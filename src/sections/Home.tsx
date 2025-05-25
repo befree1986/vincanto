@@ -27,7 +27,7 @@ const Home: React.FC = () => {
           <svg width="28" height="24" viewBox="0 0 5 3"><rect width="5" height="1" y="0" fill="#000000"/><rect width="5" height="1" y="1" fill="#FF0000"/><rect width="5" height="1" y="2" fill="#FFCC00"/></svg>
         </button>
       </div>
-      <ParallaxBackground imageUrl="/maiori_2.webp">
+      <ParallaxBackground imageUrl="/welcome.jpg">
         <div className="hero-content">
           <div className="hero-bar"></div>
           <img src="/logo.svg" alt="Vincanto Logo" className="hero-logo" />

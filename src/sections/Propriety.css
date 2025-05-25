@@ -39,3 +39,97 @@
   margin: 0.5rem auto 0 auto;
   border-radius: 2px;
 }
+
+
+/* Table Styles for Tariffe */
+.tariffe-table-container {
+  margin: 2rem auto 2.5rem auto; /* Aggiunto margine inferiore */
+  max-width: 900px;
+  overflow-x: auto; /* Necessario per la responsività della tabella su schermi piccoli */
+}
+
+.tariffe-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  border-radius: 10px;
+  overflow: hidden; /* Per far funzionare il border-radius con la tabella */
+  border: 1px solid #e9ecef; /* Bordo sottile per la tabella */
+}
+
+.tariffe-table th,
+.tariffe-table td {
+  border: 1px solid #e9ecef; /* Bordi più chiari per le celle */
+  padding: 14px 18px; /* Padding leggermente aumentato */
+  text-align: left;
+  font-size: 1rem;
+  color: #333; /* Colore testo più scuro per leggibilità */
+}
+
+.tariffe-table th {
+  background-color: var(--terracotta,#f0f6ff); /* Colore di sfondo per header, usa variabile CSS se definita */
+  color: var(--white, #1f67d4); /* Colore testo per header, usa variabile CSS se definita */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem; /* Dimensione font leggermente ridotta per header */
+}
+
+.tariffe-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa; /* Alternanza colore righe più tenue */
+}
+
+.tariffe-table tbody tr:hover {
+  background-color: #eef6ff; /* Hover più evidente */
+}
+
+.tariffe-note {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #555;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.tariffe-note a {
+  color: var(--accent-color, #007bff); /* Usa il colore accento del tuo sito */
+  text-decoration: underline;
+}
+
+/* Responsive adjustments for the table */
+@media (max-width: 768px) {
+  .tariffe-table thead {
+    display: none; /* Nasconde l'header tabellare classico */
+  }
+  .tariffe-table tr {
+    display: block;
+    margin-bottom: 1rem; /* Spazio tra le "card" su mobile */
+    border: 1px solid #dee2e6;
+    border-radius: 8px; /* Arrotonda i bordi di ogni riga/card */
+  }
+  .tariffe-table td {
+    display: block;
+    text-align: right; /* Allinea il valore a destra */
+    padding-left: 50%; /* Spazio per il data-label */
+    position: relative;
+    border-bottom: 1px solid #e9ecef; /* Separatore tra "celle" verticali */
+  }
+  .tariffe-table td:last-child {
+    border-bottom: none; /* Rimuove il bordo inferiore dell'ultima cella nella card */
+  }
+  .tariffe-table td::before {
+    content: attr(data-label); /* Mostra l'etichetta */
+    position: absolute;
+    left: 15px; /* Allineamento etichetta */
+    width: calc(50% - 30px); /* Larghezza etichetta */
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left; /* Allinea l'etichetta a sinistra */
+    font-weight: bold;
+    color: var(--blue-dark, #0d2c5a);
+  }
+}
