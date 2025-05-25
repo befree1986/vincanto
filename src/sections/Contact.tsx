@@ -212,7 +212,7 @@ const Contact: React.FC = () => {
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.138502828421!2d14.64101131568713!3d40.65196497933509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bbf759bd276b7%3A0x49b8fbf1f67d6fb7!2sVia%20Torre%20di%20Milo%2C%207%2C%2084010%20Maiori%20SA%2C%20Italia!5e0!3m2!1sit!2sit!4v1716300000000!5m2!1sit!2sit"
                 width="100%"
                 height="300"
-                style={{ border: 0 }}
+                className="map-iframe"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Posizione Vincanto"

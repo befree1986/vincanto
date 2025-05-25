@@ -21,13 +21,13 @@ const About: React.FC = () => {
         <div className="about-content">
           <div className="about-description">
             <h2>
-              a VINCANTO
+              VINCANTO
             </h2>
             <p>
-              {t("Abbiamo curato ogni dettaglio per garantire un'esperienza di soggiorno superiore. Gli interni, totalmente ammodernati, sfoggiano arredi di stile ricercato e finiture di pregio, con pavimenti e rivestimenti in elegante Gres Porcellanato che conferiscono un tocco di raffinatezza. I nuovi infissi in PVC assicurano isolamento e tranquillità, mentre le zanzariere su porte e finestre ti permettono di godere appieno dell'aria fresca e pulita della campagna.")}
+              {t("Ogni dettaglio di VINCANTO è pensato per offrirti un soggiorno indimenticabile. Gli interni, completamente rinnovati, uniscono design contemporaneo e materiali di pregio: pavimenti e rivestimenti in elegante gres porcellanato, arredi ricercati e finiture di alta qualità. I nuovi infissi in PVC garantiscono silenzio e comfort, mentre le zanzariere su porte e finestre ti permettono di godere della brezza della campagna in totale relax.")}
             </p>
             <p>
-              {t("La proprietà si compone di quattro accoglienti camere da letto, ciascuna dotata di un letto matrimoniale King Size per garantirti il massimo del riposo. Tre bagni moderni e funzionali completano gli spazi interni, pensati per offrire comfort e privacy a tutti gli ospiti. La cucina interna, attrezzata per ogni esigenza, è perfetta per preparare i tuoi piatti preferiti.")}
+              {t("La proprietà dispone di quattro camere matrimoniali King Size, luminose e accoglienti, e tre bagni moderni e funzionali per il massimo comfort e privacy. La cucina open space, completamente attrezzata, è perfetta per condividere momenti conviviali e preparare i tuoi piatti preferiti.")}
             </p>
           </div>
           
@@ -35,80 +35,85 @@ const About: React.FC = () => {
             <h3>
               {t('Caratteristiche della Proprietà')}
             </h3>
-            <div className="features-grid">
-              <div className="feature">
-                <div className="feature-title">
-                  <span className="feature-icon">🛏️</span>
-                  <h4>
-                    {t('4 Camere King Size')}
-                  </h4>
+            <div className="features-grid" style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '2.5rem 2rem',
+              alignItems: 'stretch',
+              margin: '2.5rem 0 1.5rem 0',
+            }}>
+              <div className="feature feature-main" style={{
+                gridColumn: '1 / -1',
+                textAlign: 'center',
+                background: 'rgba(255,255,255,0.92)',
+                borderRadius: '18px',
+                boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)',
+                padding: '2.2rem 1.5rem 1.7rem 1.5rem',
+                marginBottom: '0.5rem',
+                border: '2px solid #e6e6e6',
+              }}>
+                <div className="feature-title" style={{ justifyContent: 'center', alignItems: 'center', gap: '0.7rem', marginBottom: '0.7rem' }}>
+                  <span className="feature-icon" style={{ fontSize: '2.2rem' }}>👨‍👩‍👧‍👦</span>
+                  <h4 style={{ fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>{t('Perfetta per Ogni Ospite')}</h4>
                 </div>
-                <p>
-                  {t('Camere lussuose con biancheria di pregio, ognuna con vista unica sulla costa')}
+                <p style={{ maxWidth: 600, margin: '0 auto', fontSize: '1.08rem', color: '#444', lineHeight: 1.6 }}>
+                  {t('Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.')}
                 </p>
               </div>
-              
+
               <div className="feature">
-                <div className="feature-title">
-                  <span className="feature-icon">🚿</span>
-                  <h4>
-                    {t('3 Bagni')}
-                  </h4>
+                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🛏️</span>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('3 Camere King Size')}</h4>
                 </div>
-                <p>
-                  {t('Bagni eleganti con ceramiche locali e finiture di pregio')}
+                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                  {t('Camere spaziose, luminose e climatizzate, con biancheria di pregio e arredi moderni.')}
                 </p>
               </div>
-              
               <div className="feature">
-                <div className="feature-title">
-                  <span className="feature-icon">🏞️</span>
-                  <h4>
-                    {t('Terrazza Esterna')}
-                  </h4>
+                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🚿</span>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('2 Bagni')}</h4>
                 </div>
-                <p>
-                  {t('Spaziosa terrazza con zona pranzo e lettini con vista sulla costa')}
+                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                  {t('Bagni moderni con ampi box doccia, finiture di design e dotazioni di qualità.')}
                 </p>
               </div>
-              
               <div className="feature">
-                <div className="feature-title">
-                  <span className="feature-icon">🍳</span>
-                  <h4>
-                    {t('Cucina in Muratura')}
-                  </h4>
+                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🏞️</span>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('Terrazza Esterna')}</h4>
                 </div>
-                <p>
-                  {t('Cucina gourmet completamente attrezzata in stile tradizionale italiano')}
+                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                  {t('Ampia terrazza panoramica con pergolato, cucina esterna, barbecue e forno a legna, ideale per cene all’aperto e relax immersi nel verde.')}
                 </p>
               </div>
-              
               <div className="feature">
-                <div className="feature-title">
-                  <span className="feature-icon">🍽️</span>
-                  <h4>
-                    {t('Barbecue & Forno a Legna')}
-                  </h4>
+                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🛋️</span>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('Zona Giorno')}</h4>
                 </div>
-                <p>
-                  {t("Autentico forno a legna per pizza e barbecue per cucinare all'aperto")}
+                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                  {t('Zona living open space, luminosa e accogliente, perfetta per momenti di relax e convivialità.')}
                 </p>
               </div>
-              
               <div className="feature">
-                <div className="feature-title">
-                  <span className="feature-icon">🛎️</span>
-                  <h4>
-                    {t('Servizi inclusi')}
-                  </h4>
+                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🟦</span>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('Ceramica Vietrese')}</h4>
                 </div>
-                <ul style={{ paddingLeft: '1.2em' }}>
-                  <li>• {t('Aria condizionata')}</li>
-                  <li>• {t('Cucina accessoriata')}</li>
-                  <li>• {t('Internet (Wi-Fi)')}</li>
-                  <li>• {t('Tv')}</li>
-                </ul>
+                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                  {t('Applique artigianali in ceramica vietrese decorano corridoio e camere, donando colore e unicità agli ambienti.')}
+                </p>
+              </div>
+              <div className="feature">
+                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>📍</span>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('Posizione Unica')}</h4>
+                </div>
+                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                  {t('A pochi minuti dal centro di Maiori, immersa nella quiete della collina e circondata dalla natura mediterranea.')}
+                </p>
               </div>
             </div>
           </div>
@@ -154,7 +159,7 @@ const About: React.FC = () => {
             <div className="location-image" style={{ width: '100%', height: '400px', overflow: 'hidden', borderRadius: '16px', padding: 0, margin: 0 }}>
               <img 
                 src="/public/contact2b.jpg" 
-                alt="Maiori view" 
+                alt="Vista panoramica su Maiori e la Costiera Amalfitana" 
                 className="img-fluid"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', padding: 0, margin: 0 }}
               />

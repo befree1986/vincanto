@@ -16,19 +16,23 @@ const Home: React.FC = () => {
       <div style={{ position: 'absolute', top: 24, right: 32, zIndex: 10, display: 'flex', gap: 8 }}>
         <button onClick={() => i18n.changeLanguage('it')} aria-label="Italiano" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
           {/* Bandiera Italia SVG */}
-          <svg width="32" height="24" viewBox="0 0 3 2"><rect width="1" height="2" x="0" y="0" fill="#008d46"/><rect width="1" height="2" x="1" y="0" fill="#fff"/><rect width="1" height="2" x="2" y="0" fill="#d2232c"/></svg>
+          <svg width="28" height="24" viewBox="0 0 3 2"><rect width="1" height="2" x="0" y="0" fill="#008d46"/><rect width="1" height="2" x="1" y="0" fill="#fff"/><rect width="1" height="2" x="2" y="0" fill="#d2232c"/></svg>
         </button>
-        <button onClick={() => i18n.changeLanguage('en')} aria-label="English" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+        <button onClick={() => i18n.changeLanguage('en')} aria-label="English" className="language-selector-button">
           {/* Bandiera UK SVG */}
-          <svg width="32" height="24" viewBox="0 0 60 30"><clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><g clipPath="url(#s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 l60,30 M60,0 l-60,30" stroke="#fff" strokeWidth="6"/><path d="M0,0 l60,30 M60,0 l-60,30" stroke="#c8102e" strokeWidth="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10"/><path d="M30,0 v30 M0,15 h60" stroke="#c8102e" strokeWidth="6"/></g></svg>
+          <svg width="28" height="24" viewBox="0 0 60 30"><clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><g clipPath="url(#s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 l60,30 M60,0 l-60,30" stroke="#fff" strokeWidth="6"/><path d="M0,0 l60,30 M60,0 l-60,30" stroke="#c8102e" strokeWidth="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10"/><path d="M30,0 v30 M0,15 h60" stroke="#c8102e" strokeWidth="6"/></g></svg>
+        </button>
+        <button onClick={() => i18n.changeLanguage('de')} aria-label="Deutsch" className="language-selector-button">
+          {/* Bandiera DEU  SVG */}
+          <svg width="28" height="24" viewBox="0 0 5 3"><rect width="5" height="1" y="0" fill="#000000"/><rect width="5" height="1" y="1" fill="#FF0000"/><rect width="5" height="1" y="2" fill="#FFCC00"/></svg>
         </button>
       </div>
       <ParallaxBackground imageUrl="/maiori_2.webp">
         <div className="hero-content">
           <div className="hero-bar"></div>
-          <img src="/logo.svg" alt="Vincanto Logo" style={{ maxWidth: '320px', width: '100%' }} />
+          <img src="/logo.svg" alt="Vincanto Logo" className="hero-logo" />
           <h2>
-            {t('Il Tuo angolo di Paradiso nel Limoneto')}
+            {t('Un angolo di paradiso tra i limoni della Costiera Amalfitana')}
           </h2>
           <a href="#contact" className="btn btn-accent">
             {t('Prenota Ora')}
@@ -74,7 +78,7 @@ const Home: React.FC = () => {
                 {t('Alloggio di Lusso')}
               </h3>
               <p>
-                {t('4 camere da letto king-size e 3 bagni moderni con servizi premium')}
+                {t('3 camere da letto king-size e 2 bagni moderni')}
               </p>
             </div>
             <div className="highlight-card">
