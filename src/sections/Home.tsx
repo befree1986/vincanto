@@ -34,7 +34,7 @@ const Home: React.FC = () => {
           <h2>
             {t('Un angolo di paradiso tra i limoni della Costiera Amalfitana')}
           </h2>
-          <a href="#Booking" className="btn btn-accent">
+          <a href="#booking" className="btn btn-accent">
             {t('Prenota Ora')}
           </a>
         </div>
