@@ -8,13 +8,21 @@ const Propriety: React.FC = () => {
   return (
     <section id="proprieta" className="proprieta-section">
       <div className="container">
-        <h2 className="section-title underline-title">
+        <div className="propiety-content">
+          <div className="propiety-description"> {/* Rimosso stile inline textAlign: 'center' */}
+          <h2 className="section-title underline-title"> {/* Questo titolo ora sarà centrato grazie all'ereditarietà */}
           {t('La Proprietà')}
         </h2>
-        </div>
-        <p className="proprieta-description" style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          {t('Descrizione Proprietà')}
-        </p>
+          <p className="proprieta-description" style={{ marginBottom: '2rem' }}> {/* Rimosso textAlign: 'center' da qui, poiché ora è ereditato dal genitore */}
+          {t('Immersa nel cuore profumato di un limoneto tipico della Costiera Amalfitana')}, {/* Corretto refuso nel testo */}
+          </p>
+          <p>
+            {t('La casa, spaziosa e accogliente, si compone di un’ampia zona giorno con cucina open space completamente attrezzata, ideale per condividere momenti in famiglia o con amici. Dispone di tre camere da letto confortevoli e arredate con gusto, e di due bagni completi, entrambi dotati di ampi piatti doccia.')}
+          </p>
+          <p>
+            {('All’esterno, gli ospiti possono godere di una cucina esterna, perfetta per pranzi e cene all’aperto sotto il pergolato, con vista sul verde circostante. A completare l’offerta, una doccia esterna, un forno a legna tradizionale e un barbecue, ideali per serate conviviali immersi nel profumo dei limoni e del mare.')}
+          </p>
+          </div>
         <div className="proprieta-gallery">
           <div className="proprieta-img-card">
             <img src="https://lh3.googleusercontent.com/p/AF1QipNtrJ92Qev3zyTcqNA8PsGlIIJr63p4ix5l7XJ2=s680-w680-h510-rw" alt={t('Proprietà 1')} className="img-fluid" />
@@ -40,7 +48,9 @@ const Propriety: React.FC = () => {
           <div className="proprieta-img-card">
             <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80" alt={t('Proprietà 8')} className="img-fluid" />
           </div>
+        
         </div>
+       
        <h2 className='section-title underline-title' style={{ marginTop: '2rem' }}>
         {t('Tariffe Indicative')}
       </h2>
@@ -78,6 +88,8 @@ const Propriety: React.FC = () => {
           {t('Per un preventivo dettagliato e personalizzato, non esitare a')}{' '}
           <a href="#contact">{t('contattarci')}</a>.
         </p>
+      </div>
+      </div>
       </div>
       {/* 
         TODO: Sostituisci '€X', 'Y notti', ecc. con i valori reali delle tariffe.

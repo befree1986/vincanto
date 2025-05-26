@@ -64,13 +64,17 @@ const Home: React.FC = () => {
           </h2>
           <div className="highlights-grid">
             <div className="highlight-card">
-              <div className="highlight-icon">🍋</div>
+              <div className="highlight-icon">🛏</div>
               <h3>
-                {t('Accesso al Limone')}
+                {t('Comfort e accoglienza')}
               </h3>
               <p>
-                {t('Esplora i nostri limoneti privati con splendide viste sulla costa')}
-              </p>
+                {t('• 3 camere da letto climatizzate, luminose e arredate con gusto')}
+                </p>
+                <p>
+                {t('• 2 bagni moderni con spaziosi piatti doccia')}
+                </p>
+                
             </div>
             <div className="highlight-card">
               <div className="highlight-icon">🏠</div>
@@ -78,26 +82,37 @@ const Home: React.FC = () => {
                 {t('Alloggio di Lusso')}
               </h3>
               <p>
-                {t('3 camere da letto king-size e 2 bagni moderni')}
+                {t('• Zona giorno con ampio open space e cucina completamente attrezzata')}
+                </p>
+                <p>
+                {t('• Wi-Fi gratuito in tutta la casa')}
+                </p>
+                <p>
+                  {t('• Aria condizionata in ogni camera per il massimo comfort')}
+                </p>
+            </div>
+            <div className="highlight-card">
+              <div className="highlight-icon">🌞</div>
+              <h3>
+                {t('Spazi esterni esclusivi')}
+              </h3>
+              <p>
+                {t("• Cucina esterna coperta per pranzi e cene all’aperto.")}
+              </p>
+              <p>{t('• Forno a legna tradizionale e barbecue')}
+              </p>
+              <p>
+                {t('• Doccia esterna, perfetta per rinfrescarsi dopo una giornata di mare o escursioni')}
               </p>
             </div>
             <div className="highlight-card">
-              <div className="highlight-icon">🌅</div>
+              <div className="highlight-icon">📍</div>
               <h3>
-                {t('Terrazza Privata')}
+                {t('Posizione Unica')}
               </h3>
               <p>
-                {t("Perfetto per indimenticabili serate all'aperto circondati dal verde, con doccia esterna rinfrescante.")}
-              </p>
-            </div>
-            <div className="highlight-card">
-              <div className="highlight-icon">🍽️</div>
-              <h3>
-                {t('Cucina Gourmet')}
-              </h3>
-              <p>
-                {t('Cucina in muratura completamente attrezzata con forno a legna tradizionale e BBQ')}
-              </p>
+                {t('La casa si trova in una zona collinare tranquilla, immersa nel verde. I 200 gradini per raggiungerla regalano un’esperienza autentica e una vista indimenticabile, ideale per gli amanti della natura e della quiete.')}
+                </p>
             </div>
           </div>
         </div>

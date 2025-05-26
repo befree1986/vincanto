@@ -23,12 +23,25 @@
   transform: scale(1.08);
 }
 
+/* Stile generale per i titoli con una sottolineatura.
+   L'elemento ::after crea la sottolineatura. */
 .underline-title {
   position: relative;
-  display: inline-block;
-  text-align: center;
-  left: 50%;
-  transform: translateX(-50%);
+  display: inline-block; /* Permette la centratura tramite text-align: center del genitore */
+  text-align: center;   /* Centra il testo all'interno di questo elemento */
+  /* Eventuali left/transform qui potrebbero essere ereditati se non sovrascritti specificamente */
+}
+
+/* Override specifici per il titolo "La Proprietà" per assicurare la centratura
+   e resettare stili che potrebbero causare un allineamento errato. */
+.propiety-description h2.section-title.underline-title {
+  /* display: inline-block; è ereditato da .underline-title */
+  /* text-align: center; è ereditato da .underline-title (per il testo interno) */
+  float: none !important;          /* Sovrascrive eventuali float */
+  left: auto !important;           /* Sovrascrive posizionamenti 'left' espliciti */
+  transform: none !important;      /* Sovrascrive eventuali trasformazioni */
+  margin-left: 0 !important;       /* Assicura che margini specifici non lo spostino */
+  margin-right: 0 !important;      /* Assicura che margini specifici non lo spostino */
 }
 .underline-title::after {
   content: '';
@@ -132,4 +145,21 @@
     font-weight: bold;
     color: var(--blue-dark, #0d2c5a);
   }
+}
+
+.propiety-content {
+  padding: 6rem 0;
+}
+
+/* Contenitore per il titolo "La Proprietà" e i paragrafi descrittivi */
+.propiety-description {
+  max-width: 800px;
+  margin: 0 auto 4rem; /* Centra questo blocco nella pagina */
+  text-align: center;   /* FONDAMENTALE: Centra gli elementi figli inline o inline-block (come il nostro h2) */
+}
+
+.propiety-description p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }

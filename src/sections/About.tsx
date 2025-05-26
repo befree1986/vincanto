@@ -27,7 +27,7 @@ const About: React.FC = () => {
               {t("Ogni dettaglio di VINCANTO è pensato per offrirti un soggiorno indimenticabile. Gli interni, completamente rinnovati, uniscono design contemporaneo e materiali di pregio: pavimenti e rivestimenti in elegante gres porcellanato, arredi ricercati e finiture di alta qualità. I nuovi infissi in PVC garantiscono silenzio e comfort, mentre le zanzariere su porte e finestre ti permettono di godere della brezza della campagna in totale relax.")}
             </p>
             <p>
-              {t("La proprietà dispone di quattro camere matrimoniali King Size, luminose e accoglienti, e tre bagni moderni e funzionali per il massimo comfort e privacy. La cucina open space, completamente attrezzata, è perfetta per condividere momenti conviviali e preparare i tuoi piatti preferiti.")}
+              {t("La proprietà dispone di tre camere matrimoniali King Size, luminose e accoglienti, e due bagni moderni e funzionali per il massimo comfort e privacy. La cucina open space, completamente attrezzata, è perfetta per condividere momenti conviviali e preparare i tuoi piatti preferiti.")}
             </p>
           </div>
           
