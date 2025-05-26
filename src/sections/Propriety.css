@@ -68,8 +68,8 @@
 }
 
 .tariffe-table th {
-  background-color: var(--terracotta,#f0f6ff); /* Colore di sfondo per header, usa variabile CSS se definita */
-  color: var(--white, #1f67d4); /* Colore testo per header, usa variabile CSS se definita */
+  background-color: var(--blue-light,#000000); /* Colore di sfondo per header, usa variabile CSS se definita */
+  color: var(--blue-dark, #1f67d4); /* Colore testo per header, usa variabile CSS se definita */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
