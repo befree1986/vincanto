@@ -1,203 +1,178 @@
 .about-section {
-  position: relative;
+  padding: 4rem 0;
+  scroll-margin-top: 80px; /* Regola in base all'altezza del tuo header fisso */
 }
 
 .about-hero {
-  text-align: center;
   color: var(--white);
-  padding: 0 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 4rem 0; /* Aggiungi padding se necessario */
 }
 
 .about-hero h2 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 600;
-  color: var(--white);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .about-content {
-  padding: 6rem 0;
+  padding: 3rem 0;
 }
 
 .about-description {
   max-width: 800px;
-  margin: 0 auto 4rem;
+  margin: 0 auto 3rem auto;
   text-align: center;
 }
 
 .about-description h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
   margin-bottom: 1.5rem;
-}
-
-.about-description p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  color: var(--blue-dark); /* O il colore che preferisci */
 }
 
 .features-container {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 }
 
 .features-container h3 {
   text-align: center;
-  margin-bottom: 3rem;
-  position: relative;
-}
-
-.features-container h3::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 2px;
-  background-color: var(--terracotta);
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  margin-bottom: 2.5rem;
+  color: var(--blue-dark); /* O il colore che preferisci */
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 2rem;
+  align-items: stretch;
+  margin: 2.5rem 0 1.5rem 0;
 }
 
 .feature {
-  background-color: var(--white);
+  background-color: #fff;
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
 }
 
-.feature:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+.feature-main {
+  grid-column: 1 / -1;
+  text-align: center;
+  background: rgba(250, 250, 250, 0.95); /* Leggermente diverso per distinguerlo */
+  border-radius: 18px;
+  box-shadow: 0 6px 24px 0 rgba(0,0,0,0.09);
+  padding: 2.2rem 1.5rem 1.7rem 1.5rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid #e0e0e0;
 }
 
 .feature-title {
-  display: flex;
+  display: flex; /* Aggiunto per allineare icona e titolo */
   align-items: center;
-  margin-bottom: 1rem;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.feature-main .feature-title {
+  justify-content: center;
 }
 
 .feature-icon {
-  font-size: 1.5rem;
-  margin-right: 1rem;
+  font-size: 1.7rem; /* Default per icone piccole */
+}
+.feature-main .feature-icon {
+  font-size: 2.2rem; /* Icona più grande per la feature principale */
 }
 
 .feature h4 {
-  margin: 0;
+  font-size: 1.1rem;
   font-weight: 600;
+  margin: 0;
+}
+.feature-main h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.feature p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: auto; /* Spinge il paragrafo in basso se le card hanno altezze diverse */
+}
+
+.feature-main p {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.08rem;
+  color: #444;
+  line-height: 1.6;
 }
 
 .location-info {
   display: flex;
-  flex-wrap: wrap;
   gap: 2rem;
-  align-items: flex-start;
+  align-items: center;
   margin-top: 3rem;
 }
 
-.location-text {
-  flex: 2 1 320px;
-  min-width: 260px;
+.location-text, .location-image-container { /* Rinominato per chiarezza */
+  flex: 1;
 }
 
-.location-text h3 {
-  margin-bottom: 1.5rem;
-}
-
-.location-text p {
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.location-image {
-  flex: 0 1 400px;
-  min-width: 220px;
-  min-height: 220px;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: var(--shadow-lg);
-  opacity: 1 !important;
-  visibility: visible !important;
-  transition: opacity 1.5s;
-}
-
-.location-image::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
+.location-image-container img { /* Stile per l'immagine dentro il contenitore */
   width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, transparent 30%, var(--blue-dark) 100%);
-  opacity: 0.3;
-}
-
-.location-image img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
-  display: block !important;
+  height: 400px; /* O l'altezza desiderata */
   object-fit: cover;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s;
-}
-
-.location-image:hover img {
-  transform: scale(1.05);
+  border-radius: 16px;
+  display: block;
 }
 
 .distances {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .distance-item {
-  background-color: var(--off-white);
-  padding: 0.75rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 }
 
-@media (max-width: 992px) {
-  .location-info {
-    grid-template-columns: 1fr;
-  }
-  
-  .location-image {
-    order: -1;
+/* Responsive adjustments for About section */
+@media (max-width: 992px) { /* Tablet */
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 768px) { /* Mobile */
+  .about-content {
+    padding: 2rem 0;
+  }
+  .features-grid {
+    grid-template-columns: 1fr; /* Stack features on mobile */
+  }
+  .feature-main {
+    padding: 1.5rem 1rem;
+  }
+  .feature-main h4 {
+    font-size: 1.3rem;
+  }
+  .feature-main p {
+    font-size: 1rem;
+  }
   .location-info {
     flex-direction: column;
-    align-items: stretch;
+    text-align: center;
   }
-  .location-image {
+  .location-image-container {
     margin-top: 2rem;
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 992px) {
-  .about-content {
-    padding: 0rem 0;
-  }
-  
-  .features-grid {
-    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 500px; /* Limita la larghezza dell'immagine su mobile se necessario */
   }
 }

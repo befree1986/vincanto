@@ -1,31 +1,29 @@
-/* Booking section styles */
 .booking-section {
-  background: linear-gradient(120deg, var(--yellow-light) 0%, var(--off-white) 100%);
-  padding: 6rem 0;
+  padding: 4rem 0;
+  background-color: #fcfcfc; /* Sfondo leggermente diverso */
+  scroll-margin-top: 80px; /* Regola in base all'altezza del tuo header fisso */
 }
 
-.booking-content {
-  background: var(--white);
-  border-radius: 8px;
-  box-shadow: var(--shadow-md);
-  padding: 3rem 2rem;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.section-subtitle {
+.booking-section .section-title {
   text-align: center;
-  font-size: 1.2rem;
-  color: var(--gray-dark);
   margin-bottom: 1rem;
 }
 
-.underline-title {
-  position: relative;
-  display: inline-block;
+.booking-subtitle {
   text-align: center;
-  left: 50%;
-  transform: translateX(-50%);
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.booking-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
 }
 
 .availability-form, .booking-form {
@@ -35,12 +33,12 @@
 }
 
 .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
   gap: 1.5rem;
 }
 
 .form-group {
+  flex: 1; /* Permette ai gruppi di dividere lo spazio in una riga */
   display: flex;
   flex-direction: column;
 }
@@ -48,57 +46,101 @@
 .form-group label {
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: var(--gray-dark);
+  color: #333;
 }
 
-.form-group input,
-.form-group select {
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
   padding: 0.75rem;
-  border: 1px solid var(--gray-light);
-  border-radius: 4px;
-  font-family: var(--body-font);
-  transition: all 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
 }
 
 .form-group input:focus,
-.form-group select:focus {
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-color, #007bff); /* Usa il tuo colore accento */
   outline: none;
-  border-color: var(--blue-light);
-  box-shadow: 0 0 0 2px rgba(144, 205, 244, 0.3);
-}
-
-.btn {
-  align-self: center;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.2); /* Esempio con blu */
 }
 
 .availability-message {
-  margin-top: 1rem;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.availability-message.available {
-  color: var(--seafoam);
-}
-
-.availability-message.unavailable {
-  color: var(--terracotta);
-}
-
-.success-message {
-  background-color: var(--seafoam);
-  color: var(--white);
-  padding: 2rem;
-  border-radius: 4px;
+  padding: 0.8rem;
+  border-radius: 6px;
   text-align: center;
-  margin-top: 2rem;
+  font-weight: 500;
+}
+.availability-message.available {
+  background-color: #e6ffed;
+  color: #2f6f4f;
+  border: 1px solid #b7e4c7;
+}
+.availability-message.unavailable {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
 }
 
-@media (max-width: 992px) {
+.payment-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.payment-section-title {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column; /* Stack radio buttons by default */
+  gap: 0.75rem;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: normal;
+}
+
+.radio-group-wrap { /* Per metodi di pagamento, permetti il wrap */
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.file-upload-group, .payment-gateway-info {
+  margin-top: 1rem;
+}
+
+.error-message {
+  color: #c62828;
+  background-color: #ffebee;
+  border: 1px solid #ef9a9a;
+  padding: 0.8rem;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Responsive adjustments for Booking form */
+@media (max-width: 768px) {
   .booking-content {
-    padding: 2rem 0.5rem;
+    padding: 1.5rem;
   }
   .form-row {
-    grid-template-columns: 1fr;
+    flex-direction: column; /* Stack form groups in a row */
+    gap: 1.5rem; /* Mantieni il gap anche quando impilati */
+  }
+  .radio-group-wrap label { /* Assicura che i radio button per i metodi di pagamento abbiano spazio */
+    margin-bottom: 0.5rem;
   }
 }

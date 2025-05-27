@@ -136,9 +136,15 @@
   .tariffe-table td {
     display: block;
     text-align: right; /* Allinea il valore a destra */
-    padding-left: 50%; /* Spazio per il data-label */
+    padding-left: 50%; /* Il valore del TD inizia al 50% della larghezza del TD */
     position: relative;
     border-bottom: 1px solid #e9ecef; /* Separatore tra "celle" verticali */
+    padding-top: 8px; /* Ridotto leggermente il padding verticale */
+    padding-bottom: 8px; /* Ridotto leggermente il padding verticale */
+    line-height: 2.5; /* Aumentata interlinea per il valore */
+    overflow-wrap: break-word; /* Assicura che il testo del valore vada a capo correttamente */
+    box-sizing: border-box; /* Coerenza nel box model */
+    font-size: 0.875rem; /* Ridotta dimensione font per il valore (era 1rem) */
   }
   .tariffe-table td:last-child {
     border-bottom: none; /* Rimuove il bordo inferiore dell'ultima cella nella card */
@@ -146,13 +152,19 @@
   .tariffe-table td::before {
     content: attr(data-label); /* Mostra l'etichetta */
     position: absolute;
-    left: 15px; /* Allineamento etichetta */
-    width: calc(50% - 30px); /* Larghezza etichetta */
-    padding-right: 10px;
-    white-space: nowrap;
+    left: 8px; /* Spostata leggermente a sinistra */
+    width: calc(50% - 20px); /* Larghezza dell'etichetta (box): 50% del TD meno 10px (left) e meno 10px (gap desiderato) */
+    padding-right: 8px; /* Padding interno all'etichetta, dopo il testo dell'etichetta */
+    /* white-space: nowrap; */ /* Rimosso per permettere all'etichetta di andare a capo */
     text-align: left; /* Allinea l'etichetta a sinistra */
     font-weight: bold;
     color: var(--blue-dark, #0d2c5a);
+    /* Proprietà per gestire il testo lungo e l'overflow */
+    overflow-wrap: break-word; /* Permette di andare a capo per parole lunghe per evitare overflow */
+    word-wrap: break-word; /* Alias per overflow-wrap, per maggiore compatibilità */
+    line-height: 1.4; /* Aumentata interlinea per l'etichetta */
+    box-sizing: border-box; /* Assicura che padding e border siano inclusi nella larghezza/altezza */
+    font-size: 0.875rem; /* Ridotta dimensione font per l'etichetta (era 1rem) */
   }
 }
 

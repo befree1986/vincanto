@@ -1,156 +1,111 @@
 .contact-section {
-  background-color: var(--off-white);
-  padding: 6rem 0;
+  padding: 4rem 0;
+  background-color: #fff;
+  scroll-margin-top: 80px; /* Regola in base all'altezza del tuo header fisso */
+}
+
+.contact-section .section-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
 .contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 3rem;
 }
 
-.booking-form-container {
-  background-color: var(--white);
-  padding: 2.5rem;
-  border-radius: 8px;
-  box-shadow: var(--shadow-md);
+.booking-form-container, /* Riusiamo alcuni stili dal booking form */
+.contact-info {
+  flex: 1;
 }
 
-.booking-form-container h3 {
-  margin-bottom: 2rem;
-  position: relative;
+.booking-form-container h3,
+.contact-info h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: var(--blue-dark); /* O il colore che preferisci */
 }
 
-.booking-form-container h3::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 60px;
-  height: 2px;
-  background-color: var(--terracotta);
-}
-
-.booking-form {
+.booking-form .form-row { /* Stili specifici per il form di contatto se necessario */
   display: flex;
-  flex-direction: column;
   gap: 1.5rem;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-.form-group {
+.booking-form .form-group {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.form-group label {
+.booking-form .form-group label {
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: var(--gray-dark);
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.booking-form input[type="text"],
+.booking-form input[type="email"],
+.booking-form input[type="tel"],
+.booking-form input[type="date"],
+.booking-form select,
+.booking-form textarea {
+  width: 100%;
   padding: 0.75rem;
-  border: 1px solid var(--gray-light);
-  border-radius: 4px;
-  font-family: var(--body-font);
-  transition: all 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--blue-light);
-  box-shadow: 0 0 0 2px rgba(144, 205, 244, 0.3);
-}
-
-.booking-form .btn {
-  margin-top: 1rem;
-  align-self: flex-start;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 .success-message {
-  background-color: var(--seafoam);
-  color: var(--white);
-  padding: 2rem;
-  border-radius: 4px;
+  padding: 1.5rem;
+  background-color: #e6ffed;
+  color: #2f6f4f;
+  border: 1px solid #b7e4c7;
+  border-radius: 6px;
   text-align: center;
 }
 
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.contact-details {
-  background-color: var(--white);
-  padding: 2.5rem;
-  border-radius: 8px;
-  box-shadow: var(--shadow-md);
-}
-
-.contact-details h3 {
-  margin-bottom: 2rem;
-  position: relative;
-}
-
-.contact-details h3::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 60px;
-  height: 2px;
-  background-color: var(--terracotta);
-}
-
-.contact-item {
+.contact-details .contact-item {
   margin-bottom: 1.5rem;
 }
 
-.contact-item h4 {
-  color: var(--blue-dark);
-  margin-bottom: 0.5rem;
+.contact-details .contact-item h4 {
   font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #444;
 }
 
-.contact-item p {
-  margin-bottom: 0.5rem;
+.contact-details .contact-item p {
+  margin: 0.25rem 0;
+  color: #555;
 }
 
 .map-container {
-  overflow: hidden;
+  margin-top: 2rem;
   border-radius: 8px;
-  box-shadow: var(--shadow-md);
-  height: 300px;
+  overflow: hidden; /* Per far rispettare il border-radius all'iframe */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-@media (max-width: 992px) {
+.map-iframe {
+  border: none;
+  display: block; /* Rimuove spazio extra sotto l'iframe */
+}
+
+/* Responsive adjustments for Contact section */
+@media (max-width: 992px) { /* Tablet e inferiori */
   .contact-content {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 2.5rem;
   }
 }
 
-@media (max-width: 768px) {
-  .contact-section {
-    padding: 4rem 0;
+@media (max-width: 768px) { /* Mobile */
+  .booking-form .form-row {
+    flex-direction: column; /* Stack form groups in a row */
+    gap: 1.5rem; /* Mantieni il gap anche quando impilati */
   }
-  
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .booking-form .btn {
-    width: 100%;
+  .booking-form-container h3,
+  .contact-info h3 {
+    font-size: 1.4rem;
   }
 }

@@ -35,83 +35,68 @@ const About: React.FC = () => {
             <h3>
               {t('Caratteristiche della Proprietà')}
             </h3>
-            <div className="features-grid" style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '2.5rem 2rem',
-              alignItems: 'stretch',
-              margin: '2.5rem 0 1.5rem 0',
-            }}>
-              <div className="feature feature-main" style={{
-                gridColumn: '1 / -1',
-                textAlign: 'center',
-                background: 'rgba(255,255,255,0.92)',
-                borderRadius: '18px',
-                boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)',
-                padding: '2.2rem 1.5rem 1.7rem 1.5rem',
-                marginBottom: '0.5rem',
-                border: '2px solid #e6e6e6',
-              }}>
-                <div className="feature-title" style={{ justifyContent: 'center', alignItems: 'center', gap: '0.7rem', marginBottom: '0.7rem' }}>
-                  <span className="feature-icon" style={{ fontSize: '2.2rem' }}>👨‍👩‍👧‍👦</span>
-                  <h4 style={{ fontSize: '1.5rem', fontWeight: 700, margin: 0 }}>{t('Perfetta per Ogni Ospite')}</h4>
+            <div className="features-grid">
+              <div className="feature feature-main">
+                <div className="feature-title">
+                  <span className="feature-icon">👨‍👩‍👧‍👦</span>
+                  <h4>{t('Perfetta per Ogni Ospite')}</h4>
                 </div>
-                <p style={{ maxWidth: 600, margin: '0 auto', fontSize: '1.08rem', color: '#444', lineHeight: 1.6 }}>
+                <p>
                   {t('Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.')}
                 </p>
               </div>
 
               <div className="feature">
-                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🛏️</span>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('3 Camere King Size')}</h4>
+                <div className="feature-title">
+                  <span className="feature-icon">🛏️</span>
+                  <h4>{t('3 Camere King Size')}</h4>
                 </div>
-                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                <p>
                   {t('Camere spaziose, luminose e climatizzate, con biancheria di pregio e arredi moderni.')}
                 </p>
               </div>
               <div className="feature">
-                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🚿</span>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('2 Bagni')}</h4>
+                <div className="feature-title">
+                  <span className="feature-icon">🚿</span>
+                  <h4>{t('2 Bagni')}</h4>
                 </div>
-                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                <p>
                   {t('Bagni moderni con ampi box doccia, finiture di design e dotazioni di qualità.')}
                 </p>
               </div>
               <div className="feature">
-                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🏞️</span>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('Terrazza Esterna')}</h4>
+                <div className="feature-title">
+                  <span className="feature-icon">🏞️</span>
+                  <h4>{t('Terrazza Esterna')}</h4>
                 </div>
-                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                <p>
                   {t('Ampia terrazza panoramica con pergolato, cucina esterna, barbecue e forno a legna, ideale per cene all’aperto e relax immersi nel verde.')}
                 </p>
               </div>
               <div className="feature">
-                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🛋️</span>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('Zona Giorno')}</h4>
+                <div className="feature-title">
+                  <span className="feature-icon">🛋️</span>
+                  <h4>{t('Zona Giorno')}</h4>
                 </div>
-                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                <p>
                   {t('Zona living open space, luminosa e accogliente, perfetta per momenti di relax e convivialità.')}
                 </p>
               </div>
               <div className="feature">
-                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>🟦</span>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('Ceramica Vietrese')}</h4>
+                <div className="feature-title">
+                  <span className="feature-icon">🟦</span>
+                  <h4>{t('Ceramica Vietrese')}</h4>
                 </div>
-                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                <p>
                   {t('Applique artigianali in ceramica vietrese decorano corridoio e camere, donando colore e unicità agli ambienti.')}
                 </p>
               </div>
               <div className="feature">
-                <div className="feature-title" style={{ alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span className="feature-icon" style={{ fontSize: '1.7rem' }}>📍</span>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 600, margin: 0 }}>{t('Posizione Unica')}</h4>
+                <div className="feature-title">
+                  <span className="feature-icon">📍</span>
+                  <h4>{t('Posizione Unica')}</h4>
                 </div>
-                <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.5 }}>
+                <p>
                   {t('A pochi minuti dal centro di Maiori, immersa nella quiete della collina e circondata dalla natura mediterranea.')}
                 </p>
               </div>
@@ -156,12 +141,11 @@ const About: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="location-image" style={{ width: '100%', height: '400px', overflow: 'hidden', borderRadius: '16px', padding: 0, margin: 0 }}>
+            <div className="location-image-container">
               <img 
                 src="/public/contact2b.jpg" 
                 alt="Vista panoramica su Maiori e la Costiera Amalfitana" 
                 className="img-fluid"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', padding: 0, margin: 0 }}
               />
             </div>
           </div>

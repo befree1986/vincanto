@@ -45,26 +45,7 @@ const BackToTopButton: React.FC = () => {
   return (
     <button
       onClick={scrollToTop}
-      className="back-to-top-btn"
-      style={{
-        position: 'fixed',
-        right: '2rem',
-        bottom: '2.5rem',
-        zIndex: 9999,
-        background: 'var(--terracotta)',
-        color: 'white',
-        border: 'none',
-        borderRadius: '50%',
-        width: '48px',
-        height: '48px',
-        boxShadow: 'var(--shadow-lg)',
-        display: visible ? 'flex' : 'none',
-        alignItems: 'center',
-        justifyContent: 'center',
-        cursor: 'pointer',
-        transition: 'opacity 0.4s',
-        opacity: visible ? 1 : 0,
-      }}
+      className={`back-to-top-btn ${visible ? 'visible' : ''}`}
       aria-label="Torna su"
     >
       <ArrowUp size={28} />

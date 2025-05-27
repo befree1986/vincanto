@@ -76,17 +76,17 @@ const Propriety: React.FC = () => {
           <tbody>
             <tr>
               <td data-label={t('Periodo')}>{t('Bassa Stagione')}</td>
-              <td data-label={t('Prezzo a Notte (intera proprietà)')}>{t('A partire da €X')}</td>
+              <td data-label={t('Prezzo a Notte')}>{t('A partire da €X')}</td>
               <td data-label={t('Soggiorno Minimo')}>{t('Y notti')}</td>
             </tr>
             <tr>
               <td data-label={t('Periodo')}>{t('Media Stagione')}</td>
-              <td data-label={t('Prezzo a Notte (intera proprietà)')}>{t('A partire da €Y')}</td>
+              <td data-label={t('Prezzo a Notte')}>{t('A partire da €Y')}</td>
               <td data-label={t('Soggiorno Minimo')}>{t('Z notti')}</td>
             </tr>
             <tr>
               <td data-label={t('Periodo')}>{t('Alta Stagione')}</td>
-              <td data-label={t('Prezzo a Notte (intera proprietà)')}>{t('A partire da €Z')}</td>
+              <td data-label={t('Prezzo a Notte')}>{t('A partire da €Z')}</td>
               <td data-label={t('Soggiorno Minimo')}>{t('W notti')}</td>
             </tr>
             {/* Puoi aggiungere più righe qui se necessario */}
