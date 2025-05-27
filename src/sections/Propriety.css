@@ -23,6 +23,15 @@
   transform: scale(1.08);
 }
 
+/* Modificato il selettore per corrispondere alla struttura HTML più probabile */
+.proprieta-img-card .image-caption {
+  text-align: center;
+  font-size: 0.8rem; /* Dimensione del font leggermente ridotta */
+  color: #555;       /* Colore del testo della didascalia */
+  margin-top: 10px; /* Aumentato drasticamente per test, usa 1.0rem o il valore desiderato in produzione */
+  padding: 0 0.25rem; /* Piccolo padding laterale se il testo è lungo */
+}
+
 /* Stile generale per i titoli con una sottolineatura.
    L'elemento ::after crea la sottolineatura. */
 .underline-title {

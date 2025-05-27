@@ -24,29 +24,39 @@ const Propriety: React.FC = () => {
           </p>
           </div>
         <div className="proprieta-gallery">
+          {/* Esempio per la prima immagine */}
           <div className="proprieta-img-card">
-            <img src="https://lh3.googleusercontent.com/p/AF1QipNtrJ92Qev3zyTcqNA8PsGlIIJr63p4ix5l7XJ2=s680-w680-h510-rw" alt={t('Proprietà 1')} className="img-fluid" />
+            <img src="https://lh3.googleusercontent.com/p/AF1QipNtrJ92Qev3zyTcqNA8PsGlIIJr63p4ix5l7XJ2=s680-w680-h510-rw" alt={t('alt.proprieta.immagine1')} className="img-fluid" />
+            <p className="image-caption">{t('caption.proprieta.immagine1')}</p>
+          </div>
+          {/* Esempio per la seconda immagine */}
+          <div className="proprieta-img-card">
+            <img src="https://lh3.googleusercontent.com/p/AF1QipMJ-hFnOtK--MbqUsPj7dh5LSjsz9f3hFJ-B0c5=s680-w680-h510-rw" alt={t('alt.proprieta.immagine2')} className="img-fluid" />
+            <p className="image-caption">🎨 {t('Applique nel corridoio e nelle camere in Pregiata Cermaica Vietrese devcorate a mano')} 🎨</p>
           </div>
           <div className="proprieta-img-card">
-            <img src="https://lh3.googleusercontent.com/p/AF1QipMJ-hFnOtK--MbqUsPj7dh5LSjsz9f3hFJ-B0c5=s680-w680-h510-rw" alt={t('Proprietà 2')} className="img-fluid" />
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80" alt={t('alt.proprieta.immagine3')} className="img-fluid" />
+            <p className="image-caption">{t('caption.proprieta.immagine3')}</p>
           </div>
           <div className="proprieta-img-card">
-            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80" alt={t('Proprietà 3')} className="img-fluid" />
+            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80" alt={t('alt.proprieta.immagine4')} className="img-fluid" />
+            <p className="image-caption">{t('caption.proprieta.immagine4')}</p>
           </div>
           <div className="proprieta-img-card">
-            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80" alt={t('Proprietà 4')} className="img-fluid" />
-          </div>
-          <div className="proprieta-img-card">
-            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80" alt={t('Proprietà 5')} className="img-fluid" />
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80" alt={t('alt.proprieta.immagine5')} className="img-fluid" />
+            <p className="image-caption">{t('caption.proprieta.immagine5')}</p>
         </div>
           <div className="proprieta-img-card">
-            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80" alt={t('Proprietà 6')} className="img-fluid" />
+            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80" alt={t('alt.proprieta.immagine6')} className="img-fluid" />
+            <p className="image-caption">{t('caption.proprieta.immagine6')}</p>
           </div>
           <div className="proprieta-img-card">
-            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80" alt={t('Proprietà 7')} className="img-fluid" />
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80" alt={t('alt.proprieta.immagine7')} className="img-fluid" />
+            <p className="image-caption">{t('caption.proprieta.immagine7')}</p>
           </div>
           <div className="proprieta-img-card">
-            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80" alt={t('Proprietà 8')} className="img-fluid" />
+            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80" alt={t('alt.proprieta.immagine8')} className="img-fluid" />
+            <p className="image-caption">{t('caption.proprieta.immagine8')}</p>
           </div>
         
         </div>
