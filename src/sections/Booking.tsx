@@ -269,7 +269,7 @@ const Booking: React.FC = () => {
   return (
     <section id="booking" className="booking-section">
       <div className="container">
-        <h2 className="section-title underline-title">
+        <h2 className="section-title underline-title titolo-sezione">
           {t('Disponibilità & Prenotazione')}
         </h2>
         <p className="section-subtitle booking-subtitle">

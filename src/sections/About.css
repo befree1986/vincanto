@@ -13,6 +13,7 @@
   font-size: clamp(2.2rem, 5vw, 3.5rem);
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-align: center;;
 }
 
 .about-content {
@@ -35,12 +36,36 @@
   margin-bottom: 3rem;
 }
 
-.features-container h3 {
+.features-container h2 {
   text-align: center;
-  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-size: 1.2rem;
   margin-bottom: 2.5rem;
   color: var(--blue-dark); /* O il colore che preferisci */
 }
+
+.underline-h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  text-align: center;
+}
+.about-description h2.underline-h2 {
+  float: none !important; /* Sovrascrive eventuali float */
+  left: auto !important; /* Sovrascrive posizionamenti 'left' espliciti */
+  transform: none !important; /* Sovrascrive eventuali trasformazioni */
+  margin-left: 0 !important; /* Assicura che margini specifici non lo spostino */
+  margin-right: 0 !important; /* Assicura che margini specifici non lo spostino */
+} 
+
+.underline-h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--terracotta, #e67e22);
+  margin: 0.5rem auto 0 auto;
+  border-radius: 2px;
+} 
 
 .features-grid {
   display: grid;

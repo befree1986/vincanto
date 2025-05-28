@@ -36,7 +36,7 @@
    L'elemento ::after crea la sottolineatura. */
 .underline-title {
   position: relative;
-  display: inline-block; /* Permette la centratura tramite text-align: center del genitore */
+  display: block; /* Assicura che occupi la larghezza e permetta text-align: center interno */
   text-align: center;   /* Centra il testo all'interno di questo elemento */
   /* Eventuali left/transform qui potrebbero essere ereditati se non sovrascritti specificamente */
 }

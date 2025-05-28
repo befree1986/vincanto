@@ -10,7 +10,7 @@ const Propriety: React.FC = () => {
       <div className="container">
         <div className="propiety-content">
           <div className="propiety-description"> {/* Rimosso stile inline textAlign: 'center' */}
-          <h2 className="section-title underline-title"> {/* Questo titolo ora sarà centrato grazie all'ereditarietà */}
+          <h2 className="section-title underline-title" style={{ marginTop: '2rem' }}> {/* Questo titolo ora sarà centrato grazie all'ereditarietà */}
           {t('La Proprietà')}
         </h2>
           <p className="proprieta-description" style={{ marginBottom: '2rem' }}> {/* Rimosso textAlign: 'center' da qui, poiché ora è ereditato dal genitore */}
@@ -61,7 +61,7 @@ const Propriety: React.FC = () => {
         
         </div>
        
-       <h2 className='section-title underline-title' style={{ marginTop: '2rem' }}>
+       <h2 className='section-title underline-title titolo-sezione' style={{ marginTop: '2rem' }}>
         {t('Tariffe Indicative')}
       </h2>
       <div className="tariffe-table-container">

@@ -32,9 +32,11 @@ const About: React.FC = () => {
           </div>
           
           <div className="features-container">
-            <h3>
+            <h2 className="section-title underline-title">
               {t('Caratteristiche della Proprietà')}
-            </h3>
+            </h2>
+            <div className="feature-grid">
+            </div>
             <div className="features-grid">
               <div className="feature feature-main">
                 <div className="feature-title">
