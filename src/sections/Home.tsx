@@ -47,8 +47,31 @@ const Home: React.FC = () => {
           <h2 className="section-title">
             {t('Punti Salienti della Proprietà')}
           </h2>
+
+          {/* Sezione "Perfetta per Ogni Ospite" a tutta larghezza */}
+          <div 
+            className="full-width-feature-card" 
+            style={{ 
+              background: '#f8f9fa', // Sfondo leggermente diverso per distinguerla
+              padding: '2rem',        // Padding interno
+              marginBottom: '2.5rem', // Spazio prima della griglia di card sottostante
+              borderRadius: '8px',    // Bordi arrotondati
+              boxShadow: '0 4px 8px rgba(0,0,0,0.05)', // Ombra leggera per dare profondità
+              textAlign: 'center',    // Centra il testo e i blocchi inline/inline-block al suo interno
+            }}
+          >
+            <div className="feature-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+              <span className="feature-icon" style={{ fontSize: '2.2rem', marginRight: '1rem' }}>👨‍👩‍👧‍👦</span> {/* Ridotta dimensione icona */}
+              <h4 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 600 }}>{t('Perfetta per Ogni Ospite')}</h4> {/* Ridotta dimensione titolo */}
+            </div>
+            <p style={{ fontSize: '1.1rem', lineHeight: '1.65', color: '#333', margin: '0' /* Rimuove margini default del paragrafo */ }}> {/* Ridotta dimensione testo e interlinea */}
+              {t('Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.')}
+            </p>
+          </div>
+
           <div className="highlights-grid">
-            <div className="highlight-card">
+            {/* Le altre card rimangono qui */}
+            <div className="highlight-card" style={{ background: '#f8f9fa' }}>
               <div className="highlight-icon">🛏</div>
               <h3>
                 {t('Comfort e accoglienza')}
@@ -61,13 +84,13 @@ const Home: React.FC = () => {
                 </p>
                 
             </div>
-            <div className="highlight-card">
+            <div className="highlight-card" style={{ background: '#f8f9fa' }}>
               <div className="highlight-icon">🏠</div>
               <h3>
                 {t('Alloggio di Lusso')}
               </h3>
               <p>
-                {t('• Zona giorno con ampio open space e cucina completamente attrezzata')}
+                {t('• Zona giorno con ampio open space con divano letto e cucina completamente attrezzata')}
                 </p>
                 <p>
                 {t('• Wi-Fi gratuito in tutta la casa')}
@@ -76,7 +99,7 @@ const Home: React.FC = () => {
                   {t('• Aria condizionata in ogni camera per il massimo comfort')}
                 </p>
             </div>
-            <div className="highlight-card">
+            <div className="highlight-card" style={{ background: '#f8f9fa' }}>
               <div className="highlight-icon">🌞</div>
               <h3>
                 {t('Spazi esterni esclusivi')}
@@ -90,13 +113,13 @@ const Home: React.FC = () => {
                 {t('• Doccia esterna, perfetta per rinfrescarsi dopo una giornata di mare o escursioni')}
               </p>
             </div>
-            <div className="highlight-card">
+            <div className="highlight-card" style={{ background: '#f8f9fa' }}>
               <div className="highlight-icon">📍</div>
               <h3>
                 {t('Posizione Unica')}
               </h3>
               <p>
-                {t('La casa si trova in una zona collinare tranquilla, immersa nel verde. I 200 gradini per raggiungerla regalano un’esperienza autentica e una vista indimenticabile, ideale per gli amanti della natura e della quiete.')}
+                {t('La struttura si trova in una zona collinare tranquilla, immersa nel verde. Accessibile tramite 200 gradini utilizzata dalle formichelle, trasporitatrice di limoni. Un’esperienza autentica e una vista indimenticabile, ideale per gli amanti della quiete.')}
                 </p>
             </div>
           </div>
