@@ -62,7 +62,7 @@ const Propriety: React.FC = () => {
         </div>
        
        <h2 className='section-title underline-title titolo-sezione' style={{ marginTop: '2rem' }}>
-        {t('Le nostre Traiffe')}
+        {t('Tariffe Indicative')}
       </h2>
       <div className="tariffe-table-container">
         <table className="tariffe-table">
@@ -70,25 +70,34 @@ const Propriety: React.FC = () => {
             <tr>
               <th>{t('Numero di Persone')}</th>
               <th>{t('Prezzo a Notte')}</th>
+              <th>{t('Soggiorno Minimo')}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td data-label={t('Numero di Persone')}>{t('1 a 2')}</td>
-              <td data-label={t('Prezzo a Notte')}>{t('50 € a Persona')}</td>
+              <td data-label={t('da 1 - 2')}>{t('Persone')}</td>
+              <td data-label={t('50 €')}>{t('a persona')}</td>
+              <td data-label={t('Soggiorno Minimo')}>{t('Y notti')}</td>
             </tr>
             <tr>
-              <td data-label={t('Numero di Persone')}>{t('da 3 a 4')}</td>
-              <td data-label={t('Prezzo a Notte')}>{t('40 € a Persona')}</td>
+              <td data-label={t('Periodo')}>{t('Media Stagione')}</td>
+              <td data-label={t('Prezzo a Notte')}>{t('A partire da €Y')}</td>
+              <td data-label={t('Soggiorno Minimo')}>{t('Z notti')}</td>
             </tr>
             <tr>
-              <td data-label={t('Numero di Persone')}>{t('da 4 a 6')}</td>
-              <td data-label={t('Prezzo a Notte')}>{t('30 € a Persona')}</td>
-              </tr>
+              <td data-label={t('Periodo')}>{t('Alta Stagione')}</td>
+              <td data-label={t('Prezzo a Notte')}>{t('A partire da €Z')}</td>
+              <td data-label={t('Soggiorno Minimo')}>{t('W notti')}</td>
+            </tr>
             {/* Puoi aggiungere più righe qui se necessario */}
           </tbody>
         </table>
-        
+        <p className="tariffe-note">
+          {t('I prezzi sono indicativi e possono variare in base al numero di ospiti, al periodo specifico e alla durata del soggiorno.')}
+          {' '}
+          {t('Per un preventivo dettagliato e personalizzato, non esitare a')}{' '}
+          <a href="#contact">{t('contattarci')}</a>.
+        </p>
       </div>
       </div>
       </div>

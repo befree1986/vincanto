@@ -110,15 +110,17 @@ const About: React.FC = () => {
 
           <div className="location-info">
             <div className="location-text">
-              <h3>
+              <h4>
                 {t('La Nostra Posizione')}
-              </h3>
-              <p>
-                {t('Situati a soli 2 km dal centro paese, godi della tranquillità della campagna con la comodità dei servizi vicini, facilmente raggiungibili anche grazie al servizio navetta comunale e ai bus di linea.')}
-              </p>
-              <p>
-                {t("L'accesso a VINCANTO avviene attraverso una scalinata di circa 200 gradini, un percorso suggestivo che si snoda nel verde. Consideriamo questi gradini parte del fascino autentico del luogo, un piccolo 'sentiero delle formichelle' che storicamente trasportavano i preziosi limoni. Salire ti ricompenserà con una vista impagabile e la sensazione di raggiungere un angolo di paradiso nascosto, lontano dalla frenesia quotidiana. È un invito a rallentare, a connettersi con la natura e a godere della pace che solo luoghi come questo sanno offrire.")}
-              </p>
+              </h4>
+              <div style={{ marginTop: '1rem' }}> {/* Aggiunto div con marginTop */}
+                <p>
+                  {t('Situati a soli 2 km dal centro paese, godi della tranquillità della campagna con la comodità dei servizi vicini, facilmente raggiungibili anche grazie al servizio navetta comunale e ai bus di linea.')}
+                </p>
+                <p>
+                  {t("L'accesso a VINCANTO avviene attraverso una scalinata di circa 200 gradini, un percorso suggestivo che si snoda nel verde. Consideriamo questi gradini parte del fascino autentico del luogo, un piccolo 'sentiero delle formichelle' che storicamente trasportavano i preziosi limoni. Salire ti ricompenserà con una vista impagabile e la sensazione di raggiungere un angolo di paradiso nascosto, lontano dalla frenesia quotidiana. È un invito a rallentare, a connettersi con la natura e a godere della pace che solo luoghi come questo sanno offrire.")}
+                </p>
+              </div>
               <div className="distances">
                 <div className="distance-item">
                   <strong>{t('Maiori')}:</strong> {t('8 min dal porto di Maiori (6 min dal lungomare)')}
@@ -145,7 +147,7 @@ const About: React.FC = () => {
             </div>
             <div className="location-image-container">
               <img 
-                src="/public/contact2b.jpg" 
+                src="/contact3.jpg" 
                 alt="Vista panoramica su Maiori e la Costiera Amalfitana" 
                 className="img-fluid"
               />
