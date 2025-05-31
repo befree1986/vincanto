@@ -178,6 +178,9 @@ const Contact: React.FC = () => {
               </form>
             )}
           </div>
+          <div className="contact-divider">
+           
+          </div>
           <div className="contact-info">
             <div className="contact-details">
                 <h3>

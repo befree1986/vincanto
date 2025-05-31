@@ -67,6 +67,9 @@ const Home: React.FC = () => {
             <p style={{ fontSize: '1.1rem', lineHeight: '1.65', color: '#333', margin: '0' /* Rimuove margini default del paragrafo */ }}> {/* Ridotta dimensione testo e interlinea */}
               {t('Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.')}
             </p>
+            <p>
+              {t('🤝 Il proprietario è sempre presente per garantire un\'accoglienza calorosa e un supporto costante durante la vostra permanenza')}
+            </p>
           </div>
 
           <div className="highlights-grid">
@@ -122,6 +125,15 @@ const Home: React.FC = () => {
                 {t('La struttura si trova in una zona collinare tranquilla, immersa nel verde. Accessibile tramite 200 gradini utilizzata dalle formichelle, trasporitatrice di limoni. Un’esperienza autentica e una vista indimenticabile, ideale per gli amanti della quiete.')}
                 </p>
             </div>
+            <div className='highlight-card' style={{ background: '#f8f9fa' }}>
+              <div className="highlight-icon">🤝</div>
+              <h3>
+                {t('Assistenza Dedicata in Loco')}
+              </h3>
+              <p>
+                {t('Il proprietario è sempre presente per garantire un\'accoglienza calorosa e un supporto costante durante la vostra permanenza')}  
+              </p>
+            </div>        
           </div>
         </div>
       </div>

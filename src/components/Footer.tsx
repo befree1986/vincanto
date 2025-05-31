@@ -15,8 +15,8 @@ const Footer: React.FC = () => {
             <p>
               {t('Il Tuo angolo di Paradiso nel Limoneto')}
             </p>
-          </div>
-          <div className="footer-links">
+           </div>
+            <div className="footer-links">
             <h4>
               {t('Link Veloci')}
             </h4>
@@ -37,11 +37,28 @@ const Footer: React.FC = () => {
             <p>{t('Telefono')}: +39 334 202 9141</p>
           </div>
         </div>
+       <div className="footer-bottom">
+        <div className="footer-paytourist-logo">
+            <img src="/paytourist_logo.png" alt="Paytourist" className="footer-paytourist-logo-img"/>
+            <p>
+              {t('Certificata dal Comune di Maiori')}
+            </p>
+            <p>
+              {t('Licenza SLSA000108-0026')}
+            </p>
+            <p>
+              {t('Licenza Regionale / CIN: IT065066C248Z362SX')}            
+            </p>
+        </div>
+        <div className="footer-verfied-logo">
+          <img src="verify-logo.webp" alt="Verified" className="footer-verfied-logo-img" />
+        </div>
+        </div> 
+        </div>
         <div className="footer-bottom">
           <p>&copy; {currentYear} Vincanto. {t('All Rights Reserved.')}</p>
           <p>{t('Webmaster')} Giuseppe Marino</p>
         </div>
-      </div>
     </footer>
   );
 };

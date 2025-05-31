@@ -12,6 +12,7 @@
 .contact-content {
   display: flex;
   gap: 3rem;
+  align-items: center; /* Allinea verticalmente gli item (inclusa la linea) quando in riga, e orizzontalmente quando in colonna */
 }
 
 .booking-form-container, /* Riusiamo alcuni stili dal booking form */
@@ -91,15 +92,29 @@
   display: block; /* Rimuove spazio extra sotto l'iframe */
 }
 
+.contact-divider {
+  /* Stile per la linea VERTICALE (default, per desktop) */
+  width: 2px;                     /* Spessore della linea */
+  height: 750px;                  /* Altezza della linea verticale - puoi aggiustare questo valore */
+  background-color: var(--gray-light); /* Colore della linea */
+  margin: 0; /* Il 'gap' del genitore .contact-content gestirà lo spazio attorno alla linea */
+  border-radius: 10px;
+}
+
 /* Responsive adjustments for Contact section */
 @media (max-width: 992px) { /* Tablet e inferiori */
   .contact-content {
     flex-direction: column;
     gap: 2.5rem;
+    /* align-items: center; è ereditato e ora centra orizzontalmente gli item impilati */
   }
-}
-
-@media (max-width: 768px) { /* Mobile */
+  .contact-divider {
+    /* Stile per la linea ORIZZONTALE (per tablet/mobile) */
+    width: 80%;       /* Larghezza della linea orizzontale */
+    max-width: 200px; /* Mantiene la larghezza massima che avevi prima */
+    height: 2px;      /* Spessore della linea orizzontale */
+    /* margin: 0; è ereditato, il 'gap' del genitore gestisce lo spazio verticale */
+  }
   .booking-form .form-row {
     flex-direction: column; /* Stack form groups in a row */
     gap: 1.5rem; /* Mantieni il gap anche quando impilati */
