@@ -1,7 +1,7 @@
 import React from 'react';
 import LemonDivider from '../components/LemonDivider';
 import './Propriety.css';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
 const Propriety: React.FC = () => {
   const { t } = useTranslation();
@@ -13,6 +13,7 @@ const Propriety: React.FC = () => {
           <h2 className="section-title underline-title" style={{ marginTop: '2rem' }}> {/* Questo titolo ora sarà centrato grazie all'ereditarietà */}
           {t('Foto della Struttura')}
         </h2>
+           </div>
            </div>
         <div className="proprieta-gallery">
           {/* Esempio per la prima immagine */}
@@ -79,10 +80,37 @@ const Propriety: React.FC = () => {
             {/* Puoi aggiungere più righe qui se necessario */}
           </tbody>
         </table>
-        
+        <div className="tariffe-note">   
+        </div>
+        <p style={{ textAlign: 'center' }}>
+        {t(" Servizi inclusi nel prezzo: aria condizionata, internet Wi-Fi, uso lavatrice.")}
+        </p>
+        <p style={{ textAlign: 'center' , textDecoration: 'underline' }}>
+      {t("* Tassa di soggiorno esclusa.")}
+          </p>
+        <p style={{ textAlign: 'center' }}>
+          {t("Il comune di Maiori (SA) applica una tassa di soggiorno per ogni pernottamento, dal 1° gennaio al 31 dicembre di ogni anno, per contribuire al miglioramento dei servizi turistici.")}
+          </p>
+        <h2 className='section-title underline-title titolo-sezione' style={{ marginTop: '2rem' }}>
+        {t(' ')}
+      </h2>
+      <h2>
+      <p> {t(" Costo: € 2,00 a persona per notte ")} </p>
+      <p> {t(" Esenzioni: Sono esenti i minori di 14 anni")}</p>
+      <p> {t(" Pagamento: La tassa non è inclusa nel costo del soggiorno e andrà saldata direttamente presso la nostra struttura, al vostro arrivo o alla partenza.")} </p>        
+      <p>
+        <Trans i18nKey="info.paytouristLinkText">
+          Per tutti i dettagli, potete consultare il sito del Comune di Maiori o il portale dedicato {/*spazzio */}    
+          <a href="https://maiori.paytourist.com/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>
+          PayTourist.
+          </a>
+        </Trans>
+      </p>
+      </h2>   
       </div>
+      {/* Il tag <a> precedentemente vuoto è stato rimosso e integrato nel testo sopra */}
       </div>
-      </div>
+      
       {/* 
         TODO: Sostituisci '€X', 'Y notti', ecc. con i valori reali delle tariffe.
         Esempio di chiavi di traduzione da aggiungere al tuo file i18n JSON:

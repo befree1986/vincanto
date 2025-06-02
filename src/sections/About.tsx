@@ -36,7 +36,7 @@ const About: React.FC = () => {
               {t('La casa, spaziosa e accogliente, si compone di un’ampia zona giorno con cucina open space completamente attrezzata, ideale per condividere momenti in famiglia o con amici. Dispone di tre camere da letto confortevoli e arredate con gusto, e di due bagni completi, entrambi dotati di ampi piatti doccia.')}
             </p>
            <p>
-               {('All’esterno, gli ospiti possono godere di una cucina esterna, perfetta per pranzi e cene all’aperto sotto il pergolato, con vista sul verde circostante. A completare l’offerta, una doccia esterna, un forno a legna tradizionale e un barbecue, ideali per serate conviviali immersi nel profumo dei limoni e del mare.')}
+               {t('All’esterno, gli ospiti possono godere di una cucina esterna, perfetta per pranzi e cene all’aperto sotto il pergolato, con vista sul verde circostante. A completare l’offerta, una doccia esterna, un forno a legna tradizionale e un barbecue, ideali per serate conviviali immersi nel profumo dei limoni e del mare.')}
           </p>
             
           </div>

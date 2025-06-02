@@ -56,6 +56,7 @@
 .nav-menu {
   display: flex;
   align-items: center;
+  /* Margini auto rimossi per permettere l'allineamento a destra gestito dal contenitore flex */
 }
 
 .nav-links {
@@ -65,7 +66,7 @@
 }
 
 .nav-links li {
-  margin: 0 1.5rem;
+  margin: 0 0.7rem;
 }
 
 .nav-links a {
@@ -104,7 +105,42 @@
   z-index: 1001;
 }
 
-@media (max-width: 768px) {
+.language-flag-button { background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease-in-out; /* Aggiunge una transizione fluida */
+  display: inline-block; /* Utile per transform */
+}
+
+.language-flag-button:hover {
+  transform: scale(1.2); /* Aumenta la dimensione del 20% al passaggio del mouse */
+}
+
+/* Contenitore per il selettore della lingua */
+.language-selector-wrapper {
+  position: absolute; /* Relativo a .navbar (che è position: fixed) */
+  z-index: 1010;      /* Assicura che sia sopra altri elementi della navbar */
+  display: flex;
+  gap: 8px;
+  transition: top 0.4s cubic-bezier(0.4,0,0.2,1), right 0.4s cubic-bezier(0.4,0,0.2,1); /* Transizione per top/right */
+}
+
+/* Posizionamento di default (Desktop, navbar scrollata) */
+.navbar.scrolled .language-selector-wrapper {
+  top: 33px;  /* Calcolato per centrare verticalmente le bandiere (20px) nell'altezza della navbar scrollata (padding 0.8rem + logo 60px) */
+  right: 28px; /* Distanza dal bordo destro della viewport */
+}
+
+/* Adattamenti per schermi più piccoli (tablet e mobile) */
+@media (max-width: 1024px) { /* Modificato da 768px a 992px */
+  .navbar.scrolled .language-selector-wrapper {
+    top: 33px;   /* Manteniamo lo stesso allineamento verticale della versione desktop scrollata */
+    right: 80px; /* Spostato più a sinistra per fare spazio al pulsante hamburger (circa 32px padding + 40px toggle + 8px gap) */
+  }
+}
+
+@media (max-width: 1024px) { /* Modificato da 768px a 992px */
   .menu-toggle {
     display: block;
   }

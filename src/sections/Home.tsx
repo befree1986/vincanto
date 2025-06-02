@@ -125,15 +125,6 @@ const Home: React.FC = () => {
                 {t('La struttura si trova in una zona collinare tranquilla, immersa nel verde. Accessibile tramite 200 gradini utilizzata dalle formichelle, trasporitatrice di limoni. Un’esperienza autentica e una vista indimenticabile, ideale per gli amanti della quiete.')}
                 </p>
             </div>
-            <div className='highlight-card' style={{ background: '#f8f9fa' }}>
-              <div className="highlight-icon">🤝</div>
-              <h3>
-                {t('Assistenza Dedicata in Loco')}
-              </h3>
-              <p>
-                {t('Il proprietario è sempre presente per garantire un\'accoglienza calorosa e un supporto costante durante la vostra permanenza')}  
-              </p>
-            </div>        
           </div>
         </div>
       </div>

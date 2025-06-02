@@ -8,6 +8,7 @@ import { ArrowUp } from 'lucide-react';
 import './App.css';
 import React, { useEffect, useState } from 'react';
 
+
 function App() {
   return (
     <div className="app">
