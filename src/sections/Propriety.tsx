@@ -100,7 +100,12 @@ const Propriety: React.FC = () => {
       <p> {t(" Pagamento: La tassa non è inclusa nel costo del soggiorno e andrà saldata direttamente presso la nostra struttura, al vostro arrivo o alla partenza.")} </p>        
       <p>
         <Trans i18nKey="info.paytouristLinkText">
-          Per tutti i dettagli, potete consultare il sito del Comune di Maiori o il portale dedicato {/*spazzio */}    
+          Per tutti i dettagli, potete consultare il sito del  {/*spazzio */}    
+          <a href="https://www.comune.maiori.sa.it/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>
+          Comune di Maiori{ }
+          </a>
+          {} o il portale dedicato {}
+          {/*spazzio */}
           <a href="https://maiori.paytourist.com/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>
           PayTourist.
           </a>

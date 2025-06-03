@@ -61,10 +61,10 @@ const Home: React.FC = () => {
             }}
           >
             <div className="feature-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
-              <span className="feature-icon" style={{ fontSize: '2.2rem', marginRight: '1rem' }}>👨‍👩‍👧‍👦</span> {/* Ridotta dimensione icona */}
-              <h4 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 600 }}>{t('Perfetta per Ogni Ospite')}</h4> {/* Ridotta dimensione titolo */}
+              <span className="feature-icon" style={{ fontSize: '2.0rem', marginRight: '1rem' }}>👨‍👩‍👧‍👦</span> {/* Ridotta dimensione icona */}
+              <h3 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 600 }}>{t('Perfetta per Ogni Ospite')}</h3> {/* Ridotta dimensione titolo */}
             </div>
-            <p style={{ fontSize: '1.1rem', lineHeight: '1.65', color: '#333', margin: '0' /* Rimuove margini default del paragrafo */ }}> {/* Ridotta dimensione testo e interlinea */}
+            <p style={{ fontSize: '1.0rem', lineHeight: '1.65', color: '#333', margin: '0' /* Rimuove margini default del paragrafo */ }}> {/* Ridotta dimensione testo e interlinea */}
               {t('Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.')}
             </p>
             <p>
@@ -76,9 +76,9 @@ const Home: React.FC = () => {
             {/* Le altre card rimangono qui */}
             <div className="highlight-card" style={{ background: '#f8f9fa' }}>
               <div className="highlight-icon">🛏</div>
-              <h3>
+              <h2>
                 {t('Comfort e accoglienza')}
-              </h3>
+              </h2>
               <p>
                 {t('• 3 camere da letto climatizzate, luminose e arredate con gusto')}
                 </p>
@@ -89,9 +89,9 @@ const Home: React.FC = () => {
             </div>
             <div className="highlight-card" style={{ background: '#f8f9fa' }}>
               <div className="highlight-icon">🏠</div>
-              <h3>
+              <h2>
                 {t('Alloggio di Lusso')}
-              </h3>
+              </h2>
               <p>
                 {t('• Zona giorno con ampio open space con divano letto e cucina completamente attrezzata')}
                 </p>
@@ -104,9 +104,9 @@ const Home: React.FC = () => {
             </div>
             <div className="highlight-card" style={{ background: '#f8f9fa' }}>
               <div className="highlight-icon">🌞</div>
-              <h3>
+              <h2>
                 {t('Spazi esterni esclusivi')}
-              </h3>
+              </h2>
               <p>
                 {t("• Cucina esterna coperta per pranzi e cene all’aperto.")}
               </p>
@@ -118,9 +118,9 @@ const Home: React.FC = () => {
             </div>
             <div className="highlight-card" style={{ background: '#f8f9fa' }}>
               <div className="highlight-icon">📍</div>
-              <h3>
+              <h2>
                 {t('Posizione Unica')}
-              </h3>
+              </h2>
               <p>
                 {t('La struttura si trova in una zona collinare tranquilla, immersa nel verde. Accessibile tramite 200 gradini utilizzata dalle formichelle, trasporitatrice di limoni. Un’esperienza autentica e una vista indimenticabile, ideale per gli amanti della quiete.')}
                 </p>

@@ -33,8 +33,30 @@ const Footer: React.FC = () => {
             </h4>
             <p>Via Torre di Milo, 7</p>
             <p>84010 Maiori (SA)</p>
-            <p>{t('Email')}: info@vincantomaiori.it</p>
-            <p>{t('Telefono')}: +39 334 202 9141</p>
+            <p>
+              <a href="mailto:info@vincantomaiori.it" className="footer-link">
+                <i className="fas fa-envelope"></i> info@vincantomaiori.it
+              </a>
+              </p>
+            <p>
+              <a href="tel:+393342029141" className="footer-link">
+                <i className="fas fa-phone"></i> Tel. +39 334 202 9141
+              </a>
+            </p>
+          </div>
+          <div className="footer-social">
+            <h4>{t('Seguici')}</h4>
+            <div className="social-icons-list">
+              <a href="https://www.facebook.com/people/Vincanto-Maiori-Costiera-Amalfitana/61574880714522/" target="_blank" rel="noopener noreferrer" aria-label={t('Facebook')}>
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://www.instagram.com/vincanto_maiori/" target="_blank" rel="noopener noreferrer" aria-label={t('Instagram')}> {/* Sostituisci con il tuo URL Instagram effettivo */}
+                <i className="fab fa-instagram"></i>
+              </a>
+              <a href="https://wa.me/393342029141" target="_blank" rel="noopener noreferrer" aria-label={t('WhatsApp')}>
+                <i className="fab fa-whatsapp"></i>
+              </a>
+            </div>
           </div>
         </div>
        <div className="footer-bottom">

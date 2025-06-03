@@ -123,6 +123,27 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.footer-social h4 {
+  /* Eredita gli stili da .footer h4 */
+  /* Puoi aggiungere personalizzazioni se necessario */
+}
+
+.social-icons-list {
+  display: flex;
+  gap: 1rem; /* Spazio tra le icone */
+  margin-top: 1rem; /* Spazio sotto il titolo "Seguici" */
+}
+
+.social-icons-list a {
+  color: var(--gray-light); /* O var(--white) */
+  font-size: 1.6rem; /* Dimensione delle icone, aggiusta secondo necessità */
+  transition: color 0.3s ease;
+}
+
+.social-icons-list a:hover {
+  color: var(--yellow);
+}
+
 @media (max-width: 768px) {
   .footer {
     padding: 3rem 0 1.5rem;
@@ -140,5 +161,8 @@
   .footer h4::after {
     left: 50%;
     transform: translateX(-50%);
+  }
+  .social-icons-list {
+    justify-content: center; /* Centra le icone su mobile */
   }
 }

@@ -198,8 +198,14 @@ const Contact: React.FC = () => {
                 <h4>
                   {t('Telefono & Email')}
                 </h4>
-                <p>+39 334 202 9141</p>
-                <p>info@vincanto.com</p>
+                <p>
+                  <a href="tel:3342029141" className="footer-link">
+                <i className="fas fa-phone"></i> +39 334 202 9141 </a>
+                </p>
+                <p>
+                  <a href="mailto:info@vincantomaiori.it" className="footer-link">
+                <i className="fas fa-envelope"></i> info@vincantoma.it </a>
+                </p>
               </div>
               <div className="contact-item">
                 <h4>
