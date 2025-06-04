@@ -18,12 +18,12 @@ const Propriety: React.FC = () => {
         <div className="proprieta-gallery">
           {/* Esempio per la prima immagine */}
           <div className="proprieta-img-card">
-            <img src="https://lh3.googleusercontent.com/p/AF1QipNtrJ92Qev3zyTcqNA8PsGlIIJr63p4ix5l7XJ2=s680-w680-h510-rw" alt={t('alt.proprieta.immagine1')} className="img-fluid" />
-            <p className="image-caption">{t('caption.proprieta.immagine1')}</p>
+            <img src="/ingresso.jpg" alt={t('alt.proprieta.immagine1')} className="img-fluid" />
+            <p className="image-caption">{t('Ingresso della struttura')}</p>
           </div>
           {/* Esempio per la seconda immagine */}
           <div className="proprieta-img-card">
-            <img src="https://lh3.googleusercontent.com/p/AF1QipMJ-hFnOtK--MbqUsPj7dh5LSjsz9f3hFJ-B0c5=s680-w680-h510-rw" alt={t('alt.proprieta.immagine2')} className="img-fluid" />
+            <img src="/corridoio.jpg" alt={t('alt.proprieta.immagine2')} className="img-fluid" />
             <p className="image-caption">🎨 {t('Applique nel corridoio e nelle camere in Pregiata Cermaica Vietrese devcorate a mano')} 🎨</p>
           </div>
           <div className="proprieta-img-card">

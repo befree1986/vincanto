@@ -199,8 +199,8 @@ const Contact: React.FC = () => {
                   {t('Telefono & Email')}
                 </h4>
                 <p>
-                  <a href="tel:3342029141" className="footer-link">
-                <i className="fas fa-phone"></i> +39 334 202 9141 </a>
+                  <a href="tel:3331481677" className="footer-link">
+                <i className="fas fa-phone"></i> +39 333 148 1677 </a>
                 </p>
                 <p>
                   <a href="mailto:info@vincantomaiori.it" className="footer-link">

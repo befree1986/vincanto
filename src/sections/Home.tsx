@@ -39,7 +39,7 @@ const Home: React.FC = () => {
             </a>
           </div>
           <div className="welcome-image">
-            <img src="https://lh3.googleusercontent.com/p/AF1QipPM8TeeZ26vR6-HJVwG1FBZ63G6xj5ujSyJZI4N=s680-w680-h510-rw" alt="Vincanto" className="img-fluid" />
+            <img src="/limoneto copia.jpg" alt="Vincanto" className="img-fluid" />
           </div>
         </div>
         
@@ -83,7 +83,7 @@ const Home: React.FC = () => {
                 {t('• 3 camere da letto climatizzate, luminose e arredate con gusto')}
                 </p>
                 <p>
-                {t('• 2 bagni moderni con spaziosi piatti doccia')}
+                {t('• 3 bagni moderni di cui 2 con spaziosi piatti doccia')}
                 </p>
                 
             </div>
