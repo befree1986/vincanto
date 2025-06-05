@@ -39,8 +39,8 @@ const Footer: React.FC = () => {
               </a>
               </p>
             <p>
-              <a href="tel:+393342029141" className="footer-link">
-                <i className="fas fa-phone"></i> Tel. +39 334 202 9141
+              <a href="tel:+393331481677" className="footer-link">
+                <i className="fas fa-phone"></i> Tel. +39 333 148 1677
               </a>
             </p>
           </div>
@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
               <a href="https://www.instagram.com/vincanto_maiori/" target="_blank" rel="noopener noreferrer" aria-label={t('Instagram')}> {/* Sostituisci con il tuo URL Instagram effettivo */}
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="https://wa.me/393342029141" target="_blank" rel="noopener noreferrer" aria-label={t('WhatsApp')}>
+              <a href="https://wa.me/393331481677" target="_blank" rel="noopener noreferrer" aria-label={t('WhatsApp')}>
                 <i className="fab fa-whatsapp"></i>
               </a>
             </div>
