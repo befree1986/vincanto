@@ -17,6 +17,142 @@
   font-size: 1.1rem;
 }
 
+
+
+/* Stili per la pagina di riepilogo della prenotazione */
+.booking-summary-page {
+  border: 1px solid #e0e0e0;
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-top: 2rem;
+}
+
+.summary-page-title {
+  font-size: 1.8rem;
+  color: var(--primary-color, #333); /* Usa variabile se definita, altrimenti fallback */
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid var(--accent-color, #f0ad4e); /* Usa variabile se definita */
+  padding-bottom: 0.5rem;
+}
+
+.summary-section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.summary-section:not(:last-child) {
+ border-bottom: 1px dashed #ccc;
+}
+
+.summary-section h4 {
+  font-size: 1.3rem;
+  color: var(--secondary-color, #555); /* Usa variabile se definita */
+  margin-bottom: 0.75rem;
+}
+
+.summary-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+.summary-section p strong {
+  color: #333;
+  margin-right: 5px;
+}
+
+.summary-payment-info {
+  font-style: italic;
+  color: #666;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.5rem;
+  background-color: #eef;
+  border-radius: 4px;
+}
+
+.summary-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem; /* Spazio tra i pulsanti */
+}
+
+/* Stili per il riepilogo costi */
+.cost-summary-section hr {
+  border: none;
+  border-top: 1px dashed #ccc;
+  margin: 0.75rem 0;
+}
+
+.cost-summary-section .grand-total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 0.75rem;
+  color: var(--primary-color, #333);
+}
+
+.cost-summary-section .grand-total strong {
+  color: var(--primary-color, #333); /* Assicura che anche il strong erediti o abbia lo stesso colore */
+}
+
+.tax-detail {
+  font-size: 0.85em;
+  color: #555;
+  margin-left: 5px;
+}
+
+/* Assicura che la sezione dettagli pagamento e costi siano ben separate */
+.payment-details-section {
+  margin-top: 1.5rem; /* Aggiunge spazio sopra la sezione dettagli pagamento se c'è il riepilogo costi */
+}
+
+/* Stile per il nome del file caricato */
+.file-name-display {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: #555;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* Stili per il riepilogo costi */
+.cost-summary-section hr {
+  border: none;
+  border-top: 1px dashed #ccc;
+  margin: 0.75rem 0;
+}
+
+.cost-summary-section .grand-total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 0.75rem;
+  color: var(--primary-color, #333);
+}
+
+.cost-summary-section .grand-total strong {
+  color: var(--primary-color, #333); /* Assicura che anche il strong erediti o abbia lo stesso colore */
+}
+
+.tax-detail {
+  font-size: 0.85em;
+  color: #555;
+  margin-left: 5px;
+}
+
+/* Assicura che la sezione dettagli pagamento e costi siano ben separate */
+.payment-details-section {
+  margin-top: 1.5rem; /* Aggiunge spazio sopra la sezione dettagli pagamento se c'è il riepilogo costi */
+}
+
+
 .booking-content {
   max-width: 800px;
   margin: 0 auto;
