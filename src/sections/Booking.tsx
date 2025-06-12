@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Booking.css';
 import LemonDivider from '../components/LemonDivider';
 import { useTranslation } from 'react-i18next';
@@ -14,20 +14,25 @@ interface BookingFormData {
   childrenAges: string[];
   checkin: string;
   checkout: string;
+  parkingOption: 'street' | 'private' | '';
 }
 
 interface CalculationResults {
   numberOfNights: number;
-  pricePerPersonPerNight: number;
-  subtotal: number;
+  // pricePerPersonPerNight: number; // Sostituito da subtotalNightlyRate per maggiore chiarezza con prezzi scaglionati
+  subtotalNightlyRate: number;
+  cleaningFee: number;
+  parkingCost: number;
+  parkingOption: string;
+  totalPayableOnline: number; // subtotalNightlyRate + cleaningFee + parkingCost
   touristTaxEligibleGuests: number;
   touristTax: number;
-  grandTotal: number;
-  depositAmount: number;
+  grandTotalWithTax: number; // totalPayableOnline + touristTax
+  depositAmount: number; // Calcolato su totalPayableOnline
 }
 
 const MAX_CHILDREN = 5;
-const MAX_CHILD_AGE = 16;
+const MAX_CHILD_AGE = 17;
 
 const BookingForm: React.FC = () => {
   const { t } = useTranslation();
@@ -41,21 +46,44 @@ const BookingForm: React.FC = () => {
     childrenAges: [],
     checkin: '',
     checkout: '',
+    parkingOption: '',
   });
   const [submitted, setSubmitted] = useState(false);
   const [availability, setAvailability] = useState<'idle' | 'checking' | 'available' | 'unavailable'>('idle');
   const [paymentAmount, setPaymentAmount] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
+  const [showParkingSelectionStep, setShowParkingSelectionStep] = useState(false);
   // const [receiptFile, setReceiptFile] = useState<File | null>(null); // Rimosso stato per il file
   const [showSummary, setShowSummary] = useState(false);
   const [sending, setSending] = useState(false);
   const [calculationResults, setCalculationResults] = useState<CalculationResults | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const [currentNumberOfNights, setCurrentNumberOfNights] = useState<number | null>(null);
+
+  const CLEANING_LINEN_FEE = 30;
+  const DEPOSIT_PERCENTAGE = 0.50; // Acconto aggiornato al 50%
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (formData.checkin && formData.checkout) {
+      const checkinDate = new Date(formData.checkin);
+      const checkoutDate = new Date(formData.checkout);
+      if (checkoutDate > checkinDate) {
+        const diffTime = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
+        const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        setCurrentNumberOfNights(nights);
+      } else {
+        setCurrentNumberOfNights(null);
+      }
+    } else {
+      setCurrentNumberOfNights(null);
+    }
+  }, [formData.checkin, formData.checkout]);
 
   const handleGuestsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormData(prev => ({ ...prev, guests: e.target.value }));
@@ -78,12 +106,19 @@ const BookingForm: React.FC = () => {
     });
   };
 
+  const handleParkingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({ ...prev, parkingOption: e.target.value as 'street' | 'private' | '' }));
+  };
+
   const checkAvailability = (e: React.FormEvent) => {
     e.preventDefault();
     setAvailability('checking');
     setTimeout(() => {
       if (formData.checkin && formData.checkout) {
+        // Resetta gli step successivi quando si riverifica la disponibilità
         setAvailability('available');
+        setShowParkingSelectionStep(false);
+        setShowSummary(false);
       } else {
         setAvailability('unavailable');
       }
@@ -103,8 +138,14 @@ const BookingForm: React.FC = () => {
   //   }
   // };
 
+  const isHighSeason = (checkinDate: Date): boolean => {
+    const month = checkinDate.getMonth(); // 0 (Gen) - 11 (Dic)
+    // Giugno, Luglio, Agosto sono alta stagione
+    return month >= 6 && month <= 7; // 5: Giugno, 6: Luglio, 7: Agosto
+  };
+
   const calculateBookingCosts = (): CalculationResults | null => {
-    const { checkin, checkout, guests, children, childrenAges } = formData;
+    const { checkin, checkout, guests, children, childrenAges, parkingOption } = formData;
     if (!checkin || !checkout || !guests) return null;
 
     const checkinDate = new Date(checkin);
@@ -124,13 +165,25 @@ const BookingForm: React.FC = () => {
     const numChildren = children;
     const totalGuests = numAdults + numChildren;
 
-    let pricePerPersonPerNight;
-    if (totalGuests <= 0) pricePerPersonPerNight = 0;
-    else if (totalGuests <= 2) pricePerPersonPerNight = 50;
-    else if (totalGuests <= 4) pricePerPersonPerNight = 40;
-    else pricePerPersonPerNight = 30; // Per 5 o più ospiti
+    if (totalGuests <= 0) return null;
 
-    const subtotal = pricePerPersonPerNight * totalGuests * numberOfNights;
+    let subtotalNightlyRate = 0;
+
+    if (numberOfNights === 1) {
+      subtotalNightlyRate = totalGuests * 50; // 50€ a persona per 1 notte
+    } else {
+      let costPerNight = 0;
+      if (totalGuests >= 1) {
+        costPerNight += Math.min(totalGuests, 2) * 50; // Prime 2 persone
+      }
+      if (totalGuests >= 3) {
+        costPerNight += Math.min(totalGuests - 2, 2) * 40; // 3ª e 4ª persona
+      }
+      if (totalGuests >= 5) {
+        costPerNight += (totalGuests - 4) * 30; // Dalla 5ª persona in su
+      }
+      subtotalNightlyRate = costPerNight * numberOfNights;
+    }
 
     let touristTaxEligibleGuests = numAdults;
     childrenAges.forEach(ageStr => {
@@ -139,37 +192,66 @@ const BookingForm: React.FC = () => {
         touristTaxEligibleGuests++;
       }
     });
+    const touristTax = touristTaxEligibleGuests * 2 * numberOfNights;
 
-    const touristTaxAmount = touristTaxEligibleGuests * 2 * numberOfNights; // Rinominiamo per chiarezza
-    const grandTotal = subtotal; // Il grandTotal per il pagamento online ora è solo il subtotal
-    const DEPOSIT_PERCENTAGE = 0.30; // 30% di acconto calcolato sul subtotal
-    const depositAmount = grandTotal * DEPOSIT_PERCENTAGE;
+    let parkingCost = 0;
+    if (parkingOption === 'private') {
+      const rate = isHighSeason(checkinDate) ? 20 : 15;
+      parkingCost = rate * numberOfNights;
+    }
+
+    const cleaningFee = CLEANING_LINEN_FEE;
+    const totalPayableOnline = subtotalNightlyRate + cleaningFee + parkingCost;
+    const grandTotalWithTax = totalPayableOnline + touristTax;
+    const depositAmount = grandTotalWithTax * DEPOSIT_PERCENTAGE; // Modificato per calcolare l'acconto sul totale complessivo
 
     return {
       numberOfNights,
-      pricePerPersonPerNight,
-      subtotal,
+      subtotalNightlyRate,
+      cleaningFee,
+      parkingCost,
+      parkingOption: parkingOption || 'street', // Assicura che ci sia un valore
+      totalPayableOnline,
       touristTaxEligibleGuests,
-      touristTax: touristTaxAmount, // Usiamo il nome corretto della proprietà
-      grandTotal,
+      touristTax,
+      grandTotalWithTax,
       depositAmount,
     };
   };
 
-  const handleProceedToSummary = () => {
+  const handleProceedToParkingSelection = () => {
+    // Validazione dei campi utente e pagamento prima di mostrare la selezione parcheggio
+    if (!formData.name || !formData.surname || !formData.email || !formData.phone || !paymentAmount || !paymentMethod) {
+      setError(t("ErroreCompilaCampiUtentePagamento")); // Nuova chiave di traduzione
+      return;
+    }
+    setError(null);
+    setShowParkingSelectionStep(true);
+  };
+
+  const handleProceedToSummaryFromParking = () => {
+    if (!formData.parkingOption) {
+      setError(t("ErroreSelezionaParcheggio")); // Nuova chiave di traduzione
+      return;
+    }
     setError(null);
     const costs = calculateBookingCosts();
     if (costs) {
       setCalculationResults(costs);
       setShowSummary(true);
+      setShowParkingSelectionStep(false); // Nasconde la selezione parcheggio, mostra il riepilogo
     } else if (!error) { // Se l'errore non è già stato impostato da calculateBookingCosts
-      setError(t("ErroreControllaDateOspiti"));
+      setError(t("ErroreControllaDateOspitiParcheggio"));
     }
-    // setShowSummary(true); // Spostato dentro if(costs) per mostrare il riepilogo solo se i costi sono validi
   };
 
-  const handleBackToDetails = () => {
+  const handleBackToParkingSelection = () => { // Dal riepilogo torna alla selezione parcheggio
     setShowSummary(false);
+    setShowParkingSelectionStep(true);
+    setError(null);
+  };
+  const handleBackToUserDetails = () => { // Dalla selezione parcheggio torna ai dettagli utente
+    setShowParkingSelectionStep(false);
     setError(null); // Resetta eventuali errori precedenti
   };
 
@@ -189,6 +271,7 @@ const BookingForm: React.FC = () => {
       });
       data.append('paymentAmount', paymentAmount);
     data.append('paymentMethod', paymentMethod);
+      data.append('parkingOption', formData.parkingOption);
       
       // Chiama l'endpoint del CMS esistente
       await axios.post('http://localhost:5174/api/booking', data);
@@ -199,7 +282,8 @@ const BookingForm: React.FC = () => {
           formData, 
           calculationResults, 
           paymentAmount, 
-          paymentMethod 
+          paymentMethod,
+          // parkingOption: formData.parkingOption // formData già include parkingOption
         });
       }
       // if (paymentMethod === 'bonifico' && receiptFile) { // Rimosso l'append del file
@@ -219,6 +303,7 @@ const BookingForm: React.FC = () => {
         childrenAges: [],
         checkin: '',
         checkout: '',
+        parkingOption: '',
       });
       setPaymentAmount('');
       setPaymentMethod('');
@@ -233,11 +318,29 @@ const BookingForm: React.FC = () => {
     }
   };
 
-  const isValidForSummary = 
+  useEffect(() => {
+    const guests = formData.guests ? parseInt(formData.guests, 10) : 0;
+    // currentNumberOfNights è già disponibile dallo stato
+    if (guests === 1 && currentNumberOfNights === 1 && paymentAmount === 'acconto') {
+      setPaymentAmount('totale');
+      // Opzionale: potresti voler informare l'utente di questa modifica automatica
+      // ad esempio con un messaggio non invasivo o un tooltip.
+    }
+  }, [formData.guests, currentNumberOfNights, paymentAmount]);
+
+  const areCoreDetailsValid = // Per abilitare il form dopo il check disponibilità
     formData.checkin && 
     formData.checkout && 
     new Date(formData.checkout) > new Date(formData.checkin) &&
     formData.guests && parseInt(formData.guests, 10) > 0;
+
+  const canProceedToParking =
+    areCoreDetailsValid &&
+    formData.name && formData.surname && formData.email && formData.phone && paymentAmount && paymentMethod;
+
+  const canProceedToSummaryFromParking =
+    canProceedToParking && formData.parkingOption !== '';
+
 
   return (
     <div className="booking-content">
@@ -257,13 +360,13 @@ const BookingForm: React.FC = () => {
             <label htmlFor="guests">{t('Adulti')}</label>
             <select id="guests" name="guests" value={formData.guests} onChange={handleGuestsChange} required>
               <option value="">{t('Seleziona')}</option>
-              {[...Array(8)].map((_, idx) => (
+              {[...Array(6)].map((_, idx) => (
                 <option key={idx+1} value={String(idx+1)}>{idx+1}</option>
               ))}
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="children">{t('Bambini')}</label>
+            <label htmlFor="children">{t('Bambini e/o Ragazzi')}</label>
             <select id="children" name="children" value={formData.children} onChange={handleChildrenChange}>
               {[...Array(MAX_CHILDREN+1)].map((_, idx) => (
                 <option key={idx} value={idx}>{idx}</option>
@@ -278,9 +381,12 @@ const BookingForm: React.FC = () => {
                 <label>{t('Età bambino')} {idx+1}</label>
                 <select value={formData.childrenAges[idx] || ''} onChange={e => handleChildAgeChange(idx, e.target.value)} required>
                   <option value="">{t('Seleziona')}</option>
-                  {[...Array(MAX_CHILD_AGE + 1)].map((_, age) => (
+                  {/* Opzioni da 0 a 13 anni */}
+                  {[...Array(14)].map((_, age) => (
                     <option key={age} value={String(age)}>{age} {t('Anni')}</option>
                   ))}
+                  {/* Opzione 14+ */}
+                  <option value="14+">14+ {t('Anni')}</option>
                 </select>
               </div>
             ))}
@@ -299,9 +405,8 @@ const BookingForm: React.FC = () => {
 
       {availability === 'available' && !submitted && (
         <form className="booking-process-form" onSubmit={handleActualSubmit} style={{ marginTop: '2rem' }} encType="multipart/form-data">
-          {!showSummary ? (
-            <>
-              {/* Vista Dettagli Prenotazione */}
+          {!showParkingSelectionStep && !showSummary && areCoreDetailsValid && (
+            <> {/* Step 1: Dati Utente e Pagamento */}
               <div className="form-row user-details-row">
                 <div className="form-group">
                   <label htmlFor="name">{t('Nome')}</label>
@@ -326,8 +431,13 @@ const BookingForm: React.FC = () => {
                 <div className="form-group">
                   <label>{t('Scegli importo da pagare')}</label>
                   <div className="radio-group">
-                    <label><input type="radio" name="paymentAmount" value="acconto" checked={paymentAmount === 'acconto'} onChange={handlePaymentAmountChange} required /> {t('Acconto (caparra)')}</label>
-                    <label><input type="radio" name="paymentAmount" value="totale" checked={paymentAmount === 'totale'} onChange={handlePaymentAmountChange} required /> {t('Importo totale')}</label>
+                    <label>
+                      <input type="radio" name="paymentAmount" value="acconto" checked={paymentAmount === 'acconto'} onChange={handlePaymentAmountChange} required 
+                      disabled={(formData.guests ? parseInt(formData.guests, 10) === 1 : false) && currentNumberOfNights === 1} /> {t('Acconto (caparra)')}
+                    </label>
+                    <label>
+                      <input type="radio" name="paymentAmount" value="totale" checked={paymentAmount === 'totale'} onChange={handlePaymentAmountChange} required /> {t('Importo totale')}
+                    </label>
                   </div>
                 </div>
                 <div className="form-group payment-method-group">
@@ -348,13 +458,41 @@ const BookingForm: React.FC = () => {
                 )} */}
               </div>
               {error && <div className="error-message">{error}</div>}
-              <button type="button" className="btn btn-accent" onClick={handleProceedToSummary} disabled={sending || !formData.name || !formData.surname || !formData.email || !formData.phone || !paymentAmount || !paymentMethod || !isValidForSummary}>
-                {t('ProcediAlRiepilogo')}
+              <button type="button" className="btn btn-accent" onClick={handleProceedToParkingSelection} disabled={sending || !canProceedToParking}>
+                {t('ProcediSceltaParcheggio')}
               </button>
             </>
-          ) : (
-            // Vista Riepilogo Prenotazione
-            <div className="booking-summary-page">
+          )}
+
+          {showParkingSelectionStep && !showSummary && (
+            <> {/* Step 2: Selezione Parcheggio */}
+              <div className="parking-selection-section" style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+                <h3 className="parking-section-title">{t('OpzioniParcheggio')}</h3>
+                <div className="form-group">
+                  <div className="radio-group">
+                    <label>
+                      <input type="radio" name="parkingOption" value="street" checked={formData.parkingOption === 'street'} onChange={handleParkingChange} required /> {t('ParcheggioInStrada')}
+                    </label>
+                    <label>
+                      <input type="radio" name="parkingOption" value="private" checked={formData.parkingOption === 'private'} onChange={handleParkingChange} required /> {t('ParcheggioPrivatoCustodito')}
+                    </label>
+                  </div>
+                  {formData.parkingOption === 'private' && <p className="parking-cost-note">{t('CostoParcheggioPrivatoInfo')}</p>}
+                </div>
+              </div>
+              {error && <div className="error-message">{error}</div>}
+              <div className="summary-actions">
+                <button type="button" className="btn btn-secondary" onClick={handleBackToUserDetails} disabled={sending}>
+                  {t('IndietroDatiUtente')}
+                </button>
+                <button type="button" className="btn btn-accent" onClick={handleProceedToSummaryFromParking} disabled={sending || !formData.parkingOption}>
+                {t('ProcediAlRiepilogo')}
+                </button>
+              </div>
+            </>
+          )}
+          {showSummary && calculationResults && (
+            <div className="booking-summary-page"> {/* Step 3: Riepilogo Prenotazione */}
               <h3 className="summary-page-title">{t('TitoloRiepilogoRichiesta')}</h3>
               
               <div className="summary-section">
@@ -371,55 +509,67 @@ const BookingForm: React.FC = () => {
                 <p><strong>{t('Check-out')}:</strong> {formData.checkout}</p>
                 <p><strong>{t('Adulti')}:</strong> {formData.guests}</p>
                 {formData.children > 0 && (
-                  <p><strong>{t('Bambini')}:</strong> {formData.children} ({formData.childrenAges.map(age => `${age} ${t('Anni')}`).join(', ')})</p>
+                  <p><strong>{t('Bambini e/o Ragazzi')}:</strong> {formData.children} ({formData.childrenAges.map(age => `${age} ${t('Anni')}`).join(', ')})</p>
                 )}
+                <p><strong>{t('ParcheggioLabel')}</strong> {formData.parkingOption === 'street' ? t('ParcheggioInStrada') : t('ParcheggioPrivatoCustodito')}</p>
               </div>
 
-              {calculationResults && (
-                <div className="summary-section cost-summary-section">
-                  <h4>{t('RiepilogoCosti')}</h4>
-                  <p><strong>{t('NumeroNotti')}</strong> {calculationResults.numberOfNights}</p>
-                  <p>
-                    <strong>{t('OspitiLabel')}</strong> {parseInt(formData.guests,10)} {t(parseInt(formData.guests,10) > 1 ? 'AdultiLabel' : 'AdultoLabel')}
-                    {formData.children > 0 && `, ${formData.children} ${t(formData.children > 1 ? 'BambiniLabel' : 'BambinoLabel')}`}
-                  </p>
-                  <p><strong>{t('PrezzoBasePerPersonaNotte')}</strong> €{calculationResults.pricePerPersonPerNight.toFixed(2)}</p>
-                  <hr />
-                  <p><strong>{t('SubtotaleSoggiorno')}</strong> €{calculationResults.subtotal.toFixed(2)}</p>
-                  <p>
-                    <strong>{t('TassaDiSoggiorno')}</strong> €{calculationResults.touristTax.toFixed(2)}
-                    <span className="tax-detail"> ({t('DettaglioTassaSoggiorno', { count: calculationResults.touristTaxEligibleGuests, nights: calculationResults.numberOfNights })})</span>
-                  </p>
-                  <p className="payable-total"><strong>{t('TotaleSoggiornoDaPagareOnline')}</strong> €{calculationResults.grandTotal.toFixed(2)}</p>
-                  {calculationResults.touristTax > 0 && (
-                    <p className="tourist-tax-note">{t('NotaTassaSoggiornoPagamento')}</p>
-                  )}
-                </div>
-              )}
+              <div className="summary-section cost-summary-section">
+                <h4>{t('RiepilogoCosti')}</h4>
+                <p><strong>{t('NumeroNotti')}</strong> {calculationResults.numberOfNights}</p>
+                {/* <p>
+                  <strong>{t('OspitiLabel')}</strong> {parseInt(formData.guests,10)} {t(parseInt(formData.guests,10) > 1 ? 'AdultiLabel' : 'AdultoLabel')}
+                  {formData.children > 0 && `, ${formData.children} ${t(formData.children > 1 ? 'BambiniLabel' : 'BambinoLabel')}`}
+                </p> */}
+                {/* <p><strong>{t('PrezzoBasePerPersonaNotte')}</strong> €{calculationResults.pricePerPersonPerNight.toFixed(2)}</p> */}
+                <p><strong>{t('SubtotaleSoggiornoTariffa')}</strong> €{calculationResults.subtotalNightlyRate.toFixed(2)}</p>
+                <p><strong>{t('CostoPuliziaBiancheria')}</strong> €{calculationResults.cleaningFee.toFixed(2)}</p>
+                {calculationResults.parkingCost > 0 && (
+                  <p><strong>{t('CostoParcheggio')}</strong> €{calculationResults.parkingCost.toFixed(2)}</p>
+                )}
+                <hr />
+                <p className="payable-total"><strong>{t('TotaleDaPagareOnline')}</strong> €{calculationResults.totalPayableOnline.toFixed(2)}</p>
+                <hr style={{ margin: "0.5rem 0"}}/>
+                <p>
+                  <strong>{t('TassaDiSoggiorno')}</strong> €{calculationResults.touristTax.toFixed(2)}
+                  <span className="tax-detail"> ({t('DettaglioTassaSoggiorno', { count: calculationResults.touristTaxEligibleGuests, nights: calculationResults.numberOfNights })})</span>
+                </p>
+                <p className="grand-total-final">
+                  <strong>{t('TotaleComplessivoDovuto')}</strong> €{calculationResults.grandTotalWithTax.toFixed(2)}
+                </p>
+                {/* La NotaTassaSoggiornoPagamento specifica per l'acconto è stata rimossa 
+                    perché l'acconto ora è calcolato sul grandTotalWithTax, includendo quindi la tassa.
+                    Le informazioni aggiornate sono in InfoPagamentoAcconto. */}
+              </div>
 
               <div className="summary-section payment-details-section">
                 <h4>{t('DettagliPagamento')}</h4>
                 <p><strong>{t('DettaglioOpzionePagamento')}</strong> {paymentAmount === 'acconto' ? t('Acconto (caparra)') : t('Importo totale')}</p>
                 <p><strong>{t('DettaglioMetodoPagamento')}</strong>
-                    {paymentMethod === 'bonifico' && t('Bonifico Immediato')}
-                    {paymentMethod === 'carta' && t('Carta di Credito / Bancomat')}
-                    {paymentMethod === 'altro' && t('Altri metodi elettronici')}
+                  {paymentMethod === 'bonifico' && t('Bonifico Immediato')}
+                  {paymentMethod === 'carta' && t('Carta di Credito / Bancomat')}
+                  {paymentMethod === 'altro' && t('Altri metodi elettronici')}
                 </p>
 
-                {calculationResults && paymentAmount === 'acconto' && (
-                  <p><strong>{t('AccontoPercentuale', { percent: (0.30 * 100).toFixed(0) })}</strong> €{calculationResults.depositAmount.toFixed(2)}</p>
+                {paymentAmount === 'acconto' && (
+                  <p><strong>{t('AccontoDaVersare', { percent: (DEPOSIT_PERCENTAGE * 100).toFixed(0) })}</strong> €{calculationResults.depositAmount.toFixed(2)}</p>
                 )}
-                {calculationResults && paymentAmount === 'totale' && (
-                  <p><strong>{t('ValoreImportoTotaleDaVersare')}</strong> €{calculationResults.grandTotal.toFixed(2)}</p>
+                {paymentAmount === 'totale' && (
+                  <p><strong>{t('ValoreImportoTotaleDaVersare')}</strong> €{calculationResults.grandTotalWithTax.toFixed(2)}</p>
                 )}
 
-                <p className="summary-payment-info">{t('InfoTotaleDaPagare')}</p>
+                {paymentAmount === 'acconto' && (
+                  <p className="summary-payment-info">{t('InfoPagamentoAcconto')}</p>
+                )}
+                {paymentAmount === 'totale' && (
+                  <p className="summary-payment-info">{t('InfoPagamentoTotaleConTassa')}</p>
+                )}
               </div>
               
               {error && <div className="error-message">{error}</div>}
               <div className="summary-actions">
-                <button type="button" className="btn btn-secondary" onClick={handleBackToDetails} disabled={sending}>
-                  {t('Indietro')}
+                <button type="button" className="btn btn-secondary" onClick={handleBackToParkingSelection} disabled={sending}>
+                  {t('IndietroSelezioneParcheggio')}
                 </button>
                 <button type="submit" className="btn btn-accent btn-submit-booking" disabled={sending}>
                   {sending ? t('Invio in corso...') : t('ConfermaEInviaRichiesta')}
@@ -457,3 +607,32 @@ const Booking: React.FC = () => {
 };
 
 export default Booking;
+
+/*
+TODO: Aggiungere queste chiavi al file di traduzione i18n (es. public/locales/it/translation.json)
+
+"ErroreCompilaCampiUtentePagamento": "Errore: compila tutti i campi relativi ai tuoi dati e al metodo di pagamento.",
+"ErroreSelezionaParcheggio": "Errore: seleziona un'opzione di parcheggio per procedere.",
+"ProcediSceltaParcheggio": "Procedi alla Scelta Parcheggio",
+"IndietroDatiUtente": "Modifica Dati Utente/Pagamento",
+"IndietroSelezioneParcheggio": "Modifica Scelta Parcheggio",
+
+"ErroreControllaDateOspitiParcheggio": "Errore: controlla le date, il numero di ospiti o seleziona un'opzione di parcheggio.",
+"OpzioniParcheggio": "Scegli un'opzione per il parcheggio:",
+"ParcheggioInStrada": "Parcheggio in strada (gratuito, non custodito)",
+"ParcheggioPrivatoCustodito": "Parcheggio Privato Custodito",
+"CostoParcheggioPrivatoInfo": "Il parcheggio privato ha un costo di €15/notte (bassa/media stagione) o €20/notte (alta stagione: Giu-Ago). Il costo verrà aggiunto al totale.",
+"ParcheggioLabel": "Parcheggio:",
+"SubtotaleSoggiornoTariffa": "Subtotale soggiorno (tariffa notti):",
+"CostoPuliziaBiancheria": "Costo Pulizia e Biancheria:",
+"CostoParcheggio": "Costo Parcheggio:",
+"TotaleDaPagareOnline": "Totale da pagare online:",
+"TotaleComplessivoDovuto": "Totale complessivo dovuto (tasse incluse):",
+"AccontoDaVersare": "Acconto da versare ({{percent}}% del totale complessivo, tasse incl.):",
+// NotaTassaSoggiornoPagamento (vecchia): "La Tassa di Soggiorno (€{{taxAmount}}) non è inclusa nell'acconto e verrà saldata in struttura insieme al saldo del soggiorno."
+// Questa nota non è più mostrata per l'acconto con la nuova logica. Se necessario, può essere riutilizzata o adattata per altri contesti.
+"InfoPagamentoAcconto": "L'acconto selezionato ({{percent}}% del totale complessivo, tasse incluse) sarà quello da versare. Il saldo rimanente (il restante {{saldoPercent}}% del totale complessivo) sarà da pagare in struttura.",
+"InfoPagamentoTotaleConTassa": "L'importo totale selezionato, comprensivo di Tassa di Soggiorno, sarà quello da versare tramite il metodo scelto."
+
+Modificare/verificare anche le chiavi esistenti se necessario per coerenza.
+*/

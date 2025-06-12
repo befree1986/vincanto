@@ -97,7 +97,7 @@ const Propriety: React.FC = () => {
       <h2>
       <p> {t(" Costo: € 2,00 a persona per notte ")} </p>
       <p> {t(" Esenzioni: Sono esenti i minori di 14 anni")}</p>
-      <p> {t(" Pagamento: La tassa non è inclusa nel costo del soggiorno e andrà saldata direttamente presso la nostra struttura, al vostro arrivo o alla partenza.")} </p>        
+      <p> {t(" Pagamento: La tassa non è inclusa nel costo del soggiorno e verrà calcolata nel totale del prezzo dei servizi.")} </p>        
       <p>
         <Trans i18nKey="info.paytouristLinkText">
           Per tutti i dettagli, potete consultare il sito del  {/*spazzio */}    
