@@ -256,67 +256,43 @@ const BookingForm: React.FC = () => {
   };
 
   // Invio dati a backend
-  const handleActualSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSending(true);
-    setError(null);
-    try {
-      const data = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          value.forEach((v, i) => data.append(`${key}[${i}]`, v));
-        } else {
-          data.append(key, value as string);
-        }
-      });
-      data.append('paymentAmount', paymentAmount);
-    data.append('paymentMethod', paymentMethod);
-      data.append('parkingOption', formData.parkingOption);
-      
-      // Chiama l'endpoint del CMS esistente
-      await axios.post('http://localhost:5174/api/booking', data);
-      
-      // Chiama la nuova API per inviare l'email di conferma
-      if (calculationResults) {
-        await axios.post('http://localhost:5000/api/send-confirmation-email', { 
-          formData, 
-          calculationResults, 
-          paymentAmount, 
-          paymentMethod,
-          // parkingOption: formData.parkingOption // formData già include parkingOption
-        });
-      }
-      // if (paymentMethod === 'bonifico' && receiptFile) { // Rimosso l'append del file
-      //   data.append('receipt', receiptFile);
-      // }
-      // Chiamata API aggiornata per CMS su http://localhost:5174
-      // await axios.post('http://localhost:5174/api/booking', data); // RIMOSSA CHIAMATA DUPLICATA
-      
-      setSubmitted(true);
-      setFormData({
-        name: '',
-        surname: '',
-        email: '',
-        phone: '',
-        guests: '',
-        children: 0,
-        childrenAges: [],
-        checkin: '',
-        checkout: '',
-        parkingOption: '',
-      });
-      setPaymentAmount('');
-      setPaymentMethod('');
-      // setReceiptFile(null); // Rimosso reset stato file
-      setCalculationResults(null);
-      setShowSummary(false);
-      setAvailability('idle');
-    } catch (err: any) {
-      setError(t('Si è verificato un errore durante l\'invio. Riprova più tardi.'));
-    } finally {
-      setSending(false);
-    }
-  };
+const handleActualSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setSending(true);
+  setError(null);
+  try {
+    // Invia i dati come JSON (non FormData)
+    await axios.post('http://localhost:3001/api/booking-request', {
+      ...formData,
+      paymentAmount,
+      paymentMethod,
+      parkingOption: formData.parkingOption,
+    });
+
+    setSubmitted(true);
+    setFormData({
+      name: '',
+      surname: '',
+      email: '',
+      phone: '',
+      guests: '',
+      children: 0,
+      childrenAges: [],
+      checkin: '',
+      checkout: '',
+      parkingOption: '',
+    });
+    setPaymentAmount('');
+    setPaymentMethod('');
+    setCalculationResults(null);
+    setShowSummary(false);
+    setAvailability('idle');
+  } catch (err: any) {
+    setError(t('Si è verificato un errore durante l\'invio. Riprova più tardi.'));
+  } finally {
+    setSending(false);
+  }
+};
 
   useEffect(() => {
     const guests = formData.guests ? parseInt(formData.guests, 10) : 0;
