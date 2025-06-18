@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import LemonDivider from '../components/LemonDivider';
 import './Propriety.css';
 import { useTranslation, Trans } from 'react-i18next';
@@ -70,6 +70,47 @@ const galleryData: GallerySection[] = [
 
 const Propriety: React.FC = () => {
   const { t } = useTranslation();
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [lightboxImages, setLightboxImages] = useState<GalleryImage[]>([]);
+
+  const openLightbox = useCallback((images: GalleryImage[], startIndex: number) => {
+    if (images.length === 0) return;
+    setLightboxImages(images);
+    setCurrentImageIndex(startIndex);
+    setIsLightboxOpen(true);
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setIsLightboxOpen(false);
+    document.body.style.overflow = 'auto'; // Restore background scrolling
+  }, []);
+
+  const showNextImage = useCallback(() => {
+    if (lightboxImages.length <= 1) return;
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % lightboxImages.length);
+  }, [lightboxImages.length]);
+
+  const showPrevImage = useCallback(() => {
+    if (lightboxImages.length <= 1) return;
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + lightboxImages.length) % lightboxImages.length);
+  }, [lightboxImages.length]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!isLightboxOpen) return;
+      if (event.key === 'Escape') closeLightbox();
+      else if (event.key === 'ArrowLeft') showPrevImage();
+      else if (event.key === 'ArrowRight') showNextImage();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isLightboxOpen, closeLightbox, showPrevImage, showNextImage]);
+
   return (
     <section id="proprieta" className="proprieta-section">
       <div className="container">
@@ -82,6 +123,9 @@ const Propriety: React.FC = () => {
            </div>
        
           {galleryData.map((section, sectionIndex) => {
+            const allImagesCurrentSection = section.mainImage
+              ? [section.mainImage, ...(section.images || [])]
+              : (section.images || []);
             // Determina se ci sono immagini nella griglia oltre all'eventuale immagine principale
             const hasGridImages = section.images && section.images.length > 0;
 
@@ -100,8 +144,14 @@ const Propriety: React.FC = () => {
 
               {section.mainImage && (
                 <div className="gallery-main-image-card">
-                  <img src={section.mainImage.src} alt={t(section.mainImage.altKey)} className="img-fluid-main" />
-                  <p className="image-caption">
+                  <img
+                    src={section.mainImage.src}
+                    alt={t(section.mainImage.altKey)}
+                    className="img-fluid-main"
+                    onClick={() => openLightbox(allImagesCurrentSection, 0)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                  <p className="image-caption" onClick={() => openLightbox(allImagesCurrentSection, 0)} style={{ cursor: 'pointer' }}>
                     {section.mainImage.captionText ? section.mainImage.captionText : (section.mainImage.captionKey ? t(section.mainImage.captionKey) : '')}
                   </p>
                 </div>
@@ -110,9 +160,16 @@ const Propriety: React.FC = () => {
               {hasGridImages && (
                 <div className="proprieta-gallery">
                   {section.images.map((image, imgIndex) => (
-                    <div className="proprieta-img-card" key={image.src || `gallery-img-${sectionIndex}-${imgIndex}`}>
+                    <div
+                      className="proprieta-img-card"
+                      key={image.src || `gallery-img-${sectionIndex}-${imgIndex}`}
+                      onClick={() => openLightbox(allImagesCurrentSection, section.mainImage ? imgIndex + 1 : imgIndex)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       <img src={image.src} alt={t(image.altKey)} className="img-fluid" />
-                      <p className="image-caption">
+                      <p
+                        className="image-caption"
+                      >
                         {image.captionText ? image.captionText : (image.captionKey ? t(image.captionKey) : '')}
                       </p>
                     </div>
@@ -183,6 +240,32 @@ const Propriety: React.FC = () => {
       </h2>   
       </div> {/* Chiusura di tariffe-table-container */}
         </div> {/* Chiusura di propriety-content */}
+
+        {isLightboxOpen && lightboxImages.length > 0 && (
+          <div className="lightbox-overlay" onClick={closeLightbox}>
+            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+              <button className="lightbox-close" onClick={closeLightbox} title={t('lightbox.close') || 'Chiudi'}>&times;</button>
+              {lightboxImages.length > 1 && (
+                <>
+                  <button className="lightbox-prev" onClick={showPrevImage} title={t('lightbox.prev') || 'Precedente'}>&#10094;</button>
+                  <button className="lightbox-next" onClick={showNextImage} title={t('lightbox.next') || 'Successiva'}>&#10095;</button>
+                </>
+              )}
+              <img
+                src={lightboxImages[currentImageIndex].src}
+                alt={t(lightboxImages[currentImageIndex].altKey)}
+                className="lightbox-img" // Modificata classe per corrispondere al CSS fornito
+              />
+              {(lightboxImages[currentImageIndex].captionKey || lightboxImages[currentImageIndex].captionText) && (
+                <div className="lightbox-caption">
+                  {lightboxImages[currentImageIndex].captionText
+                    ? lightboxImages[currentImageIndex].captionText
+                    : t(lightboxImages[currentImageIndex].captionKey!)}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div> {/* Chiusura di container */}
       <LemonDivider position="left" />
     </section>

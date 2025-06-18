@@ -32,7 +32,7 @@ const Home: React.FC = () => {
               {t('Benvenuti a VINCANTO')}
             </h2>
             <p>
-              {t('un rifugio esclusivo nato da una completa ristrutturazione e immerso nella quiete di un profumato limoneto. Qui lusso, comfort e natura si incontrano per offrirti un soggiorno rigenerante.')}
+              {t('una struttura ricettiva nata da una completa ristrutturazione e immerso nella quiete di un profumato limoneto. Qui lusso, comfort e natura si incontrano per offrirti un soggiorno rigenerante.')}
             </p>
             <a href="#about" className="btn">
               {t('Scopri di più')}
