@@ -151,5 +151,39 @@
   "Seguici": " Follow us",
   "Certificata dal Comune di Maiori": "Certified by the Municipality of Maiori",
   "Licenza SLSA000108-0026": "License SLSA000108-0026", 
-  "Licenza Regionale / CIN: IT065066C248Z362SX": "Regional License / CIN: IT065066C248Z362SX"
+  "Licenza Regionale / CIN: IT065066C248Z362SX": "Regional License / CIN: IT065066C248Z362SX",
+
+  "propriety.gallery.mainTitle": "Foto della Struttura", 
+
+  "propriety.gallery.sections.entranceAndExterior.title": "Ingresso ed Esterni",
+  "propriety.gallery.sections.entranceAndExterior.image1.alt": "Ingresso principale Vincanto",
+  "propriety.gallery.sections.entranceAndExterior.image1.caption": "Benvenuti a Vincanto", 
+
+  "propriety.gallery.sections.interiorsAndDetails.title": "Interni e Dettagli",
+ 
+  "propriety.gallery.sections.rooms.title": "Le Camere da Letto",
+ 
+  "propriety.gallery.sections.bathrooms.title": "I Bagni",
+  "propriety.gallery.sections.bathrooms.image1.caption": "Bagno moderno e funzionale", 
+  "propriety.gallery.sections.bathrooms.image2.caption": "Dettaglio del bagno con doccia",
+
+  "propriety.gallery.common.placeholder.alt": "Dettaglio della struttura Vincanto",
+
+
+  "propriety.rates.title": "Le Nostre Tariffe",
+  "propriety.rates.table.personsHeader": "Numero di Persone",
+  "propriety.rates.table.pricePerNightHeader": "Prezzo a Notte",
+  "propriety.rates.table.persons1to2": "1 a 2",
+  "propriety.rates.table.price1to2": "50 € a Persona",
+  "propriety.rates.table.persons3to4": "da 3 a 4",
+  "propriety.rates.table.price3to4": "40 € a Persona",
+  "propriety.rates.table.persons4to6": "da 4 a 6",
+  "propriety.rates.table.price4to6": "30 € a Persona",
+  "propriety.rates.servicesIncluded": "Servizi inclusi nel prezzo: aria condizionata, internet Wi-Fi, uso lavatrice.",
+  "propriety.rates.touristTaxExcluded": "* Tassa di soggiorno esclusa.",
+  "propriety.rates.touristTaxInfo": "Il comune di Maiori (SA) applica una tassa di soggiorno per ogni pernottamento, dal 1° gennaio al 31 dicembre di ogni anno, per contribuire al miglioramento dei servizi turistici.",
+  "propriety.rates.touristTaxCost": "Costo: € 2,00 a persona per notte",
+  "propriety.rates.touristTaxExemptions": "Esenzioni: Sono esenti i minori di 14 anni",
+  "propriety.rates.touristTaxPaymentInfo": "Pagamento: La tassa non è inclusa nel costo del soggiorno e verrà calcolata nel totale del prezzo dei servizi.",
+  "propriety.rates.touristTaxLinkText": "Per tutti i dettagli, potete consultare il sito del <1>Comune di Maiori</1> o il portale dedicato <3>PayTourist</3>."
 }
