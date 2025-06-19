@@ -85,7 +85,9 @@ const Home: React.FC = () => {
                 <p>
                 {t('• 3 bagni moderni di cui 2 con spaziosi piatti doccia')}
                 </p>
-                
+                <p>
+                  {t('• Smart TV in ogni camera per un intrattenimento completo')}
+                </p>
             </div>
             <div className="highlight-card" style={{ background: '#f8f9fa' }}>
               <div className="highlight-icon">🏠</div>
@@ -96,10 +98,10 @@ const Home: React.FC = () => {
                 {t('• Zona giorno con ampio open space con divano letto e cucina completamente attrezzata')}
                 </p>
                 <p>
-                {t('• Wi-Fi gratuito in tutta la casa')}
+                {t('• Internet gratuito in tutta la casa con collegamento Wi-Fi veloce e ingressi Ethernet LAN')}
                 </p>
                 <p>
-                  {t('• Aria condizionata in ogni camera per il massimo comfort')}
+                {t('• Aria condizionata in ogni zona della struttura')}
                 </p>
             </div>
             <div className="highlight-card" style={{ background: '#f8f9fa' }}>

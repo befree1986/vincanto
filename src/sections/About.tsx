@@ -23,14 +23,14 @@ const About: React.FC = () => {
             <h2>
               VINCANTO
             </h2>
-            <p>
+            <p className='proprieta-description' style={{ marginBottom: '2rem' }}>
               {t("Ogni dettaglio di VINCANTO è pensato per offrirti un soggiorno indimenticabile. Gli interni, completamente rinnovati, uniscono design contemporaneo e materiali di pregio: pavimenti e rivestimenti in elegante gres porcellanato, applique in ceramica vietrese decorate a mano, arredi ricercati e finiture di alta qualità. I nuovi infissi in PVC garantiscono silenzio e comfort, mentre le zanzariere su porte e finestre ti permettono di godere della brezza della campagna in totale relax.")}
             </p>
             <p>
-              {t("La struttura dispone di due camere matrimoniali con letti King Size e una camera con due letti singoli, luminose e accoglienti, e tre bagni moderni e funzionali con ampi piatti doccia per il massimo comfort e privacy. La cucina open space, completamente attrezzata, è perfetta per condividere momenti conviviali e preparare i tuoi piatti preferiti.")}
+              {t("La struttura dispone di due camere matrimoniali con letti King Size, una camera con due letti singoli, luminose e accoglienti, e tre bagni moderni e funzionali con ampi piatti doccia per il massimo comfort e privacy. La cucina open space, completamente attrezzata, è perfetta per condividere momenti conviviali e preparare i tuoi piatti preferiti.")}
             </p> 
             <p className="proprieta-description" style={{ marginBottom: '2rem' }}> {/* Rimosso textAlign: 'center' da qui, poiché ora è ereditato dal genitore */}
-              {t('Immersa nel cuore profumato di un limoneto tipico della Costiera Amalfitana')}, {/* Corretto refuso nel testo */}
+              {t('Immersa nel cuore profumato di un limoneto tipico della Costiera Amalfitana.')} {/* Corretto refuso nel testo */}
             </p>
              <p>
                {t('All’esterno, gli ospiti possono godere di una cucina esterna, perfetta per pranzi e cene all’aperto sotto il pergolato, con vista sul verde circostante. A completare l’offerta, una doccia esterna, un forno a legna tradizionale e un barbecue, ideali per serate conviviali immersi nel profumo dei limoni e del mare.')}
