@@ -1,13 +1,23 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
-const cors = require('cors'); // Per consentire richieste dal frontend
-const { Pool } = require('pg'); // Per la connessione al database PostgreSQL
+const cors = require('cors');
+const validator  = require('validator');
+const ejs = require('ejs');
+const path = require('path');
+const { Pool } = require('pg'); // Unica riga per importare Pool
 const dotenv = require('dotenv');
+const fs = require('fs');
 
-dotenv.config(); // Carica le variabili ambiente da .env
+const envPath = path.resolve(__dirname, '../.env');
+
+
+dotenv.config({ path: envPath });
+
+
 const app = express();
 app.use(cors());
 app.use(express.json()); // Per parsare il body JSON delle richieste
+
 
 
 // Configura il transporter di Nodemailer usando le variabili d'ambiente
@@ -107,9 +117,11 @@ app.post('/api/booking-request', async (req, res) => {
 
     // --- Validazione Aggiuntiva ---
     if (new Date(checkin) >= new Date(checkout)) {
+        console.log('Errore di validazione: DAta di check-out non valida.');
         return res.status(400).json({ success: false, message: "La data di check-out deve essere successiva a quella di check-in." });
     }
     if (parseInt(guests, 10) <= 0) {
+        console.log('Errore di validazione: Numero di opstiti non valido.');
         return res.status(400).json({ success: false, message: "Il numero di ospiti deve essere almeno 1." });
     }
     // Si potrebbe aggiungere una validazione per il formato dell'email con una regex
@@ -135,7 +147,8 @@ app.post('/api/booking-request', async (req, res) => {
         `;
         const values = [
             formData.name, formData.surname, formData.email, formData.phone,
-            formData.checkin, formData.checkout, parseInt(formData.guests, 10), parseInt(formData.children || 0, 10), formData.childrenAges || [],
+            formData.checkin, formData.checkout, parseInt(formData.guests, 10), parseInt(formData.children || 0, 10), 
+            JSON.stringify(formData.childrenAges || []), // Converti l'array in una stringa JSON
             formData.parkingOption, // street o private
             paymentAmount, // acconto o totale
             paymentMethod, // bonifico, carta, altro
@@ -163,6 +176,7 @@ app.post('/api/booking-request', async (req, res) => {
         await transporter.sendMail(mailOptions);
         res.status(201).json({ success: true, message: "Richiesta di prenotazione ricevuta e email di conferma inviata!" });
     } catch (error) {
+        
         console.error("Errore durante la richiesta di prenotazione:", error);
         res.status(500).json({ success: false, message: "Errore durante l'elaborazione della richiesta." });
     }

@@ -263,10 +263,9 @@ const handleActualSubmit = async (e: React.FormEvent) => {
   try {
     // Invia i dati come JSON (non FormData)
     await axios.post('http://localhost:3001/api/booking-request', {
-      ...formData,
+      formData: { ...formData }, // Raggruppa tutti i dati del form sotto la chiave 'formData'
       paymentAmount,
       paymentMethod,
-      parkingOption: formData.parkingOption,
     });
 
     setSubmitted(true);
