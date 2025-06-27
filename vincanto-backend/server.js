@@ -4,9 +4,10 @@ const cors = require('cors');
 const validator  = require('validator');
 const ejs = require('ejs');
 const path = require('path');
-const { Pool } = require('pg'); // Unica riga per importare Pool
 const dotenv = require('dotenv');
 const fs = require('fs');
+const pool = require('./src/config/db.js'); // Importiamo il nostro pool centralizzato
+const adminReservationRoutes = require('./src/routes/admin/reservations.routes.js'); // Importiamo le rotte admin
 
 const envPath = path.resolve(__dirname, '../.env');
 
@@ -31,14 +32,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Configurazione del Pool di Connessioni PostgreSQL
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-});
 
 // Funzione helper per il calcolo dei costi (da rendere più dinamica in futuro leggendo da DB)
 function calculateServerSideCosts(formData) {
@@ -181,6 +174,9 @@ app.post('/api/booking-request', async (req, res) => {
         res.status(500).json({ success: false, message: "Errore durante l'elaborazione della richiesta." });
     }
 });
+
+// Rotte per la gestione delle prenotazioni da parte dell'amministratore
+app.use('/api/admin/reservations', adminReservationRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server attivo sulla porta ${PORT}`));
