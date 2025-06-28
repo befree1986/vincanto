@@ -255,6 +255,13 @@ const BookingForm: React.FC = () => {
     setError(null); // Resetta eventuali errori precedenti
   };
 
+  // Funzione per chiudere il modale di successo e resettare lo stato
+  const handleCloseSuccessMessage = () => {
+    setSubmitted(false);
+    // Lo stato del form è già stato resettato in handleActualSubmit,
+    // quindi nascondere il modale mostrerà di nuovo il form iniziale.
+  };
+
   // Invio dati a backend
 const handleActualSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -554,9 +561,16 @@ const handleActualSubmit = async (e: React.FormEvent) => {
           )}
         </form>
       )}
+      {/* Modale di successo che sostituisce il vecchio messaggio */}
       {submitted && (
-        <div className="success-message">
-          {t('IstruzioniPagamentoPostRiepilogo')}
+        <div className="success-modal-overlay" onClick={handleCloseSuccessMessage}>
+          <div className="success-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button onClick={handleCloseSuccessMessage} className="close-modal-btn">&times;</button>
+            <div className="modal-icon">🎉</div>
+            <h2 className="modal-title">{t('Richiesta Inviata con Successo!')}</h2>
+            <p className="modal-text">{t('IstruzioniPagamentoPostRiepilogo')}</p>
+            <button onClick={handleCloseSuccessMessage} className="btn btn-accent modal-ok-button">OK</button>
+          </div>
         </div>
       )}
     </div>
@@ -593,6 +607,7 @@ TODO: Aggiungere queste chiavi al file di traduzione i18n (es. public/locales/it
 "IndietroSelezioneParcheggio": "Modifica Scelta Parcheggio",
 
 "ErroreControllaDateOspitiParcheggio": "Errore: controlla le date, il numero di ospiti o seleziona un'opzione di parcheggio.",
+"Richiesta Inviata con Successo!": "Richiesta Inviata con Successo!",
 "OpzioniParcheggio": "Scegli un'opzione per il parcheggio:",
 "ParcheggioInStrada": "Parcheggio in strada (gratuito, non custodito)",
 "ParcheggioPrivatoCustodito": "Parcheggio Privato Custodito",

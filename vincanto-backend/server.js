@@ -1,274 +1,189 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const validator  = require('validator');
 const ejs = require('ejs');
 const path = require('path');
+const pool = require('./src/config/db.js'); // Assicurati che il percorso sia corretto
 const dotenv = require('dotenv');
-const fs = require('fs');
-const pool = require('./src/config/db.js'); // Importiamo il nostro pool centralizzato
-const adminReservationRoutes = require('./src/routes/admin/reservations.routes.js'); // Importiamo le rotte admin
 
-const envPath = path.resolve(__dirname, '../.env');
-
-
-dotenv.config({ path: envPath });
-
+// Carica le variabili d'ambiente dal file .env nella cartella principale
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const app = express();
+
+// Middleware
 app.use(cors());
-app.use(express.json()); // Per parsare il body JSON delle richieste
+app.use(express.json()); // Per parsare il body delle richieste JSON
 
-
-
-// Configura il transporter di Nodemailer usando le variabili d'ambiente
+// --- Configurazione di Nodemailer ---
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: process.env.SMTP_SECURE === 'true', // true per 465, false per altri
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    secure: process.env.EMAIL_PORT == 465, // true solo se la porta è 465
     auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS // IMPORTANTE: La password è ora sicura nel file .env
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
     }
 });
 
-
-// Funzione helper per il calcolo dei costi (da rendere più dinamica in futuro leggendo da DB)
+// --- Logica di Calcolo dei Prezzi (Fonte di Verità Ufficiale) ---
 function calculateServerSideCosts(formData) {
-    const { checkin, checkout, guests, children, parkingOption } = formData;
+    const { checkin, checkout, guests, children, childrenAges, parkingOption } = formData;
+
+    // --- Dati di base ---
     const checkinDate = new Date(checkin);
     const checkoutDate = new Date(checkout);
+    if (checkoutDate <= checkinDate) return null;
 
-    // Gestione del caso in cui le date non siano valide o checkout sia prima di checkin
-    if (isNaN(checkinDate.getTime()) || isNaN(checkoutDate.getTime()) || checkoutDate <= checkinDate) {
-        // La validazione a monte dovrebbe già aver bloccato la richiesta,
-        // ma per sicurezza ritorniamo 0 notti.
-        return { numberOfNights: 0 /* ...altri valori a zero... */ };
+    const oneDay = 1000 * 60 * 60 * 24;
+    const nights = Math.round(Math.abs((checkoutDate - checkinDate) / oneDay));
+    if (nights <= 0) return null;
+
+    const numAdults = parseInt(guests, 10) || 0;
+    const numChildren = parseInt(children, 10) || 0;
+    const totalGuests = numAdults + numChildren;
+    if (totalGuests <= 0) return null;
+
+    // --- Costanti di prezzo (in futuro da DB) ---
+    const CLEANING_FEE = 30;
+    const TOURIST_TAX_RATE = 2.00;
+    const PARKING_LOW_SEASON_RATE = 15;
+    const PARKING_HIGH_SEASON_RATE = 25;
+    const DEPOSIT_PERCENTAGE = 0.50;
+
+    // --- 1. Calcolo costo soggiorno a scaglioni ---
+    let base_price = 0;
+    if (nights === 1) {
+        base_price = totalGuests * 50;
+    } else {
+        let costPerNight = 0;
+        if (totalGuests >= 1) costPerNight += Math.min(totalGuests, 2) * 50;
+        if (totalGuests >= 3) costPerNight += Math.min(totalGuests - 2, 2) * 40;
+        if (totalGuests >= 5) costPerNight += (totalGuests - 4) * 30;
+        base_price = costPerNight * nights;
     }
 
-    const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
-    const numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-    // Tariffe (per ora statiche, in futuro da DB)
-    const PRICE_PER_PERSON_PER_NIGHT = 70; // Esempio
-    const CLEANING_FEE = 50; // Esempio
-    const PARKING_COST_PRIVATE = 10; // Esempio costo parcheggio privato per notte
-    const TOURIST_TAX_PER_PERSON_PER_NIGHT = 2;
-    const DEPOSIT_PERCENTAGE = 0.30; // 30%
-
-    const totalGuests = parseInt(guests, 10) + parseInt(children || 0, 10);
-    let subtotalNightlyRate = numberOfNights * parseInt(guests, 10) * PRICE_PER_PERSON_PER_NIGHT;
-    // Qui potresti aggiungere logica per prezzi diversi per bambini se necessario
-
-    let parkingCost = 0;
+    // --- 2. Calcolo costo parcheggio stagionale ---
+    let parking_cost = 0;
     if (parkingOption === 'private') {
-        parkingCost = numberOfNights * PARKING_COST_PRIVATE;
+        const month = checkinDate.getMonth(); // 0=Gen, 5=Giu, 6=Lug, 7=Ago
+        const isHighSeason = (month >= 5 && month <= 7); // Giugno, Luglio, Agosto
+        const parkingRate = isHighSeason ? PARKING_HIGH_SEASON_RATE : PARKING_LOW_SEASON_RATE;
+        parking_cost = parkingRate * nights;
     }
 
-    const totalPayableOnline = subtotalNightlyRate + CLEANING_FEE + parkingCost;
+    // --- 3. Calcolo tassa di soggiorno (esclusi under 14) ---
+    let taxableGuests = numAdults;
+    (childrenAges || []).forEach(ageStr => {
+        const age = parseInt(ageStr, 10);
+        if (!isNaN(age) && age >= 14) {
+            taxableGuests++;
+        }
+    });
+    const tourist_tax = taxableGuests * TOURIST_TAX_RATE * nights;
 
-    const touristTaxEligibleGuests = parseInt(guests, 10); // Solo adulti pagano la tassa di soggiorno (esempio)
-    const touristTax = touristTaxEligibleGuests * TOURIST_TAX_PER_PERSON_PER_NIGHT * numberOfNights;
-
-    const grandTotalWithTax = totalPayableOnline + touristTax; // Questo è il totale che include la tassa
-    const depositAmount = totalPayableOnline * DEPOSIT_PERCENTAGE; // Acconto calcolato sul totale online (esclusa tassa)
+    // --- 4. Calcolo totali ---
+    const cleaning_fee = CLEANING_FEE;
+    const total_amount = base_price + cleaning_fee + parking_cost + tourist_tax;
+    const deposit_amount = total_amount * DEPOSIT_PERCENTAGE;
 
     return {
-        numberOfNights,
-        pricePerPersonPerNight: PRICE_PER_PERSON_PER_NIGHT,
-        subtotalNightlyRateCents: Math.round(subtotalNightlyRate * 100),
-        cleaningFeeCents: Math.round(CLEANING_FEE * 100),
-        parkingCostCents: Math.round(parkingCost * 100),
-        totalPayableOnlineCents: Math.round(totalPayableOnline * 100),
-        touristTaxEligibleGuests,
-        touristTaxCents: Math.round(touristTax * 100),
-        grandTotalWithTaxCents: Math.round(grandTotalWithTax * 100),
-        calculatedDepositCents: Math.round(depositAmount * 100),
-        // Per l'email, passiamo anche i valori non in centesimi
-        subtotalNightlyRate: subtotalNightlyRate,
-        cleaningFee: CLEANING_FEE,
-        parkingCost: parkingCost,
-        totalPayableOnline: totalPayableOnline,
-        touristTax: touristTax,
-        grandTotalWithTax: grandTotalWithTax,
-        depositAmount: depositAmount,
+        nights,
+        base_price,
+        cleaning_fee,
+        parking_cost,
+        tourist_tax,
+        total_amount,
+        deposit_amount,
+        taxableGuests,
     };
 }
 
-// Route per la richiesta di prenotazione
+// --- Endpoint per la Creazione di una Nuova Prenotazione ---
 app.post('/api/booking-request', async (req, res) => {
-    const { formData, paymentAmount, paymentMethod } = req.body;
-
-    // --- Validazione Dati Essenziali ---
-    if (!formData || !paymentAmount || !paymentMethod) {
-        return res.status(400).json({ success: false, message: "Dati di prenotazione incompleti." });
-    }
-    const { name, surname, email, phone, checkin, checkout, guests, parkingOption } = formData;
-    if (!name || !surname || !email || !phone || !checkin || !checkout || !guests || !parkingOption) {
-        return res.status(400).json({ success: false, message: "Mancano alcuni campi obbligatori nel form." });
-    }
-
-    // --- Validazione Aggiuntiva ---
-    if (new Date(checkin) >= new Date(checkout)) {
-        console.log('Errore di validazione: DAta di check-out non valida.');
-        return res.status(400).json({ success: false, message: "La data di check-out deve essere successiva a quella di check-in." });
-    }
-    if (parseInt(guests, 10) <= 0) {
-        console.log('Errore di validazione: Numero di opstiti non valido.');
-        return res.status(400).json({ success: false, message: "Il numero di ospiti deve essere almeno 1." });
-    }
-    // Si potrebbe aggiungere una validazione per il formato dell'email con una regex
-
-    // --- Ricalcolo Costi Lato Server ---
-    // Questo garantisce che i costi siano sempre quelli corretti, indipendentemente da ciò che invia il client.
-    const serverCalculatedCosts = calculateServerSideCosts(formData);
-
     try {
-        // --- Salvataggio nel Database (usando direttamente pool.query per semplicità e sicurezza) ---
+        // Leggiamo i dati dalla struttura corretta inviata dal frontend
+        const { formData, paymentAmount, paymentMethod } = req.body;
+
+        // 1. Calcola i costi lato server per sicurezza.
+        const costs = calculateServerSideCosts(formData);
+        if (!costs) {
+            return res.status(400).json({ success: false, message: "Dati di prenotazione non validi." });
+        }
+        if (costs.nights === 1 && paymentAmount === 'acconto') {
+            return res.status(400).json({ success: false, message: "L'acconto non è disponibile per soggiorni di una sola notte." });
+        }
+
+        // Determina l'importo numerico effettivo da salvare in base alla scelta dell'utente
+        const numericAmountToPay = paymentAmount === 'acconto' ? costs.deposit_amount : costs.total_amount;
+
+        // 2. Inserisci la prenotazione nel database
         const queryText = `
             INSERT INTO Bookings (
                 guest_name, guest_surname, guest_email, guest_phone,
-                check_in_date, check_out_date, num_adults, num_children, children_ages,
-                parking_option_selected, selected_payment_amount_option, selected_payment_method,
-                number_of_nights,
-                subtotal_nightly_rate_cents, cleaning_fee_cents, parking_cost_cents,
-                tourist_tax_eligible_guests, tourist_tax_cents,
-                grand_total_with_tax_cents, calculated_deposit_cents,
-                booking_status, payment_status, currency
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)
-            RETURNING id;
+                check_in_date, check_out_date, num_adults, num_children, 
+                children_ages, parking_option, 
+                base_price, parking_cost, cleaning_fee, tourist_tax, total_amount, deposit_amount,
+                payment_amount, payment_method, booking_status, payment_choice
+            )
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
+            RETURNING *;
         `;
         const values = [
-            formData.name, formData.surname, formData.email, formData.phone,
-            formData.checkin, formData.checkout, parseInt(formData.guests, 10), parseInt(formData.children || 0, 10), 
-            JSON.stringify(formData.childrenAges || []), // Converti l'array in una stringa JSON
-            formData.parkingOption, // street o private
-            paymentAmount, // acconto o totale
-            paymentMethod, // bonifico, carta, altro
-            serverCalculatedCosts.numberOfNights,
-            serverCalculatedCosts.subtotalNightlyRateCents, serverCalculatedCosts.cleaningFeeCents, serverCalculatedCosts.parkingCostCents,
-            serverCalculatedCosts.touristTaxEligibleGuests, serverCalculatedCosts.touristTaxCents,
-            serverCalculatedCosts.grandTotalWithTaxCents, serverCalculatedCosts.calculatedDepositCents,
-            'PENDING_CONFIRMATION', // Stato iniziale
-            'PENDING', // Stato pagamento iniziale
-            'EUR'
+            formData.name,                            // $1
+            formData.surname,                         // $2
+            formData.email,                           // $3
+            formData.phone,                           // $4
+            formData.checkin,                         // $5
+            formData.checkout,                        // $6
+            parseInt(formData.guests, 10),            // $7
+            parseInt(formData.children, 10) || 0,     // $8
+            JSON.stringify(formData.childrenAges || []),// $9
+            formData.parkingOption,                   // $10
+            costs.base_price,                         // $11
+            costs.parking_cost,                       // $12
+            costs.cleaning_fee,                       // $13
+            costs.tourist_tax,                        // $14
+            costs.total_amount,                       // $15
+            costs.deposit_amount,                     // $16
+            numericAmountToPay,                       // $17: L'importo numerico corretto
+            paymentMethod,                            // $18
+            'PENDING',                                // $19: Lo stato della prenotazione
+            paymentAmount,                            // $20: La scelta testuale 'acconto' o 'totale'
         ];
-        const dbRes = await pool.query(queryText, values);
-        const bookingId = dbRes.rows[0].id;
-        console.log('Prenotazione inserita con ID:', bookingId);
 
-        // --- Invio Email di Conferma ---
+        const { rows } = await pool.query(queryText, values);
+        const newBooking = rows[0]; // Questa è la nostra "fonte di verità"
+
+        // 3. Invia l'email di conferma al cliente
+        const bankDetails = {
+            beneficiary: process.env.BANK_BENEFICIARY,
+            iban: process.env.BANK_IBAN,
+        };
+        
+        const emailHtml = await ejs.renderFile(
+            path.join(__dirname, 'src', 'views', 'booking-confirmation.ejs'), 
+            { booking: newBooking, bankDetails } // Passiamo i dati corretti dal DB
+        );
+
         const mailOptions = {
-            from: '"Vincanto" <info@vincantomaiori.it>',
-            to: formData.email,
-            subject: 'Conferma Prenotazione Vincanto',
-            // Usa i costi ricalcolati dal server per l'email, garantendo coerenza
-            html: generateConfirmationEmailHTML(formData, serverCalculatedCosts, paymentAmount, paymentMethod)
+            from: `"Vincanto" <${process.env.EMAIL_USER}>`,
+            to: newBooking.guest_email,
+            subject: 'Conferma Richiesta di Prenotazione per Vincanto',
+            html: emailHtml,
         };
 
         await transporter.sendMail(mailOptions);
-        res.status(201).json({ success: true, message: "Richiesta di prenotazione ricevuta e email di conferma inviata!" });
+        res.status(201).json({ success: true, message: "Richiesta di prenotazione ricevuta!", booking: newBooking });
+
     } catch (error) {
-        
         console.error("Errore durante la richiesta di prenotazione:", error);
         res.status(500).json({ success: false, message: "Errore durante l'elaborazione della richiesta." });
     }
 });
 
-// Rotte per la gestione delle prenotazioni da parte dell'amministratore
-app.use('/api/admin/reservations', adminReservationRoutes);
-
+// --- Avvio del Server ---
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server attivo sulla porta ${PORT}`));
-
-function generateConfirmationEmailHTML(formData, calculationResults, paymentAmount, paymentMethod) {
-  const {
-      name, surname, email, phone,
-      checkin, checkout, guests, children, childrenAges
-  } = formData;
-
-  const {
-      numberOfNights, pricePerPersonPerNight,
-      subtotalNightlyRate, // Usiamo i valori non in centesimi per la visualizzazione
-      cleaningFee, parkingCost, totalPayableOnline,
-      touristTax, grandTotalWithTax, depositAmount, touristTaxEligibleGuests
-  } = calculationResults;
-
-  const paymentOption = paymentAmount === 'acconto' ? 'Acconto (caparra)' : 'Importo totale';
-  let paymentMethodName = '';
-  switch (paymentMethod) {
-      case 'bonifico': paymentMethodName = 'Bonifico Immediato'; break;
-      case 'carta': paymentMethodName = 'Carta di Credito/Bancomat'; break;
-      case 'altro': paymentMethodName = 'Altri metodi elettronici'; break;
-      default: paymentMethodName = paymentMethod; // Fallback per valori inattesi
-  }
-
-  let paymentInstructions = '';
-  if (paymentMethod === 'bonifico') {
-    // Istruzioni per il bonifico lette dalle variabili d'ambiente per maggiore flessibilità
-    paymentInstructions = `
-      <p>Per completare la prenotazione, effettua un bonifico di 
-      ${paymentAmount === 'acconto' ? `€${depositAmount.toFixed(2)} (acconto)` : `€${totalPayableOnline.toFixed(2)} (importo totale online)`} alle seguenti coordinate:</p>
-      <ul style="list-style-type: none; padding-left: 0;">
-          <li><strong>Beneficiario:</strong> ${process.env.BANK_BENEFICIARY || 'NOME BENEFICIARIO'}</li>
-          <li><strong>IBAN:</strong> ${process.env.BANK_IBAN || 'IT00 A000 0000 0000 0000 0000 000'}</li>
-          <li><strong>Causale:</strong> Prenotazione Vincanto ${name} ${surname} - dal ${checkin} al ${checkout}</li>
-      </ul>
-      <p>Ti preghiamo di inviarci una copia della contabile via email a prenotazioni@vincantomaiori.it.</p>
-    `;
-  }
-  // else if (paymentMethod === 'carta') { ... qui andrebbe la logica per il pagamento con carta ... }
-
-  const childrenDetails = children > 0 ? ` e ${children} bambino${children > 1 ? 'i' : ''} (${childrenAges.map(age => `${age} anni`).join(', ')})` : '';
-
-  return `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-      <h2 style="color: #2c3e50;">Conferma Prenotazione - Vincanto</h2>
-
-      <p>Gentile ${name} ${surname},</p>
-
-      <p>Grazie per aver prenotato il tuo soggiorno presso Vincanto! Abbiamo ricevuto la tua richiesta e ti confermiamo i dettagli:</p>
-
-      <div style="background-color: #f8f8f8; padding: 20px; border-radius: 5px; margin-bottom: 20px;">
-        <h3>Dettagli Prenotazione:</h3>
-        <ul style="list-style-type: none; padding-left: 0;">
-          <li><strong>Nome:</strong> ${name} ${surname}</li>
-          <li><strong>Email:</strong> ${email}</li>
-          <li><strong>Telefono:</strong> ${phone}</li>
-          <li><strong>Check-in:</strong> ${checkin}</li>
-          <li><strong>Check-out:</strong> ${checkout}</li>
-          <li><strong>Ospiti:</strong> ${guests} adulto${parseInt(guests, 10) > 1 ? 'i' : ''}${childrenDetails}</li>
-          <li><strong>Durata del soggiorno:</strong> ${numberOfNights} notti</li>
-        </ul>
-
-        <h3>Riepilogo Costi:</h3>
-        <ul style="list-style-type: none; padding-left: 0;">
-            <li><strong>Prezzo base:</strong> €${pricePerPersonPerNight.toFixed(2)} a persona/notte</li>
-            <li><strong>Subtotale soggiorno (notti):</strong> €${subtotalNightlyRate.toFixed(2)}</li>
-            ${formData.parkingOption === 'private' ? `<li><strong>Costo parcheggio privato:</strong> €${parkingCost.toFixed(2)}</li>` : ''}
-            <li><strong>Costo pulizia:</strong> €${cleaningFee.toFixed(2)}</li>
-            <li><strong>Totale da pagare online (esclusa tassa di soggiorno):</strong> €${totalPayableOnline.toFixed(2)}</li>
-            ${paymentAmount === 'acconto' ? `<li><strong>Acconto (30%):</strong> €${depositAmount.toFixed(2)}</li>` : ''}
-            <li><strong>Tassa di soggiorno (da pagare in struttura):</strong> €${touristTax.toFixed(2)}  (€2.00 x ${touristTaxEligibleGuests} adulto/i x ${numberOfNights} notti)</li>
-            <li><strong>Importo Totale (inclusa tassa di soggiorno): €${grandTotalWithTax.toFixed(2)}</strong></li>
-        </ul>
-
-        <h3>Pagamento:</h3>
-        <ul style="list-style-type: none; padding-left: 0;">
-          <li><strong>Opzione di pagamento scelta:</strong> ${paymentOption}</li>
-          <li><strong>Metodo di pagamento:</strong> ${paymentMethodName}</li>
-        </ul>
-
-        ${paymentInstructions}
-
-      </div>
-
-      ${paymentMethod === 'bonifico' ? 
-        `<p><strong>IMPORTANTE:</strong> La prenotazione sarà confermata solo dopo la ricezione e verifica del pagamento dell'acconto/saldo. Hai 48 ore per effettuare il pagamento e inviare la contabile, altrimenti la prenotazione potrebbe essere annullata.</p>` :
-        '<p>A breve riceverai conferma del pagamento se effettuato con carta o altro metodo elettronico istantaneo.</p>'
-      }
-
-      <p>Non vediamo l'ora di accoglierti a Vincanto e rendere il tuo soggiorno indimenticabile!</p>
-    </div>
-  `;
-}
+app.listen(PORT, () => {
+    console.log(`Server attivo sulla porta ${PORT}`);
+});
