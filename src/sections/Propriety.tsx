@@ -46,6 +46,8 @@ const galleryData: GallerySection[] = [
       { src: "/caneraVerde/verdet.jpg", altKey: 'alt.proprieta.camera.dettaglio1', captionKey: 'caption.camera.dettaglio1' },
       { src: "/caneraVerde/verde1.jpg", altKey: 'alt.proprieta.camera.dettaglio2', captionKey: 'caption.camera.dettaglio2' },
       { src: "/caneraVerde/verde3.jpg", altKey: 'alt.proprieta.camera.dettaglio3', captionKey: 'caption.camera.dettaglio3' },
+      { src: "/cameraBlu/camerablu1.jpg", altKey: 'alt.propieta.camera.dettagio4', captionKey: 'caption.camera.dettaglio4' },
+      { src: "/cameraBlu/camerablu2.jpg", altKey: 'alt.propieta.camera.dettaglio5', captionKey: 'caption.camera.dettaglio5'}
     ],
   },
   {

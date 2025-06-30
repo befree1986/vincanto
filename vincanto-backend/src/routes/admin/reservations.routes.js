@@ -4,13 +4,18 @@ const {
     getReservationById,
     updateReservationStatus,
     deleteReservation
-} = require('../../controllers/admin/reservation.controller.js');
+} = require('../../controllers/admin/reservation.controller');
+const { protect } = require('../../middleware/auth.middleware');
 
 const router = express.Router();
 
-router.get('/', getAllReservations);
-router.get('/:id', getReservationById);
-router.put('/:id/status', updateReservationStatus);
-router.delete('/:id', deleteReservation); // Nuova rotta per la cancellazione
+// Applichiamo il middleware 'protect' a tutte le rotte definite di seguito
+// Da questo momento, per accedere a queste API servirà un token valido.
+router.use(protect);
+
+router.get('/', getAllReservations); // Protetto
+router.get('/:id', getReservationById); // Protetto
+router.put('/:id/status', updateReservationStatus); // Protetto
+router.delete('/:id', deleteReservation); // Protetto
 
 module.exports = router;
