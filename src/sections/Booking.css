@@ -357,6 +357,25 @@
   font-size: 1rem;
 }
 
+.discount-info {
+  font-size: 0.9em;
+  color: #555;
+  margin-left: 1rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 0.5rem;
+}
+
+.discounted-price {
+  font-weight: bold;
+  color: #27ae60; /* Un colore verde per evidenziare lo sconto */
+}
+
 
 }
 

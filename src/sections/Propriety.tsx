@@ -30,10 +30,12 @@ const galleryData: GallerySection[] = [
       altKey: 'alt.proprieta.entrances.header' // Nuova chiave di traduzione per l'alt text
     },
     images: [
-      { src: "/ingresso.jpg", altKey: 'alt.proprieta.immagine1', captionKey: 'Ingresso della struttura' },
-      { src: "/corridoio.jpg", altKey: 'alt.proprieta.immagine2', captionText: '🎨 Applique nel corridoio e nelle camere in Pregiata Ceramica Vietrese decorate a mano 🎨' },
+      { src: "corridoio/ingresso.jpg", altKey: 'alt.proprieta.immagine1', captionKey: 'Ingresso della struttura' },
+      { src: "corridoio/corridoio.jpg", altKey: 'alt.proprieta.immagine2', captionText: '🎨 Applique nel corridoio e nelle camere in Pregiata Ceramica Vietrese decorate a mano 🎨' },
     ],
   },
+
+  //seconda sezione per le camere matrimoniali
   {
     titleKey: 'propriety.gallery.sections.rooms.title', // Esempio: "Le Camere"
     headerImage: { // Immagine di testata per la sezione "Le Camere"
@@ -46,21 +48,33 @@ const galleryData: GallerySection[] = [
       { src: "/caneraVerde/verdet.jpg", altKey: 'alt.proprieta.camera.dettaglio1', captionKey: 'caption.camera.dettaglio1' },
       { src: "/caneraVerde/verde1.jpg", altKey: 'alt.proprieta.camera.dettaglio2', captionKey: 'caption.camera.dettaglio2' },
       { src: "/caneraVerde/verde3.jpg", altKey: 'alt.proprieta.camera.dettaglio3', captionKey: 'caption.camera.dettaglio3' },
+      { src: "/caneraVerde/verde4.jpg", altKey: 'alt.proprieta.camera.dettaglio4', captionKey: 'caption.camera.dettaglio4' },
+      { src: "/caneraVerde/verde5.jpg", altKey: 'alt.proprieta.camera.dettaglio5', captionKey: 'caption.camera.dettaglio5' },
+      { src: "/caneraVerde/verde6.jpg", altKey: 'alt.proprieta.camera.dettaglio6', captionKey: 'caption.camera.dettaglio6' },
       { src: "/cameraBlu/camerablu1.jpg", altKey: 'alt.propieta.camera.dettagio4', captionKey: 'caption.camera.dettaglio4' },
-      { src: "/cameraBlu/camerablu2.jpg", altKey: 'alt.propieta.camera.dettaglio5', captionKey: 'caption.camera.dettaglio5'}
+      { src: "/cameraBlu/camerablu2.jpg", altKey: 'alt.propieta.camera.dettaglio5', captionKey: 'caption.camera.dettaglio5'},
+      { src: "/cameraBlu/camerablu3.jpg", altKey: 'alt.propieta.camera.dettaglio6', captionKey: 'caption.camera.dettaglio6' },
+      { src: "/cameraBlu/camerablu4.jpg", altKey: 'alt.propieta.camera.dettaglio7', captionKey: 'caption.camera.dettaglio7' },
+      { src: "/cameraBlu/camerablu5.jpg", altKey: 'alt.propieta.camera.dettaglio8', captionKey: 'caption.camera.dettaglio8' },
+      { src: "/cameraBlu/camerablu6.jpg", altKey: 'alt.propieta.camera.dettaglio9', captionKey: 'caption.camera.dettaglio9' },
     ],
   },
+
+ // sezione per la camera singola
   {
-    titleKey: 'propriety.gallery.sections.details.title', // Esempio: "Dettagli e Ambienti"
+    titleKey: 'propriety.gallery.sections.singleroom.title',
+    headerImage:{ 
+      src: "/cameraSingola/singolaheader.jpg", 
+      altKey: 'alt.proprieta.singleroom.header' 
+  },
     images: [
-      { src: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80", altKey: 'alt.proprieta.immagine4', captionKey: 'caption.proprieta.immagine4' },
-      { src: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80", altKey: 'alt.proprieta.immagine5', captionKey: 'caption.proprieta.immagine5' },
-      { src: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80", altKey: 'alt.proprieta.immagine6', captionKey: 'caption.proprieta.immagine6' },
-      { src: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80", altKey: 'alt.proprieta.immagine7', captionKey: 'caption.proprieta.immagine7' },
-      { src: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80", altKey: 'alt.proprieta.immagine8', captionKey: 'caption.proprieta.immagine8' },
-      // Aggiungi altre immagini di dettagli qui
+      { src: "/cameraSingola/1_giorno.jpg", altKey: 'alt.proprieta.singleroom.image1', captionKey: 'caption.proprieta.singleroom.image1' },
+      { src: "/cameraSingola/1_notte.jpg", altKey: 'alt.proprieta.singleroom.image2', captionKey: 'caption.proprieta.singleroom.image2' },
+      { src: "/cameraSingola/2_giorno.jpg", altKey: 'alt.proprieta.singleroom.image3', captionKey: 'caption.proprieta.singleroom.image3' },
+      { src: "/cameraSingola/2_notte.jpg", altKey: 'alt.proprieta.singleroom.image4', captionKey: 'caption.proprieta.singleroom.image4' },
     ],
   },
+  
   // Puoi aggiungere altre sezioni come "I Bagni", "Esterni", "Cucina", ecc.
   // {
   //   titleKey: 'propriety.gallery.sections.bathrooms.title',

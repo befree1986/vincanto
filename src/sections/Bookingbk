@@ -48,10 +48,8 @@ const BOOKING_CONFIG = {
     BASE_PER_GUEST: 75, // Prezzo per i primi 2 ospiti
     ADDITIONAL_GUEST: 30, // Prezzo per ogni ospite aggiuntivo
   },
-  // Le date vengono create senza orario per evitare problemi di fuso orario.
-  // Mese è 0-indicizzato (7 = Agosto).
-  AUGUST_RULE_START: new Date(2024, 7, 11),
-  AUGUST_RULE_END: new Date(2024, 7, 25),
+  AUGUST_RULE_START: new Date('2024-08-11T00:00:00'),
+  AUGUST_RULE_END: new Date('2024-08-25T00:00:00'),
 };
 
 // Aggiungiamo qui le date già prenotate per simulare un calendario.
@@ -116,28 +114,7 @@ const BookingForm: React.FC = () => {
     if (date >= augustRuleStart && date < augustRuleEnd) {
       return 'special-august-day';
     }
-    return '';
-  };
-
-  // --- LOGICA DI FILTRO PER AGOSTO ---
-  const isDateInSpecialPeriod = (date: Date) => {
-    return date >= BOOKING_CONFIG.AUGUST_RULE_START && date < BOOKING_CONFIG.AUGUST_RULE_END;
-  };
-
-  // Filtra le date di CHECK-IN: nel periodo speciale, solo le domeniche sono selezionabili.
-  const filterCheckinDates = (date: Date) => {
-    if (isDateInSpecialPeriod(date)) {
-      return date.getDay() === 0; // 0 = Domenica
-    }
-    return true; // Al di fuori del periodo speciale, tutte le date sono valide (salvo quelle già prenotate)
-  };
-
-  // Filtra le date di CHECK-OUT: se il check-in è nel periodo speciale, anche il checkout deve essere di domenica.
-  const filterCheckoutDates = (date: Date) => {
-    if (formData.checkin && isDateInSpecialPeriod(formData.checkin)) {
-      return date.getDay() === 0; // Permette solo di selezionare una domenica
-    }
-    return true;
+    return null;
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -153,32 +130,17 @@ const BookingForm: React.FC = () => {
   };
 
   const handleDateChange = (name: 'checkin' | 'checkout', date: Date | null) => {
+    setFormData(prev => {
+        const newFormData = { ...prev, [name]: date };
+        if (name === 'checkin' && date && (!prev.checkout || prev.checkout <= date)) {
+            newFormData.checkout = null;
+        }
+        return newFormData;
+    });
     setAvailability('idle');
     setShowParkingSelectionStep(false);
     setShowSummary(false);
     setError(null);
-
-    if (name === 'checkin') {
-      if (!date) { // Se il checkin viene cancellato
-        setFormData(prev => ({ ...prev, checkin: null, checkout: null }));
-        return;
-      }
-      // REGOLA SPECIALE AGOSTO: Se il check-in è una domenica nel periodo speciale,
-      // imposta automaticamente il checkout alla domenica successiva.
-      if (isDateInSpecialPeriod(date) && date.getDay() === 0) {
-        const nextSunday = new Date(date);
-        nextSunday.setDate(date.getDate() + 7);
-        setFormData(prev => ({ ...prev, checkin: date, checkout: nextSunday }));
-      } else {
-        // Comportamento normale: resetta il checkout per forzare una nuova selezione
-        setFormData(prev => ({ ...prev, checkin: date, checkout: null }));
-      }
-    } else if (name === 'checkout') {
-      // La modifica del checkout è permessa solo se non siamo nella regola speciale di agosto
-      if (!(formData.checkin && isDateInSpecialPeriod(formData.checkin) && formData.checkin.getDay() === 0)) {
-        setFormData(prev => ({ ...prev, checkout: date }));
-      }
-    }
   };
 
   const handleChildrenChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -227,6 +189,7 @@ const BookingForm: React.FC = () => {
     const diffTime = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
     const numberOfNights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+    // Correzione #2: Spostata la validazione del soggiorno minimo qui per un feedback immediato
     if (numberOfNights < BOOKING_CONFIG.MIN_NIGHTS) {
       setError(t("Il soggiorno minimo è di 2 notti."));
       setAvailability('unavailable');
@@ -242,12 +205,13 @@ const BookingForm: React.FC = () => {
       // solo per intere settimane, da Domenica a Domenica.
       const { AUGUST_RULE_START: augustRuleStart, AUGUST_RULE_END: augustRuleEnd } = BOOKING_CONFIG;
 
-      // La regola speciale si applica solo se il CHECK-IN avviene all'interno del periodo speciale.
-      const isCheckinInSpecialPeriod = checkinDate >= augustRuleStart && checkinDate < augustRuleEnd;
+      const overlapsSpecialPeriod = checkinDate < augustRuleEnd && checkoutDate > augustRuleStart;
 
-      if (isCheckinInSpecialPeriod) {
-        const isCheckinSunday = checkinDate.getDay() === 0;
-        const isCheckoutSunday = checkoutDate.getDay() === 0;
+      if (overlapsSpecialPeriod) {
+        const isCheckinSunday = checkinDate.getDay() === 0; // Corretto: usa il giorno locale
+        const isCheckoutSunday = checkoutDate.getDay() === 0; // Corretto: usa il giorno locale
+        const diffTime = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
+
         if (!isCheckinSunday || !isCheckoutSunday || (numberOfNights % 7 !== 0)) {
           setError(t("Nel periodo centrale di Agosto, le prenotazioni sono accettate solo per settimane complete, da Domenica a Domenica."));
           setAvailability('unavailable');
@@ -445,16 +409,14 @@ const handleActualSubmit = async (e: React.FormEvent) => {
               endDate={formData.checkout}
               minDate={getMinDate()}
               excludeDates={bookedDates}
-              filterDate={filterCheckinDates}
               dateFormat="dd/MM/yyyy"
               placeholderText={t('Seleziona data')}
               className="form-control"
               required
               locale="it"
-              disabled={formData.checkin && isDateInSpecialPeriod(formData.checkin) && formData.checkin.getDay() === 0}
               dayClassName={dayClassName}
             />
-          </div>
+          </div> 
           <div className="form-group">
             <label htmlFor="checkout">{t('Check-out')}</label>
             <DatePicker
@@ -466,7 +428,6 @@ const handleActualSubmit = async (e: React.FormEvent) => {
               endDate={formData.checkout}
               minDate={formData.checkin ? new Date(new Date(formData.checkin).setDate(formData.checkin.getDate() + BOOKING_CONFIG.MIN_NIGHTS)) : getMinDate()}
               excludeDates={bookedDates}
-              filterDate={filterCheckoutDates}
               dateFormat="dd/MM/yyyy"
               placeholderText={t('Seleziona data')}
               className="form-control"
@@ -652,7 +613,7 @@ const handleActualSubmit = async (e: React.FormEvent) => {
 
               <div className="summary-section payment-details-section">
                 <h4>{t('DettagliPagamento')}</h4>
-                <p><strong>{t('DettaglioOpzionePagamento')}</strong> {paymentAmount === 'acconto' ? t('Acconto (caparra)') : t('Importo totale')}</p>
+                <p><strong>{t('DettaglioOpzionePagamento')}:</strong> {paymentAmount === 'acconto' ? t('Acconto (caparra)') : t('Importo totale')}</p>
                 <p><strong>{t('DettaglioMetodoPagamento')}</strong>
                   {paymentMethod === 'bonifico' && t('Bonifico Immediato')}
                   {paymentMethod === 'carta' && t('Carta di Credito / Bancomat')}

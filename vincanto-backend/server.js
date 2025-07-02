@@ -28,7 +28,7 @@ const transporter = nodemailer.createTransport({
 
 // --- Logica di Calcolo dei Prezzi (Fonte di Verità Ufficiale) ---
 function calculateServerSideCosts(formData) {
-    const { checkin, checkout, guests, children, childrenAges, parkingOption } = formData;
+    const { checkin, checkout, guests, childrenAges, parkingOption } = formData;
 
     // --- Dati di base ---
     const checkinDate = new Date(checkin);
@@ -37,42 +37,46 @@ function calculateServerSideCosts(formData) {
 
     const oneDay = 1000 * 60 * 60 * 24;
     const nights = Math.round(Math.abs((checkoutDate - checkinDate) / oneDay));
-    if (nights <= 0) return null;
+    
+    // --- REGOLA 1: Soggiorno minimo 2 notti ---
+    if (nights < 2) {
+        return { error: "Il soggiorno minimo è di 2 notti." };
+    }
 
     const numAdults = parseInt(guests, 10) || 0;
-    const numChildren = parseInt(children, 10) || 0;
-    const totalGuests = numAdults + numChildren;
-    if (totalGuests <= 0) return null;
+    
+    // --- REGOLA 3: Bambini 0-3 anni non pagano (per il soggiorno) ---
+    let payingChildren = 0;
+    (childrenAges || []).forEach(ageStr => {
+        const age = parseInt(ageStr, 10);
+        if (!isNaN(age) && age > 3) {
+            payingChildren++;
+        }
+    });
 
-    // --- Costanti di prezzo (in futuro da DB) ---
+    const totalPayingGuests = numAdults + payingChildren;
+    if (totalPayingGuests <= 0) return null;
+
+    // --- Costanti di prezzo ---
     const CLEANING_FEE = 30;
     const TOURIST_TAX_RATE = 2.00;
-    const PARKING_LOW_SEASON_RATE = 15;
-    const PARKING_HIGH_SEASON_RATE = 25;
+    const PARKING_RATE = 15; // REGOLA 4: Parcheggio fisso
     const DEPOSIT_PERCENTAGE = 0.50;
 
-    // --- 1. Calcolo costo soggiorno a scaglioni ---
-    let base_price = 0;
-    if (nights === 1) {
-        base_price = totalGuests * 50;
-    } else {
-        let costPerNight = 0;
-        if (totalGuests >= 1) costPerNight += Math.min(totalGuests, 2) * 50;
-        if (totalGuests >= 3) costPerNight += Math.min(totalGuests - 2, 2) * 40;
-        if (totalGuests >= 5) costPerNight += (totalGuests - 4) * 30;
-        base_price = costPerNight * nights;
+    // --- REGOLA 2: Calcolo costo soggiorno a scaglioni (nuovi prezzi) ---
+    let costPerNight = 0;
+    if (totalPayingGuests >= 1) {
+        costPerNight += Math.min(totalPayingGuests, 2) * 75; // Primi 2 ospiti paganti
     }
-
-    // --- 2. Calcolo costo parcheggio stagionale ---
-    let parking_cost = 0;
-    if (parkingOption === 'private') {
-        const month = checkinDate.getMonth(); // 0=Gen, 5=Giu, 6=Lug, 7=Ago
-        const isHighSeason = (month >= 5 && month <= 7); // Giugno, Luglio, Agosto
-        const parkingRate = isHighSeason ? PARKING_HIGH_SEASON_RATE : PARKING_LOW_SEASON_RATE;
-        parking_cost = parkingRate * nights;
+    if (totalPayingGuests >= 3) {
+        costPerNight += (totalPayingGuests - 2) * 30; // Dal 3° ospite pagante in poi
     }
+    const base_price = costPerNight * nights;
 
-    // --- 3. Calcolo tassa di soggiorno (esclusi under 14) ---
+    // --- Calcolo costo parcheggio ---
+    const parking_cost = parkingOption === 'private' ? PARKING_RATE * nights : 0;
+
+    // --- Calcolo tassa di soggiorno (esclusi under 14) ---
     let taxableGuests = numAdults;
     (childrenAges || []).forEach(ageStr => {
         const age = parseInt(ageStr, 10);
@@ -82,7 +86,7 @@ function calculateServerSideCosts(formData) {
     });
     const tourist_tax = taxableGuests * TOURIST_TAX_RATE * nights;
 
-    // --- 4. Calcolo totali ---
+    // --- Calcolo totali ---
     const cleaning_fee = CLEANING_FEE;
     const total_amount = base_price + cleaning_fee + parking_cost + tourist_tax;
     const deposit_amount = total_amount * DEPOSIT_PERCENTAGE;
@@ -96,8 +100,10 @@ function calculateServerSideCosts(formData) {
         total_amount,
         deposit_amount,
         taxableGuests,
+        totalPayingGuests,
     };
 }
+
 
 // --- Endpoint per la Creazione di una Nuova Prenotazione ---
 app.post('/api/booking-request', async (req, res) => {
@@ -105,13 +111,13 @@ app.post('/api/booking-request', async (req, res) => {
         // Leggiamo i dati dalla struttura corretta inviata dal frontend
         const { formData, paymentAmount, paymentMethod } = req.body;
 
-        // 1. Calcola i costi lato server per sicurezza.
+        // 1. Calcola i costi lato server e valida le regole di business.
         const costs = calculateServerSideCosts(formData);
-        if (!costs) {
-            return res.status(400).json({ success: false, message: "Dati di prenotazione non validi." });
-        }
-        if (costs.nights === 1 && paymentAmount === 'acconto') {
-            return res.status(400).json({ success: false, message: "L'acconto non è disponibile per soggiorni di una sola notte." });
+
+        // Controlla se il calcolo ha prodotto un errore (es. soggiorno minimo non rispettato) o dati non validi.
+        if (!costs || costs.error) {
+            const errorMessage = (costs && costs.error) ? costs.error : "Dati di prenotazione non validi.";
+            return res.status(400).json({ success: false, message: errorMessage });
         }
 
         // Determina l'importo numerico effettivo da salvare in base alla scelta dell'utente
@@ -126,30 +132,29 @@ app.post('/api/booking-request', async (req, res) => {
                 base_price, parking_cost, cleaning_fee, tourist_tax, total_amount, deposit_amount,
                 payment_amount, payment_method, booking_status, payment_choice
             )
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, 'PENDING', $19)
             RETURNING *;
         `;
         const values = [
-            formData.name,                            // $1
-            formData.surname,                         // $2
-            formData.email,                           // $3
-            formData.phone,                           // $4
-            formData.checkin,                         // $5
-            formData.checkout,                        // $6
-            parseInt(formData.guests, 10),            // $7
-            parseInt(formData.children, 10) || 0,     // $8
-            JSON.stringify(formData.childrenAges || []),// $9
-            formData.parkingOption,                   // $10
-            costs.base_price,                         // $11
-            costs.parking_cost,                       // $12
-            costs.cleaning_fee,                       // $13
-            costs.tourist_tax,                        // $14
-            costs.total_amount,                       // $15
-            costs.deposit_amount,                     // $16
-            numericAmountToPay,                       // $17: L'importo numerico corretto
-            paymentMethod,                            // $18
-            'PENDING',                                // $19: Lo stato della prenotazione
-            paymentAmount,                            // $20: La scelta testuale 'acconto' o 'totale'
+            formData.name,
+            formData.surname,
+            formData.email,
+            formData.phone,
+            formData.checkin,
+            formData.checkout,
+            parseInt(formData.guests, 10),
+            formData.children,
+            JSON.stringify(formData.childrenAges || []),
+            formData.parkingOption,
+            costs.base_price,
+            costs.parking_cost,
+            costs.cleaning_fee,
+            costs.tourist_tax,
+            costs.total_amount,
+            costs.deposit_amount,
+            numericAmountToPay,
+            paymentMethod,
+            paymentAmount, // La scelta testuale: 'acconto' o 'totale'
         ];
 
         const { rows } = await pool.query(queryText, values);

@@ -204,7 +204,7 @@ const Contact: React.FC = () => {
                 </p>
                 <p>
                   <a href="mailto:info@vincantomaiori.it" className="footer-link">
-                <i className="fas fa-envelope"></i> info@vincantoma.it </a>
+                <i className="fas fa-envelope"></i> info@vincantomaiori.it </a>
                 </p>
               </div>
               <div className="contact-item">

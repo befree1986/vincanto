@@ -122,7 +122,6 @@
   "All'esterno, gli ospiti possono godere di una cucina esterna, perfetta per pranzi e cene all’aperto sotto il pergolato, con vista sul verde circostante. A completare l'offerta, una doccia esterna, un forno a legna tradizionale e un barbecue, ideali per serate conviviali immersi nel profumo dei limoni e del mare.": "All'esterno, gli ospiti possono godere di una cucina esterna, perfetta per pranzi e cene all'aperto sotto il pergolato, con vista sul verde circostante. A completare l'offerta, una doccia esterna, un forno a legna tradizionale e un barbecue, ideali per serate conviviali immersi nel profumo dei limoni e del mare.",
    "propriety.gallery.mainTitle": "Foto della Struttura",
   "propriety.gallery.sections.entrances.title": "Ingressi e Corridoi",
-  "propriety.gallery.sections.rooms.title": "Le Camere da Letto",
   "propriety.gallery.sections.details.title": "Dettagli e Ambienti",
 
   "alt.proprieta.immagine1": "Ingresso della struttura Vincanto",
@@ -167,7 +166,19 @@
   "alt.proieta.camera.dettaglio4": "camera blu 1",
   "caption.camera.dettaglio4": "Camera Blu giorno",
   "alt.propieta.camera.dettaglio5": "Camera blu2",
-  "caption.camera.dettaglio5": "Camera Blu notte - striscia led"
+  "caption.camera.dettaglio5": "Camera Blu notte - striscia led",
 
+  "propriety.gallery.sections.rooms.title": "Camere Matrimoniali",
+  "alt.proprieta.rooms.header": "Le Camere Matrimoniali",
+  "propriety.gallery.sections.singleroom.title": "La Singola",
+  "alt.proprieta.singlerooms.header": "La Singola",
+  "alt.proprieta.singleroom.image1": "Camera Singola 1",
+  "caption.proprieta.singleroom.image1": "Camera Singola GIorno",
+  "alt.proprieta.singleroom.image2": "Camera Singola 2",
+  "caption.proprieta.singleroom.image2": "Camera Singola Notte",
+  "alt.proprieta.singleroom.image3": "Camera Singola 3",
+  "caption.proprieta.singleroom.image3": "Camera Singola Giorno",
+  "alt.proprieta.singleroom.image4": "Camera Singola 4",
+  "caption.proprieta.singleroom.image4": "Camera Singola Notte"
 }
 

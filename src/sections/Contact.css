@@ -123,4 +123,21 @@
   .contact-info h3 {
     font-size: 1.4rem;
   }
+  .discount-info {
+  font-size: 0.9em;
+  color: #555;
+  margin-left: 1rem;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 0.5rem;
+}
+
+.discounted-price {
+  font-weight: bold;
+  color: #27ae60; /* Un colore verde per evidenziare lo sconto */
+}
+
 }
