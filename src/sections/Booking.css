@@ -1,7 +1,198 @@
+/* --- Layout generale --- */
+.booking-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.availability-form, .booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-color, #007bff);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
+}
+
+.availability-message {
+  padding: 0.8rem;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+}
+.availability-message.available {
+  background-color: #e6ffed;
+  color: #2f6f4f;
+  border: 1px solid #b7e4c7;
+}
+.availability-message.unavailable {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+/* --- Stepper e form process --- */
+.booking-steps-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.booking-steps-indicator span {
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  background: #eee;
+  color: #888;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.booking-steps-indicator .active {
+  background: #f0ad4e;
+  color: #222;
+}
+
+.booking-process-form {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.form-row.user-details-row {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+.payment-section {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+/* --- Evidenziazione periodo speciale nel DatePicker --- */
+.react-datepicker__day.special-august-day {
+  background-color: #fffbe6 !important;
+  border-radius: 50%;
+  color: #594c00 !important;
+  font-weight: 600;
+  border: 2px solid #ffe066;
+}
+
+.react-datepicker__day.special-august-day.react-datepicker__day--disabled {
+  background-color: #f8f9fa !important;
+  color: #ccc !important;
+  text-decoration: line-through;
+}
+
+.react-datepicker__day.special-august-day:hover {
+  background-color: #ffecb3 !important;
+}
+
+.react-datepicker__day--selected.special-august-day,
+.react-datepicker__day--keyboard-selected.special-august-day {
+  background-color: #ffc107 !important;
+  color: #212529 !important;
+}
+
+.react-datepicker__day--in-range.special-august-day {
+  background-color: #fff0c2 !important;
+  color: #594c00 !important;
+  border-radius: 0;
+}
+
+/* --- Legenda periodo speciale --- */
+.special-period-note {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-top: 12px;
+  margin-bottom: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.special-day-indicator {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  background-color: #fffbe6;
+  border: 1px solid #ffeeba;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* --- Errori e messaggi --- */
+.error-message {
+  color: #c62828;
+  background-color: #ffebee;
+  border: 1px solid #ef9a9a;
+  padding: 0.8rem;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .booking-content {
+    padding: 1.5rem;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+/* --- Altri stili utili per la pagina Booking --- */
 .booking-section {
   padding: 4rem 0;
-  background-color: #fcfcfc; /* Sfondo leggermente diverso */
-  scroll-margin-top: 80px; /* Regola in base all'altezza del tuo header fisso */
+  background-color: #fcfcfc;
+  scroll-margin-top: 80px;
 }
 
 .booking-section .section-title {
@@ -17,9 +208,7 @@
   font-size: 1.1rem;
 }
 
-
-
-/* Stili per la pagina di riepilogo della prenotazione */
+/* --- Riepilogo prenotazione --- */
 .booking-summary-page {
   border: 1px solid #e0e0e0;
   padding: 2rem;
@@ -30,10 +219,10 @@
 
 .summary-page-title {
   font-size: 1.8rem;
-  color: var(--primary-color, #333); /* Usa variabile se definita, altrimenti fallback */
+  color: var(--primary-color, #333);
   margin-bottom: 1.5rem;
   text-align: center;
-  border-bottom: 2px solid var(--accent-color, #f0ad4e); /* Usa variabile se definita */
+  border-bottom: 2px solid var(--accent-color, #f0ad4e);
   padding-bottom: 0.5rem;
 }
 
@@ -43,12 +232,12 @@
 }
 
 .summary-section:not(:last-child) {
- border-bottom: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc;
 }
 
 .summary-section h4 {
   font-size: 1.3rem;
-  color: var(--secondary-color, #555); /* Usa variabile se definita */
+  color: var(--secondary-color, #555);
   margin-bottom: 0.75rem;
 }
 
@@ -80,10 +269,9 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 2rem;
-  gap: 1rem; /* Spazio tra i pulsanti */
+  gap: 1rem;
 }
 
-/* Stili per il riepilogo costi */
 .cost-summary-section hr {
   border: none;
   border-top: 1px dashed #ccc;
@@ -98,7 +286,7 @@
 }
 
 .cost-summary-section .grand-total strong {
-  color: var(--primary-color, #333); /* Assicura che anche il strong erediti o abbia lo stesso colore */
+  color: var(--primary-color, #333);
 }
 
 .tax-detail {
@@ -107,12 +295,10 @@
   margin-left: 5px;
 }
 
-/* Assicura che la sezione dettagli pagamento e costi siano ben separate */
 .payment-details-section {
-  margin-top: 1.5rem; /* Aggiunge spazio sopra la sezione dettagli pagamento se c'è il riepilogo costi */
+  margin-top: 1.5rem;
 }
 
-/* Stile per il nome del file caricato */
 .file-name-display {
   display: inline-block;
   margin-left: 10px;
@@ -123,164 +309,26 @@
   border-radius: 4px;
 }
 
-/* Stili per il riepilogo costi */
-.cost-summary-section hr {
-  border: none;
-  border-top: 1px dashed #ccc;
-  margin: 0.75rem 0;
-}
-
-.cost-summary-section .grand-total {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-top: 0.75rem;
-  color: var(--primary-color, #333);
-}
-
-.cost-summary-section .grand-total strong {
-  color: var(--primary-color, #333); /* Assicura che anche il strong erediti o abbia lo stesso colore */
-}
-
-.tax-detail {
-  font-size: 0.85em;
+.discount-info {
+  font-size: 0.9em;
   color: #555;
-  margin-left: 5px;
-}
-
-/* Assicura che la sezione dettagli pagamento e costi siano ben separate */
-.payment-details-section {
-  margin-top: 1.5rem; /* Aggiunge spazio sopra la sezione dettagli pagamento se c'è il riepilogo costi */
-}
-
-
-.booking-content {
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-}
-
-.availability-form, .booking-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-row {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.form-group {
-  flex: 1; /* Permette ai gruppi di dividere lo spazio in una riga */
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
+  margin-left: 1rem;
+  margin-top: -0.5rem;
   margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #333;
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="tel"],
-.form-group input[type="date"],
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.2s;
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 0.5rem;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: var(--accent-color, #007bff); /* Usa il tuo colore accento */
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(0,123,255,0.2); /* Esempio con blu */
+.discounted-price {
+  font-weight: bold;
+  color: #27ae60;
 }
 
-.availability-message {
-  padding: 0.8rem;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: 500;
-}
-.availability-message.available {
-  background-color: #e6ffed;
-  color: #2f6f4f;
-  border: 1px solid #b7e4c7;
-}
-.availability-message.unavailable {
-  background-color: #ffebee;
-  color: #c62828;
-  border: 1px solid #ef9a9a;
-}
-
-.payment-section {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #eee;
-}
-
-.payment-section-title {
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-
-.radio-group {
-  display: flex;
-  flex-direction: column; /* Stack radio buttons by default */
-  gap: 0.75rem;
-}
-
-.radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: normal;
-}
-
-.radio-group-wrap { /* Per metodi di pagamento, permetti il wrap */
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.file-upload-group, .payment-gateway-info {
-  margin-top: 1rem;
-}
-
-.error-message {
-  color: #c62828;
-  background-color: #ffebee;
-  border: 1px solid #ef9a9a;
-  padding: 0.8rem;
-  border-radius: 6px;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-/* Responsive adjustments for Booking form */
-@media (max-width: 768px) {
-  .booking-content {
-    padding: 1.5rem;
-  }
-  .form-row {
-    flex-direction: column; /* Stack form groups in a row */
-    gap: 1.5rem; /* Mantieni il gap anche quando impilati */
-  }
-  .radio-group-wrap label { /* Assicura che i radio button per i metodi di pagamento abbiano spazio */
-    margin-bottom: 0.5rem;
-  }
-
-/* Stili per il modale di successo */
+/* --- Modale di successo --- */
 .success-modal-overlay {
   position: fixed;
   top: 0;
@@ -341,7 +389,7 @@
 
 .modal-title {
   font-size: 1.75rem;
-  color: var(--primary-color); /* Usa i colori del tuo sito */
+  color: var(--primary-color);
   margin-bottom: 0.5rem;
 }
 
@@ -356,26 +404,3 @@
   padding: 0.75rem 2rem;
   font-size: 1rem;
 }
-
-.discount-info {
-  font-size: 0.9em;
-  color: #555;
-  margin-left: 1rem;
-  margin-top: -0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.original-price {
-  text-decoration: line-through;
-  color: #999;
-  margin-right: 0.5rem;
-}
-
-.discounted-price {
-  font-weight: bold;
-  color: #27ae60; /* Un colore verde per evidenziare lo sconto */
-}
-
-
-}
-

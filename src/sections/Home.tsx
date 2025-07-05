@@ -39,7 +39,7 @@ const Home: React.FC = () => {
             </a>
           </div>
           <div className="welcome-image">
-            <img src="/limoneto copia.jpg" alt="Vincanto" className="img-fluid" />
+            <img src="/esterni/ingressoindex.jpg" alt="Vincanto" className="img-fluid" />
           </div>
         </div>
         

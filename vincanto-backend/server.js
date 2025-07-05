@@ -6,6 +6,7 @@ const path = require('path');
 const pool = require('./src/config/db.js'); // Assicurati che il percorso sia corretto
 const dotenv = require('dotenv');
 
+
 // Carica le variabili d'ambiente dal file .env nella cartella principale
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 

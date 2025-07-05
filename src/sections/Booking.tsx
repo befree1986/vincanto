@@ -54,24 +54,6 @@ const BOOKING_CONFIG = {
   AUGUST_RULE_END: new Date(2024, 7, 25),
 };
 
-// Aggiungiamo qui le date già prenotate per simulare un calendario.
-// In un'applicazione reale, questi dati proverrebbero da un database/API.
-const bookedDateRanges = [
-  { start: new Date('2024-08-05'), end: new Date('2024-08-10') },
-];
-
-// Espande gli intervalli di date prenotate in un array di singole date da disabilitare.
-// La data di fine (checkout) non viene inclusa perché è disponibile per un nuovo check-in.
-const bookedDates = bookedDateRanges.flatMap(range => {
-  const dates = [];
-  let currentDate = new Date(range.start);
-  while (currentDate < range.end) {
-    dates.push(new Date(currentDate));
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
-  return dates;
-});
-
 const BookingForm: React.FC = () => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState<BookingFormData>({
@@ -95,6 +77,35 @@ const BookingForm: React.FC = () => {
   const [sending, setSending] = useState(false);
   const [calculationResults, setCalculationResults] = useState<CalculationResults | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [step, setStep] = useState(1); // Nuovo stato per gestire i passaggi
+  const [bookedDates, setBookedDates] = useState<Date[]>([]);
+
+  // Carica le date prenotate dal backend quando il componente viene montato
+  useEffect(() => {
+    const fetchBookedDates = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/booked-dates');
+        const ranges: { start: string; end: string }[] = response.data;
+        
+        const disabledDates = ranges.flatMap(range => {
+          const dates = [];
+          let currentDate = new Date(range.start);
+          const endDate = new Date(range.end);
+          while (currentDate < endDate) {
+            dates.push(new Date(currentDate));
+            currentDate.setDate(currentDate.getDate() + 1);
+          }
+          return dates;
+        });
+        setBookedDates(disabledDates);
+      } catch (error) {
+        console.error("Errore nel caricamento delle date prenotate:", error);
+        // Potresti voler mostrare un messaggio di errore all'utente
+      }
+    };
+
+    fetchBookedDates();
+  }, []);
 
   const getMinDate = () => {
     const now = new Date();
@@ -108,17 +119,6 @@ const BookingForm: React.FC = () => {
     return now;
   };
 
-  const dayClassName = (date: Date) => {
-    const augustRuleStart = BOOKING_CONFIG.AUGUST_RULE_START;
-    const augustRuleEnd = BOOKING_CONFIG.AUGUST_RULE_END;
-
-    // Evidenzia i giorni dal 11/08 al 24/08 (il 25 è il giorno di checkout)
-    if (date >= augustRuleStart && date < augustRuleEnd) {
-      return 'special-august-day';
-    }
-    return '';
-  };
-
   // --- LOGICA DI FILTRO PER AGOSTO ---
   const isDateInSpecialPeriod = (date: Date) => {
     return date >= BOOKING_CONFIG.AUGUST_RULE_START && date < BOOKING_CONFIG.AUGUST_RULE_END;
@@ -127,17 +127,28 @@ const BookingForm: React.FC = () => {
   // Filtra le date di CHECK-IN: nel periodo speciale, solo le domeniche sono selezionabili.
   const filterCheckinDates = (date: Date) => {
     if (isDateInSpecialPeriod(date)) {
-      return date.getDay() === 0; // 0 = Domenica
-    }
-    return true; // Al di fuori del periodo speciale, tutte le date sono valide (salvo quelle già prenotate)
-  };
-
-  // Filtra le date di CHECK-OUT: se il check-in è nel periodo speciale, anche il checkout deve essere di domenica.
-  const filterCheckoutDates = (date: Date) => {
-    if (formData.checkin && isDateInSpecialPeriod(formData.checkin)) {
-      return date.getDay() === 0; // Permette solo di selezionare una domenica
+      return date.getDay() === 0; // Solo domenica
     }
     return true;
+  };
+
+  // Filtra le date di CHECK-OUT: se il check-in è nel periodo speciale, solo la domenica successiva è selezionabile.
+  const filterCheckoutDates = (date: Date) => {
+    if (formData.checkin && isDateInSpecialPeriod(formData.checkin)) {
+      const nextSunday = new Date(formData.checkin);
+      nextSunday.setDate(formData.checkin.getDate() + 7);
+      return date.getTime() === nextSunday.getTime();
+    }
+    return true;
+  };
+
+  // Evidenzia i giorni del periodo speciale
+  const dayClassName = (date: Date) => {
+    const { AUGUST_RULE_START, AUGUST_RULE_END } = BOOKING_CONFIG;
+    if (date >= AUGUST_RULE_START && date < AUGUST_RULE_END) {
+      return 'special-august-day';
+    }
+    return '';
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -174,10 +185,7 @@ const BookingForm: React.FC = () => {
         setFormData(prev => ({ ...prev, checkin: date, checkout: null }));
       }
     } else if (name === 'checkout') {
-      // La modifica del checkout è permessa solo se non siamo nella regola speciale di agosto
-      if (!(formData.checkin && isDateInSpecialPeriod(formData.checkin) && formData.checkin.getDay() === 0)) {
-        setFormData(prev => ({ ...prev, checkout: date }));
-      }
+      setFormData(prev => ({ ...prev, checkout: date }));
     }
   };
 
@@ -256,7 +264,7 @@ const BookingForm: React.FC = () => {
       }
 
       // Controlla la sovrapposizione con altre date già prenotate
-      const isOverlapping = bookedDateRanges.some(range => {
+      const isOverlapping = bookedDates.some(range => {
         return checkinDate < range.end && checkoutDate > range.start;
       });
 
@@ -351,6 +359,7 @@ const BookingForm: React.FC = () => {
     }
     setError(null);
     setShowParkingSelectionStep(true);
+    setStep(3); // Vai allo step Parcheggio
   };
 
   const handleProceedToSummaryFromParking = () => {
@@ -364,6 +373,7 @@ const BookingForm: React.FC = () => {
       setCalculationResults(costs);
       setShowSummary(true);
       setShowParkingSelectionStep(false);
+      setStep(4); // Vai allo step Riepilogo
     } else if (!error) {
       setError(t("ErroreControllaDateOspitiParcheggio"));
     }
@@ -372,11 +382,11 @@ const BookingForm: React.FC = () => {
   const handleBackToParkingSelection = () => {
     setShowSummary(false);
     setShowParkingSelectionStep(true);
-    setError(null);
+    setStep(3); // Torna allo step Parcheggio
   };
   const handleBackToUserDetails = () => {
     setShowParkingSelectionStep(false);
-    setError(null);
+    setStep(2); // Torna allo step Pagamento
   };
 
   const handleCloseSuccessMessage = () => {
@@ -387,31 +397,25 @@ const handleActualSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setSending(true);
   setError(null);
+
+  const finalData = {
+    formData,
+    paymentAmount,
+    paymentMethod,
+    costs: calculateBookingCosts() // Includiamo anche i costi calcolati
+  };
+
   try {
-    await axios.post('http://localhost:3001/api/booking-request', {
-      formData: { ...formData },
-      paymentAmount,
-      paymentMethod,
-    });
+    const response = await axios.post('http://localhost:3001/api/booking-request', finalData);
 
     setSubmitted(true);
-    setFormData({
-      name: '',
-      surname: '',
-      email: '',
-      phone: '',
-      guests: '',
-      children: 0,
-      childrenAges: [],
-      checkin: null,
-      checkout: null,
-      parkingOption: '',
-    });
-    setPaymentAmount('');
-    setPaymentMethod('');
-    setCalculationResults(null);
-    setShowSummary(false);
-    setAvailability('idle');
+    // Reset completo dello stato del form
+    setFormData({ name: '', surname: '', email: '', phone: '', guests: '', children: 0, childrenAges: [], checkin: null, checkout: null, parkingOption: '' });
+    setPaymentAmount(''); setPaymentMethod('');
+    setCalculationResults(null); setShowSummary(false);
+    setAvailability('idle'); setStep(1);
+    setShowParkingSelectionStep(false);
+
   } catch (err: any) {
     const serverMessage = err.response?.data?.message || t('Si è verificato un errore durante l\'invio. Riprova più tardi.');
     setError(serverMessage);
@@ -430,6 +434,12 @@ const handleActualSubmit = async (e: React.FormEvent) => {
     areCoreDetailsValid &&
     formData.name && formData.surname && formData.email && formData.phone && paymentAmount && paymentMethod;
 
+  // --- NOTA VISIVA PER IL PERIODO SPECIALE ---
+  const showSpecialPeriodNote =
+    formData.checkin &&
+    isDateInSpecialPeriod(formData.checkin) &&
+    formData.checkin.getDay() === 0;
+
   return (
     <div className="booking-content">
       <form className="availability-form" onSubmit={checkAvailability}>
@@ -439,20 +449,16 @@ const handleActualSubmit = async (e: React.FormEvent) => {
             <DatePicker
               id="checkin"
               selected={formData.checkin}
-              onChange={(date) => handleDateChange('checkin', date)}
-              selectsStart
-              startDate={formData.checkin}
-              endDate={formData.checkout}
+              onChange={date => handleDateChange('checkin', date)}
               minDate={getMinDate()}
-              excludeDates={bookedDates}
               filterDate={filterCheckinDates}
+              dayClassName={dayClassName}
+              excludeDates={bookedDates}
+              locale="it"
               dateFormat="dd/MM/yyyy"
-              placeholderText={t('Seleziona data')}
+              placeholderText={t('Check-in')}
               className="form-control"
               required
-              locale="it"
-              disabled={formData.checkin && isDateInSpecialPeriod(formData.checkin) && formData.checkin.getDay() === 0}
-              dayClassName={dayClassName}
             />
           </div>
           <div className="form-group">
@@ -460,19 +466,16 @@ const handleActualSubmit = async (e: React.FormEvent) => {
             <DatePicker
               id="checkout"
               selected={formData.checkout}
-              onChange={(date) => handleDateChange('checkout', date)}
-              selectsEnd
-              startDate={formData.checkin}
-              endDate={formData.checkout}
-              minDate={formData.checkin ? new Date(new Date(formData.checkin).setDate(formData.checkin.getDate() + BOOKING_CONFIG.MIN_NIGHTS)) : getMinDate()}
-              excludeDates={bookedDates}
+              onChange={date => handleDateChange('checkout', date)}
+              minDate={formData.checkin ? new Date(formData.checkin.getTime() + 24 * 60 * 60 * 1000) : getMinDate()}
               filterDate={filterCheckoutDates}
+              dayClassName={dayClassName}
+              excludeDates={bookedDates}
+              locale="it"
               dateFormat="dd/MM/yyyy"
-              placeholderText={t('Seleziona data')}
+              placeholderText={t('Check-out')}
               className="form-control"
               required
-              locale="it"
-              dayClassName={dayClassName}
             />
           </div>
         </div>
@@ -526,7 +529,22 @@ const handleActualSubmit = async (e: React.FormEvent) => {
       </form>
 
       {availability === 'available' && !submitted && (
-        <form className="booking-process-form" onSubmit={handleActualSubmit} style={{ marginTop: '2rem' }} encType="multipart/form-data">
+        <form className="booking-process-form" onSubmit={handleActualSubmit} style={{ marginTop: '2rem' }}>
+          <div className="booking-steps-indicator">
+            <span className={step === 1 ? 'active' : ''}>{t('Dati')}</span>
+            <span className={step === 2 ? 'active' : ''}>{t('Pagamento')}</span>
+            <span className={step === 3 ? 'active' : ''}>{t('Parcheggio')}</span>
+            <span className={step === 4 ? 'active' : ''}>{t('Riepilogo')}</span>
+          </div>
+
+          {/* Nota periodo speciale */}
+          {showSpecialPeriodNote && (
+            <div className="special-period-note">
+              <span className="special-day-indicator"></span>
+              {t("Nel periodo centrale di Agosto (11-24), puoi prenotare solo settimane intere da Domenica a Domenica.")}
+            </div>
+          )}
+
           {!showParkingSelectionStep && !showSummary && areCoreDetailsValid && (
             <> {/* Step 1: Dati Utente e Pagamento */}
               <div className="form-row user-details-row">

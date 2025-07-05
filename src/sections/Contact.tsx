@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Contact.css';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 interface FormData {
   name: string;
@@ -34,11 +35,14 @@ const Contact: React.FC = () => {
     }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form data submitted:', formData);
-    setSubmitted(true);
-    
+    try {
+      await axios.post('http://localhost:3001/api/contact-request', formData);
+      setSubmitted(true);
+    } catch (error) {
+      alert(t('Si è verificato un errore. Riprova più tardi.'));
+    }
     // Reset form after submission
     setTimeout(() => {
       setFormData({
