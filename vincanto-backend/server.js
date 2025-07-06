@@ -1,26 +1,44 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const cors = require('cors');
-const ejs = require('ejs');
-const path = require('path');
-const pool = require('./src/config/db.js'); // Assicurati che il percorso sia corretto
-const dotenv = require('dotenv');
-
+import express from 'express';
+import cors from 'cors';
+import nodemailer from 'nodemailer';
+import ejs from 'ejs';
+import path from 'path';
+import pool from './src/config/db.js'; // Assicurati che il percorso sia corretto
+import dotenv from 'dotenv';
 
 // Carica le variabili d'ambiente dal file .env nella cartella principale
-dotenv.config({ path: path.join(__dirname, '..', '.env') });
+// Consiglio extra: usare path.resolve è più robusto
+dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
 
 const app = express();
+const port = 3001;
 
-// Middleware
-app.use(cors());
+// Lista delle origini che possono fare richieste
+const whitelist = ['http://localhost:5173', 'http://localhost:3000'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Controlla se l'origine della richiesta è nella whitelist
+    // !origin permette anche a tool come Postman di funzionare
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+
+// --- Middleware ---
+// LA MODIFICA È QUI: Passiamo le opzioni a cors()
+app.use(cors(corsOptions));
 app.use(express.json()); // Per parsare il body delle richieste JSON
 
 // --- Configurazione di Nodemailer ---
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    secure: process.env.EMAIL_PORT == 465, // true solo se la porta è 465
+    port: Number(process.env.EMAIL_PORT), // Assicurati che la porta sia un numero
+    secure: process.env.EMAIL_PORT == '465', // true solo se la porta è 465
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -37,7 +55,7 @@ function calculateServerSideCosts(formData) {
     if (checkoutDate <= checkinDate) return null;
 
     const oneDay = 1000 * 60 * 60 * 24;
-    const nights = Math.round(Math.abs((checkoutDate - checkinDate) / oneDay));
+    const nights = Math.round(Math.abs((checkoutDate.getTime() - checkinDate.getTime()) / oneDay));
     
     // --- REGOLA 1: Soggiorno minimo 2 notti ---
     if (nights < 2) {
@@ -48,7 +66,7 @@ function calculateServerSideCosts(formData) {
     
     // --- REGOLA 3: Bambini 0-3 anni non pagano (per il soggiorno) ---
     let payingChildren = 0;
-    (childrenAges || []).forEach(ageStr => {
+    (childrenAges || []).forEach((ageStr) => {
         const age = parseInt(ageStr, 10);
         if (!isNaN(age) && age > 3) {
             payingChildren++;
@@ -79,7 +97,7 @@ function calculateServerSideCosts(formData) {
 
     // --- Calcolo tassa di soggiorno (esclusi under 14) ---
     let taxableGuests = numAdults;
-    (childrenAges || []).forEach(ageStr => {
+    (childrenAges || []).forEach((ageStr) => {
         const age = parseInt(ageStr, 10);
         if (!isNaN(age) && age >= 14) {
             taxableGuests++;
@@ -192,4 +210,5 @@ app.post('/api/booking-request', async (req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server attivo sulla porta ${PORT}`);
+    console.log('CORS è configurato per permettere richieste da:', whitelist.join(', '));
 });
