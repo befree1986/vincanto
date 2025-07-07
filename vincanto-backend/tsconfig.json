@@ -17,19 +17,21 @@
     /* Module Resolution */
     "baseUrl": ".", // Dice a TS che la radice per i percorsi è la cartella corrente
     "paths": {
-      "@models/*": ["models/*"],
-      "@config/*": ["src/config/*"]
+      "@models/*": ["src/models/*"],
+      "@config/*": ["src/config/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@routes/*": ["src/routes/*"],
+      "@schemas/*": ["src/schemas/*"],
+      "@middleware/*": ["src/middleware/*"],
+      "@services/*": ["src/services/*"]
     },
 
     /* Completeness */
     "skipLibCheck": true
   },
-  "ts-node": {
-    "require": ["tsconfig-paths/register"]
-  },
   "include": [
     "server.ts",      // Includi esplicitamente il file server.ts nella root
-    "src/**/*.ts"     // E tutti i file .ts dentro la cartella src
+    "src/**/*.ts"     // Ora questo include automaticamente anche la cartella models
   ],
   "exclude": [
     "node_modules"

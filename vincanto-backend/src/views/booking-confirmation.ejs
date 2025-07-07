@@ -107,7 +107,7 @@
                   <ul style="margin:0; padding-left:20px; list-style-type: disc;">
                       <li style="margin-bottom:5px;"><strong>Beneficiario:</strong> <%= bankDetails.beneficiary %></li>
                       <li style="margin-bottom:5px;"><strong>IBAN:</strong> <%= bankDetails.iban %></li>
-                      <li><strong>Causale:</strong> Prenotazione <%= booking.guest_name %> <%= booking.guest_surname %> - ID <%= booking.id %></li>
+                      <li><strong>Causale:</strong> Prenotazione <%= booking.guest_name %> <%= booking.guest_surname %> - dal <%=  new Date(booking.check_in_date).toLocaleDateString('it-IT') %></li>
                   </ul>
                   <p style="margin-top:20px; margin-bottom:0;">Una volta effettuato il pagamento, ti preghiamo di inviare una copia della ricevuta a questo indirizzo email per accelerare la conferma.</p>
                 </div>
