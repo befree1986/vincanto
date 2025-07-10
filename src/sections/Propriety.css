@@ -1,373 +1,36 @@
-.proprieta-gallery {
+/* === GALLERIA IMMAGINI === */
+.gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.proprieta-img-card {
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.proprieta-img-card img {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: var(--shadow-md);
-  object-fit: cover;
-  height: 250px;
-  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
-}
-
-.proprieta-img-card:hover img {
-  transform: scale(1.08);
-}
-
-/* Modificato il selettore per corrispondere alla struttura HTML più probabile */
-.proprieta-img-card .image-caption {
-  text-align: center;
-  font-size: 0.8rem; /* Dimensione del font leggermente ridotta */
-  color: #555;       /* Colore del testo della didascalia */
-  margin-top: 10px; /* Aumentato drasticamente per test, usa 1.0rem o il valore desiderato in produzione */
-  padding: 0 0.25rem; /* Piccolo padding laterale se il testo è lungo */
-}
-
-/* Stile generale per i titoli con una sottolineatura.
-   L'elemento ::after crea la sottolineatura. */
-.underline-title {
-  position: relative;
-  display: block; /* Assicura che occupi la larghezza e permetta text-align: center interno */
-  text-align: center;   /* Centra il testo all'interno di questo elemento */
-  /* Eventuali left/transform qui potrebbero essere ereditati se non sovrascritti specificamente */
-}
-
-/* Override specifici per il titolo "La Proprietà" per assicurare la centratura
-   e resettare stili che potrebbero causare un allineamento errato. */
-.propiety-description h2.section-title.underline-title {
-  /* display: inline-block; è ereditato da .underline-title */
-  /* text-align: center; è ereditato da .underline-title (per il testo interno) */
-  float: none !important;          /* Sovrascrive eventuali float */
-  left: auto !important;           /* Sovrascrive posizionamenti 'left' espliciti */
-  transform: none !important;      /* Sovrascrive eventuali trasformazioni */
-  margin-left: 0 !important;       /* Assicura che margini specifici non lo spostino */
-  margin-right: 0 !important;      /* Assicura che margini specifici non lo spostino */
-}
-.underline-title::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--terracotta, #e67e22);
-  margin: 0.5rem auto 0 auto;
-  border-radius: 2px;
-}
-
-
-/* Table Styles for Tariffe */
-.tariffe-table-container {
-  margin: 2rem auto 2.5rem auto; /* Aggiunto margine inferiore */
-  max-width: 900px;
-  overflow-x: auto; /* Necessario per la responsività della tabella su schermi piccoli */
-}
-
-.tariffe-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #fff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
-  border-radius: 10px;
-  overflow: hidden; /* Per far funzionare il border-radius con la tabella */
-  border: 1px solid #e9ecef; /* Bordo sottile per la tabella */
-}
-
-.tariffe-table th,
-.tariffe-table td {
-  border: 1px solid #e9ecef; /* Bordi più chiari per le celle */
-  padding: 14px 18px; /* Padding leggermente aumentato */
-  text-align: left;
-  font-size: 1rem;
-  color: #333; /* Colore testo più scuro per leggibilità */
-}
-
-.tariffe-table th {
-  background-color: var(--blue-light,#000000); /* Colore di sfondo per header, usa variabile CSS se definita */
-  color: var(--blue-dark, #1f67d4); /* Colore testo per header, usa variabile CSS se definita */
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.9rem; /* Dimensione font leggermente ridotta per header */
-}
-
-.tariffe-table tbody tr:nth-child(even) {
-  background-color: #f8f9fa; /* Alternanza colore righe più tenue */
-}
-
-.tariffe-table tbody tr:hover {
-  background-color: #eef6ff; /* Hover più evidente */
-}
-
-.tariffe-note {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
-  color: #555;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
-}
-
-.tariffe-note a {
-  color: var(--accent-color, #007bff); /* Usa il colore accento del tuo sito */
-  text-decoration: underline;
-}
-
-/* Responsive adjustments for the table */
-@media (max-width: 768px) {
-  .tariffe-table thead {
-    display: none; /* Nasconde l'header tabellare classico */
-  }
-  .tariffe-table tr {
-    display: block;
-    margin-bottom: 1rem; /* Spazio tra le "card" su mobile */
-    border: 1px solid #dee2e6;
-    border-radius: 8px; /* Arrotonda i bordi di ogni riga/card */
-  }
-  .tariffe-table td {
-    display: block;
-    text-align: right; /* Allinea il valore a destra */
-    padding-left: 50%; /* Il valore del TD inizia al 50% della larghezza del TD */
-    position: relative;
-    border-bottom: 1px solid #e9ecef; /* Separatore tra "celle" verticali */
-    padding-top: 8px; /* Ridotto leggermente il padding verticale */
-    padding-bottom: 8px; /* Ridotto leggermente il padding verticale */
-    line-height: 2.5; /* Aumentata interlinea per il valore */
-    overflow-wrap: break-word; /* Assicura che il testo del valore vada a capo correttamente */
-    box-sizing: border-box; /* Coerenza nel box model */
-    font-size: 0.875rem; /* Ridotta dimensione font per il valore (era 1rem) */
-  }
-  .tariffe-table td:last-child {
-    border-bottom: none; /* Rimuove il bordo inferiore dell'ultima cella nella card */
-  }
-  .tariffe-table td::before {
-    content: attr(data-label); /* Mostra l'etichetta */
-    position: absolute;
-    left: 8px; /* Spostata leggermente a sinistra */
-    width: calc(50% - 20px); /* Larghezza dell'etichetta (box): 50% del TD meno 10px (left) e meno 10px (gap desiderato) */
-    padding-right: 8px; /* Padding interno all'etichetta, dopo il testo dell'etichetta */
-    /* white-space: nowrap; */ /* Rimosso per permettere all'etichetta di andare a capo */
-    text-align: left; /* Allinea l'etichetta a sinistra */
-    font-weight: bold;
-    color: var(--blue-dark, #0d2c5a);
-    /* Proprietà per gestire il testo lungo e l'overflow */
-    overflow-wrap: break-word; /* Permette di andare a capo per parole lunghe per evitare overflow */
-    word-wrap: break-word; /* Alias per overflow-wrap, per maggiore compatibilità */
-    line-height: 1.4; /* Aumentata interlinea per l'etichetta */
-    box-sizing: border-box; /* Assicura che padding e border siano inclusi nella larghezza/altezza */
-    font-size: 0.875rem; /* Ridotta dimensione font per l'etichetta (era 1rem) */
-  }
-}
-
-.propiety-content {
-  padding: 6rem 0;
-}
-
-/* Contenitore per il titolo "La Proprietà" e i paragrafi descrittivi */
-.propiety-description {
-  max-width: 800px;
-  margin: 0 auto 4rem; /* Centra questo blocco nella pagina */
-  text-align: center;   /* FONDAMENTALE: Centra gli elementi figli inline o inline-block (come il nostro h2) */
-}
-
-.propiety-description p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.gallery-section {
-  margin-bottom: 40px;
-}
-
-.gallery-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.gallery-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-}
-
-.gallery-item {
-  width: 250px;
-  text-align: center;
-}
-
-.gallery-item img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-.gallery-desc {
-  margin-top: 8px;
-  font-size: 1rem;
-  color: #555;
-}
-/* Aggiungi alla fine del tuo file Propriety.css o integra con gli stili esistenti */
-
-.propriety-content { /* Assicurati che questa classe esista e gestisca la larghezza/centratura */
-  max-width: 1200px; /* O la larghezza massima che usi per i contenuti */
-  margin: 0 auto;
-  padding: 0 1rem; /* Padding laterale se necessario */
+  margin-top: 2rem;
 }
 
 .gallery-section-container {
-  margin-top: 2rem; /* Spazio sopra ogni nuova sezione della galleria */
-  margin-bottom: 2.5rem; /* Spazio tra le diverse sezioni della galleria */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .gallery-section-title {
-  font-size: 1.9rem; /* Regola la dimensione del carattere secondo le tue preferenze */
-  color: var(--primary-color-dark); /* Usa un colore dal tuo tema, o scegline uno */
-  margin-bottom: 1.5rem; /* Spazio sotto il titolo, prima delle immagini */
-  text-align: center; /* Per centrare il titolo della sezione */
-  font-weight: 600; /* Puoi regolare il peso del font */
-}
-
-/* Lo stile per .proprieta-gallery e .proprieta-img-card dovrebbe rimanere invariato
-   per mantenere l'aspetto attuale delle immagini.
-   Esempio (se non già presente o se vuoi verificarlo): */
-
-.proprieta-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* O la tua configurazione attuale */
-  gap: 1.5rem; /* O il tuo gap attuale */
-}
-
-.proprieta-img-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.proprieta-img-card img.img-fluid { /* Assicurati che img-fluid sia applicato correttamente */
-  width: 100%;
-  height: 250px; /* O l'altezza desiderata, se vuoi un'altezza fissa */
-  object-fit: cover; /* Per mantenere le proporzioni e riempire lo spazio */
-  display: block;
-}
-
-.image-caption {
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
-  color: #333;
-  background-color: #f8f9fa;
-  text-align: center;
-  margin-top: auto; /* Spinge la didascalia in basso se la card è più alta */
-}
-/* ... stili esistenti ... */
-
-.gallery-main-image-card {
-  margin-bottom: 1.5rem; /* Spazio prima della griglia di immagini piccole, se presente */
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Ombra leggermente più pronunciata */
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.gallery-main-image-card .img-fluid-main { /* Classe specifica per l'immagine principale */
-  width: 100%;
-  height: auto; /* Mantiene le proporzioni originali */
-  max-height: 450px; /* Altezza massima per l'immagine principale, puoi regolarla */
-  object-fit: cover; /* Assicura che l'immagine copra lo spazio, potrebbe tagliare */
-  display: block;
-  transition: transform 0.5s ease-in-out; /* Transizione per l'effetto hover */
-}
-
-.gallery-main-image-card:hover .img-fluid-main {
-  transform: scale(1.05); /* Ingrandisce l'immagine del 5% al passaggio del mouse */
-}
-
-.gallery-main-image-card .image-caption {
-  padding: 0.85rem 1.1rem;
-  font-size: 1rem; /* Didascalia leggermente più grande per l'immagine principale */
-  color: #333;
-  background-color: #f8f9fa;
-  text-align: center;
-}
-
-/* Assicurati che la griglia sottostante funzioni come previsto */
-.proprieta-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.proprieta-img-card img.img-fluid {
-  width: 100%;
-  height: 250px; /* Altezza per le immagini nella griglia */
-  object-fit: cover;
-  display: block;
-}
-
-/* ... stili esistenti ... */
-
-/* Stili per l'immagine di testata della sezione (Approccio 2) */
-.gallery-section-image-header {
-  position: relative; /* Necessario per posizionare il titolo sovrapposto */
-  width: 100%;
-  height: 250px; /* Regola l'altezza come preferisci per la tua immagine di testata */
-  margin-bottom: 1.5rem; /* Spazio sotto l'immagine di testata, prima del contenuto della sezione */
-  border-radius: 8px; /* Opzionale: per bordi arrotondati */
-  overflow: hidden; /* Per contenere l'immagine e i bordi arrotondati */
-  background-color: #e9ecef; /* Colore di fallback se l'immagine non carica */
-}
-
-.gallery-section-image-header .header-bg-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Assicura che l'immagine copra l'area, potrebbe essere ritagliata */
-  display: block;
-  transition: transform 0.5s ease-in-out; /* Transizione per l'effetto hover */
-}
-
-.gallery-section-image-header:hover .header-bg-image {
-  transform: scale(1.05); /* Ingrandisce l'immagine di testata al passaggio del mouse */
-}
-.gallery-section-image-header .header-title-overlay {
-  position: absolute;
-  bottom: 20px; /* Distanza dal basso */
-  left: 20px;   /* Distanza da sinistra */
-  color: white;
-  background-color: rgba(0, 0, 0, 0.55); /* Sfondo semitrasparente per leggibilità */
-  padding: 10px 18px;
-  border-radius: 5px;
-  font-size: 1.9rem; /* Adatta alla dimensione del titolo originale .gallery-section-title */
+  font-size: 1.4rem;
   font-weight: 600;
-  margin: 0; /* Rimuove il margine predefinito dell'h3 */
-  line-height: 1.3;
-}
-
-/* Stile per il titolo standard della sezione (quando non c'è headerImage) */
-.gallery-section-title {
-  font-size: 1.9rem;
-  color: var(--primary-color-dark);
-  margin-bottom: 1.5rem;
+  color: var(--primary-color, #333);
   text-align: center;
-  font-weight: 600;
+  margin: 2rem 0 1rem;
+  position: relative;
 }
 
+.gallery-section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: var(--accent-color, #e67e22);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
 
-/* Stili per l'immagine principale all'interno del contenuto della sezione (Opzione 1) */
 .gallery-main-image-card {
   margin-bottom: 1.5rem;
   background-color: #fff;
@@ -376,67 +39,34 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
 }
 
-.gallery-main-image-card .img-fluid-main {
+.img-fluid-main {
   width: 100%;
   height: auto;
   max-height: 450px;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s ease-in-out;
+  filter: grayscale(100%);
+  transition: filter 0.4s ease, transform 0.4s ease;
 }
 
 .gallery-main-image-card:hover .img-fluid-main {
+  filter: grayscale(0%);
   transform: scale(1.05);
 }
 
-.gallery-main-image-card .image-caption {
+.image-caption {
   padding: 0.85rem 1.1rem;
   font-size: 1rem;
   color: #333;
   background-color: #f8f9fa;
   text-align: center;
 }
-
-/* Stili per la griglia di immagini */
-.proprieta-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.proprieta-img-card img.img-fluid {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.3s ease-in-out; /* Aggiunto per coerenza con l'effetto zoom */
-}
-
-.proprieta-img-card:hover img.img-fluid { /* Aggiunto effetto zoom anche alle immagini della griglia */
-  transform: scale(1.05);
-}
-
-.proprieta-img-card { /* Assicurati che overflow:hidden sia qui per le card della griglia */
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.image-caption { /* Didascalia per le immagini della griglia */
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
-  color: #333;
-  background-color: #f8f9fa;
-  text-align: center;
-  margin-top: auto;
-}
-
-/* Lightbox styles */
+/* === LIGHTBOX === */
 .lightbox-overlay {
   position: fixed;
   z-index: 9999;
@@ -447,15 +77,17 @@
   justify-content: center;
   animation: fadeIn 0.2s;
 }
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
 .lightbox-content {
   position: relative;
   background: #fff;
   border-radius: 12px;
-  padding: 1.5rem 2rem 1.5rem 2rem;
+  padding: 1.5rem 2rem;
   box-shadow: 0 8px 32px rgba(0,0,0,0.25);
   max-width: 95vw;
   max-height: 90vh;
@@ -463,17 +95,16 @@
   flex-direction: column;
   align-items: center;
 }
+
 .lightbox-img {
   max-width: 80vw;
   max-height: 60vh;
-  width: auto;
-  height: auto;
   object-fit: contain;
   border-radius: 8px;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
   background: #f8f8f8;
 }
+
 .lightbox-caption {
   color: #333;
   font-size: 1.1rem;
@@ -482,6 +113,7 @@
   max-width: 70vw;
   word-break: break-word;
 }
+
 .lightbox-close {
   position: absolute;
   top: 12px;
@@ -494,10 +126,13 @@
   z-index: 2;
   transition: color 0.2s;
 }
+
 .lightbox-close:hover {
   color: #b94e0b;
 }
-.lightbox-prev, .lightbox-next {
+
+.lightbox-prev,
+.lightbox-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -516,57 +151,173 @@
   align-items: center;
   justify-content: center;
 }
-.lightbox-prev:hover, .lightbox-next:hover {
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
   background: #b94e0b;
 }
+
 .lightbox-prev {
   left: -60px;
 }
+
 .lightbox-next {
   right: -60px;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .lightbox-content {
-    padding: 0.5rem;
-    max-width: 98vw;
-    max-height: 90vh;
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
   }
+
+  .img-fluid-main {
+    max-height: 300px;
+  }
+
   .lightbox-img {
-    max-width: 95vw;
+    max-width: 90vw;
     max-height: 50vh;
   }
-  .lightbox-caption {
-    max-width: 90vw;
-    font-size: 1rem;
-  }
-  .lightbox-prev, .lightbox-next {
-    width: 38px;
-    height: 38px;
-    font-size: 1.5rem;
-    left: 5px;
-    right: 5px;
-  }
-  .lightbox-prev {
-    left: 5px;
-  }
+
+  .lightbox-prev,
   .lightbox-next {
-    right: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
   }
 }
-@media (max-width: 600px) {
-  .lightbox-content {
-    padding: 0.2rem;
-    max-width: 100vw;
-    max-height: 100vh;
-  }
-  .lightbox-img {
-    max-width: 98vw;
-    max-height: 40vh;
-  }
-  .lightbox-caption {
-    font-size: 0.95rem;
-    max-width: 98vw;
-  }
+/* === TITOLO CON SOTTOLINEATURA === */
+.underline-title {
+  position: relative;
+  display: block;
+  text-align: center;
+}
+
+.underline-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--terracotta, #e67e22);
+  margin: 0.5rem auto 0 auto;
+  border-radius: 2px;
+}
+
+/* === TABELLA TARIFFE === */
+.tariffe-table-container {
+  margin: 2rem auto 2.5rem auto;
+  max-width: 900px;
+  overflow-x: auto;
+}
+
+.tariffe-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+}
+
+.tariffe-table th,
+.tariffe-table td {
+  border: 1px solid #e9ecef;
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 1rem;
+  color: #333;
+}
+
+.tariffe-table th {
+  background-color: var(--blue-light, #000);
+  color: var(--blue-dark, #1f67d4);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+.tariffe-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.tariffe-table tbody tr:hover {
+  background-color: #eef6ff;
+}
+
+.tariffe-note {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #555;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.tariffe-note a {
+  color: var(--accent-color, #007bff);
+  text-decoration: underline;
+}
+
+/* === SEZIONI TESTUALI === */
+.booking-rules,
+.included-services,
+.extra-costs {
+  max-width: 960px;
+  margin: 3rem auto;
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.booking-rules {
+  background-color: #fff8e1;
+  border-left: 4px solid #f0ad4e;
+}
+
+.included-services {
+  background-color: #f9f9f9;
+  border-left: 4px solid #ccc;
+}
+
+.extra-costs {
+  background-color: #fff3f3;
+  border-left: 4px solid #e57373;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color, #333);
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color, #444);
+  border-bottom: 1px solid #ddd;
+  display: inline-block;
+  padding-bottom: 0.25rem;
+  margin-top: 2rem;
+}
+
+.section-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
 }

@@ -6,83 +6,89 @@ import { useTranslation, Trans } from 'react-i18next';
 interface GalleryImage {
   src: string;
   altKey: string;
-  captionKey?: string; // Per didascalie da tradurre
-  captionText?: string; // Per didascalie con testo diretto (es. con emoji)
+  captionKey?: string;
+  captionText?: string;
 }
 
 interface GallerySection {
-  titleKey: string; // Chiave di traduzione per il titolo della sezione
-  headerImage?: {    // Immagine opzionale per la testata della sezione (Approccio 2)
-    src: string;
-    altKey: string;
-  };
-  mainImage?: GalleryImage; // Immagine principale opzionale per la sezione
-  images: GalleryImage[];    // Immagini per la griglia sottostante (o l'unica galleria se mainImage non c'è)
+  titleKey: string;
+  mainImage?: GalleryImage;
+  images: GalleryImage[];
 }
 
-// Definisci qui i dati della tua galleria, organizzati per sezioni.
-// Puoi aggiungere, rimuovere o modificare sezioni e immagini come preferisci.
 const galleryData: GallerySection[] = [
   {
-    titleKey: 'propriety.gallery.sections.entrances.title', // Esempio: "Ingressi e Corridoi"
-    headerImage: { // Immagine di testata per la sezione "Ingressi e Corridoi"
-      src: "/ingresso.jpg", // SOSTITUISCI con il percorso della tua immagine di testata
-      altKey: 'alt.proprieta.entrances.header' // Nuova chiave di traduzione per l'alt text
+    titleKey: 'propriety.gallery.sections.entrances.title',
+    mainImage: {
+      src: "/ingressoNotte/ingresso.jpg",
+      altKey: 'alt.proprieta.immagine1',
     },
     images: [
-      { src: "corridoio/ingresso.jpg", altKey: 'alt.proprieta.immagine1', captionKey: 'Ingresso della struttura' },
+      { src: "/ingressoNotte/ingresso.jpg", altKey: 'alt.proprieta.immagine1' },
       { src: "corridoio/corridoio.jpg", altKey: 'alt.proprieta.immagine2', captionText: '🎨 Applique nel corridoio e nelle camere in Pregiata Ceramica Vietrese decorate a mano 🎨' },
     ],
   },
-
-  //seconda sezione per le camere matrimoniali
   {
-    titleKey: 'propriety.gallery.sections.rooms.title', // Esempio: "Le Camere"
-    headerImage: { // Immagine di testata per la sezione "Le Camere"
-      src: "/caneraVerde/verdett.jpg", // SOSTITUISCI con il percorso della tua immagine di testata
-      altKey: 'alt.proprieta.rooms.header' // Nuova chiave di traduzione per l'alt text
+    titleKey: 'propriety.gallery.sections.rooms.title',
+    mainImage: {
+      src: "/caneraVerde/verdet.jpg",
+      altKey: "alt.proprieta.camera.dettaglio1",
+      
     },
-   
-    images: [ // Immagini più piccole per la griglia sotto l'immagine principale
-      // Sostituisci questi placeholder con le tue immagini reali
-      { src: "/caneraVerde/verdet.jpg", altKey: 'alt.proprieta.camera.dettaglio1', captionKey: 'caption.camera.dettaglio1' },
-      { src: "/caneraVerde/verde1.jpg", altKey: 'alt.proprieta.camera.dettaglio2', captionKey: 'caption.camera.dettaglio2' },
-      { src: "/caneraVerde/verde3.jpg", altKey: 'alt.proprieta.camera.dettaglio3', captionKey: 'caption.camera.dettaglio3' },
-      { src: "/caneraVerde/verde4.jpg", altKey: 'alt.proprieta.camera.dettaglio4', captionKey: 'caption.camera.dettaglio4' },
-      { src: "/caneraVerde/verde5.jpg", altKey: 'alt.proprieta.camera.dettaglio5', captionKey: 'caption.camera.dettaglio5' },
-      { src: "/caneraVerde/verde6.jpg", altKey: 'alt.proprieta.camera.dettaglio6', captionKey: 'caption.camera.dettaglio6' },
-      { src: "/cameraBlu/camerablu1.jpg", altKey: 'alt.propieta.camera.dettagio4', captionKey: 'caption.camera.dettaglio4' },
-      { src: "/cameraBlu/camerablu2.jpg", altKey: 'alt.propieta.camera.dettaglio5', captionKey: 'caption.camera.dettaglio5'},
-      { src: "/cameraBlu/camerablu3.jpg", altKey: 'alt.propieta.camera.dettaglio6', captionKey: 'caption.camera.dettaglio6' },
-      { src: "/cameraBlu/camerablu4.jpg", altKey: 'alt.propieta.camera.dettaglio7', captionKey: 'caption.camera.dettaglio7' },
-      { src: "/cameraBlu/camerablu5.jpg", altKey: 'alt.propieta.camera.dettaglio8', captionKey: 'caption.camera.dettaglio8' },
-      { src: "/cameraBlu/camerablu6.jpg", altKey: 'alt.propieta.camera.dettaglio9', captionKey: 'caption.camera.dettaglio9' },
+    images: [
+      { src: "/caneraVerde/verdet.jpg", altKey: 'alt.proprieta.camera.dettaglio1'},
+      { src: "/caneraVerde/verde1.jpg", altKey: 'alt.proprieta.camera.dettaglio2'},
+      { src: "/caneraVerde/verde3.jpg", altKey: 'alt.proprieta.camera.dettaglio3'},
+      { src: "/caneraVerde/verde4.jpg", altKey: 'alt.proprieta.camera.dettaglio4'},      
+      { src: "/caneraVerde/verde5.jpg", altKey: 'alt.proprieta.camera.dettaglio5'},
+      { src: "/caneraVerde/verde6.jpg", altKey: 'alt.proprieta.camera.dettaglio6'},
+      { src: "/cameraBlu/camerablu1.jpg", altKey: 'alt.propieta.camera.dettagio4'},
+      { src: "/cameraBlu/camerablu2.jpg", altKey: 'alt.propieta.camera.dettaglio5'},
+      { src: "/cameraBlu/camerablu3.jpg", altKey: 'alt.propieta.camera.dettaglio6'},
+      { src: "/cameraBlu/camerablu4.jpg", altKey: 'alt.propieta.camera.dettaglio7'},
+      { src: "/cameraBlu/camerablu5.jpg", altKey: 'alt.propieta.camera.dettaglio8'},
+      { src: "/cameraBlu/camerablu6.jpg", altKey: 'alt.propieta.camera.dettaglio9'},
     ],
   },
-
- // sezione per la camera singola
   {
     titleKey: 'propriety.gallery.sections.singleroom.title',
-    headerImage:{ 
-      src: "/cameraSingola/singolaheader.jpg", 
-      altKey: 'alt.proprieta.singleroom.header' 
-  },
+    mainImage: {
+      src: "/cameraSingola/1_giorno.jpg",
+      altKey: 'alt.proprieta.singleroom.image1',
+    
+    },
     images: [
-      { src: "/cameraSingola/1_giorno.jpg", altKey: 'alt.proprieta.singleroom.image1', captionKey: 'caption.proprieta.singleroom.image1' },
-      { src: "/cameraSingola/1_notte.jpg", altKey: 'alt.proprieta.singleroom.image2', captionKey: 'caption.proprieta.singleroom.image2' },
-      { src: "/cameraSingola/2_giorno.jpg", altKey: 'alt.proprieta.singleroom.image3', captionKey: 'caption.proprieta.singleroom.image3' },
-      { src: "/cameraSingola/2_notte.jpg", altKey: 'alt.proprieta.singleroom.image4', captionKey: 'caption.proprieta.singleroom.image4' },
+      { src: "/cameraSingola/1_giorno.jpg", altKey: 'alt.proprieta.singleroom.image1'},
+      { src: "/cameraSingola/1_notte.jpg", altKey: 'alt.proprieta.singleroom.image2'},
+      { src: "/cameraSingola/2_giorno.jpg", altKey: 'alt.proprieta.singleroom.image3'},
+      { src: "/cameraSingola/2_notte.jpg", altKey: 'alt.proprieta.singleroom.image4'},  
     ],
   },
-  
-  // Puoi aggiungere altre sezioni come "I Bagni", "Esterni", "Cucina", ecc.
-  // {
-  //   titleKey: 'propriety.gallery.sections.bathrooms.title',
-  //   images: [
-  //     { src: "/path/to/bathroom1.jpg", altKey: 'alt.bathroom1', captionKey: 'caption.bathroom1' },
-  //   ],
-  // },
+  {
+    titleKey: 'propriety.gallery.section.bathroms.title',
+    mainImage: {
+      src: "/bagno1/bagno1.jpg",
+      altKey: 'alt.proprieta.bathrooms.image1',
+    },
+    images: [
+      { src: "/cameraBagni/1_giorno.jpg", altKey: 'alt.proprieta.bathrooms.image1'},
+      { src: "/cameraBagni/1_notte.jpg", altKey: 'alt.proprieta.bathrooms.image2'},
+      { src: "/cameraBagni/2_giorno.jpg", altKey: 'alt.proprieta.bathrooms.image3'},
+    ],   
+  },
+    {
+    titleKey: 'propriety.gallery.sections.openspace.title',
+    mainImage: {
+      src: "/openS  pace/title.jpg",
+      altKey: 'alt.proprieta.openspace.image1',
+    },
+    images: [
+    ],
+  }
 ];
+
+
+
 
 const Propriety: React.FC = () => {
   const { t } = useTranslation();
@@ -95,12 +101,12 @@ const Propriety: React.FC = () => {
     setLightboxImages(images);
     setCurrentImageIndex(startIndex);
     setIsLightboxOpen(true);
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
   }, []);
 
   const closeLightbox = useCallback(() => {
     setIsLightboxOpen(false);
-    document.body.style.overflow = 'auto'; // Restore background scrolling
+    document.body.style.overflow = 'auto';
   }, []);
 
   const showNextImage = useCallback(() => {
@@ -126,117 +132,189 @@ const Propriety: React.FC = () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isLightboxOpen, closeLightbox, showPrevImage, showNextImage]);
-
-  return (
+    return (
     <section id="proprieta" className="proprieta-section">
       <div className="container">
-        {/* Questo div propriety-content ora avvolge tutta la sezione Propriety */}
         <div className="propriety-content">
-          <div className="propriety-description">
-          <h2 className="section-title underline-title" style={{ marginTop: '2rem' }}> {/* Questo titolo ora sarà centrato grazie all'ereditarietà */}
-          {t('propriety.gallery.mainTitle')}
-        </h2>
-           </div>
-       
-          {galleryData.map((section, sectionIndex) => {
-            const allImagesCurrentSection = section.mainImage
-              ? [section.mainImage, ...(section.images || [])]
-              : (section.images || []);
-            // Determina se ci sono immagini nella griglia oltre all'eventuale immagine principale
-            const hasGridImages = section.images && section.images.length > 0;
+          <h2 className="section-title underline-title" style={{ marginTop: '2rem' }}>
+            {t('propriety.gallery.mainTitle')}
+          </h2>
 
-            return (
-            <div key={section.titleKey || `section-${sectionIndex}`} className="gallery-section-container">
-              {section.headerImage ? (
-                <div className="gallery-section-image-header">
-                  <img src={section.headerImage.src} alt={t(section.headerImage.altKey)} className="header-bg-image" />
-                  <h3 className="header-title-overlay">{t(section.titleKey)}</h3>
-                </div>
-              ) : (
-                <h3 className="gallery-section-title">
-                  {t(section.titleKey)}
-                </h3>
-              )}
+          <div className="gallery-grid">
+            {galleryData.map((section, sectionIndex) => {
+              const allImages = section.mainImage
+                ? [section.mainImage, ...section.images]
+                : section.images;
 
-              {section.mainImage && (
-                <div className="gallery-main-image-card">
-                  <img
-                    src={section.mainImage.src}
-                    alt={t(section.mainImage.altKey)}
-                    className="img-fluid-main"
-                    onClick={() => openLightbox(allImagesCurrentSection, 0)}
-                    style={{ cursor: 'pointer' }}
-                  />
-                  <p className="image-caption" onClick={() => openLightbox(allImagesCurrentSection, 0)} style={{ cursor: 'pointer' }}>
-                    {section.mainImage.captionText ? section.mainImage.captionText : (section.mainImage.captionKey ? t(section.mainImage.captionKey) : '')}
-                  </p>
-                </div>
-              )}
+              return (
+                <div key={section.titleKey || `section-${sectionIndex}`} className="gallery-section-container">
+                  <h3 className="gallery-section-title">{t(section.titleKey)}</h3>
 
-              {hasGridImages && (
-                <div className="proprieta-gallery">
-                  {section.images.map((image, imgIndex) => (
-                    <div
-                      className="proprieta-img-card"
-                      key={image.src || `gallery-img-${sectionIndex}-${imgIndex}`}
-                      onClick={() => openLightbox(allImagesCurrentSection, section.mainImage ? imgIndex + 1 : imgIndex)}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <img src={image.src} alt={t(image.altKey)} className="img-fluid" />
-                      <p
-                        className="image-caption"
-                      >
-                        {image.captionText ? image.captionText : (image.captionKey ? t(image.captionKey) : '')}
+                  {section.mainImage && (
+                    <div className="gallery-main-image-card" onClick={() => openLightbox(allImages, 0)}>
+                      <img
+                        src={section.mainImage.src}
+                        alt={t(section.mainImage.altKey)}
+                        className="img-fluid-main"
+                      />
+                      <p className="image-caption">
+                        {section.mainImage.captionText || (section.mainImage.captionKey && t(section.mainImage.captionKey))}
                       </p>
                     </div>
-                  ))}
+                  )}
                 </div>
-              )}
-            </div>
-          )})}
+              );
+            })}
+          </div>
 
-       <h2 className='section-title underline-title titolo-sezione' style={{ marginTop: '2rem' }}>
-        {t('propriety.rates.title')}
-      </h2>
-      <div className="tariffe-table-container">
-        <table className="tariffe-table">
-          <thead>
-            <tr>
-              <th>{t('propriety.rates.table.personsHeader')}</th>
-              <th>{t('propriety.rates.table.pricePerNightHeader')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label={t('propriety.rates.table.personsHeader')}>{t('propriety.rates.table.persons1to2')}</td>
-              <td data-label={t('propriety.rates.table.pricePerNightHeader')}>{t('propriety.rates.table.price1to2')}</td>
-            </tr>
-            <tr>
-              <td data-label={t('propriety.rates.table.personsHeader')}>{t('propriety.rates.table.persons3to4')}</td>
-              <td data-label={t('propriety.rates.table.pricePerNightHeader')}>{t('propriety.rates.table.price3to4')}</td>
-            </tr>
-            <tr>
-              <td data-label={t('propriety.rates.table.personsHeader')}>{t('propriety.rates.table.persons4to6')}</td>
-              <td data-label={t('propriety.rates.table.pricePerNightHeader')}>{t('propriety.rates.table.price4to6')}</td>
-              </tr>
-            {/* Puoi aggiungere più righe qui se necessario */}
-          </tbody>
-        </table>
-        <div className="tariffe-note">   
-        </div>
-        <p style={{ textAlign: 'center' }}>
-        {t("propriety.rates.servicesIncluded")}
-        </p>
-        <p style={{ textAlign: 'center' , textDecoration: 'underline' }}>
-      {t("propriety.rates.touristTaxExcluded")}
-          </p>
-        <p style={{ textAlign: 'center' }}>
-          {t("propriety.rates.touristTaxInfo")}
-          </p>
-        <h2 className='section-title underline-title titolo-sezione' style={{ marginTop: '2rem' }}>
-        {t(' ')}
-      </h2>
-      <h2>
+          {isLightboxOpen && lightboxImages.length > 0 && (
+            <div className="lightbox-overlay" onClick={closeLightbox}>
+              <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+                <button className="lightbox-close" onClick={closeLightbox}>&times;</button>
+                {lightboxImages.length > 1 && (
+                  <>
+                    <button className="lightbox-prev" onClick={showPrevImage}>&#10094;</button>
+                    <button className="lightbox-next" onClick={showNextImage}>&#10095;</button>
+                  </>
+                )}
+                <img
+                  src={lightboxImages[currentImageIndex].src}
+                  alt={t(lightboxImages[currentImageIndex].altKey)}
+                  className="lightbox-img"
+                />
+                {(lightboxImages[currentImageIndex].captionKey || lightboxImages[currentImageIndex].captionText) && (
+                  <div className="lightbox-caption">
+                    {lightboxImages[currentImageIndex].captionText
+                      ? lightboxImages[currentImageIndex].captionText
+                      : t(lightboxImages[currentImageIndex].captionKey!)}
+                  </div>
+                )}
+              </div>
+            </div>
+            
+          )}
+          <h2 className="section-title underline-title titolo-sezione" style={{ marginTop: '2rem' }}>
+  {t('propriety.rates.title')}
+</h2>
+
+<div className="tariffe-table-container">
+  <table className="tariffe-table">
+    <thead>
+      <tr>
+        <th>{t('propriety.rates.table.personsHeader')}</th>
+        <th>{t('propriety.rates.table.pricePerNightHeader')}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label={t('propriety.rates.table.personsHeader')}>
+          {t('propriety.rates.table.persons1to2')}
+        </td>
+        <td data-label={t('propriety.rates.table.pricePerNightHeader')}>
+          {t('propriety.rates.table.price1to2')}
+        </td>
+      </tr>
+      <tr>
+        <td data-label={t('propriety.rates.table.personsHeader')}>
+          {t('propriety.rates.table.persons3to4')}
+        </td>
+        <td data-label={t('propriety.rates.table.pricePerNightHeader')}>
+          {t('propriety.rates.table.price3to4')}
+        </td>
+      </tr>
+      <tr>
+        <td data-label={t('propriety.rates.table.personsHeader')}>
+          {t('propriety.rates.table.persons4to6')}
+        </td>
+        <td data-label={t('propriety.rates.table.pricePerNightHeader')}>
+          {t('propriety.rates.table.price4to6')}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  {/* 📅 Regole di Prenotazione */}
+<section className="booking-rules">
+  <h2 className="section-title">📅 Regole di Prenotazione</h2>
+  <div className="rule-group">
+    <h4 className="section-subtitle">Minori 0-3 anni</h4>
+    <ul className="section-list">
+      <li>Per i bambini di età compresa tra 0 e 3 anni, il soggiorno è gratuito.</li>
+    </ul>
+  </div>
+  <div className="rule-group">
+    <h4 className="section-subtitle">Periodo Estivo</h4>
+    <ul className="section-list">
+      <li>Dal <strong>11 al 24 agosto</strong> si accettano solo prenotazioni settimanali <strong>da domenica a domenica</strong>.</li>
+    </ul>
+  </div>
+
+  <div className="rule-group">
+    <h4 className="section-subtitle">Tutto l’anno</h4>
+    <ul className="section-list">
+      <li>Il soggiorno minimo durante tutto l’anno è di <strong>2 notti</strong>.</li>
+    </ul>
+  </div>
+  <div className="rule-group">
+    <h4 className="section-subtitle">Check-in e Check-out</h4>
+    <ul className="section-list">
+      <li>Check-in: dalle <strong>16:00</strong> con possibilità di anticipazione <strong> (a discrezione del proprietario)</strong></li>
+      <li>Check-out: entro le <strong>09:00</strong></li>
+    </ul>
+  </div>
+</section>
+
+{/* 🛎️ Servizi Inclusi */}
+<section className="included-services">
+  <h2 className="section-title">🛎️ Servizi Inclusi</h2>
+  <div className="service-group">
+    <h4 className="section-subtitle">Comfort</h4>
+    <ul className="section-list">
+      <li>Biancheria da letto e da bagno</li>
+      <li>Aria condizionata</li>
+      <li>Riscaldamento</li>
+      <li>Asciugacapelli</li>
+      <li>Asse e ferro da stiro</li>
+      <li>Prodotti da bagno</li>
+      <li>Kit di pronto soccorso</li>
+      <li>Macchina da caffè</li>
+      <li>Frigorifero</li>
+      <li>Forno a microonde</li>
+      <li>Stoviglie e posate</li>
+      <li>Lavastoviglie</li>
+
+    </ul>
+  </div>
+
+  <div className="service-group">
+    <h4 className="section-subtitle">Connettività</h4>
+    <ul className="section-list">
+      <li>Wi-Fi gratuito</li>
+      <li>Connessione Ethernet LAN in tutte le stanze</li>
+    </ul>
+  </div>
+</section>
+
+{/* 💰 Costi Extra */}
+<section className="extra-costs">
+  <h2 className="section-title">💰 Costi Extra (non inclusi)</h2>
+
+  <div className="cost-group">
+    <h4 className="section-subtitle">Obbligatori</h4>
+    <ul className="section-list">
+      <li>Pulizia finale obbligatoria: <strong>30€</strong></li>
+      <li>Tassa di soggiorno secondo normativa comunale</li>
+    </ul>
+  </div>
+
+  <div className="cost-group">
+    <h4 className="section-subtitle">Su richiesta</h4>
+    <ul className="section-list">
+      <li>Posto auto riservato e custodito a <strong>15€/giorno</strong></li>
+    </ul>
+  </div>
+</section>
+</div>
+<h2>
       <p> {t("propriety.rates.touristTaxCost")} </p>
       <p> {t("propriety.rates.touristTaxExemptions")}</p>
       <p> {t("propriety.rates.touristTaxPaymentInfo")} </p>
@@ -254,38 +332,15 @@ const Propriety: React.FC = () => {
         </Trans>
       </p>
       </h2>   
-      </div> {/* Chiusura di tariffe-table-container */}
-        </div> {/* Chiusura di propriety-content */}
 
-        {isLightboxOpen && lightboxImages.length > 0 && (
-          <div className="lightbox-overlay" onClick={closeLightbox}>
-            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-              <button className="lightbox-close" onClick={closeLightbox} title={t('lightbox.close') || 'Chiudi'}>&times;</button>
-              {lightboxImages.length > 1 && (
-                <>
-                  <button className="lightbox-prev" onClick={showPrevImage} title={t('lightbox.prev') || 'Precedente'}>&#10094;</button>
-                  <button className="lightbox-next" onClick={showNextImage} title={t('lightbox.next') || 'Successiva'}>&#10095;</button>
-                </>
-              )}
-              <img
-                src={lightboxImages[currentImageIndex].src}
-                alt={t(lightboxImages[currentImageIndex].altKey)}
-                className="lightbox-img" // Modificata classe per corrispondere al CSS fornito
-              />
-              {(lightboxImages[currentImageIndex].captionKey || lightboxImages[currentImageIndex].captionText) && (
-                <div className="lightbox-caption">
-                  {lightboxImages[currentImageIndex].captionText
-                    ? lightboxImages[currentImageIndex].captionText
-                    : t(lightboxImages[currentImageIndex].captionKey!)}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-      </div> {/* Chiusura di container */}
-      <LemonDivider position="left" />
+
+
+
+        </div>
+        <LemonDivider position="left" />
+      </div>
     </section>
-   );
-  };
+  );
+};
 
 export default Propriety;

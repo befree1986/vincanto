@@ -179,6 +179,15 @@
   "alt.proprieta.singleroom.image3": "Camera Singola 3",
   "caption.proprieta.singleroom.image3": "Camera Singola Giorno",
   "alt.proprieta.singleroom.image4": "Camera Singola 4",
-  "caption.proprieta.singleroom.image4": "Camera Singola Notte"
+  "caption.proprieta.singleroom.image4": "Camera Singola Notte",
+
+  "propriety.gallery.section.bathroms.title": "I Bagni",
+  "alt.proprieta.bathroms.header": "I Bagni",
+  "alt.proprieta.bathroms.image1": "Bagno",
+
+
+  "propriety.gallery.sections.openspace.title": "Open Space e Cucina",
+  "alt.proprieta.openspace.header": "Open Space e Cucina",
+  "propriety.gallery.section.openspace.image1": "Open Space"
 }
 
