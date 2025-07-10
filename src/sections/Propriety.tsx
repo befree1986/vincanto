@@ -79,7 +79,7 @@ const galleryData: GallerySection[] = [
     {
     titleKey: 'propriety.gallery.sections.openspace.title',
     mainImage: {
-      src: "/openS  pace/title.jpg",
+      src: "/openSpace/title.jpg",
       altKey: 'alt.proprieta.openspace.image1',
     },
     images: [

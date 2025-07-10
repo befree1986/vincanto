@@ -215,7 +215,6 @@ const Contact: React.FC = () => {
                 <h4>
                   {t('Trasporti')}
                 </h4>
-                <p><strong>{t('Da Napoli Aeroporto')}:</strong> {t('Servizio di trasferimento privato disponibile (70 min)')}</p>
                 <p><strong>{t('Da Salerno')}:</strong> {t('Traghetto per Maiori (45 min) | Autobus (60 min)')}</p>
                 <p><strong>{t('Da Amalfi')}:</strong> {t('Autobus locale (40 min)')}</p>
               </div>
