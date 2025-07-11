@@ -1,3 +1,23 @@
+/* 🌈 Variabili */
+:root {
+  --blue-dark: #003049;
+  --terracotta: #d98260;
+  --white: #ffffff;
+  --black: #000000;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --bg-transparent: rgba(255, 255, 255, 0.95);
+}
+
+/* 🌘 Tema scuro */
+.dark-theme {
+  --blue-dark: #f0f0f0;
+  --terracotta: #e6956f;
+  --white: #1a1a1a;
+  --bg-transparent: rgba(26, 26, 26, 0.95);
+  --shadow-md: 0 4px 6px rgba(255, 255, 255, 0.1);
+}
+
+/* 📦 Navbar base */
 .navbar {
   position: fixed;
   top: 0;
@@ -5,11 +25,11 @@
   width: 100%;
   z-index: 1000;
   padding: 1.5rem 0;
-  transition: background 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0,0.2,1), color 0.4s cubic-bezier(0.4,0,0.2,1);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: var(--bg-transparent);
   box-shadow: var(--shadow-md);
   padding: 0.8rem 0;
 }
@@ -18,62 +38,54 @@
   display: none !important;
 }
 
+/* 📐 Container */
 .navbar-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-.navbar.scrolled .navbar-container {
-  justify-content: space-between;
-}
-
+/* 🔖 Logo */
 .logo {
-  z-index: 1001;
-  display: none;
-  margin-right: 2rem;
-}
-
-.navbar.scrolled .logo {
-  display: flex !important;
+  display: flex;
   align-items: center;
+  z-index: 1001;
 }
 
 .logo-img {
   height: 80px;
-  transition: all 0.3s ease;
-  display: block;
+  transition: height 0.3s ease;
 }
 
 .navbar.scrolled .logo-img {
   height: 60px;
 }
 
+/* 🔗 Link menu */
 .nav-menu {
   display: flex;
   align-items: center;
-  /* Margini auto rimossi per permettere l'allineamento a destra gestito dal contenitore flex */
+  z-index: 1002;
+  opacity: 1;
+  pointer-events: auto;
+  position: static;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
   margin-right: 1rem;
-}
-
-.nav-links li {
-  margin: 0 0.5rem;
+  gap: 1rem;
 }
 
 .nav-links a {
   color: var(--blue-dark);
   font-weight: 500;
   position: relative;
-  transition: all 1.0s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-links a::after {
@@ -91,13 +103,16 @@
   width: 100%;
 }
 
+/* 🛎️ Bottone Prenota */
 .btn-navbar {
   font-size: 0.875rem;
   padding: 10px 20px;
-  margin-left: auto;  
-  margin-right: 5rem; 
+  margin-left: 1rem;
+  position: relative;
+  z-index: 1003;
 }
 
+/* 🍔 Hamburger button */
 .menu-toggle {
   display: none;
   background: transparent;
@@ -107,42 +122,67 @@
   z-index: 1001;
 }
 
-.language-flag-button { background: none;
+/* 🗺️ Lingue desktop */
+.language-selector-wrapper {
+  position: absolute;
+  z-index: 1010;
+  display: flex;
+  gap: 8px;
+  top: 33px;
+  right: 28px;
+}
+
+/* 📱 Lingue mobile */
+.language-selector-mobile {
+  display: none;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  z-index: 1003;
+}
+
+/* 🌓 Switch tema */
+.theme-switcher-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 8px;
+  transition: transform 0.2s ease;
+}
+
+.theme-switcher-button:hover {
+  transform: scale(1.2);
+}
+
+/* 🇺🇳 Bandiere lingua */
+.language-flag-button {
+  background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: transform 0.2s ease-in-out; /* Aggiunge una transizione fluida */
-  display: inline-block; /* Utile per transform */
+  display: inline-block;
+  transition: transform 0.2s ease;
 }
 
 .language-flag-button:hover {
-  transform: scale(1.2); /* Aumenta la dimensione del 20% al passaggio del mouse */
+  transform: scale(1.2);
 }
 
-/* Contenitore per il selettore della lingua */
-.language-selector-wrapper {
-  position: absolute; /* Relativo a .navbar (che è position: fixed) */
-  z-index: 1010;      /* Assicura che sia sopra altri elementi della navbar */
-  display: flex;
-  gap: 8px;
-  transition: top 0.4s cubic-bezier(0.4,0,0.2,1), right 0.4s cubic-bezier(0.4,0,0.2,1); /* Transizione per top/right */
+/* 🧁 Overlay menu mobile */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 999;
 }
 
-/* Posizionamento di default (Desktop, navbar scrollata) */
-.navbar.scrolled .language-selector-wrapper {
-  top: 33px;  /* Calcolato per centrare verticalmente le bandiere (20px) nell'altezza della navbar scrollata (padding 0.8rem + logo 60px) */
-  right: 28px; /* Distanza dal bordo destro della viewport */
-}
-
-/* Adattamenti per schermi più piccoli (tablet e mobile) */
-@media (max-width: 1024px) { /* Modificato da 768px a 992px */
-  .navbar.scrolled .language-selector-wrapper {
-    top: 33px;   /* Manteniamo lo stesso allineamento verticale della versione desktop scrollata */
-    right: 80px; /* Spostato più a sinistra per fare spazio al pulsante hamburger (circa 32px padding + 40px toggle + 8px gap) */
-  }
-}
-
-@media (max-width: 1024px) { /* Modificato da 768px a 992px */
+/* 📱 Mobile styles */
+@media (max-width: 1024px) {
   .menu-toggle {
     display: block;
   }
@@ -156,32 +196,51 @@
     flex-direction: column;
     justify-content: center;
     background-color: var(--white);
-    transition: all 0.5s ease;
+    transition: right 0.5s ease;
+    opacity: 0;
+    pointer-events: none;
   }
 
   .nav-menu.active {
     right: 0;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .nav-links {
     flex-direction: column;
     align-items: center;
-    margin-right: 0;
     margin-bottom: 2rem;
+    gap: 1.5rem;
   }
 
-  .nav-links li {
-    margin: 1.5rem 0;
+  .btn-navbar {
+    margin: 0 auto;
   }
 
-  .menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px);
-  z-index: 999;
+  .language-selector-mobile {
+    display: flex;
+  }
+
+  .language-selector-wrapper {
+    display: none;
+  }
 }
+
+/* 💻 Desktop override */
+@media (min-width: 1025px) {
+  .menu-toggle,
+  .menu-overlay,
+  .language-selector-mobile {
+    display: none;
+  }
+
+  .nav-menu {
+    position: static;
+    height: auto;
+    flex-direction: row;
+    background: transparent;
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
