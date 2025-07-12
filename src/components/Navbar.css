@@ -154,6 +154,24 @@
 .theme-switcher-button:hover {
   transform: scale(1.2);
 }
+.close-menu-button {
+  background: none;
+  border: 2px solid var(--terracotta);
+  color: var(--blue-dark);
+  padding: 10px 20px;
+  margin: 20px auto;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.close-menu-button:hover {
+  background-color: var(--terracotta);
+  color: var(--white);
+}
 
 /* 🇺🇳 Bandiere lingua */
 .language-flag-button {
@@ -168,6 +186,7 @@
 .language-flag-button:hover {
   transform: scale(1.2);
 }
+
 
 /* 🧁 Overlay menu mobile */
 .menu-overlay {

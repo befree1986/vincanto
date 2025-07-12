@@ -3,15 +3,14 @@ import { Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import ThemeSwitcher from './ThemeSwitcher';
 import './Navbar.css';
+
 const Navbar: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -53,14 +52,20 @@ const Navbar: React.FC = () => {
             {t('Prenota Ora')}
           </a>
           {isOpen && (
-            <div className="language-selector-mobile">
-              {['it', 'en', 'de', 'fr'].map(lang => (
-                <button key={lang} onClick={() => { i18n.changeLanguage(lang); closeMenu(); }} className="language-flag-button" aria-label={lang}>
-                  {renderFlagSVG(lang)}
-                </button>
-              ))}
-              <ThemeSwitcher />
-            </div>
+            <>
+              <div className="language-selector-mobile">
+                {['it', 'en', 'de', 'fr'].map(lang => (
+                  <button key={lang} onClick={() => { i18n.changeLanguage(lang); closeMenu(); }} className="language-flag-button" aria-label={lang}>
+                    {renderFlagSVG(lang)}
+                  </button>
+                ))}
+                <ThemeSwitcher />
+              </div>
+
+              <button onClick={closeMenu} className="close-menu-button" aria-label="Chiudi menu">
+                ❌ {t('Chiudi Menu')}
+              </button>
+            </>
           )}
         </nav>
 
