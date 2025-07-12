@@ -126,7 +126,20 @@ const Propriety: React.FC = () => {
       else if (event.key === 'ArrowLeft') showPrevImage();
       else if (event.key === 'ArrowRight') showNextImage();
     };
+    useEffect(() => {
+  const images = document.querySelectorAll('.gallery-img');
 
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        (entry.target as HTMLElement).classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  images.forEach((img) => observer.observe(img));
+  return () => observer.disconnect();
+}, []);
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
@@ -151,17 +164,17 @@ const Propriety: React.FC = () => {
                   <h3 className="gallery-section-title">{t(section.titleKey)}</h3>
 
                   {section.mainImage && (
-                    <div className="gallery-main-image-card" onClick={() => openLightbox(allImages, 0)}>
-                      <img
-                        src={section.mainImage.src}
-                        alt={t(section.mainImage.altKey)}
-                        className="img-fluid-main"
-                      />
-                      <p className="image-caption">
-                        {section.mainImage.captionText || (section.mainImage.captionKey && t(section.mainImage.captionKey))}
-                      </p>
-                    </div>
-                  )}
+                  <div className="gallery-main-image-card" onClick={() => openLightbox(allImages, 0)}>
+                   <img
+                       src={section.mainImage.src}
+                       alt={t(section.mainImage.altKey)}
+                       className="img-fluid-main gallery-img"
+                    />
+                  <p className="image-caption">
+                   {section.mainImage.captionText || (section.mainImage.captionKey && t(section.mainImage.captionKey))}
+                  </p>
+                </div>
+            )}
                 </div>
               );
             })}

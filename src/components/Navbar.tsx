@@ -42,6 +42,14 @@ const Navbar: React.FC = () => {
         </div>
 
         <nav id="navMenu" className={`nav-menu ${isOpen ? 'active' : ''}`}>
+          {isOpen && (
+            <div className="mobile-logo">
+              <a href="#home" onClick={closeMenu}>
+                <img src="/logo.svg" alt="Vincanto logo" className="mobile-logo-img" />
+              </a>
+            </div>
+          )}
+
           <ul className="nav-links">
             <li><a href="#home" onClick={closeMenu}>{t('Home')}</a></li>
             <li><a href="#about" onClick={closeMenu}>{t('Chi Siamo')}</a></li>
@@ -51,6 +59,7 @@ const Navbar: React.FC = () => {
           <a href="#booking" className="btn btn-navbar" onClick={closeMenu}>
             {t('Prenota Ora')}
           </a>
+
           {isOpen && (
             <>
               <div className="language-selector-mobile">
