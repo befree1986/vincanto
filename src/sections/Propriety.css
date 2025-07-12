@@ -320,29 +320,4 @@
   font-size: 1rem;
   color: #333;
   line-height: 1.6;
-
-  .gallery-img {
-  filter: grayscale(100%);
-  opacity: 0;
-  transform: scale(0.95);
-  transition: filter 0.8s ease, opacity 0.8s ease, transform 0.6s ease;
-}
-
-.gallery-img.visible {
-  filter: grayscale(0%);
-  opacity: 1;
-  transform: scale(1);
-}
-.gallery-img {
-  filter: grayscale(100%);
-  opacity: 0;
-  transform: scale(0.95);
-  transition: filter 0.8s ease, opacity 0.8s ease, transform 0.6s ease;
-}
-
-.gallery-img.visible {
-  filter: grayscale(0%);
-  opacity: 1;
-  transform: scale(1);
-}
 }
