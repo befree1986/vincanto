@@ -168,26 +168,26 @@
   "alt.propieta.camera.dettaglio5": "Camera blu2",
   "caption.camera.dettaglio5": "Camera Blu notte - striscia led",
 
-  "propriety.gallery.sections.rooms.title": "Camere Matrimoniali",
-  "alt.proprieta.rooms.header": "Le Camere Matrimoniali",
-  "propriety.gallery.sections.singleroom.title": "La Singola",
-  "alt.proprieta.singlerooms.header": "La Singola",
-  "alt.proprieta.singleroom.image1": "Camera Singola 1",
-  "caption.proprieta.singleroom.image1": "Camera Singola GIorno",
-  "alt.proprieta.singleroom.image2": "Camera Singola 2",
-  "caption.proprieta.singleroom.image2": "Camera Singola Notte",
-  "alt.proprieta.singleroom.image3": "Camera Singola 3",
-  "caption.proprieta.singleroom.image3": "Camera Singola Giorno",
-  "alt.proprieta.singleroom.image4": "Camera Singola 4",
-  "caption.proprieta.singleroom.image4": "Camera Singola Notte",
+  "propriety.gallery.section1.title": "Ingresso e Corridoio",
+  "propriety.gallery.ingressoNotte.main.alt": "Ingresso e Corridoio",
+  "propriety.gallery.section1.image1": "Ingresso",
 
-  "propriety.gallery.section.bathroms.title": "I Bagni",
-  "alt.proprieta.bathroms.header": "I Bagni",
-  "alt.proprieta.bathroms.image1": "Bagno",
+  "propriety.gallery.section2.title": "Camere Matrimoniali",
+  "alt.proprieta.bathroms.header": "Camere Matrimoniali",
+  "alt.proprieta.bathroms.image1": "Camere Matrimoniali",
 
 
-  "propriety.gallery.sections.openspace.title": "Open Space e Cucina",
+  "propriety.gallery.section3.title": "Camera Singola",
+  "propriety.gallery.cameraSingola.main.alt": "Camera Singola",
+  "propriety.gallery.section3.image1": "Camera Singola",
+
+
+  "propriety.gallery.section4.title": "Open Space e Cucina",
   "alt.proprieta.openspace.header": "Open Space e Cucina",
-  "propriety.gallery.section.openspace.image1": "Open Space"
+  "propriety.gallery.section.openspace.image1": "Open Space",
+
+  "propriety.gallery.section5.title": "I Bagni",
+  "propriety.gallery.section5.image1": "I bagni"
+
 }
 
