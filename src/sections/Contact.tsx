@@ -11,10 +11,12 @@ interface FormData {
   checkin: string;
   checkout: string;
   message: string;
+  honeypot?: string; // campo anti-spam invisibile
 }
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -23,27 +25,44 @@ const Contact: React.FC = () => {
     checkin: '',
     checkout: '',
     message: '',
+    honeypot: ''
   });
-  
+
   const [submitted, setSubmitted] = useState(false);
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const validateEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (formData.honeypot) return; // anti-bot trap
+
+    if (!validateEmail(formData.email)) {
+      setErrorMsg('Email non valida');
+      return;
+    }
+
+    setLoading(true);
+    setErrorMsg(null);
+
     try {
       await axios.post('http://localhost:3001/api/contact-request', formData);
       setSubmitted(true);
     } catch (error) {
-      alert(t('Si è verificato un errore. Riprova più tardi.'));
+      console.error(error);
+      setErrorMsg(t('Si è verificato un errore. Riprova più tardi.'));
     }
-    // Reset form after submission
+
     setTimeout(() => {
       setFormData({
         name: '',
@@ -53,80 +72,83 @@ const Contact: React.FC = () => {
         checkin: '',
         checkout: '',
         message: '',
+        honeypot: ''
       });
       setSubmitted(false);
+      setLoading(false);
     }, 5000);
   };
-  
+
   return (
     <section id="contact" className="contact-section">
       <div className="container">
-        <h2 className="section-title">
-          {t('Contatti')}
-        </h2>
+        <h2 className="section-title">{t('Contatti')}</h2>
+
         <div className="contact-content">
           <div className="booking-form-container">
-            <h3>
-              {t('Hai richieste particolari o domande?')}
-            </h3>
+            <h3>{t('Hai richieste particolari o domande?')}</h3>
+
             {submitted ? (
               <div className="success-message">
-                <p>
-                  {t('Grazie per la tua richiesta! Ti ricontatteremo al più presto.')}
-                </p>
+                <p>{t('Grazie per la tua richiesta! Ti ricontatteremo al più presto.')}</p>
               </div>
             ) : (
               <form className="booking-form" onSubmit={handleSubmit}>
+                {/* Honeypot anti-bot invisibile */}
+                <input
+                  type="text"
+                  name="honeypot"
+                  value={formData.honeypot}
+                  onChange={handleChange}
+                  style={{ display: 'none' }}
+                  autoComplete="off"
+                />
+
                 <div className="form-group">
-                  <label htmlFor="name">
-                    {t('Nome e Cognome')}
-                  </label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    value={formData.name} 
-                    onChange={handleChange} 
-                    required 
+                  <label htmlFor="name">{t('Nome e Cognome')}</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    minLength={2}
                   />
                 </div>
+
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="email">
-                      {t('Email')}
-                    </label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      name="email" 
-                      value={formData.email} 
-                      onChange={handleChange} 
-                      required 
+                    <label htmlFor="email">{t('Email')}</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="phone">
-                      {t('Telefono')}
-                    </label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      name="phone" 
-                      value={formData.phone} 
-                      onChange={handleChange} 
-                      required 
+                    <label htmlFor="phone">{t('Telefono')}</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
                     />
                   </div>
                 </div>
+
                 <div className="form-group">
-                  <label htmlFor="guests">
-                    {t('Numero di Ospiti')}
-                  </label>
-                  <select 
-                    id="guests" 
-                    name="guests" 
-                    value={formData.guests} 
-                    onChange={handleChange} 
+                  <label htmlFor="guests">{t('Numero di Ospiti')}</label>
+                  <select
+                    id="guests"
+                    name="guests"
+                    value={formData.guests}
+                    onChange={handleChange}
                     required
                   >
                     <option value="">{t('Seleziona')}</option>
@@ -136,52 +158,56 @@ const Contact: React.FC = () => {
                     <option value="7-8">7-8</option>
                   </select>
                 </div>
+
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="checkin">
-                      {t('Data di Arrivo')}
-                    </label>
-                    <input 
-                      type="date" 
-                      id="checkin" 
-                      name="checkin" 
-                      value={formData.checkin} 
-                      onChange={handleChange} 
-                      required 
+                    <label htmlFor="checkin">{t('Data di Arrivo')}</label>
+                    <input
+                      type="date"
+                      id="checkin"
+                      name="checkin"
+                      value={formData.checkin}
+                      onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="checkout">
-                      {t('Data di Partenza')}
-                    </label>
-                    <input 
-                      type="date" 
-                      id="checkout" 
-                      name="checkout" 
-                      value={formData.checkout} 
-                      onChange={handleChange} 
-                      required 
+                    <label htmlFor="checkout">{t('Data di Partenza')}</label>
+                    <input
+                      type="date"
+                      id="checkout"
+                      name="checkout"
+                      value={formData.checkout}
+                      onChange={handleChange}
+                      required
                     />
                   </div>
                 </div>
+
                 <div className="form-group">
-                  <label htmlFor="message">
-                    {t('Richieste Speciali')}
-                  </label>
-                  <textarea 
-                    id="message" 
-                    name="message" 
-                    rows={4} 
-                    value={formData.message} 
+                  <label htmlFor="message">{t('Richieste Speciali')}</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    value={formData.message}
                     onChange={handleChange}
                   ></textarea>
                 </div>
-                <button type="submit" className="btn btn-accent">
-                  {t('Invia Richiesta')}
+
+                {errorMsg && <p className="error-message">{errorMsg}</p>}
+
+                <button
+                  type="submit"
+                  className="btn btn-accent"
+                  disabled={loading}
+                >
+                  {loading ? t('Invio in corso...') : t('Invia Richiesta')}
                 </button>
               </form>
             )}
           </div>
+
           <div className="contact-divider">
            
           </div>

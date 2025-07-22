@@ -92,5 +92,19 @@ export const galleryData: GallerySection[] = [
         altKey: 'propriety.gallery.section5.img1.alt',  
       },
     ]
+  },
+
+  {titleKey: 'propriety.gallery.section6.title',
+    mainImage: {
+      src: '/esterni/ingressoindex.jpg',
+      altKey: 'propriety.gallery.section6.mainImage.alt',
+    },
+    images: [
+      {
+        src: '/bagno2/bagno2.jpg',
+        altKey: 'propriety.gallery.section6.img1.alt',
+      },
+    ]
   }
+
 ]

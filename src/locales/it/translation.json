@@ -147,8 +147,8 @@
   "propriety.rates.table.price1to2": "50 € a Persona",
   "propriety.rates.table.persons3to4": "da 3 a 4",
   "propriety.rates.table.price3to4": "40 € a Persona",
-  "propriety.rates.table.persons4to6": "da 4 a 6",
-  "propriety.rates.table.price4to6": "30 € a Persona",
+  "propriety.rates.table.persons5to6": "da 5 a 6",
+  "propriety.rates.table.price5to6": "30 € a Persona",
 
   "propriety.rates.servicesIncluded": "Servizi inclusi nel prezzo: aria condizionata, internet Wi-Fi, uso lavatrice.",
   "propriety.rates.touristTaxExcluded": "* Tassa di soggiorno esclusa.",
@@ -187,7 +187,11 @@
   "propriety.gallery.section.openspace.image1": "Open Space",
 
   "propriety.gallery.section5.title": "I Bagni",
-  "propriety.gallery.section5.image1": "I bagni"
+  "propriety.gallery.section5.image1": "I bagni",
+
+  "propriety.gallery.section6.title": "Terrazza e Cucina Esterna",
+  "alt.proprieta.terrazza.header": "Terrazza e Cucina Esterna"  ,
+  "propriety.gallery.section6.image1": "Terrazza"
 
 }
 
