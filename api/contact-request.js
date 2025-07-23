@@ -34,13 +34,20 @@ module.exports = async (req, res) => {
     `,
   };
 
-  try {
-    console.log(`📨 Invio email per ${name} <${email}>`);
-    await transporter.sendMail(mailOptions);
-    console.log('✅ Email inviata con successo!');
-    res.status(200).json({ success: true, message: 'Email inviata con successo!' });
-  } catch (error) {
-    console.error('❌ Errore invio email:', error);
-    res.status(500).json({ success: false, message: 'Errore invio email' });
-  }
-};
+try {
+  console.log('📥 Dati ricevuti:', req.body);
+  console.log('📨 Configurazione SMTP:', {
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    user: process.env.EMAIL_USER,
+  });
+
+  await transporter.sendMail(mailOptions);
+
+  console.log('✅ Email inviata!');
+  res.status(200).json({ success: true, message: 'Email inviata con successo!' });
+} catch (error) {
+  console.error('❌ Errore invio email:', error);
+  res.status(500).json({ success: false, message: 'Errore invio email', error: error.message });
+}
+}
