@@ -56,7 +56,7 @@ const Contact: React.FC = () => {
     setErrorMsg(null);
 
     try {
-      await axios.post('http://localhost:3001/api/contact-request', formData);
+      await axios.post('/api/contact-request', formData);
       setSubmitted(true);
     } catch (error) {
       console.error(error);

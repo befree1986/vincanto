@@ -33,7 +33,7 @@ const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({
         className="parallax-background"
         style={{ 
           backgroundImage: `url(${imageUrl})`,
-          transform: `none`
+          transform: `translateY(${translateY}px)`
         }}
       />
       <div className="parallax-content">
