@@ -18,8 +18,8 @@ module.exports = async (req, res) => {
   });
 
   const mailOptions = {
-    from: `"${name}" <${email}>`,
-    replyTo: email,
+    from: `"Vincanto" <${process.env.EMAIL_USER}>`, // mittente = utente SMTP
+    replyTo: email, // così puoi rispondere al visitatore
     to: process.env.ADMIN_EMAIL,
     subject: `Richiesta da ${name} — Vincanto`,
     html: `
