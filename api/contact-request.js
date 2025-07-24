@@ -1,18 +1,16 @@
-import nodemailer from 'nodemailer'; // ✅ corretto per ESModule    
+import nodemailer from 'nodemailer';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Metodo non consentito' });
   }
 
-  // 🧪 LOG dei dati ricevuti dal form
   console.log("📥 Dati ricevuti dal form:", req.body);
-
-  // 🧪 LOG delle variabili ambiente lette
   console.log("🌐 Variabili ENV SMTP:", {
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS ? '***' : 'undefined', // protezione password
+    pass: process.env.EMAIL_PASS ? '***' : 'undefined',
     to: process.env.ADMIN_EMAIL,
   });
 
@@ -57,7 +55,39 @@ export default async function handler(req, res) {
     console.log("📤 Invio email in corso...");
     await transporter.sendMail(mailOptions);
     console.log("✅ Email inviata con successo!");
+
+    // ✨ Invio conferma al cliente
+    const confirmationMail = {
+      from: `"Vincanto" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "Abbiamo ricevuto la tua richiesta ✨",
+      html: `
+        <p>Ciao ${name},</p>
+        <p>Grazie per averci contattato! 🍋</p>
+        <p>Abbiamo ricevuto la tua richiesta e ti risponderemo al più presto. Siamo felici che tu stia considerando Vincanto per il tuo soggiorno.</p>
+        <p><strong>Riepilogo della tua richiesta:</strong></p>
+        <ul>
+          <li><strong>Email:</strong> ${email}</li>
+          <li><strong>Telefono:</strong> ${phone}</li>
+          <li><strong>Numero di ospiti:</strong> ${guests}</li>
+          <li><strong>Data di arrivo:</strong> ${checkin}</li>
+          <li><strong>Data di partenza:</strong> ${checkout}</li>
+          <li><strong>Messaggio:</strong> ${message}</li>
+        </ul>
+        <p>📍 <em>Vincanto • Via Torre di Milo, 7 • Maiori (SA)</em></p>
+        <p>Un caro saluto,<br/>Lo staff di Vincanto</p>
+      `,
+    };
+
+    try {
+      await transporter.sendMail(confirmationMail);
+      console.log("📧 Conferma inviata al cliente!");
+    } catch (err) {
+      console.error("❌ Errore invio conferma al cliente:", err.message);
+    }
+
     res.status(200).json({ success: true, message: 'Email inviata con successo!' });
+
   } catch (error) {
     console.error("❌ Errore durante l'invio:", error);
     res.status(500).json({ success: false, message: 'Errore invio email', error: error.message });
