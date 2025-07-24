@@ -9,7 +9,7 @@ const About: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section id="about" className="about-section">
-      <ParallaxBackground imageUrl="/lemon.jpg"> {/* https://www.italia.it/content/dam/tdh/en/destinations/campania/salerno/maiori/media/google/image0.jpeg*/}
+      <ParallaxBackground imageUrl="/lemon.jpg"> 
         <div className="about-hero">
           <h2>
             {t('Chi Siamo')}

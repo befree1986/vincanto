@@ -35,7 +35,9 @@ const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({
           backgroundImage: `url(${imageUrl})`,
           transform: `translateY(${translateY}px)`
         }}
-      />
+      >
+        {/* Empty div to ensure the background covers the entire section */}
+      </div>
       <div className="parallax-content">
         {children}
       </div>
