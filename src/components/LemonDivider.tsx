@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import './LemonDivider.css';
 
 interface LemonDividerProps {
   position: 'left' | 'right';
@@ -19,18 +20,11 @@ const LemonDivider: React.FC<LemonDividerProps> = ({ position }) => {
     };
   }, []);
 
-  const style: React.CSSProperties = {
-    opacity: isVisible ? 1 : 0,
-    transform: isVisible
-      ? 'translateX(0) rotate(0deg)'
-      : position === 'left'
-      ? 'translateX(-80px) rotate(-3deg)'
-      : 'translateX(80px) rotate(3deg)',
-    transition: 'opacity 0.7s ease, transform 0.7s ease',
-  };
-
   return (
-    <div ref={ref} className={`lemon-divider ${position}`} style={style}>
+    <div
+      ref={ref}
+      className={`lemon-divider ${position} ${isVisible ? 'visible' : ''}`}
+    >
       <div className="lemon-branch-container">
         <div className="lemon-branch"></div>
       </div>
