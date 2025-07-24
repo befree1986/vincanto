@@ -1,18 +1,28 @@
-import nodemailer from 'nodemailer';
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Metodo non consentito' });
   }
 
+  // 🧪 LOG dei dati ricevuti dal form
+  console.log("📥 Dati ricevuti dal form:", req.body);
+
+  // 🧪 LOG delle variabili ambiente lette
+  console.log("🌐 Variabili ENV SMTP:", {
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS ? '***' : 'undefined', // protezione password
+    to: process.env.ADMIN_EMAIL,
+  });
+
   const {
-    name,
-    email,
+    name = 'Sconosciuto',
+    email = 'noreply@example.com',
     phone = 'Non fornito',
     guests = 'Non specificato',
     checkin = 'Data non indicata',
     checkout = 'Data non indicata',
-    message
+    message = 'Nessun messaggio',
   } = req.body;
 
   const transporter = nodemailer.createTransport({
@@ -43,19 +53,12 @@ export default async function handler(req, res) {
   };
 
   try {
-    console.log('📥 Dati ricevuti:', req.body);
-    console.log('📨 Configurazione SMTP:', {
-      host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
-      user: process.env.EMAIL_USER,
-    });
-
+    console.log("📤 Invio email in corso...");
     await transporter.sendMail(mailOptions);
-
-    console.log('✅ Email inviata!');
+    console.log("✅ Email inviata con successo!");
     res.status(200).json({ success: true, message: 'Email inviata con successo!' });
   } catch (error) {
-    console.error('❌ Errore invio email:', error);
+    console.error("❌ Errore durante l'invio:", error);
     res.status(500).json({ success: false, message: 'Errore invio email', error: error.message });
   }
 }
