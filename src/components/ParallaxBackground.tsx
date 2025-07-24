@@ -25,7 +25,8 @@ const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({
   }, []);
 
   // Fix: Clamp the translateY so the background never moves up (never hides the image)
-  const translateY = Math.max(0, offsetY * 0.5);
+  const maxTranslateY = 200; // massimo pixel di traslazione
+const translateY = Math.min(maxTranslateY, Math.max(0, offsetY * 0.5));
 
   return (
     <div className="parallax-wrapper">
