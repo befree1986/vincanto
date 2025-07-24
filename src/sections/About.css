@@ -1,13 +1,13 @@
 .about-section {
-  padding: 2rem 0;
-  scroll-margin-top: 80px; /* Regola in base all'altezza del tuo header fisso */
+  padding: 0rem 0;
+  scroll-margin-top: 0rem; /* Regola in base all'altezza del tuo header fisso */
 }
 
 .about-hero {
   color: var(--white);
   text-align: center;
   padding-top: 1rem;
-  padding: 2rem 0; /* Aggiungi padding se necessario */
+  padding: 1rem 0; /* Aggiungi padding se necessario */
 }
 
 .about-hero h2 {
