@@ -1,16 +1,24 @@
 import nodemailer from 'nodemailer';
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Metodo non consentito' });
   }
 
-  const { name, email, phone, guests, checkin, checkout, message } = req.body;
+  const {
+    name,
+    email,
+    phone = 'Non fornito',
+    guests = 'Non specificato',
+    checkin = 'Data non indicata',
+    checkout = 'Data non indicata',
+    message
+  } = req.body;
 
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: Number(process.env.EMAIL_PORT),
-    secure: process.env.EMAIL_SECURE === 'true', // Vercel legge tutto come stringa
+    secure: process.env.EMAIL_SECURE === 'true',
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -18,8 +26,8 @@ module.exports = async (req, res) => {
   });
 
   const mailOptions = {
-    from: `"Vincanto" <${process.env.EMAIL_USER}>`, // mittente = utente SMTP
-    replyTo: email, // così puoi rispondere al visitatore
+    from: `"Vincanto" <${process.env.EMAIL_USER}>`,
+    replyTo: email,
     to: process.env.ADMIN_EMAIL,
     subject: `Richiesta da ${name} — Vincanto`,
     html: `
@@ -34,20 +42,20 @@ module.exports = async (req, res) => {
     `,
   };
 
-try {
-  console.log('📥 Dati ricevuti:', req.body);
-  console.log('📨 Configurazione SMTP:', {
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    user: process.env.EMAIL_USER,
-  });
+  try {
+    console.log('📥 Dati ricevuti:', req.body);
+    console.log('📨 Configurazione SMTP:', {
+      host: process.env.EMAIL_HOST,
+      port: process.env.EMAIL_PORT,
+      user: process.env.EMAIL_USER,
+    });
 
-  await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
 
-  console.log('✅ Email inviata!');
-  res.status(200).json({ success: true, message: 'Email inviata con successo!' });
-} catch (error) {
-  console.error('❌ Errore invio email:', error);
-  res.status(500).json({ success: false, message: 'Errore invio email', error: error.message });
-}
+    console.log('✅ Email inviata!');
+    res.status(200).json({ success: true, message: 'Email inviata con successo!' });
+  } catch (error) {
+    console.error('❌ Errore invio email:', error);
+    res.status(500).json({ success: false, message: 'Errore invio email', error: error.message });
+  }
 }

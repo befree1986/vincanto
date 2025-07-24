@@ -168,7 +168,6 @@ const Contact: React.FC = () => {
                       name="checkin"
                       value={formData.checkin}
                       onChange={handleChange}
-                      required
                     />
                   </div>
                   <div className="form-group">
@@ -179,7 +178,6 @@ const Contact: React.FC = () => {
                       name="checkout"
                       value={formData.checkout}
                       onChange={handleChange}
-                      required
                     />
                   </div>
                 </div>
@@ -192,6 +190,7 @@ const Contact: React.FC = () => {
                     rows={4}
                     value={formData.message}
                     onChange={handleChange}
+                    required
                   ></textarea>
                 </div>
 
