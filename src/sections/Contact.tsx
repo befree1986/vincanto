@@ -149,7 +149,7 @@ const Contact: React.FC = () => {
                     name="guests"
                     value={formData.guests}
                     onChange={handleChange}
-                    required
+                  
                   >
                     <option value="">{t('Seleziona')}</option>
                     <option value="1-2">1-2</option>
