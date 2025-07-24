@@ -6,7 +6,7 @@
 .about-hero {
   color: var(--white);
   text-align: center;
-  padding: 4rem 0; /* Aggiungi padding se necessario */
+  padding: 2rem 0; /* Aggiungi padding se necessario */
 }
 
 .about-hero h2 {
