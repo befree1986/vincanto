@@ -37,7 +37,6 @@ const translateY = Math.min(maxTranslateY, Math.max(0, offsetY * 0.5));
           transform: `translateY(${translateY}px)`
         }}
       >
-        {/* Empty div to ensure the background covers the entire section */}
       </div>
       <div className="parallax-content">
         {children}
@@ -47,3 +46,4 @@ const translateY = Math.min(maxTranslateY, Math.max(0, offsetY * 0.5));
 };
 
 export default ParallaxBackground;
+

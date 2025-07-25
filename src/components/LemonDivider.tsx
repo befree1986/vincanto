@@ -1,33 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './LemonDivider.css';
 
 interface LemonDividerProps {
-  position: 'left' | 'right';
+  position?: 'left' | 'right';
 }
 
-const LemonDivider: React.FC<LemonDividerProps> = ({ position }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement | null>(null);
+const LemonDivider: React.FC<LemonDividerProps> = ({ position = 'left' }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [out, setOut] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) setIsVisible(true);
-    });
-
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setVisible(entry.isIntersecting);
+        setOut(!entry.isIntersecting);
+      },
+      { threshold: 0.2 }
+    );
     if (ref.current) observer.observe(ref.current);
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div
       ref={ref}
-      className={`lemon-divider ${position} ${isVisible ? 'visible' : ''}`}
+      className={`lemon-divider ${position} ${visible ? 'visible' : ''} ${
+        out ? 'out' : ''
+      }`}
     >
-      <div className="lemon-branch-container">
-        <div className="lemon-branch"></div>
-      </div>
+      {/* ...contenuto divider... */}
     </div>
   );
 };

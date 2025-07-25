@@ -18,6 +18,15 @@
   transform: translateX(0);
 }
 
+.lemon-divider.out {
+  opacity: 0;
+  transform: translateX(-80px); /* o 80px se .right */
+}
+
+.lemon-divider.right.out {
+  transform: translateX(80px);
+}
+
 .lemon-branch-container {
   position: absolute;
   width: 60%;
