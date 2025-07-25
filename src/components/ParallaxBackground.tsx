@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './ParallaxBackground.css';
 
 interface ParallaxBackgroundProps {
@@ -6,38 +6,13 @@ interface ParallaxBackgroundProps {
   children?: React.ReactNode;
 }
 
-const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ 
-  imageUrl, 
-  children 
-}) => {
-  const [offsetY, setOffsetY] = useState(0);
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      setOffsetY(window.pageYOffset);
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  // Fix: Clamp the translateY so the background never moves up (never hides the image)
-  const maxTranslateY = 200; // massimo pixel di traslazione
-const translateY = Math.min(maxTranslateY, Math.max(0, offsetY * 0.5));
-
+const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ imageUrl, children }) => {
   return (
     <div className="parallax-wrapper">
-      <div 
+      <div
         className="parallax-background"
-        style={{ 
-          backgroundImage: `url(${imageUrl})`,
-          transform: `translateY(${translateY}px)`
-        }}
-      >
-      </div>
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      ></div>
       <div className="parallax-content">
         {children}
       </div>
