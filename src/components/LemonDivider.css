@@ -14,7 +14,7 @@
   align-items: center;
   transform: translateX(0);
   opacity: 0;
-  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 .lemon-divider.visible .lemon-branch-container {
@@ -87,7 +87,7 @@
 
   .lemon-branch-container {
     width: 90%;
-    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s ease-out;
+    transition: transform 1.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.8s ease-out;
   }
 
   .lemon-branch::before,
@@ -110,10 +110,10 @@
   }
 
   .lemon-divider.visible.left .lemon-branch-container {
-    transform: translateX(8px);
+    transform: translateX(40px);
   }
 
   .lemon-divider.visible.right .lemon-branch-container {
-    transform: translateX(-8px);
+    transform: translateX(-40px);
   }
 }
