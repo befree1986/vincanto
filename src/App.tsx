@@ -4,13 +4,18 @@ import About from './sections/About';
 import Booking from './sections/Booking';
 import GuestFeedback from './components/GuestFeedback';
 import Contact from './sections/Contact';
+import CookieBanner from './components/CookieBanner';
+import { CookieProvider } from './components/CookieContext';
+import CookiePreferences from './components/CookieBanner';
 import Footer from './components/Footer';
 import { ArrowUp } from 'lucide-react';
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import CookieBanner from './components/CookieBanner';
+
 
 function App() {
+  const { showCookieBanner } = useCookiePreferences();
+  
   return (
     <div className="app">
       <Navbar />
@@ -20,8 +25,12 @@ function App() {
         <Booking />
         <Contact />
       </main>
-      <Footer />
+      < CookieProvider>
       <CookieBanner />
+      {showPreferences && <CookiePreferences />}
+      <Footer />
+      </CookieProvider>
+      
       {/* Bottone Torna su */}
       <BackToTopButton />
       {/* RIMOSSO: selezione lingua, ora solo in Navbar */}

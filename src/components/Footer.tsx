@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import { useTranslation } from 'react-i18next';
+import { useCookieContext } from './CookieContext'; 
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -70,6 +71,11 @@ const Footer: React.FC = () => {
             </p>
             <p>
               {t('Licenza Regionale / CIN: IT065066C248Z362SX')}            
+            </p>
+            <p>
+        <a href="#" onClick={() => window.dispatchEvent(new Event("open-cookie-preferences"))}>
+          {t('Gestisci preferenze cookie')}
+         </a>
             </p>
         </div>
         <div className="footer-verfied-logo">
