@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import { ArrowUp } from 'lucide-react';
 import './App.css';
 import React, { useEffect, useState } from 'react';
+import CookieBanner from './components/CookieBanner';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <CookieBanner />
       {/* Bottone Torna su */}
       <BackToTopButton />
       {/* RIMOSSO: selezione lingua, ora solo in Navbar */}
