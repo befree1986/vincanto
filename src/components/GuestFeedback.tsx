@@ -26,7 +26,7 @@ const feedbackData = [
 const GuestFeedback: React.FC = () => {
   return (
     <section id="guest-feedback" className="elegant-section">
-      <h2>🌟 Recensioni dei nostri ospiti</h2>
+      <h2>🌟 Dicono di Noi</h2>
       <div className="feedback-grid">
         {feedbackData.map((item, index) => (
           <blockquote key={index} className="feedback-card">
