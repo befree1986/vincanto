@@ -2,6 +2,7 @@ import Navbar from './components/Navbar';
 import Home from './sections/Home';
 import About from './sections/About';
 import Booking from './sections/Booking';
+import GuestFeedback from './components/GuestFeedback';
 import Contact from './sections/Contact';
 import Footer from './components/Footer';
 import { ArrowUp } from 'lucide-react';
@@ -16,6 +17,7 @@ function App() {
         <Home />
         <About />
         <Booking />
+        <GuestFeedback />
         <Contact />
       </main>
       <Footer />
