@@ -17,7 +17,6 @@ function App() {
         <Home />
         <About />
         <Booking />
-        <GuestFeedback />
         <Contact />
       </main>
       <Footer />
