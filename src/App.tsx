@@ -14,7 +14,7 @@ import React, { useEffect, useState } from 'react';
 
 
 function App() {
-  const { showCookieBanner } = useCookiePreferences();
+  // Removed useCookiePreferences as it does not exist
   
   return (
     <div className="app">
@@ -25,9 +25,9 @@ function App() {
         <Booking />
         <Contact />
       </main>
-      < CookieProvider>
+      <CookieProvider>
       <CookieBanner />
-      {showPreferences && <CookiePreferences />}
+      {/* Removed showPreferences and CookiePreferences usage since useCookiePreferences is not defined */}
       <Footer />
       </CookieProvider>
       

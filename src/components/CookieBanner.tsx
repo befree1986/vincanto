@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import CookiePreferences from "./CookiePreferences";
 import "./CookieBanner.css";
+import type { Preferences } from "./CookiePreferences";
 
 const CookieBanner: React.FC = () => {
   const [visible, setVisible] = useState(false);
@@ -44,7 +45,7 @@ const CookieBanner: React.FC = () => {
 
       {showPreferences && (
         <CookiePreferences
-          onSave={(prefs) => {
+          onSave={(prefs: Preferences) => {
             localStorage.setItem("cookieConsent", JSON.stringify(prefs));
             setConsent("customized");
             setVisible(false);
