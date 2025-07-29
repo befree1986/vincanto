@@ -24,7 +24,7 @@ function App() {
   });
   const [hideBanner, setHideBanner] = useState(false);
 
-  // Al primo caricamento: recupera le preferenze dal localStorage
+  // Recupera preferenze salvate al primo caricamento
   useEffect(() => {
     const savedPrefs = localStorage.getItem('cookiePreferences');
     if (savedPrefs) {
@@ -33,7 +33,7 @@ function App() {
     }
   }, []);
 
-  // Salva le preferenze e aggiorna lo stato
+  // Salva preferenze nel localStorage e chiude banner
   const handleSavePreferences = (prefs: CookiePreferences) => {
     setPreferences(prefs);
     localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
@@ -41,13 +41,9 @@ function App() {
     setHideBanner(true);
   };
 
-  // Accetta tutti i cookie (usato dal banner)
+  // Accetta tutto dal banner
   const handleAcceptAll = () => {
-    const allAccepted: CookiePreferences = {
-      analytics: true,
-      marketing: true,
-    };
-    handleSavePreferences(allAccepted);
+    handleSavePreferences({ analytics: true, marketing: true });
   };
 
   return (
@@ -60,16 +56,16 @@ function App() {
         <Contact />
       </main>
 
-      {/* Pulsante modifica preferenze */}
+      {/* Pulsante modifica preferenze (solo se il banner è stato chiuso) */}
       {hideBanner && (
-      <div className="cookie-actions">
-        <button onClick={() => setShowModal(true)}>
-          Modifica preferenze cookie
-        </button>
-        <p className="cookie-status">
-          Preferenze attuali: Analytics {preferences.analytics ? '✔' : '❌'}, Marketing {preferences.marketing ? '✔' : '❌'}
-        </p>
-      </div>
+        <div className="cookie-actions">
+          <button onClick={() => setShowModal(true)}>
+            Modifica preferenze cookie
+          </button>
+          <p className="cookie-status">
+            Preferenze attuali: Analytics {preferences.analytics ? '✔' : '❌'}, Marketing {preferences.marketing ? '✔' : '❌'}
+          </p>
+        </div>
       )}
 
       {/* Modal delle preferenze */}
@@ -82,6 +78,7 @@ function App() {
         />
       )}
 
+      {/* Banner cookie visibile solo se serve */}
       <CookieProvider>
         {!hideBanner && (
           <CookieBanner
