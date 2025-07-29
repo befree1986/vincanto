@@ -2,26 +2,25 @@ import React, { useState } from "react";
 import { useCookieContext } from "./CookieContext"; // Assicurati del path
 import "./CookiePreferences.css";
 
-export interface Preferences {
-  necessary: boolean;
+type Preferences = {
+  essential: boolean;
   analytics: boolean;
   marketing: boolean;
-}
+};
 
 const CookiePreferences: React.FC = () => {
   const {
     showPreferences,
     setShowPreferences,
-    setUserPreferences,
+    savePreferences,
   } = useCookieContext();
 
   const [preferences, setPreferences] = useState<Preferences>({
-    necessary: true,       // sempre attivi
+    essential: true,       // sempre attivi
     analytics: false,
     marketing: false,
   });
 
-  // Se il pannello non deve essere visibile, non renderizzare nulla
   if (!showPreferences) return null;
 
   const handleChange = (key: keyof Preferences) => {
@@ -32,9 +31,7 @@ const CookiePreferences: React.FC = () => {
   };
 
   const handleSave = () => {
-    setUserPreferences(preferences);      // salva preferenze nel contesto
-    setShowPreferences(false);            // chiude il pannello
-    // opzionale: mostra un messaggio di conferma
+    savePreferences(preferences);
   };
 
   return (
@@ -44,8 +41,12 @@ const CookiePreferences: React.FC = () => {
 
       <div className="preference-option">
         <label>
-          <input type="checkbox" checked={true} disabled />
-          Cookie Necessari (sempre attivi)
+          <input
+            type="checkbox"
+            checked={preferences.essential}
+            disabled
+          />
+          Cookie Essenziali (sempre attivi)
         </label>
       </div>
 

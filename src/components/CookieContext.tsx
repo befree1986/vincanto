@@ -1,11 +1,27 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-export const CookieContext = createContext();
+type Preferences = {
+  essential: boolean;
+  analytics: boolean;
+  marketing: boolean;
+};
 
-export const CookieProvider = ({ children }) => {
+type CookieContextType = {
+  showBanner: boolean;
+  setShowBanner: (value: boolean) => void;
+  showPreferences: boolean;
+  setShowPreferences: (value: boolean) => void;
+  userPreferences: Preferences;
+  setConsent: (accepted: boolean) => void;
+  savePreferences: (prefs: Preferences) => void;
+};
+
+export const CookieContext = createContext<CookieContextType | undefined>(undefined);
+
+export const CookieProvider = ({ children }: { children: ReactNode }) => {
   const [showBanner, setShowBanner] = useState(true);
   const [showPreferences, setShowPreferences] = useState(false);
-  const [userPreferences, setUserPreferences] = useState({
+  const [userPreferences, setUserPreferences] = useState<Preferences>({
     essential: true,
     analytics: false,
     marketing: false,
@@ -19,20 +35,16 @@ export const CookieProvider = ({ children }) => {
     }
   }, []);
 
-  const setConsent = (accepted) => {
-    if (accepted) {
-      const fullConsent = { essential: true, analytics: true, marketing: true };
-      setUserPreferences(fullConsent);
-      localStorage.setItem('userPreferences', JSON.stringify(fullConsent));
-    } else {
-      const minimal = { essential: true, analytics: false, marketing: false };
-      setUserPreferences(minimal);
-      localStorage.setItem('userPreferences', JSON.stringify(minimal));
-    }
+  const setConsent = (accepted: boolean) => {
+    const prefs = accepted
+      ? { essential: true, analytics: true, marketing: true }
+      : { essential: true, analytics: false, marketing: false };
+    setUserPreferences(prefs);
+    localStorage.setItem('userPreferences', JSON.stringify(prefs));
     setShowBanner(false);
   };
 
-  const savePreferences = (prefs) => {
+  const savePreferences = (prefs: Preferences) => {
     setUserPreferences(prefs);
     localStorage.setItem('userPreferences', JSON.stringify(prefs));
     setShowPreferences(false);
@@ -56,4 +68,8 @@ export const CookieProvider = ({ children }) => {
   );
 };
 
-export const useCookieContext = () => useContext(CookieContext);
+export const useCookieContext = (): CookieContextType => {
+  const context = useContext(CookieContext);
+  if (!context) throw new Error('useCookieContext must be used within a CookieProvider');
+  return context;
+};
