@@ -10,10 +10,12 @@ interface PreferencesModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (preferences: CookiePreferences) => void;
+  
 }
 
 const PreferencesModal: React.FC<PreferencesModalProps> = ({ isOpen, onClose, onSave }) => {
   if (!isOpen) return null;
+  console.log('Modal mount:', { isOpen });
 
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
