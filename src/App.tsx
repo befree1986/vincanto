@@ -61,6 +61,7 @@ function App() {
       </main>
 
       {/* Pulsante modifica preferenze */}
+      {hideBanner && (
       <div className="cookie-actions">
         <button onClick={() => setShowModal(true)}>
           Modifica preferenze cookie
@@ -69,6 +70,7 @@ function App() {
           Preferenze attuali: Analytics {preferences.analytics ? '✔' : '❌'}, Marketing {preferences.marketing ? '✔' : '❌'}
         </p>
       </div>
+      )}
 
       {/* Modal delle preferenze */}
       {showModal && (
