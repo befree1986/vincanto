@@ -1,81 +1,54 @@
-import React, { useState } from "react";
-import { useCookieContext } from "./CookieContext"; // Assicurati del path
-import "./CookiePreferences.css";
+import React, { useState, useEffect } from "react";
+import { useCookieContext } from "./CookieContext";
+import CookiePreferences from "./CookiePreferences";
+import "./CookieBanner.css";
 
-type Preferences = {
-  essential: boolean;
-  analytics: boolean;
-  marketing: boolean;
-};
+const CookieBanner: React.FC = () => {
+  const [visible, setVisible] = useState(false);
+  const { showPreferences, setShowPreferences } = useCookieContext();
 
-const CookiePreferences: React.FC = () => {
-  const {
-    showPreferences,
-    setShowPreferences,
-    savePreferences,
-  } = useCookieContext();
+  useEffect(() => {
+    const savedConsent = localStorage.getItem("cookieConsent");
+    console.log("Consent salvato:", savedConsent); // Debug temporaneo
+    if (!savedConsent) {
+      setVisible(true);
+    }
+  }, []);
 
-  const [preferences, setPreferences] = useState<Preferences>({
-    essential: true,       // sempre attivi
-    analytics: false,
-    marketing: false,
-  });
-
-  if (!showPreferences) return null;
-
-  const handleChange = (key: keyof Preferences) => {
-    setPreferences((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
+  const handleConsent = (choice: string) => {
+    localStorage.setItem("cookieConsent", choice);
+    setVisible(false);
+    setShowPreferences(false);
   };
 
-  const handleSave = () => {
-    savePreferences(preferences);
-  };
+  if (!visible && !showPreferences) return null;
 
   return (
-    <div className="cookie-preferences">
-      <h2>Preferenze Cookie</h2>
-      <p>Gestisci le categorie di cookie che vuoi abilitare:</p>
+    <>
+      {visible && (
+        <div className="cookie-banner">
+          <div className="cookie-content">
+            <p>
+              Usiamo i cookie per migliorare l'esperienza utente. Puoi accettare, rifiutare o personalizzare le preferenze. Leggi la{" "}
+              <a href="/cookie-policy" target="_blank">Cookie Policy</a>.
+            </p>
+            <div className="cookie-actions">
+              <button onClick={() => handleConsent("accepted")}>Accetta</button>
+              <button onClick={() => handleConsent("rejected")}>Rifiuta</button>
+              <button onClick={() => {
+                console.log("Apertura preferenze"); // Debug temporaneo
+                setShowPreferences(true);
+              }}>Personalizza</button>
+            </div>
+          </div>
+        </div>
+      )}
 
-      <div className="preference-option">
-        <label>
-          <input
-            type="checkbox"
-            checked={preferences.essential}
-            disabled
-          />
-          Cookie Essenziali (sempre attivi)
-        </label>
-      </div>
-
-      <div className="preference-option">
-        <label>
-          <input
-            type="checkbox"
-            checked={preferences.analytics}
-            onChange={() => handleChange("analytics")}
-          />
-          Cookie Analitici
-        </label>
-      </div>
-
-      <div className="preference-option">
-        <label>
-          <input
-            type="checkbox"
-            checked={preferences.marketing}
-            onChange={() => handleChange("marketing")}
-          />
-          Cookie di Marketing
-        </label>
-      </div>
-
-      <button className="save-btn" onClick={handleSave}>Salva Preferenze</button>
-      <button className="close-btn" onClick={() => setShowPreferences(false)}>Chiudi</button>
-    </div>
+      {showPreferences && (
+        <CookiePreferences />
+      )}
+    </>
   );
 };
 
-export default CookiePreferences;
+export default CookieBanner;
