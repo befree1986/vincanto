@@ -1,12 +1,9 @@
-// src/components/CookieBanner.tsx
 import React, { useState, useEffect } from "react";
 import CookiePreferences from "./CookiePreferences";
 import "./CookieBanner.css";
-import type { Preferences } from "./CookiePreferences";
 
 const CookieBanner: React.FC = () => {
   const [visible, setVisible] = useState(false);
-  const [consent, setConsent] = useState<string | null>(null);
   const [showPreferences, setShowPreferences] = useState(false);
 
   useEffect(() => {
@@ -18,9 +15,7 @@ const CookieBanner: React.FC = () => {
 
   const handleConsent = (choice: string) => {
     localStorage.setItem("cookieConsent", choice);
-    setConsent(choice);
     setVisible(false);
-    // Qui potresti attivare cookie tecnici o script esterni
   };
 
   if (!visible && !showPreferences) return null;
@@ -44,7 +39,7 @@ const CookieBanner: React.FC = () => {
       )}
 
       {showPreferences && (
-        <CookiePreferences/>
+        <CookiePreferences />
       )}
     </>
   );
