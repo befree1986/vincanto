@@ -84,6 +84,10 @@ function App() {
           <CookieBanner
             onClose={() => setHideBanner(true)}
             onAccept={handleAcceptAll}
+            onCustomize={() => {
+              setShowModal(true);
+              setHideBanner(true);
+            }}
           />
         )}
         <Footer />
