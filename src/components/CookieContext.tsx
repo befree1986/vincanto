@@ -1,41 +1,54 @@
-// src/components/CookieContext.tsx
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Preferences = {
-  necessary: boolean;
-  analytics: boolean;
-  marketing: boolean;
-};
+export const CookieContext = createContext();
 
-type CookieContextType = {
-  showCookieBanner: boolean;
-  setShowCookieBanner: (value: boolean) => void;
-  showPreferences: boolean;
-  setShowPreferences: (value: boolean) => void;
-  userPreferences: Preferences;
-  setUserPreferences: (prefs: Preferences) => void;
-};
-
-const CookieContext = createContext<CookieContextType | undefined>(undefined);
-
-export const CookieProvider = ({ children }: { children: ReactNode }) => {
-  const [showCookieBanner, setShowCookieBanner] = useState(true);
+export const CookieProvider = ({ children }) => {
+  const [showBanner, setShowBanner] = useState(true);
   const [showPreferences, setShowPreferences] = useState(false);
-  const [userPreferences, setUserPreferences] = useState<Preferences>({
-    necessary: true,
+  const [userPreferences, setUserPreferences] = useState({
+    essential: true,
     analytics: false,
     marketing: false,
   });
 
+  useEffect(() => {
+    const saved = localStorage.getItem('userPreferences');
+    if (saved) {
+      setUserPreferences(JSON.parse(saved));
+      setShowBanner(false);
+    }
+  }, []);
+
+  const setConsent = (accepted) => {
+    if (accepted) {
+      const fullConsent = { essential: true, analytics: true, marketing: true };
+      setUserPreferences(fullConsent);
+      localStorage.setItem('userPreferences', JSON.stringify(fullConsent));
+    } else {
+      const minimal = { essential: true, analytics: false, marketing: false };
+      setUserPreferences(minimal);
+      localStorage.setItem('userPreferences', JSON.stringify(minimal));
+    }
+    setShowBanner(false);
+  };
+
+  const savePreferences = (prefs) => {
+    setUserPreferences(prefs);
+    localStorage.setItem('userPreferences', JSON.stringify(prefs));
+    setShowPreferences(false);
+    setShowBanner(false);
+  };
+
   return (
     <CookieContext.Provider
       value={{
-        showCookieBanner,
-        setShowCookieBanner,
+        showBanner,
+        setShowBanner,
         showPreferences,
         setShowPreferences,
         userPreferences,
-        setUserPreferences,
+        setConsent,
+        savePreferences,
       }}
     >
       {children}
@@ -43,10 +56,4 @@ export const CookieProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useCookieContext = (): CookieContextType => {
-  const context = useContext(CookieContext);
-  if (!context) {
-    throw new Error('useCookieContext deve essere usato all’interno di <CookieProvider>');
-  }
-  return context;
-};
+export const useCookieContext = () => useContext(CookieContext);

@@ -6,6 +6,7 @@ import GuestFeedback from './components/GuestFeedback';
 import Contact from './sections/Contact';
 import CookieBanner from './components/CookieBanner';
 import { CookieProvider } from './components/CookieContext';
+import CookieCOntroller from './components/CookieController';
 import CookiePreferences from './components/CookieBanner';
 import Footer from './components/Footer';
 import { ArrowUp } from 'lucide-react';
