@@ -6,7 +6,7 @@ import Booking from './sections/Booking';
 import Contact from './sections/Contact';
 import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
-import PreferencesModal from './components/PreferencesModal'; // ✅ nuovo import
+import PreferencesModal from './components/PreferencesModal';
 import { CookieProvider } from './components/CookieContext';
 import { ArrowUp } from 'lucide-react';
 import './App.css';
@@ -18,7 +18,7 @@ interface CookiePreferences {
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const [preferences, setPreferences] = useState({
+  const [preferences, setPreferences] = useState<CookiePreferences>({
     analytics: false,
     marketing: false,
   });
@@ -54,16 +54,17 @@ function App() {
           Modifica preferenze cookie
         </button>
         <p className="cookie-status">
-           Preferenze attuali: Analytics {preferences.analytics ? '✔' : '❌'}, Marketing {preferences.marketing ? '✔' : '❌'}
+          Preferenze attuali: Analytics {preferences.analytics ? '✔' : '❌'}, Marketing {preferences.marketing ? '✔' : '❌'}
         </p>
       </div>
 
-      {/* Modal delle preferenze */}
+      {/* Modal delle preferenze con stato iniziale */}
       {showModal && (
         <PreferencesModal
           isOpen={showModal}
           onClose={() => setShowModal(false)}
           onSave={handleSavePreferences}
+          initialPreferences={preferences}
         />
       )}
 

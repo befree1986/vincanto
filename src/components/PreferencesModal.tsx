@@ -10,15 +10,16 @@ interface PreferencesModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (preferences: CookiePreferences) => void;
+  initialPreferences: CookiePreferences;
   
 }
 
-const PreferencesModal: React.FC<PreferencesModalProps> = ({ isOpen, onClose, onSave }) => {
+const PreferencesModal: React.FC<PreferencesModalProps> = ({ isOpen, onClose, onSave, initialPreferences, }) => {
   if (!isOpen) return null;
   console.log('Modal mount:', { isOpen });
 
-  const [analytics, setAnalytics] = useState(false);
-  const [marketing, setMarketing] = useState(false);
+  const [analytics, setAnalytics] = useState(initialPreferences.analytics);
+  const [marketing, setMarketing] = useState(initialPreferences.marketing);
 
   const handleSave = () => {
     onSave({ analytics, marketing });
