@@ -1,23 +1,28 @@
-// src/components/CookiePreferences.tsx
 import React, { useState } from "react";
+import { useCookieContext } from "./CookieContext"; // Assicurati del path
 import "./CookiePreferences.css";
 
-interface Preferences {
+export interface Preferences {
   necessary: boolean;
   analytics: boolean;
   marketing: boolean;
 }
 
-interface Props {
-  onSave: (prefs: Preferences) => void;
-}
+const CookiePreferences: React.FC = () => {
+  const {
+    showPreferences,
+    setShowPreferences,
+    setUserPreferences,
+  } = useCookieContext();
 
-const CookiePreferences: React.FC<Props> = ({ onSave }) => {
   const [preferences, setPreferences] = useState<Preferences>({
-    necessary: true, // sempre abilitati
+    necessary: true,       // sempre attivi
     analytics: false,
     marketing: false,
   });
+
+  // Se il pannello non deve essere visibile, non renderizzare nulla
+  if (!showPreferences) return null;
 
   const handleChange = (key: keyof Preferences) => {
     setPreferences((prev) => ({
@@ -27,7 +32,9 @@ const CookiePreferences: React.FC<Props> = ({ onSave }) => {
   };
 
   const handleSave = () => {
-    onSave(preferences);
+    setUserPreferences(preferences);      // salva preferenze nel contesto
+    setShowPreferences(false);            // chiude il pannello
+    // opzionale: mostra un messaggio di conferma
   };
 
   return (
@@ -38,7 +45,7 @@ const CookiePreferences: React.FC<Props> = ({ onSave }) => {
       <div className="preference-option">
         <label>
           <input type="checkbox" checked={true} disabled />
-          Cookie Necessari (obbligatori)
+          Cookie Necessari (sempre attivi)
         </label>
       </div>
 
@@ -65,6 +72,7 @@ const CookiePreferences: React.FC<Props> = ({ onSave }) => {
       </div>
 
       <button className="save-btn" onClick={handleSave}>Salva Preferenze</button>
+      <button className="close-btn" onClick={() => setShowPreferences(false)}>Chiudi</button>
     </div>
   );
 };

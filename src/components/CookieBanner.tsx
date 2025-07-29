@@ -44,15 +44,7 @@ const CookieBanner: React.FC = () => {
       )}
 
       {showPreferences && (
-        <CookiePreferences
-          onSave={(prefs: Preferences) => {
-            localStorage.setItem("cookieConsent", JSON.stringify(prefs));
-            setConsent("customized");
-            setVisible(false);
-            setShowPreferences(false);
-            // Esegui logiche in base alle preferenze salvate
-          }}
-        />
+        <CookiePreferences/>
       )}
     </>
   );

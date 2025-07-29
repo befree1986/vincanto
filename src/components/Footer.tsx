@@ -6,6 +6,7 @@ import { useCookieContext } from './CookieContext';
 const Footer: React.FC = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
+  const { setShowPreferences } = useCookieContext();
   
   return (
     <footer className="footer">
@@ -73,7 +74,10 @@ const Footer: React.FC = () => {
               {t('Licenza Regionale / CIN: IT065066C248Z362SX')}            
             </p>
             <p>
-        <a href="#" onClick={() => window.dispatchEvent(new Event("open-cookie-preferences"))}>
+        <a href="#" onClick={(e) => {
+                e.preventDefault();
+                setShowPreferences(true);
+              }}>
           {t('Gestisci preferenze cookie')}
          </a>
             </p>
