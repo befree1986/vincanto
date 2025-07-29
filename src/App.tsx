@@ -22,20 +22,32 @@ function App() {
     analytics: false,
     marketing: false,
   });
+  const [hideBanner, setHideBanner] = useState(false);
 
-  // Recupera preferenze salvate al primo caricamento
+  // Al primo caricamento: recupera le preferenze dal localStorage
   useEffect(() => {
     const savedPrefs = localStorage.getItem('cookiePreferences');
     if (savedPrefs) {
       setPreferences(JSON.parse(savedPrefs));
+      setHideBanner(true);
     }
   }, []);
 
-  // Salva nel localStorage quando l'utente clicca "Salva"
+  // Salva le preferenze e aggiorna lo stato
   const handleSavePreferences = (prefs: CookiePreferences) => {
     setPreferences(prefs);
     localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
     console.log('Preferenze aggiornate:', prefs);
+    setHideBanner(true);
+  };
+
+  // Accetta tutti i cookie (usato dal banner)
+  const handleAcceptAll = () => {
+    const allAccepted: CookiePreferences = {
+      analytics: true,
+      marketing: true,
+    };
+    handleSavePreferences(allAccepted);
   };
 
   return (
@@ -48,7 +60,7 @@ function App() {
         <Contact />
       </main>
 
-      {/* Pulsante per aprire il modal */}
+      {/* Pulsante modifica preferenze */}
       <div className="cookie-actions">
         <button onClick={() => setShowModal(true)}>
           Modifica preferenze cookie
@@ -58,7 +70,7 @@ function App() {
         </p>
       </div>
 
-      {/* Modal delle preferenze con stato iniziale */}
+      {/* Modal delle preferenze */}
       {showModal && (
         <PreferencesModal
           isOpen={showModal}
@@ -69,9 +81,15 @@ function App() {
       )}
 
       <CookieProvider>
-        <CookieBanner />
+        {!hideBanner && (
+          <CookieBanner
+            onClose={() => setHideBanner(true)}
+            onAccept={handleAcceptAll}
+          />
+        )}
         <Footer />
       </CookieProvider>
+
       <BackToTopButton />
     </div>
   );
