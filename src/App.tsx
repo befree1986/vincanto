@@ -6,11 +6,38 @@ import Booking from './sections/Booking';
 import Contact from './sections/Contact';
 import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
+import PreferencesModal from './components/PreferencesModal'; // ✅ nuovo import
 import { CookieProvider } from './components/CookieContext';
 import { ArrowUp } from 'lucide-react';
 import './App.css';
 
+interface CookiePreferences {
+  analytics: boolean;
+  marketing: boolean;
+}
+
 function App() {
+  const [showModal, setShowModal] = useState(false);
+  const [preferences, setPreferences] = useState({
+    analytics: false,
+    marketing: false,
+  });
+
+  // Recupera preferenze salvate al primo caricamento
+  useEffect(() => {
+    const savedPrefs = localStorage.getItem('cookiePreferences');
+    if (savedPrefs) {
+      setPreferences(JSON.parse(savedPrefs));
+    }
+  }, []);
+
+  // Salva nel localStorage quando l'utente clicca "Salva"
+  const handleSavePreferences = (prefs: CookiePreferences) => {
+    setPreferences(prefs);
+    localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
+    console.log('Preferenze aggiornate:', prefs);
+  };
+
   return (
     <div className="app">
       <Navbar />
@@ -20,6 +47,26 @@ function App() {
         <Booking />
         <Contact />
       </main>
+
+      {/* Pulsante per aprire il modal */}
+      <div className="cookie-actions">
+        <button onClick={() => setShowModal(true)}>
+          Modifica preferenze cookie
+        </button>
+        <p className="cookie-status">
+           Preferenze attuali: Analytics {preferences.analytics ? '✔' : '❌'}, Marketing {preferences.marketing ? '✔' : '❌'}
+        </p>
+      </div>
+
+      {/* Modal delle preferenze */}
+      {showModal && (
+        <PreferencesModal
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          onSave={handleSavePreferences}
+        />
+      )}
+
       <CookieProvider>
         <CookieBanner />
         <Footer />

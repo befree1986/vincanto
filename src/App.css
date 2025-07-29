@@ -153,3 +153,10 @@ a:hover {
     padding: 4rem 0;
   }
 }
+
+.cookie-status {
+  margin-top: 0.5rem;
+  font-size: 14px;
+  color: var(--gray-medium);
+  font-style: italic;
+}
