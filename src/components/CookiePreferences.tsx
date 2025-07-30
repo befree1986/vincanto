@@ -1,54 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { useCookieContext } from "./CookieContext";
-import CookiePreferences from "./CookiePreferences";
+import React, { useState } from "react";
 import "./CookieBanner.css";
 
-const CookieBanner: React.FC = () => {
-  const [visible, setVisible] = useState(false);
-  const { showPreferences, setShowPreferences } = useCookieContext();
+interface Preferences {
+  analytics: boolean;
+  marketing: boolean;
+}
 
-  useEffect(() => {
-    const savedConsent = localStorage.getItem("cookieConsent");
-    console.log("Consent salvato:", savedConsent); // Debug temporaneo
-    if (!savedConsent) {
-      setVisible(true);
-    }
-  }, []);
+interface Props {
+  initialPreferences: Preferences;
+  onSave: (prefs: Preferences) => void;
+  onClose: () => void;
+}
 
-  const handleConsent = (choice: string) => {
-    localStorage.setItem("cookieConsent", choice);
-    setVisible(false);
-    setShowPreferences(false);
+const CookiePreferences: React.FC<Props> = ({ initialPreferences, onSave, onClose }) => {
+  const [prefs, setPrefs] = useState(initialPreferences);
+
+  const handleToggle = (key: keyof Preferences) => {
+    setPrefs(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
-  if (!visible && !showPreferences) return null;
-
   return (
-    <>
-      {visible && (
-        <div className="cookie-banner">
-          <div className="cookie-content">
-            <p>
-              Usiamo i cookie per migliorare l'esperienza utente. Puoi accettare, rifiutare o personalizzare le preferenze. Leggi la{" "}
-              <a href="/cookie-policy" target="_blank">Cookie Policy</a>.
-            </p>
-            <div className="cookie-actions">
-              <button onClick={() => handleConsent("accepted")}>Accetta</button>
-              <button onClick={() => handleConsent("rejected")}>Rifiuta</button>
-              <button onClick={() => {
-                console.log("Apertura preferenze"); // Debug temporaneo
-                setShowPreferences(true);
-              }}>Personalizza</button>
-            </div>
-          </div>
-        </div>
-      )}
+    <div className="cookie-preferences">
+      <h2>Preferenze Cookie</h2>
 
-      {showPreferences && (
-        <CookiePreferences />
-      )}
-    </>
+      <div className="preference-option">
+        <label>
+          <input
+            type="checkbox"
+            checked={prefs.analytics}
+            onChange={() => handleToggle("analytics")}
+          />
+          Cookie Analitici
+        </label>
+      </div>
+
+      <div className="preference-option">
+        <label>
+          <input
+            type="checkbox"
+            checked={prefs.marketing}
+            onChange={() => handleToggle("marketing")}
+          />
+          Cookie di Marketing
+        </label>
+      </div>
+
+      <button className="save-btn" onClick={() => onSave(prefs)}>Salva Preferenze</button>
+      <button className="save-btn" style={{ marginLeft: "1rem", backgroundColor: "#999" }} onClick={onClose}>
+        Annulla
+      </button>
+    </div>
   );
 };
 
-export default CookieBanner;
+export default CookiePreferences;
