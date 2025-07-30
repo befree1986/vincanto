@@ -60,7 +60,7 @@ function App() {
       {hideBanner && !showModal && (
         <div className="cookie-actions">
           <button className="cookie-edit-btn" onClick={() => setShowModal(true)}>
-            🛈 Modifica preferenze cookie
+            Modifica preferenze cookie
           </button>
           <p className="cookie-status">
             Preferenze attuali: Analytics {preferences.analytics ? '✔' : '❌'}, Marketing {preferences.marketing ? '✔' : '❌'}

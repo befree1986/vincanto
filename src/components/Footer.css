@@ -123,10 +123,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footer-social h4 {
-  /* Eredita gli stili da .footer h4 */
-  /* Puoi aggiungere personalizzazioni se necessario */
-}
+/* .footer-social h4 inherits styles from .footer h4. Add custom styles here if needed. */
 
 .social-icons-list {
   display: flex;
@@ -165,4 +162,9 @@
   .social-icons-list {
     justify-content: center; /* Centra le icone su mobile */
   }
+}
+
+.coockie-edit-btn::before {
+  content: "🛈";
+  margin-right: 4px;
 }
