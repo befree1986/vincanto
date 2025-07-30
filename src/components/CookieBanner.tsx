@@ -1,6 +1,7 @@
 import React from 'react';
 import './CookieBanner.css';
 
+
 interface CookieBannerProps {
   onClose: () => void;
   onAccept: () => void;

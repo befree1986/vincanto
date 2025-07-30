@@ -1,23 +1,23 @@
-.cookie-preferences {
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 1.5rem;
-  margin: 2rem;
-  border-radius: 6px;
-  max-width: 500px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+/* Sfondo generale con texture marina */
+.popup-background {
+  background: linear-gradient(to top, #fefae0, #dbece8);
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  backdrop-filter: blur(2px);
 }
 
-.preference-option {
-  margin: 1rem 0;
-}
-
-.save-btn {
-  margin-top: 1.5rem;
-  background-color: #814d00;
-  color: white;
-  padding: 0.6rem 1rem;
+/* Card con curve morbide e limone decorativo */
+.popup-card {
+  background: #fffdf4;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
