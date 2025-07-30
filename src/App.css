@@ -160,3 +160,18 @@ a:hover {
   color: var(--gray-medium);
   font-style: italic;
 }
+
+.cookie-edit-btn {
+  background-color: #ffcc00;
+  border: none;
+  padding: 8px 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+.cookie-edit-btn::before {
+  content: "🛈";
+  margin-right: 4px;
+}

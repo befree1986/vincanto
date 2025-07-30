@@ -57,10 +57,10 @@ function App() {
       </main>
 
       {/* Pulsante modifica preferenze (solo se il banner è stato chiuso) */}
-      {hideBanner && (
+      {hideBanner && !showModal && (
         <div className="cookie-actions">
-          <button onClick={() => setShowModal(true)}>
-            Modifica preferenze cookie
+          <button className="cookie-edit-btn" onClick={() => setShowModal(true)}>
+            🛈 Modifica preferenze cookie
           </button>
           <p className="cookie-status">
             Preferenze attuali: Analytics {preferences.analytics ? '✔' : '❌'}, Marketing {preferences.marketing ? '✔' : '❌'}
