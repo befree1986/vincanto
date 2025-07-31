@@ -175,3 +175,20 @@ a:hover {
   content: "🛈";
   margin-right: 4px;
 }
+.back-home-btn {
+  display: inline-block;
+  padding: 0.75 rem 1.3rem;
+  background-color: #fff8eb;
+  color: #333;
+  border: 2px solid #fdd76e;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+ }
+.back-home-btn:hover {
+  background-color: #fdd76e;
+  color: #000;
+  border-color: #fcbf3d;
+
+ }

@@ -1,3 +1,6 @@
+ import { Link } from "react-router-dom";
+
+
 const CookiePolicy = () => {
   return (
     <main style={{ padding: "2rem", maxWidth: "800px", margin: "auto" }}>
@@ -55,6 +58,11 @@ const CookiePolicy = () => {
         La presente policy può subire variazioni. Si consiglia di consultarla
         periodicamente. Ultimo aggiornamento: [data].
       </p>
+      <div style={{ textAlign: "center", marginTop: "3rem" }}>
+        <Link to="/" className="back-home-btn">
+          ← Torna alla Home
+          </Link>
+      </div>
     </main>
   );
 };

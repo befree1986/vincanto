@@ -75,6 +75,11 @@ const PrivacyPolicy = () => {
 
       <h2>10. Aggiornamenti</h2>
       <p>Questa informativa può essere soggetta a modifiche. Ultimo aggiornamento: 31 luglio 2025</p>
+    <div style={{ textAlign: "center" , marginTop: "3rem" }}>
+      <Link to="/" className="back-home-btn">
+        ← Torna alla Home
+      </Link>
+    </div>
     </main>
   );
 };
