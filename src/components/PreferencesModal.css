@@ -27,7 +27,7 @@
 
 .modal-card::after {
   content: "";
-  background-image: url("lemon-shadow.png"); /* Inserisci immagine decorativa nel public/ */
+  background-image: url('/lemon-shadow.png'); /* Inserisci immagine decorativa nel public/ */
   background-size: 80px;
   background-repeat: no-repeat;
   position: absolute;
