@@ -13,7 +13,12 @@
 }
 
 .modal-card {
-  background: #fffdf4;
+  background-image: url('/lemon-shawdo.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* Mantieni le proprietà esistenti */
+  background-color: #fffdf4; /* se vuoi una base chiara dietro all'immagine */
   padding: 2rem;
   border-radius: 14px;
   max-width: 520px;
@@ -22,12 +27,10 @@
   position: relative;
   font-family: 'Segoe UI', sans-serif;
   border: 3px dashed lime;
-  
 }
 
 .modal-card::after {
   content: "";
-  background-image: url('/lemon-shadow.png'); /* Inserisci immagine decorativa nel public/ */
   background-size: 80px;
   background-repeat: no-repeat;
   position: absolute;
