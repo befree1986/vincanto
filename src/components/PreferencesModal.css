@@ -21,6 +21,8 @@
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   position: relative;
   font-family: 'Segoe UI', sans-serif;
+  border: 3px dashed lime;
+  
 }
 
 .modal-card::after {

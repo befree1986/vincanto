@@ -28,7 +28,7 @@
 
     return (
         <div className="modal-overlay" onClick={onClose}>
-        <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <div className="modal-card" onClick={e => e.stopPropagation()}>
             <h2>Impostazioni Cookie</h2>
             <p>Personalizza le preferenze di tracciamento per un'esperienza su misura.</p>
 
