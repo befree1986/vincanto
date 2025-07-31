@@ -66,11 +66,16 @@ const Footer: React.FC = () => {
             <p>{t('Licenza SLSA000108-0026')}</p>
             <p>{t('Licenza Regionale / CIN: IT065066C248Z362SX')}</p>
             <p>
+              <a href="/cookie-policy" className="footer-link">
+              {t('Cookie Policy')}
+              </a>
+            </p>
+            <p>
               <button
                 type="button"
                 onClick={() => setShowPreferences(true)}
-                className="footer-link" // Stile tipo link
-              >
+                className="footer-link"
+                > 
                 {t('Gestisci preferenze cookie')}
               </button>
             </p>
