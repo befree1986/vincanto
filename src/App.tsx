@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './sections/Home';
 import About from './sections/About';
@@ -9,6 +10,7 @@ import CookieBanner from './components/CookieBanner';
 import PreferencesModal from './components/PreferencesModal';
 import { CookieProvider } from './components/CookieContext';
 import { ArrowUp } from 'lucide-react';
+import CookiePolicy from './pages/CookiePolicy';
 import './App.css';
 
 interface CookiePreferences {
@@ -24,7 +26,7 @@ function App() {
   });
   const [hideBanner, setHideBanner] = useState(false);
 
-  // Recupera preferenze salvate al primo caricamento
+  // Recupera preferenze salvate
   useEffect(() => {
     const savedPrefs = localStorage.getItem('cookiePreferences');
     if (savedPrefs) {
@@ -33,7 +35,7 @@ function App() {
     }
   }, []);
 
-  // Salva preferenze nel localStorage e chiude banner
+  // Salva preferenze
   const handleSavePreferences = (prefs: CookiePreferences) => {
     setPreferences(prefs);
     localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
@@ -41,22 +43,27 @@ function App() {
     setHideBanner(true);
   };
 
-  // Accetta tutto dal banner
+  // Accetta tutto
   const handleAcceptAll = () => {
     handleSavePreferences({ analytics: true, marketing: true });
   };
 
   return (
-    <div className="app">
+    <BrowserRouter>
       <Navbar />
-      <main>
-        <Home />
-        <About />
-        <Booking />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Home />
+            <About />
+            <Booking />
+            <Contact />
+          </>
+        } />
+        <Route path="/cookie-policy" element={<CookiePolicy />} />
+      </Routes>
 
-      {/* Pulsante modifica preferenze (solo se il banner è stato chiuso) */}
+      {/* Gestione preferenze */}
       {hideBanner && !showModal && (
         <div className="cookie-actions">
           <button className="cookie-edit-btn" onClick={() => setShowModal(true)}>
@@ -68,7 +75,7 @@ function App() {
         </div>
       )}
 
-      {/* Modal delle preferenze */}
+      {/* Modal preferenze */}
       {showModal && (
         <PreferencesModal
           isOpen={showModal}
@@ -78,7 +85,7 @@ function App() {
         />
       )}
 
-      {/* Banner cookie visibile solo se serve */}
+      {/* Banner + CookieContext */}
       <CookieProvider>
         {!hideBanner && (
           <CookieBanner
@@ -94,7 +101,7 @@ function App() {
       </CookieProvider>
 
       <BackToTopButton />
-    </div>
+    </BrowserRouter>
   );
 }
 
