@@ -10,6 +10,7 @@ import PreferencesModal from './components/PreferencesModal';
 import { CookieProvider } from './components/CookieContext';
 import { ArrowUp } from 'lucide-react';
 import CookiePolicy from './pages/CookiePolicy';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
@@ -62,6 +63,7 @@ function App() {
           }
         />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
 
       {hideBanner && !showModal && (

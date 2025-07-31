@@ -1,5 +1,3 @@
-import React from "react";
-
 const CookiePolicy = () => {
   return (
     <main style={{ padding: "2rem", maxWidth: "800px", margin: "auto" }}>
