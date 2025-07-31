@@ -1,60 +1,60 @@
-import { useState } from 'react';
-import './PreferencesModal.css';
+    import { useState } from 'react';
+    import './PreferencesModal.css';
 
-interface CookiePreferences {
-  analytics: boolean;
-  marketing: boolean;
-}
+    interface CookiePreferences {
+    analytics: boolean;
+    marketing: boolean;
+    }
 
-interface PreferencesModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSave: (preferences: CookiePreferences) => void;
-  initialPreferences: CookiePreferences;
-  
-}
+    interface PreferencesModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSave: (preferences: CookiePreferences) => void;
+    initialPreferences: CookiePreferences;
+    
+    }
 
-const PreferencesModal: React.FC<PreferencesModalProps> = ({ isOpen, onClose, onSave, initialPreferences, }) => {
-  if (!isOpen) return null;
-  console.log('Modal mount:', { isOpen });
+    const PreferencesModal: React.FC<PreferencesModalProps> = ({ isOpen, onClose, onSave, initialPreferences, }) => {
+    if (!isOpen) return null;
+    console.log('Modal mount:', { isOpen });
 
-  const [analytics, setAnalytics] = useState(initialPreferences.analytics);
-  const [marketing, setMarketing] = useState(initialPreferences.marketing);
+    const [analytics, setAnalytics] = useState(initialPreferences.analytics);
+    const [marketing, setMarketing] = useState(initialPreferences.marketing);
 
-  const handleSave = () => {
-    onSave({ analytics, marketing });
-    onClose();
-  };
+    const handleSave = () => {
+        onSave({ analytics, marketing });
+        onClose();
+    };
 
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <h2>Impostazioni Cookie</h2>
-        <p>Personalizza le preferenze di tracciamento per un'esperienza su misura.</p>
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h2>Impostazioni Cookie</h2>
+            <p>Personalizza le preferenze di tracciamento per un'esperienza su misura.</p>
 
-        <label>
-          <input
-            type="checkbox"
-            checked={analytics}
-            onChange={() => setAnalytics(!analytics)}
-          />
-          Analytics
-        </label>
+            <label>
+            <input
+                type="checkbox"
+                checked={analytics}
+                onChange={() => setAnalytics(!analytics)}
+            />
+            Analytics
+            </label>
 
-        <label>
-          <input
-            type="checkbox"
-            checked={marketing}
-            onChange={() => setMarketing(!marketing)}
-          />
-          Marketing
-        </label>
+            <label>
+            <input
+                type="checkbox"
+                checked={marketing}
+                onChange={() => setMarketing(!marketing)}
+            />
+            Marketing
+            </label>
 
-        <button onClick={handleSave}>Salva</button>
-        <button onClick={onClose}>Annulla</button>
-      </div>
-    </div>
-  );
-};
+            <button onClick={handleSave}>Salva</button>
+            <button onClick={onClose}>Annulla</button>
+        </div>
+        </div>
+    );
+    };
 
-export default PreferencesModal;
+    export default PreferencesModal;
