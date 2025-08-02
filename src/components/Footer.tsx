@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
               </Link>
             </p>
             <p>
-              <Link to="/termini-condizioni" className="footer-link">
+              <Link to="/terms-conditions" className="footer-link">
               {t('Termini e Condizioni')}
               </Link>
             </p>
