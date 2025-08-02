@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
               href="/cookie-policy"
               target="_blank"
               rel="noopener noreferrer"
-              className="foote-link">
+              className="footer-link">
                 Cookie Policy
                 </a>
             </p>
