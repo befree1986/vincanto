@@ -77,6 +77,11 @@ const Footer: React.FC = () => {
               </Link>
             </p>
             <p>
+              <Link to="/termini-condizioni" className="footer-link">
+              {t('Termini e Condizioni')}
+              </Link>
+            </p>
+            <p>
               <button
                 type="button"
                 onClick={() => setShowPreferences(true)}
