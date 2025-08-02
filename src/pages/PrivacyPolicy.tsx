@@ -81,7 +81,7 @@ const PrivacyPolicy = () => {
 
       <div style={{ textAlign: "center", marginTop: "2rem" }}>
         <button
-          onClick={() => window.print()}
+          onClick={() => window.close()}
           className="colose-page-btn"
           aria-label="Chiudi pagina"
         >

@@ -43,8 +43,7 @@ const TermsConditions = () => {
       <div style={{ textAlign: "center", marginTop: "3rem" }}>
         <button 
         onClick={() =>window.close()}
-          className="close-page-btn"
-          >
+          className="close-page-btn">
           ❌ Chiudi la pasgina
           </button>
       </div>

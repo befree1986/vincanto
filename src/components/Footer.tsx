@@ -80,14 +80,15 @@ const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="foote-link">
+                Cookie Policy
                 </a>
             </p>
             <p>
-              <a href="/cookie-policy"
+              <a href="/terms-conditions"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link">
-                Cookie Policy
+                Termini e condizioni
               </a>
             </p>
             <p>
