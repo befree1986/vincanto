@@ -1,87 +1,93 @@
 import { Link } from "react-router-dom";
-// import { useTranslation } from "react-i18next"; // Da abilitare quando traduci
-// import { Helmet } from "react-helmet"; // Per SEO
 
 const PrivacyPolicy = () => {
-  // const { t } = useTranslation(); // Abilita per traduzioni
-
   return (
     <main className="privacy-container" style={{ padding: "2rem", maxWidth: "800px", margin: "auto" }}>
-      {/* SEO title per la traduzione futura */}
-      {/* 
-      <Helmet>
-        <title>{t("Privacy Policy")} | Vincanto Maiori</title>
-        <meta name="description" content={t("Informativa privacy secondo GDPR")} />
-      </Helmet> 
-      */}
-
       <h1>Informativa sulla Privacy</h1>
       <p>Ultimo aggiornamento: 31 luglio 2025</p>
 
       <h2>1. Titolare del trattamento</h2>
       <p>
         Vincanto Maiori – Via Torre di Milo, 7 – 84010 Maiori (SA) <br />
-        Email: info@vincantomaiori.it – PEC: [inserire PEC]
+        Email: info@vincantomaiori.it – PEC: pec@vincantomaiori.it
       </p>
 
       <h2>2. Tipologie di dati raccolti</h2>
       <ul>
         <li>Dati identificativi (nome, email, ecc.)</li>
         <li>Dati di navigazione (IP, browser, sistema operativo)</li>
-        <li>Dati raccolti tramite cookie</li>
+        <li>Dati raccolti tramite cookie e tecnologie simili</li>
       </ul>
 
       <h2>3. Finalità del trattamento</h2>
       <ul>
-        <li>Rispondere alle richieste</li>
-        <li>Ottimizzare l’esperienza</li>
-        <li>Statistiche e analisi</li>
-        <li>Marketing (previo consenso)</li>
+        <li>Gestione delle richieste e dei contatti</li>
+        <li>Miglioramento dell’esperienza utente</li>
+        <li>Analisi statistiche in forma aggregata</li>
+        <li>Attività di marketing, previo consenso</li>
       </ul>
 
-      <h2>4. Base giuridica</h2>
-      <p>Contratto, Consenso, Legittimo Interesse</p>
+      <h2>4. Base giuridica del trattamento</h2>
+      <p>
+        I trattamenti si basano su:
+        <ul>
+          <li>Consenso dell’utente per attività specifiche (es. marketing)</li>
+          <li>Obblighi contrattuali o precontrattuali</li>
+          <li>Legittimo interesse del titolare per finalità organizzative e di analisi</li>
+        </ul>
+      </p>
 
       <h2>5. Modalità del trattamento</h2>
       <p>
-        Trattamento lecito, trasparente e sicuro, con misure tecniche e organizzative adeguate.
+        Il trattamento è svolto in modo lecito, trasparente e con misure di sicurezza adeguate,
+        sia tecniche che organizzative.
       </p>
 
       <h2>6. Conservazione dei dati</h2>
       <ul>
-        <li>10 anni per obblighi legali</li>
-        <li>2 anni per marketing</li>
-        <li>Fino alla revoca del consenso</li>
+        <li>10 anni per adempimenti di legge</li>
+        <li>2 anni per finalità promozionali</li>
+        <li>Fino a revoca del consenso ove applicabile</li>
       </ul>
 
-      <h2>7. Diritti dell’utente</h2>
+      <h2>7. Diritti dell’interessato</h2>
       <ul>
-        <li>Accesso</li>
-        <li>Rettifica, cancellazione, limitazione</li>
-        <li>Revoca del consenso</li>
-        <li>Opposizione</li>
+        <li>Accesso ai propri dati</li>
+        <li>Rettifica, cancellazione e limitazione del trattamento</li>
+        <li>Portabilità dei dati</li>
+        <li>Revoca del consenso e opposizione al trattamento</li>
       </ul>
 
       <h2>8. Cookie</h2>
       <p>
-        Utilizziamo cookie tecnici, analitici e di marketing. Consulta la{" "}
+        Questo sito utilizza cookie tecnici, analitici e di profilazione. Per maggiori informazioni consulta la{" "}
         <Link to="/cookie-policy">Cookie Policy</Link>.
       </p>
 
       <h2>9. Destinatari e trasferimenti</h2>
       <p>
-        Provider IT, servizi di analisi/pubblicità (Google, Meta), soggetti autorizzati. Nessun trasferimento extra-UE senza garanzie adeguate.
+        I dati possono essere condivisi con fornitori di servizi IT, piattaforme di analisi e marketing (es. Google, Meta),
+        e altri soggetti autorizzati. Nessun trasferimento al di fuori dell’UE senza garanzie adeguate.
       </p>
 
-      <h2>10. Aggiornamenti</h2>
-      <p>Questa informativa può essere soggetta a modifiche. Ultimo aggiornamento: 31 luglio 2025</p>
-    <div style={{ textAlign: "center" , marginTop: "3rem" }}>
-      <button
-      onClick={() => window.print()}
-      className="colose-page-btn">
-      ❌ Chiudi la pagina
-      </button>
-    </div>
+      <h2>10. Modifiche all'informativa</h2>
+      <p>
+        La presente informativa può essere aggiornata. Ti invitiamo a consultarla periodicamente. Ultimo aggiornamento: 31 luglio 2025
+      </p>
+
+      <p style={{ marginTop: "2rem" }}>
+        Grazie per aver consultato la nostra Informativa sulla Privacy.
+      </p>
+
+      <div style={{ textAlign: "center", marginTop: "2rem" }}>
+        <button
+          onClick={() => window.print()}
+          className="colose-page-btn"
+          aria-label="Chiudi pagina"
+        >
+          ❌ Chiudi la pagina
+        </button>
+      </div>
     </main>
   );
 };
