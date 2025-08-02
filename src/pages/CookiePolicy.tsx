@@ -1,4 +1,4 @@
- import { Link } from "react-router-dom";
+ 
 
 
 const CookiePolicy = () => {
@@ -59,9 +59,11 @@ const CookiePolicy = () => {
         periodicamente. Ultimo aggiornamento: [data].
       </p>
       <div style={{ textAlign: "center", marginTop: "3rem" }}>
-        <Link to="/" className="back-home-btn">
-          ← Torna alla Home
-          </Link>
+        <button
+          onClick={() => window.close()}
+          className="close-page-btn">
+            ❌Chiudi la pagina  
+          </button>
       </div>
     </main>
   );

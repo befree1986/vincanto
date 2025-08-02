@@ -2,7 +2,6 @@ import React from 'react';
 import './Footer.css';
 import { useTranslation } from 'react-i18next';
 import { useCookieContext } from './CookieContext';
-import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -67,19 +66,29 @@ const Footer: React.FC = () => {
             <p>{t('Licenza SLSA000108-0026')}</p>
             <p>{t('Licenza Regionale / CIN: IT065066C248Z362SX')}</p>
             <p>
-              <Link to="/cookie-policy" className="footer-link">
-              {t('Cookie Policy')}
-              </Link>
+              <a
+                href="/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link">
+                  Privacy Policy
+                </a>
             </p>
             <p>
-              <Link to="/privacy-policy" className="footer-link">
-              {t('Privacy Policy')}
-              </Link>
+              <a
+              href="/cookie-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="foote-link">
+                </a>
             </p>
             <p>
-              <Link to="/terms-conditions" className="footer-link">
-              {t('Termini e Condizioni')}
-              </Link>
+              <a href="/cookie-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link">
+                Cookie Policy
+              </a>
             </p>
             <p>
               <button

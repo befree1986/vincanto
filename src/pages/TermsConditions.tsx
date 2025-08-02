@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 
 const TermsConditions = () => {
   return (
@@ -41,7 +41,12 @@ const TermsConditions = () => {
       </p>
 
       <div style={{ textAlign: "center", marginTop: "3rem" }}>
-        <Link to="/" className="back-home-btn">← Torna alla Home</Link>
+        <button 
+        onClick={() =>window.close()}
+          className="close-page-btn"
+          >
+          ❌ Chiudi la pasgina
+          </button>
       </div>
     </main>
   );
