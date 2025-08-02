@@ -65,6 +65,7 @@ const Footer: React.FC = () => {
             <p>{t('Certificata dal Comune di Maiori')}</p>
             <p>{t('Licenza SLSA000108-0026')}</p>
             <p>{t('Licenza Regionale / CIN: IT065066C248Z362SX')}</p>
+            
             <h4>{t('Informazioni Legali & Accessibilità')}</h4>
             <p>
               <a
