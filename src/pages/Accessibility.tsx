@@ -1,6 +1,6 @@
 import React from "react";
 
-const Accessibilita: React.FC = () => {
+const Accessibility: React.FC = () => {
   return (
     <main role="main" aria-labelledby="accessibility-title" lang="it">
       <section>
@@ -59,4 +59,4 @@ const Accessibilita: React.FC = () => {
   );
 };
 
-export default Accessibilita;
+export default Accessibility;
