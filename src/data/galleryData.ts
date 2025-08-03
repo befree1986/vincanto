@@ -58,6 +58,21 @@ export const galleryData: GallerySection[] = [
       {
         src: '/caneraVerde/verdett.jpg',
         altKey: 'propriety.gallery.section2.img1.alt',
+      },
+      { src: '/canerVerde/verde1.jpg',
+        altKey: 'propriety.gallery.section2.img2.alt'
+      },
+      { src: '/caneraVerde/verde2.jpg',
+        altKey: 'propriety.gallery.section2.img3.alt'
+      },
+      { src: '/caneraVerde/verde3.jpg',
+        altKey: 'propriety.gallery.section2.img4.alt'
+      },
+      { src: '/caneraVerde/verde4.jpg',
+        altKey: 'propriety.gallery.section2.img5.alt'
+      },
+      { src: '/caneraVerde/verde5.jpg',
+        altKey: 'propriety.gallery.section2.img6.alt'
       }
     ]
   },
