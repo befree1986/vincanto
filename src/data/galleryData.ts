@@ -59,9 +59,6 @@ export const galleryData: GallerySection[] = [
         src: '/caneraVerde/verdett.jpg',
         altKey: 'propriety.gallery.section2.img1.alt',
       },
-      { src: '/caneraVerde/verde1.jpg',
-        altKey: 'propriety.gallery.section2.img2.alt'
-      },
       { src: '/caneraVerde/verde2.jpg',
         altKey: 'propriety.gallery.section2.img3.alt'
       },
@@ -73,6 +70,24 @@ export const galleryData: GallerySection[] = [
       },
       { src: '/caneraVerde/verde5.jpg',
         altKey: 'propriety.gallery.section2.img6.alt'
+      },
+      { src: '/bameraBlu/blu1.jpg',
+        altKey: 'propriety.gallery.section2.img7.alt'
+      },
+      { src: '/bameraBlu/blu2.jpg',
+        altKey: 'propriety.gallery.section2.img8.alt'
+      },
+      { src: '/bameraBlu/blu3.jpg',
+        altKey: 'propriety.gallery.section2.img9.alt'
+      },
+      { src: '/bameraBlu/blu4.jpg',
+        altKey: 'propriety.gallery.section2.img10.alt'
+      },
+      { src: '/bameraBlu/blu5.jpg',
+        altKey: 'propriety.gallery.section2.img11.alt'
+      },
+      { src: '/bameraBlu/blu6.jpg',
+        altKey: 'propriety.gallery.section2.img12.alt'
       }
     ]
   },
