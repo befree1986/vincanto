@@ -35,10 +35,6 @@ export const galleryData: GallerySection[] = [
         altKey: 'propriety.gallery.section1.image3.alt'
       },
 
-    {
-      src: '/ingressoNotte/ingresso2b.jpg',
-        altKey: 'propriety.gallery.section1.image4.alt'
-      },
       {
         src: '/ingressoNotte/ingresso3.jpg',
         altKey: 'propriety.gallery.section1.image5.alt'
