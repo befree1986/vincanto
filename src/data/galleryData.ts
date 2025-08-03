@@ -59,7 +59,7 @@ export const galleryData: GallerySection[] = [
         src: '/caneraVerde/verdett.jpg',
         altKey: 'propriety.gallery.section2.img1.alt',
       },
-      { src: '/canerVerde/verde1.jpg',
+      { src: '/caneraVerde/verde1.jpg',
         altKey: 'propriety.gallery.section2.img2.alt'
       },
       { src: '/caneraVerde/verde2.jpg',
