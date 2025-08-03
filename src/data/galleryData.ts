@@ -71,22 +71,22 @@ export const galleryData: GallerySection[] = [
       { src: '/caneraVerde/verde5.jpg',
         altKey: 'propriety.gallery.section2.img6.alt'
       },
-      { src: '/cameraBlu/blu1.jpg',
+      { src: '/cameraBlu/camerablu1.jpg',
         altKey: 'propriety.gallery.section2.img7.alt'
       },
-      { src: '/cameraBlu/blu2.jpg',
+      { src: '/cameraBlu/camerablu2.jpg',
         altKey: 'propriety.gallery.section2.img8.alt'
       },
-      { src: '/cameraBlu/blu3.jpg',
+      { src: '/cameraBlu/camerablu3.jpg',
         altKey: 'propriety.gallery.section2.img9.alt'
       },
-      { src: '/cameraBlu/blu4.jpg',
+      { src: '/cameraBlu/camerablu4.jpg',
         altKey: 'propriety.gallery.section2.img10.alt'
       },
-      { src: '/cameraBlu/blu5.jpg',
+      { src: '/cameraBlu/camerablu5.jpg',
         altKey: 'propriety.gallery.section2.img11.alt'
       },
-      { src: '/cameraBlu/blu6.jpg',
+      { src: '/cameraBlu/camerablu6.jpg',
         altKey: 'propriety.gallery.section2.img12.alt'
       }
     ]
