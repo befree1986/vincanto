@@ -192,3 +192,85 @@
     grid-template-columns: 1fr;
   }
 }
+/* 🔸 Hero Section Mobile */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 0 1rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1.3rem;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .hero-content img {
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .hero-content .btn {
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .hero-bar {
+    height: 45vh;
+  }
+}
+
+/* 🔸 Welcome Section Mobile */
+@media (max-width: 768px) {
+  .welcome-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+
+  .welcome-text h2 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .welcome-text p {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .welcome-image img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* 🔸 Highlight Card Mobile */
+@media (max-width: 768px) {
+  .highlight-card {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .highlight-icon {
+    font-size: 2rem;
+  }
+
+  .highlight-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .highlight-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
+/* 🔸 Galleria Proprietà Mobile */
+@media (max-width: 768px) {
+  .proprieta-img-card img {
+    height: auto;
+  }
+}
