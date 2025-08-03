@@ -37,23 +37,23 @@ export const galleryData: GallerySection[] = [
 
     {
       src: '/ingressoNotte/ingresso2b.jpg',
-        altKey: 'propriety.gallery.section1.image2.alt'
-      },
-      {
-        src: '/ingressoNotte/ingresso3.jpg',
         altKey: 'propriety.gallery.section1.image4.alt'
       },
       {
-        src: '/corridoio/corridoio.jpg',
+        src: '/ingressoNotte/ingresso3.jpg',
         altKey: 'propriety.gallery.section1.image5.alt'
       },
       {
-        src: '/corridoio/corridoio2.jpg',
+        src: '/corridoio/corridoio.jpg',
         altKey: 'propriety.gallery.section1.image6.alt'
       },
       {
-        src: '/corridoio/corridoio3.jpg',
+        src: '/corridoio/corridoio2.jpg',
         altKey: 'propriety.gallery.section1.image7.alt'
+      },
+      {
+        src: '/corridoio/corridoio3.jpg',
+        altKey: 'propriety.gallery.section1.image8.alt'
       }
     
     ]
