@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './ParallaxBackground.css';
 
 interface ParallaxBackgroundProps {
@@ -7,6 +7,23 @@ interface ParallaxBackgroundProps {
 }
 
 const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ imageUrl, children }) => {
+  useEffect(() => {
+    const isMobile = window.innerWidth < 769;
+
+    if (isMobile) {
+      const handleScroll = () => {
+        const offset = window.scrollY;
+        const background = document.querySelector('.parallax-background') as HTMLElement;
+        if (background) {
+          background.style.transform = `translateY(${offset * 0.5}px)`;
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
   return (
     <div className="parallax-wrapper">
       <div
