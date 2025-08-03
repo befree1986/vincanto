@@ -42,6 +42,18 @@ export const galleryData: GallerySection[] = [
       {
         src: '/ingressoNotte/ingresso3.jpg',
         altKey: 'propriety.gallery.section1.img3.alt'
+      },
+      {
+        src: '/corridoio/corridoio.jpg',
+        altKey: 'propriety.gallery.section1.img4.alt'
+      },
+      {
+        src: '/corridoio/corridoio2.jpg',
+        altKey: 'propriety.gallery.section1.img5.alt'
+      },
+      {
+        src: '/corridoio/corridoio3.jpg',
+        altKey: 'propriety.gallery.section1.img6.alt'
       }
     
     ]
@@ -60,34 +72,34 @@ export const galleryData: GallerySection[] = [
         altKey: 'propriety.gallery.section2.img1.alt',
       },
       { src: '/caneraVerde/verde2.jpg',
-        altKey: 'propriety.gallery.section2.img3.alt'
+        altKey: 'propriety.gallery.section2.img2.alt'
       },
       { src: '/caneraVerde/verde3.jpg',
-        altKey: 'propriety.gallery.section2.img4.alt'
+        altKey: 'propriety.gallery.section2.img3.alt'
       },
       { src: '/caneraVerde/verde4.jpg',
-        altKey: 'propriety.gallery.section2.img5.alt'
+        altKey: 'propriety.gallery.section2.img4.alt'
       },
       { src: '/caneraVerde/verde5.jpg',
-        altKey: 'propriety.gallery.section2.img6.alt'
+        altKey: 'propriety.gallery.section2.img5.alt'
       },
       { src: '/cameraBlu/camerablu1.jpg',
-        altKey: 'propriety.gallery.section2.img7.alt'
+        altKey: 'propriety.gallery.section2.img6.alt'
       },
       { src: '/cameraBlu/camerablu2.jpg',
-        altKey: 'propriety.gallery.section2.img8.alt'
+        altKey: 'propriety.gallery.section2.img7.alt'
       },
       { src: '/cameraBlu/camerablu3.jpg',
-        altKey: 'propriety.gallery.section2.img9.alt'
+        altKey: 'propriety.gallery.section2.img8.alt'
       },
       { src: '/cameraBlu/camerablu4.jpg',
-        altKey: 'propriety.gallery.section2.img10.alt'
+        altKey: 'propriety.gallery.section2.img9.alt'
       },
       { src: '/cameraBlu/camerablu5.jpg',
-        altKey: 'propriety.gallery.section2.img11.alt'
+        altKey: 'propriety.gallery.section2.img10.alt'
       },
       { src: '/cameraBlu/camerablu6.jpg',
-        altKey: 'propriety.gallery.section2.img12.alt'
+        altKey: 'propriety.gallery.section2.img11.alt'
       }
     ]
   },
@@ -104,6 +116,18 @@ export const galleryData: GallerySection[] = [
         altKey: 'propriety.gallery.section3.img1.alt',
         
       },
+      {
+        src: '/cameraSingola/1_notte.jpg',
+        altKey: 'propriety.gallery.section3.img2.alt',
+      },
+      {
+        src: '/cameraSingola/2_giorno.jpg',
+        altKey: 'propriety.gallery.section3.img3.alt',
+      },
+      {
+        src: '/cameraSingola/2_notte.jpg',
+        altKey: 'propriety.gallery.section3.img4.alt',
+      }
     
     ]
   },
