@@ -246,7 +246,7 @@ const Propriety: React.FC = () => {
               <li>
                 Check-in: dalle <strong>16:00</strong> (possibilità di anticipazione a discrezione del proprietario)
               </li>
-              <li>Check-out: entro le <strong>09:00</strong></li>
+              <li>Check-out: entro le <strong>10:00</strong></li>
             </ul>
           </div>
         </section>

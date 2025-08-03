@@ -33,7 +33,17 @@ export const galleryData: GallerySection[] = [
       {
         src: '/ingressoNotte/ingresso2a.jpg',
         altKey: 'propriety.gallery.section1.img2a.alt'
+      },
+
+    {
+      src: '/ingressoNotte/ingresso2b.jpg',
+        altKey: 'propriety.gallery.section1.img2b.alt'
+      },
+      {
+        src: '/ingressoNotte/ingresso3.jpg',
+        altKey: 'propriety.gallery.section1.img3.alt'
       }
+    
     ]
   },
   {
@@ -43,6 +53,7 @@ export const galleryData: GallerySection[] = [
       altKey: 'propriety.gallery.section2.mainImage.alt',
       
     },
+    
     images: [
       {
         src: '/caneraVerde/verdett.jpg',
