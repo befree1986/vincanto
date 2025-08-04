@@ -141,35 +141,38 @@
   z-index: 1003;
 }
 
-/* 🌓 Switch tema */
+/* 🌗 Tema switch elegante */
 .theme-switcher-button {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0 8px;
-  transition: transform 0.2s ease;
+  font-size: 1.8rem;
+  padding: 0.3rem;
+  color: var(--terracotta);
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .theme-switcher-button:hover {
-  transform: scale(1.2);
+  background-color: var(--terracotta);
+  color: var(--white);
+  transform: scale(1.1);
 }
+
+/* ❌ Bottone 'Chiudi menu' con stile coerente al sito */
 .close-menu-button {
-  background: none;
-  border: 2px solid var(--terracotta);
+  background-color: transparent;
+  border: 2px solid var(--blue-dark);
   color: var(--blue-dark);
-  padding: 10px 20px;
-  margin: 20px auto;
+  font-weight: 600;
+  padding: 12px 24px;
   font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  border-radius: 6px;
+  border-radius: 4px;
   transition: all 0.3s ease;
   display: block;
+  margin: 1.5rem auto;
+  text-align: center;
 }
 
 .close-menu-button:hover {
-  background-color: var(--terracotta);
+  background-color: var(--blue-dark);
   color: var(--white);
 }
 
@@ -206,7 +209,7 @@
 }
 
 .mobile-logo-img {
-  height: 70px;
+  height: 90px;
 }
 
 /* 🧁 Overlay menu mobile */
@@ -285,4 +288,38 @@
   }
 
   
+}
+
+/* 🧁 Mobile optimization — blocco aggiunto agosto 2025 */
+@media (max-width: 768px) {
+  .nav-menu {
+    padding: 3rem 1.5rem;
+    overflow-y: auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+  }
+
+  .language-selector-mobile {
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+
+  .btn-navbar {
+    width: 100%;
+    max-width: 280px;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .menu-overlay {
+    background-color: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+  }
 }
