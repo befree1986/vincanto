@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Contact.css';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import Seo from '../components/Seo';
 
 interface FormData {
   name: string;
@@ -16,6 +17,12 @@ interface FormData {
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
+
+  <Seo
+  title="Contattaci | VINCANTO – Villa nella Costiera Amalfitana"
+  description="Scrivici per domande o richieste. Siamo a disposizione per aiutarti a vivere un soggiorno memorabile a Maiori, tra natura e comfort."
+/>
+
 
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -93,7 +100,7 @@ const Contact: React.FC = () => {
                 <p>{t('Grazie per la tua richiesta! Ti ricontatteremo al più presto.')}</p>
               </div>
             ) : (
-              <form className="booking-form" onSubmit={handleSubmit}>
+              <form className="booking-form" onSubmit={handleSubmit} aria-label="Modulo di contatto per richieste o prenotazioni">
                 {/* Honeypot anti-bot invisibile */}
                 <input
                   type="text"
@@ -113,7 +120,9 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    aria-required="true"
                     minLength={2}
+                    placeholder="Es. Mario Rossi"
                   />
                 </div>
 
@@ -127,6 +136,8 @@ const Contact: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      aria-required="true"
+                      placeholder="Es. mario.rossi@example.com"
                     />
                   </div>
                   <div className="form-group">
@@ -138,6 +149,8 @@ const Contact: React.FC = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       required
+                      aria-required="true"
+                      placeholder="Es. +39 333 123 456 789"
                     />
                   </div>
                 </div>
@@ -149,6 +162,9 @@ const Contact: React.FC = () => {
                     name="guests"
                     value={formData.guests}
                     onChange={handleChange}
+                    required
+                    aria-required="true"
+                    aria-lebel="Seleziona il numero di ospiti"
                   
                   >
                     <option value="">{t('Seleziona')}</option>
@@ -168,6 +184,9 @@ const Contact: React.FC = () => {
                       name="checkin"
                       value={formData.checkin}
                       onChange={handleChange}
+                      required
+                      aria-required="true"
+                      aria-label="Seleziona la data di arrivo"
                     />
                   </div>
                   <div className="form-group">
@@ -178,6 +197,8 @@ const Contact: React.FC = () => {
                       name="checkout"
                       value={formData.checkout}
                       onChange={handleChange}
+                      requiredaria-required="true"
+                      aria-label="Seleziona la data di partenza"
                     />
                   </div>
                 </div>
@@ -191,15 +212,22 @@ const Contact: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    aria-required="true"
+                    placeholder="Richieste particolari, orari preferiti, ecc."
                   ></textarea>
                 </div>
 
-                {errorMsg && <p className="error-message">{errorMsg}</p>}
+                {errorMsg && (
+                  <p className="error-message" role="alert">
+                  {errorMsg}
+                  </p>
+                  )}
 
                 <button
                   type="submit"
                   className="btn btn-accent"
                   disabled={loading}
+                  aria-busy={loading}
                 >
                   {loading ? t('Invio in corso...') : t('Invia Richiesta')}
                 </button>
