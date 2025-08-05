@@ -8,6 +8,7 @@ interface ParallaxBackgroundProps {
 
 const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ imageUrl, children }) => {
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const isMobile = window.innerWidth < 769;
 
     if (isMobile) {
