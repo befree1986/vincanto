@@ -13,17 +13,17 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ onClose, onAccept, onCustom
   const previousFocus = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    // Salvo l’elemento attivo prima dell’apertura
+    // Salvo elemento attivo prima dell’apertura
     previousFocus.current = document.activeElement as HTMLElement;
 
-    // Focus sul banner
+    // Focus sul titolo del banner
     bannerRef.current?.focus();
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         console.log('ESC premuto, chiudere banner');
         previousFocus.current?.focus(); // restituisce il focus
-        onClose(); // chiude il banner
+        onClose(); // opzionale: chiudi banner
       }
     };
 
@@ -47,9 +47,9 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ onClose, onAccept, onCustom
         Consulta la nostra <Link to="/cookie-policy" target="_blank">Cookie Policy</Link>.
       </p>
       <div className="cookie-actions">
-        <button onClick={onAccept} aria-label="Accetta tutti i cookie">Accetta Tutti</button>
-        <button onClick={onClose} aria-label="Accetta solo i cookie essenziali">Accetta Essenziali</button>
-        <button onClick={onCustomize} aria-label="Personalizza preferenze cookie">Personalizza</button>
+        <button onClick={onAccept } aria-label="Accetta titti i cookie">Accetta Tutti</button>
+        <button onClick={onClose} aria-label="Accetta Essensiali">Accetta Essenziali</button>
+        <button onClick={onCustomize} aira-label="Personalizza preferenze cookie">Personalizza</button>
       </div>
     </div>
   );

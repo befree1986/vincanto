@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Contact.css';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import Seo from '../components/Seo';
+
 
 interface FormData {
   name: string;
@@ -17,12 +17,6 @@ interface FormData {
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
-
-  <Seo
-  title="Contattaci | VINCANTO – Villa nella Costiera Amalfitana"
-  description="Scrivici per domande o richieste. Siamo a disposizione per aiutarti a vivere un soggiorno memorabile a Maiori, tra natura e comfort."
-/>
-
 
   const [formData, setFormData] = useState<FormData>({
     name: '',
