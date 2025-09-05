@@ -15,40 +15,40 @@ export const galleryData: GallerySection[] = [
   {
     titleKey: 'propriety.gallery.section1.title',
     mainImage: {
-      src: '/ingressoNotte/ingresso.jpg',
+  src: '/ingressoNotte/ingresso_nw.webp',
       altKey: 'propriety.gallery.section1.ingressoNotte.alt',
       
     },
     images: [
       {
-        src: '/ingressoNotte/ingresso1.jpg',
+  src: '/ingressoNotte/ingresso1.webp',
         altKey: 'propriety.gallery.section1.image1.alt',
         
       },
       {
-        src: '/ingressoNotte/ingresso2.jpg',
+  src: '/ingressoNotte/ingresso2.webp',
         altKey: 'propriety.gallery.section1.image2.alt'
       },
 
       {
-        src: '/ingressoNotte/ingresso2a.jpg',
+  src: '/ingressoNotte/ingresso2a.webp',
         altKey: 'propriety.gallery.section1.image3.alt'
       },
 
       {
-        src: '/ingressoNotte/ingresso3.jpg',
+  src: '/ingressoNotte/ingresso3.webp',
         altKey: 'propriety.gallery.section1.image5.alt'
       },
       {
-        src: '/corridoio/corridoio.jpg',
+  src: '/corridoio/corridoio.webp',
         altKey: 'propriety.gallery.section1.image6.alt'
       },
       {
-        src: '/corridoio/corridoio2.jpg',
+  src: '/corridoio/corridoio2.webp',
         altKey: 'propriety.gallery.section1.image7.alt'
       },
       {
-        src: '/corridoio/corridoio3.jpg',
+  src: '/corridoio/corridoio3.webp',
         altKey: 'propriety.gallery.section1.image8.alt'
       }
     
@@ -57,44 +57,44 @@ export const galleryData: GallerySection[] = [
   {
     titleKey: 'propriety.gallery.section2.title',
     mainImage: {
-      src: '/caneraVerde/verdett.jpg',
+  src: '/caneraVerde/verdett.webp',
       altKey: 'propriety.gallery.section2.mainImage.alt',
       
     },
     
     images: [
       {
-        src: '/caneraVerde/verdett.jpg',
+  src: '/caneraVerde/verdett.webp',
         altKey: 'propriety.gallery.section2.img1.alt',
       },
-      { src: '/caneraVerde/verde2.jpg',
+  { src: '/caneraVerde/verde2.webp',
         altKey: 'propriety.gallery.section2.img2.alt'
       },
-      { src: '/caneraVerde/verde3.jpg',
+  { src: '/caneraVerde/verde3.webp',
         altKey: 'propriety.gallery.section2.img3.alt'
       },
-      { src: '/caneraVerde/verde4.jpg',
+  { src: '/caneraVerde/verde4.webp',
         altKey: 'propriety.gallery.section2.img4.alt'
       },
-      { src: '/caneraVerde/verde5.jpg',
+  { src: '/caneraVerde/verde5.webp',
         altKey: 'propriety.gallery.section2.img5.alt'
       },
-      { src: '/cameraBlu/camerablu1.jpg',
+  { src: '/cameraBlu/camerablu1.webp',
         altKey: 'propriety.gallery.section2.img6.alt'
       },
-      { src: '/cameraBlu/camerablu2.jpg',
+  { src: '/cameraBlu/camerablu2.webp',
         altKey: 'propriety.gallery.section2.img7.alt'
       },
-      { src: '/cameraBlu/camerablu3.jpg',
+  { src: '/cameraBlu/camerablu3.webp',
         altKey: 'propriety.gallery.section2.img8.alt'
       },
-      { src: '/cameraBlu/camerablu4.jpg',
+  { src: '/cameraBlu/camerablu4.webp',
         altKey: 'propriety.gallery.section2.img9.alt'
       },
-      { src: '/cameraBlu/camerablu5.jpg',
+  { src: '/cameraBlu/camerablu5.webp',
         altKey: 'propriety.gallery.section2.img10.alt'
       },
-      { src: '/cameraBlu/camerablu6.jpg',
+  { src: '/cameraBlu/camerablu6.webp',
         altKey: 'propriety.gallery.section2.img11.alt'
       }
     ]
@@ -102,26 +102,26 @@ export const galleryData: GallerySection[] = [
 
   {titleKey: 'propriety.gallery.section3.title',
     mainImage: {
-      src: '/cameraSingola/singolaheader.jpg',
+  src: '/cameraSingola/singolaheader.webp',
       altKey: 'propriety.gallery.section3.mainImage.alt',
       
     },
     images: [
       {
-        src: '/cameraSingola/1_giorno.jpg',
+  src: '/cameraSingola/1_giorno.webp',
         altKey: 'propriety.gallery.section3.img1.alt',
         
       },
       {
-        src: '/cameraSingola/1_notte.jpg',
+  src: '/cameraSingola/1_notte.webp',
         altKey: 'propriety.gallery.section3.img2.alt',
       },
       {
-        src: '/cameraSingola/2_giorno.jpg',
+  src: '/cameraSingola/2_giorno.webp',
         altKey: 'propriety.gallery.section3.img3.alt',
       },
       {
-        src: '/cameraSingola/2_notte.jpg',
+  src: '/cameraSingola/2_notte.webp',
         altKey: 'propriety.gallery.section3.img4.alt',
       }
     
@@ -129,29 +129,29 @@ export const galleryData: GallerySection[] = [
   },
   {titleKey: 'propriety.gallery.section4.title',
     mainImage: {
-      src: '/openSpace/title.jpg',
+  src: '/openSpace/title.webp',
       altKey: 'propriety.gallery.section4.mainImage.alt',
      },
     images: [
       {
-        src: '/openSpace/open1.jpg',
+  src: '/openSpace/open1.webp',
         altKey: 'propriety.gallery.section4.img1.alt',
         
       },
       {
-        src: '/openSpace/open2.jpg',
+  src: '/openSpace/open2.webp',
         altKey: 'propriety.gallery.section4.img2.alt',
       },
       {
-        src: '/openSpace/open3.jpg',
+  src: '/openSpace/open3.webp',
         altKey: 'propriety.gallery.section4.img3.alt',
       },
       {
-        src: '/openSpace/open4a.jpg',
+  src: '/openSpace/open4a.webp',
         altKey: 'propriety.gallery.section4.img4.alt',
       },
       {
-        src: '/openSpace/open4.jpg',
+  src: '/openSpace/open4.webp',
         altKey: 'propriety.gallery.section4.img5.alt',
       }
     
@@ -160,52 +160,52 @@ export const galleryData: GallerySection[] = [
 
   {titleKey: 'propriety.gallery.section5.title',
     mainImage: {
-    src: '/bagno1/bagno1.jpg',
+  src: '/bagno1/bagno1.webp',
     altKey: 'propriety.gallery.section5.mainImage.alt',
   },
     images: [
       {
-        src: '/bagno1/bagno1.jpg',
+  src: '/bagno1/bagno1.webp',
         altKey: 'propriety.gallery.section5.img1.alt',  
       },
       {
-        src: '/bagno1/bagno2.jpg',
+  src: '/bagno1/bagno2.webp',
         altKey: 'propriety.gallery.section5.img2.alt',
       },
       {
-        src: '/bagno1/bagno3.jpg',
+  src: '/bagno1/bagno3.webp',
         altKey: 'propriety.gallery.section5.img3.alt',
       },
       {
-        src: '/bagno2/bagno4a.jpg',
+  src: '/bagno2/bagno4a.webp',
         altKey: 'propriety.gallery.section5.img4.alt',
       },
       {
-        src:'/bagno2/bagno4.jpg',
+  src:'/bagno2/bagno4.webp',
         altKey: 'propriety.gallery.section5.img5.alt',
       },
       {
-        src: '/bagno2/bagno5.jpg',
+  src: '/bagno2/bagno5.webp',
         altKey: 'propriety.gallery.section5.img6.alt',
       },
       {
-        src: '/bagno2/bagno6.jpg',
+  src: '/bagno2/bagno6.webp',
         altKey: 'propriety.gallery.section5.img7.alt',
       },
       {
-        src: '/bagno2/bagno7.jpg',
+  src: '/bagno2/bagno7.webp',
         altKey: 'propriety.gallery.section5.img8.alt',
       },
       {
-        src: '/bagno2/bagno7.jpg',
+  src: '/bagno2/bagno7.webp',
         altKey: 'propriety.gallery.section5.img9.alt',
       },
       {
-        src: '/bagno2/bagno8.jpg',
+  src: '/bagno2/bagno8.webp',
         altKey: 'propriety.gallery.section5.img10.alt',
       },
       {
-        src: '/bagno2/bagno9.jpg',
+  src: '/bagno2/bagno9.webp',
         altKey: 'propriety.gallery.section5.img11.alt',
       }
     ]
@@ -213,49 +213,49 @@ export const galleryData: GallerySection[] = [
 
   {titleKey: 'propriety.gallery.section6.title',
     mainImage: {
-      src: '/esterni/ingressoindex.jpg',
+  src: '/esterni/ingressoindex.webp',
       altKey: 'propriety.gallery.section6.mainImage.alt',
     },
     images: [
       {
-        src: '/esterni/esterno1.jpg',
+  src: '/esterni/esterno1.webp',
         altKey: 'propriety.gallery.section6.img1.alt',
       },
       {
-        src: '/esterni/esterno2.jpg',
+  src: '/esterni/esterno2.webp',
         altKey: 'propriety.gallery.section6.img2.alt',
       },
       {
-        src: '/esterni/esterno3.jpg',
+  src: '/esterni/esterno3.webp',
         altKey: 'propriety.gallery.section6.img3.alt',
       },
       {
-        src: '/esterni/esterno4.jpg',
+  src: '/esterni/esterno4.webp',
         altKey: 'propriety.gallery.section6.img4.alt',
       },
       {
-        src: '/esterni/esterno5.jpg',
+  src: '/esterni/esterno5.webp',
         altKey: 'propriety.gallery.section6.img5.alt',
       },
 
     {
-      src: '/esterni/esterno6.jpg',
+      src: '/esterni/esterno6.webp',
       altKey: 'propriety.gallery.section6.img6.alt',
     },
     {
-      src: '/esterni/esterno7.jpg',
+      src: '/esterni/esterno7.webp',
       altKey: 'propriety.gallery.section6.img7.alt',
     },
     {
-      src: '/esterni/esterno8.jpg',
+      src: '/esterni/esterno8.webp',
       altKey: 'propriety.gallery.section6.img8.alt',
     },
     {
-      src: '/esterni/esterno9.jpg',
+      src: '/esterni/esterno9.webp',
       altKey: 'propriety.gallery.section6.img9.alt',
     },
     {
-      src: '/esterni/esterno10.jpg',
+      src: '/esterni/esterno10.webp',
       altKey: 'propriety.gallery.section6.img10.alt',
     }
     ]

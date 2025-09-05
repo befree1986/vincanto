@@ -212,92 +212,85 @@ const Propriety: React.FC = () => {
 
         {/* Regole di Prenotazione */}
         <section className="booking-rules">
-          <h2 className="section-title">📅 Regole di Prenotazione</h2>
+          <h2 className="section-title">{t('section.booking.rules.title')}</h2>
 
           <div className="rule-group">
-            <h4 className="section-subtitle">Minori 0–3 anni</h4>
+            <h4 className="section-subtitle">{t('section.booking.rules.minoriTitle')}</h4>
             <ul className="section-list">
-              <li>
-                Per i bambini di età compresa tra 0 e 3 anni, il soggiorno è gratuito.
-              </li>
+              <li>{t('section.booking.rules.minoriList1')}</li>
             </ul>
           </div>
 
           <div className="rule-group">
-            <h4 className="section-subtitle">Periodo Estivo</h4>
+            <h4 className="section-subtitle">{t('section.booking.rules.summerTitle')}</h4>
             <ul className="section-list">
-              <li>
-                Dal <strong>11 al 24 agosto</strong> si accettano solo prenotazioni settimanali da{' '}
-                <strong>domenica a domenica</strong>.
-              </li>
+              <li>{t('section.booking.rules.summerList1')}</li>
             </ul>
           </div>
 
           <div className="rule-group">
-            <h4 className="section-subtitle">Tutto l’anno</h4>
+            <h4 className="section-subtitle">{t('section.booking.rules.allYearTitle')}</h4>
             <ul className="section-list">
-              <li>Il soggiorno minimo durante tutto l’anno è di <strong>2 notti</strong>.</li>
+              <li>{t('section.booking.rules.allYearList1')}</li>
             </ul>
           </div>
 
           <div className="rule-group">
-            <h4 className="section-subtitle">Check-in e Check-out</h4>
+            <h4 className="section-subtitle">{t('section.booking.rules.checkinoutTitle')}</h4>
             <ul className="section-list">
-              <li>
-                Check-in: dalle <strong>16:00</strong> (possibilità di anticipazione a discrezione del proprietario)
-              </li>
-              <li>Check-out: entro le <strong>10:00</strong></li>
+              <li>{t('section.booking.rules.checkinoutList1')}</li>
+              <li>{t('section.booking.rules.checkinoutList2')}</li>
             </ul>
           </div>
         </section>
 
         {/* Servizi Inclusi */}
         <section className="included-services">
-          <h2 className="section-title">🛎️ Servizi Inclusi</h2>
+          <h2 className="section-title">{t('section.includedServices.title')}</h2>
 
           <div className="service-group">
-            <h4 className="section-subtitle">Comfort</h4>
+            <h4 className="section-subtitle">{t('section.includedServices.comfortTitle')}</h4>
             <ul className="section-list">
-              <li>Biancheria da letto e da bagno</li>
-              <li>Aria condizionata</li>
-              <li>Riscaldamento</li>
-              <li>Asciugacapelli</li>
-              <li>Asse e ferro da stiro</li>
-              <li>Prodotti da bagno</li>
-              <li>Kit di pronto soccorso</li>
-              <li>Macchina da caffè</li>
-              <li>Frigorifero</li>
-              <li>Forno a microonde</li>
-              <li>Stoviglie e posate</li>
-              <li>Lavastoviglie</li>
+              <li>{t('section.includedServices.comfortList1')}</li>
+              <li>{t('section.includedServices.comfortList2')}</li>
+              <li>{t('section.includedServices.comfortList3')}</li>
+              <li>{t('section.includedServices.comfortList4')}</li>
+              <li>{t('section.includedServices.comfortList5')}</li>
+              <li>{t('section.includedServices.comfortList6')}</li>
+              <li>{t('section.includedServices.comfortList7')}</li>
+              <li>{t('section.includedServices.comfortList8')}</li>
+              <li>{t('section.includedServices.comfortList9')}</li>
+              <li>{t('section.includedServices.comfortList10')}</li>
+              <li>{t('section.includedServices.comfortList11')}</li>
+              <li>{t('section.includedServices.comfortList12')}</li>
             </ul>
           </div>
 
           <div className="service-group">
-            <h4 className="section-subtitle">Connettività</h4>
+            <h4 className="section-subtitle">{t('section.includedServices.connectivityTitle')}</h4>
             <ul className="section-list">
-              <li>Wi-Fi gratuito</li>
-              <li>Connessione Ethernet LAN in tutte le stanze</li>
+              <li>{t('section.includedServices.connectivityList1')}</li>
+              <li>{t('section.includedServices.connectivityList2')}</li>
             </ul>
           </div>
         </section>
 
         {/* Costi Extra */}
         <section className="extra-costs">
-          <h2 className="section-title">💰 Costi Extra (non inclusi)</h2>
+          <h2 className="section-title">{t('section.extraCosts.title')}</h2>
 
           <div className="cost-group">
-            <h4 className="section-subtitle">Obbligatori</h4>
+            <h4 className="section-subtitle">{t('section.extraCosts.mandatoryTitle')}</h4>
             <ul className="section-list">
-              <li>Pulizia finale obbligatoria: <strong>30€</strong></li>
-              <li>Tassa di soggiorno secondo normativa comunale</li>
+              <li>{t('section.extraCosts.mandatoryList1')}</li>
+              <li>{t('section.extraCosts.mandatoryList2')}</li>
             </ul>
           </div>
 
           <div className="cost-group">
-            <h4 className="section-subtitle">Su richiesta</h4>
+            <h4 className="section-subtitle">{t('section.extraCosts.onRequestTitle')}</h4>
             <ul className="section-list">
-              <li>Posto auto riservato e custodito a <strong>15€/giorno</strong></li>
+              <li>{t('section.extraCosts.onRequestList1')}</li>
             </ul>
           </div>
         </section>

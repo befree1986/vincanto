@@ -1,3 +1,4 @@
+import Seo from '../Seo';
 import React, { useState } from 'react';
 import './Contact.css';
 import { useTranslation } from 'react-i18next';
@@ -81,7 +82,14 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="contact-section">
+    <React.Fragment>
+      <Seo
+        title={t('VINCANTO | Contatti e Richieste')}
+        description={t('Contatta Vincanto per informazioni, richieste personalizzate o prenotazioni. Rispondiamo rapidamente a ogni esigenza di soggiorno a Maiori.')}
+        ogImage="/logo.svg"
+        canonical="https://www.vincantomaori.it/contact"
+      />
+      <section id="contact" className="contact-section">
       <div className="container">
         <h2 className="section-title">{t('Contatti')}</h2>
 
@@ -281,6 +289,7 @@ const Contact: React.FC = () => {
         </div>
       </div>
     </section>
+  </React.Fragment>
   );
 };
 

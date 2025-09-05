@@ -1,3 +1,4 @@
+import Seo from '../Seo';
 import React from 'react';
 import ParallaxBackground from '../components/ParallaxBackground';
 import LemonDivider from '../components/LemonDivider';
@@ -8,34 +9,27 @@ import { useTranslation } from 'react-i18next';
 const About: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section id="about" className="about-section">
-      <ParallaxBackground imageUrl="/lemon.jpg"> 
+  <>
+      <Seo
+        title={t('VINCANTO | Chi Siamo')}
+        description={t('Scopri la storia, la filosofia e la posizione di Vincanto. Ospitalità autentica tra i limoni della Costiera Amalfitana, comfort e natura per il tuo soggiorno a Maiori.')}
+        ogImage="/logo.svg"
+        canonical="https://www.vincantomaori.it/about"
+      />
+      <section id="about" className="about-section">
+      <ParallaxBackground imageUrl="/lemon.webp">
         <div className="about-hero">
-          <h2>
-            {t('Chi Siamo')}
-          </h2>
+          <h2>{t('Chi Siamo')}</h2>
         </div>
       </ParallaxBackground>
-      
       <div className="container">
         <div className="about-content">
           <div className="about-description">
-            <h2>
-              VINCANTO
-            </h2>
-            <p className='proprieta-description' style={{ marginBottom: '2rem' }}>
-              {t("Ogni dettaglio di VINCANTO è pensato per offrirti un soggiorno indimenticabile. Gli interni, completamente rinnovati, uniscono design contemporaneo e materiali di pregio: pavimenti e rivestimenti in elegante gres porcellanato, applique in ceramica vietrese decorate a mano, arredi ricercati e finiture di alta qualità. I nuovi infissi in PVC garantiscono silenzio e comfort, mentre le zanzariere su porte e finestre ti permettono di godere della brezza della campagna in totale relax.")}
-            </p>
-            <p>
-              {t("La struttura dispone di due camere matrimoniali con letti King Size, una camera con due letti singoli, luminose e accoglienti, e tre bagni moderni e funzionali con ampi piatti doccia per il massimo comfort e privacy. La cucina open space, completamente attrezzata, è perfetta per condividere momenti conviviali e preparare i tuoi piatti preferiti.")}
-            </p> 
-            <p className="proprieta-description" style={{ marginBottom: '2rem' }}> {/* Rimosso textAlign: 'center' da qui, poiché ora è ereditato dal genitore */}
-              {t('Immersa nel cuore profumato di un limoneto tipico della Costiera Amalfitana.')} {/* Corretto refuso nel testo */}
-            </p>
-             <p>
-               {t('All’esterno, gli ospiti possono godere di una cucina esterna, perfetta per pranzi e cene all’aperto sotto il pergolato, con vista sul verde circostante. A completare l’offerta, una doccia esterna, un forno a legna tradizionale e un barbecue, ideali per serate conviviali immersi nel profumo dei limoni e del mare.')}
-          </p>
-            
+            <h2>VINCANTO</h2>
+            <p className='proprieta-description' style={{ marginBottom: '2rem' }}>{t('about.longdesc1')}</p>
+            <p>{t('about.longdesc2')}</p>
+            <p className="proprieta-description" style={{ marginBottom: '2rem' }}>{t('about.longdesc3')}</p>
+            <p>{t('about.longdesc4')}</p>
           </div>
           
                 {/* Inserisco qui la sezione Propriety prima di 'La Nostra Posizione' */}
@@ -89,7 +83,7 @@ const About: React.FC = () => {
             </div>
             <div className="location-image-container">
               <img 
-                src="/contact3.jpg" 
+                src="/contact3.webp" 
                 alt="Vista panoramica su Maiori e la Costiera Amalfitana" 
                 className="img-fluid"
               />
@@ -99,7 +93,8 @@ const About: React.FC = () => {
       </div>
       
       <LemonDivider position="right" />
-    </section>
+      </section>
+    </>
   );
 };
 

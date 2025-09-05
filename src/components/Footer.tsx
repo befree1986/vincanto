@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
 
         <div className="footer-bottom">
           <div className="footer-paytourist-logo">
-            <img src="/paytourist_logo.png" alt="Paytourist" className="footer-paytourist-logo-img" />
+            <img src="/paytourist_logo.webp" alt="Paytourist" className="footer-paytourist-logo-img" />
             <p>{t('Certificata dal Comune di Maiori')}</p>
             <p>{t('Licenza SLSA000108-0026')}</p>
             <p>{t('Licenza Regionale / CIN: IT065066C248Z362SX')}</p>

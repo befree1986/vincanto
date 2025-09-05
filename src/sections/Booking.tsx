@@ -1,3 +1,4 @@
+import Seo from '../Seo';
 import React from "react";
 import "./Booking.css";
 import LemonDivider from "../components/LemonDivider";
@@ -11,7 +12,7 @@ const BookingForm: React.FC = () => {
     {
       name: "Booking.com",
       url: BOOKING_URL,
-      logo: "/assets/booking-logo.png",
+  logo: "/assets/booking-logo.webp",
     },
     {
       name: "Airbnb",
@@ -49,7 +50,14 @@ const Booking: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="booking" className="booking-section">
+  <>
+      <Seo
+        title={t('VINCANTO | Prenota il tuo soggiorno')}
+        description={t('Prenota la tua vacanza a Maiori direttamente o tramite le principali piattaforme. Scopri disponibilità, offerte e servizi esclusivi di Vincanto.')}
+        ogImage="/logo.svg"
+        canonical="https://www.vincantomaori.it/booking"
+      />
+      <section id="booking" className="booking-section">
       <div className="container">
         <header>
           <h2 className="section-title underline-title titolo-sezione">
@@ -62,7 +70,8 @@ const Booking: React.FC = () => {
         <BookingForm />
       </div>
       <LemonDivider position="left" />
-    </section>
+      </section>
+    </>
   );
 };
 
