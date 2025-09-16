@@ -206,6 +206,10 @@ const Propriety: React.FC = () => {
                 <td>{t('propriety.rates.table.persons5to6')}</td>
                 <td>{t('propriety.rates.table.price5to6')}</td>
               </tr>
+              <tr>
+                <td>{t('propriety.rates.table.persons7to8')}</td>
+                <td>{t('propriety.rates.table.price7to8')}</td>
+              </tr>
             </tbody>
           </table>
         </div>
