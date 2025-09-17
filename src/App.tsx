@@ -15,6 +15,8 @@ import TermsConditions from './pages/TermsConditions';
 import Accessibility from './pages/Accessibility';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+import { Analytics } from "@vercel/analytics/react";
+
 
 interface CookiePreferences {
   analytics: boolean;
@@ -105,6 +107,7 @@ function App() {
       </CookieProvider>
 
       <BackToTopButton />
+      <Analytics />
     </>
   );
 }
