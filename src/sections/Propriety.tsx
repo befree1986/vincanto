@@ -246,6 +246,13 @@ const Propriety: React.FC = () => {
               <li>{t('section.booking.rules.checkinoutList2')}</li>
             </ul>
           </div>
+
+          <div className="rule-group">
+            <h4 className="section-subtitle">{t('section.booking.rules.paymentTitle')}</h4>
+            <ul className="section-list">
+              <li>{t('section.booking.rules.paymentList1')}</li>
+            </ul>
+          </div>
         </section>
 
         {/* Servizi Inclusi */}

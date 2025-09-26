@@ -15,18 +15,18 @@ export const galleryData: GallerySection[] = [
   {
     titleKey: 'propriety.gallery.section1.title',
     mainImage: {
-  src: '/ingressoNotte/ingresso_nw.webp',
+  src: '/ingressoNotte/ingresso2.webp',
       altKey: 'propriety.gallery.section1.ingressoNotte.alt',
       
     },
     images: [
       {
-  src: '/ingressoNotte/ingresso1.webp',
+  src: '/ingressoNotte/ingresso_nw.webp',
         altKey: 'propriety.gallery.section1.image1.alt',
         
       },
       {
-  src: '/ingressoNotte/ingresso2.webp',
+  src: '/ingressoNotte/ingresso1.webp',
         altKey: 'propriety.gallery.section1.image2.alt'
       },
 
@@ -129,7 +129,7 @@ export const galleryData: GallerySection[] = [
   },
   {titleKey: 'propriety.gallery.section4.title',
     mainImage: {
-  src: '/openSpace/title.webp',
+  src: '/openSpace/open_new.webp',
       altKey: 'propriety.gallery.section4.mainImage.alt',
      },
     images: [
