@@ -16,6 +16,7 @@ import Accessibility from './pages/Accessibility';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { Analytics } from "@vercel/analytics/react";
+import GoogleAnalytics from "./utils/GoogleAnalytics";
 
 
 interface CookiePreferences {
@@ -52,7 +53,10 @@ function App() {
 
   return (
     <>
-      <Navbar />
+
+  {/* Google Analytics pageview tracking, solo se accettato */}
+  {preferences.analytics && <GoogleAnalytics />}
+  <Navbar />
 
       <Routes>
         <Route
