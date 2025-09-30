@@ -57,45 +57,33 @@ export const galleryData: GallerySection[] = [
   {
     titleKey: 'propriety.gallery.section2.title',
     mainImage: {
-  src: '/caneraVerde/verdett.webp',
+  src: '/cameraBlu/camera letto 1.1.webp',
       altKey: 'propriety.gallery.section2.mainImage.alt',
       
     },
     
     images: [
-      {
-  src: '/caneraVerde/verdett.webp',
-        altKey: 'propriety.gallery.section2.img1.alt',
-      },
-  { src: '/caneraVerde/verde2.webp',
-        altKey: 'propriety.gallery.section2.img2.alt'
-      },
-  { src: '/caneraVerde/verde3.webp',
-        altKey: 'propriety.gallery.section2.img3.alt'
-      },
-  { src: '/caneraVerde/verde4.webp',
-        altKey: 'propriety.gallery.section2.img4.alt'
-      },
-  { src: '/caneraVerde/verde5.webp',
-        altKey: 'propriety.gallery.section2.img5.alt'
-      },
-  { src: '/cameraBlu/camerablu1.webp',
+      
+  { src: '/cameraBlu/camera letto 1.2.webp',
         altKey: 'propriety.gallery.section2.img6.alt'
       },
-  { src: '/cameraBlu/camerablu2.webp',
+  { src: '/cameraBlu/camera letto 1.3.webp',
         altKey: 'propriety.gallery.section2.img7.alt'
       },
-  { src: '/cameraBlu/camerablu3.webp',
+  { src: '/cameraBlu/camera letto 1.4.webp',
         altKey: 'propriety.gallery.section2.img8.alt'
       },
-  { src: '/cameraBlu/camerablu4.webp',
+  { src: '/cameraBlu/camera letto 2.0.webp',
         altKey: 'propriety.gallery.section2.img9.alt'
       },
-  { src: '/cameraBlu/camerablu5.webp',
+  { src: '/cameraBlu/camera letto 2.1.webp',
         altKey: 'propriety.gallery.section2.img10.alt'
       },
-  { src: '/cameraBlu/camerablu6.webp',
+  { src: '/cameraBlu/camera letto 2.2.webp',
         altKey: 'propriety.gallery.section2.img11.alt'
+      },
+  { src: '/cameraBlu/camera letto 2.3.webp',
+        altKey: 'propriety.gallery.section2.img12.alt'
       }
     ]
   },
@@ -123,7 +111,17 @@ export const galleryData: GallerySection[] = [
       {
   src: '/cameraSingola/2_notte.webp',
         altKey: 'propriety.gallery.section3.img4.alt',
-      }
+      },
+      {
+  src: '/cameraSingola/singola 1.webp',
+        altKey: 'propriety.gallery.section3.img5.alt',
+        captionKey: 'propriety.gallery.section3.img5.caption',
+      },
+      {
+  src: '/cameraSingola/singola 2.webp',
+        altKey: 'propriety.gallery.section3.img6.alt',
+        captionKey: 'propriety.gallery.section3.img6.caption',
+      }    
     
     ]
   },
