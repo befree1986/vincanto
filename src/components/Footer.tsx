@@ -2,11 +2,26 @@ import React from 'react';
 import './Footer.css';
 import { useTranslation } from 'react-i18next';
 import { useCookieContext } from './CookieContext';
+import { useTranslationDebug } from '../hooks/useTranslationDebug';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   const { setShowPreferences } = useCookieContext();
+
+  useTranslationDebug([
+  'footer.privacyPolicy',
+  'footer.cookiePolicy',
+  'footer.termsConditions',
+  'footer.accessibility',
+  'footer.manageCookies',
+  'footer.legalInfo',
+  'footer.certified',
+  'footer.license',
+  'footer.cin',
+  'footer.rights',
+  'footer.webmaster'
+], 'Footer');
 
   return (
     <footer className="footer">
@@ -18,17 +33,17 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="footer-links">
-            <h4>{t('Link Veloci')}</h4>
+            <h4>{t('footer.quickLinks')}</h4>
             <ul>
-              <li><a href="#home">{t('Home')}</a></li>
-              <li><a href="#about">{t('Chi Siamo')}</a></li>
-              <li><a href="#proprieta">{t('La Proprietà')}</a></li>
-              <li><a href="#contact">{t('Contatti')}</a></li>
+              <li><a href="#home">{t('footer.home')}</a></li>
+              <li><a href="#about">{t('footer.about')}</a></li>
+              <li><a href="#proprieta">{t('footer.proprieta')}</a></li>
+              <li><a href="#contact">{t('footer.contactUs')}</a></li>
             </ul>
           </div>
 
           <div className="footer-contact">
-            <h4>{t('Contattaci')}</h4>
+            <h4>{t('footer.contactUs')}</h4>
             <p>Via Torre di Milo, 7</p>
             <p>84010 Maiori (SA)</p>
             <p>
@@ -44,7 +59,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="footer-social">
-            <h4>{t('Seguici')}</h4>
+            <h4>{t('footer.followUs')}</h4>
             <div className="social-icons-list">
               <a href="https://www.facebook.com/people/Vincanto-Maiori-Costiera-Amalfitana/61574880714522/" target="_blank" rel="noopener noreferrer" aria-label={t('Facebook')}>
                 <i className="fab fa-facebook-f"></i>
@@ -62,18 +77,18 @@ const Footer: React.FC = () => {
         <div className="footer-bottom">
           <div className="footer-paytourist-logo">
             <img src="/paytourist_logo.webp" alt="Paytourist" className="footer-paytourist-logo-img" />
-            <p>{t('Certificata dal Comune di Maiori')}</p>
-            <p>{t('Licenza SLSA000108-0026')}</p>
-            <p>{t('Licenza Regionale / CIN: IT065066C248Z362SX')}</p>
-            
-            <h4>{t('Informazioni Legali & Accessibilità')}</h4>
+            <p>{t('footer.certifiedBy')}</p>
+            <p>{t('footer.license')}</p>
+            <p>{t('footer.regionLicense')}</p>
+
+            <h4>{t('footer.legalInformation')}</h4>
             <p>
               <a
                 href="/privacy-policy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-link">
-                  Privacy Policy
+                  {t('footer.privacyPolicy')}
                 </a>
             </p>
             <p>
@@ -82,7 +97,7 @@ const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link">
-                Cookie Policy
+                {t('footer.cookiePolicy')}
                 </a>
             </p>
             <p>
@@ -90,7 +105,7 @@ const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link">
-                Termini e condizioni
+                {t('footer.terms')}
               </a>
             </p>
             <p>
@@ -98,7 +113,7 @@ const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link">
-                Accessibilità del sito
+                {t('footer.accessibility')}
               </a>
             </p>
             <p>
@@ -106,8 +121,8 @@ const Footer: React.FC = () => {
                 type="button"
                 onClick={() => setShowPreferences(true)}
                 className="footer-link"
-                > 
-                {t('Gestisci preferenze cookie')}
+                >
+                {t('footer.cookieSettings')}
               </button>
             </p>
           </div>

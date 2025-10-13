@@ -1,5 +1,104 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap');
 
+/* Tabelle e celle leggibili in modalità notte */
+.dark-theme table {
+  background-color: #23272a !important;
+  color: #ffeaa7 !important;
+  border-color: #444 !important;
+}
+.dark-theme th, .dark-theme td {
+  background-color: #23272a !important;
+  color: #ffeaa7 !important;
+  border-color: #444 !important;
+}
+.dark-theme th {
+  font-weight: bold;
+  color: #f9d423 !important;
+}
+.dark-theme tr {
+  border-bottom: 1px solid #444 !important;
+}
+/* Modalità notte globale */
+.dark-theme {
+  background-color: #181a1b !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-theme h1, .dark-theme h2, .dark-theme h3, .dark-theme h4, .dark-theme h5, .dark-theme h6 {
+  color: #f9d423 !important;
+}
+
+.dark-theme a {
+  color: #ffeaa7 !important;
+}
+.dark-theme a:hover {
+  color: #f9d423 !important;
+}
+
+.dark-theme .section {
+  background-color: #23272a !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-theme .btn {
+  background-color: #23272a !important;
+  color: #ffeaa7 !important;
+  border: 1px solid #ffeaa7 !important;
+}
+.dark-theme .btn:hover {
+  background-color: #f9d423 !important;
+  color: #23272a !important;
+}
+
+.dark-theme .btn-secondary {
+  background-color: transparent !important;
+  color: #ffeaa7 !important;
+  border: 2px solid #ffeaa7 !important;
+}
+.dark-theme .btn-secondary:hover {
+  background-color: #ffeaa7 !important;
+  color: #23272a !important;
+}
+
+.dark-theme .cookie-edit-btn {
+  background-color: #23272a !important;
+  color: #ffeaa7 !important;
+  border: 1px solid #ffeaa7 !important;
+}
+.dark-theme .cookie-edit-btn:hover {
+  background-color: #f9d423 !important;
+  color: #23272a !important;
+}
+
+.dark-theme .cookie-status {
+  color: #ffeaa7 !important;
+}
+
+.dark-theme .back-home-btn {
+  background-color: #23272a !important;
+  color: #ffeaa7 !important;
+  border: 2px solid #ffeaa7 !important;
+}
+.dark-theme .back-home-btn:hover {
+  background-color: #f9d423 !important;
+  color: #23272a !important;
+  border-color: #f9d423 !important;
+}
+
+.dark-theme .parallax-container {
+  background-color: #181a1b !important;
+}
+
+.dark-theme .theme-switcher-button {
+  background: #23272a !important;
+  color: #ffeaa7 !important;
+  border: 1px solid #ffeaa7 !important;
+}
+.dark-theme .theme-switcher-button:hover {
+  background: #f9d423 !important;
+  color: #23272a !important;
+}
+
 :root {
   --blue-dark: #1a365d;
   --blue-medium: #2c5282;

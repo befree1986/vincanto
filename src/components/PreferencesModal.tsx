@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './PreferencesModal.css';
 
 interface CookiePreferences {
+  essential?: boolean;
   analytics: boolean;
   marketing: boolean;
 }
@@ -25,7 +26,11 @@ const PreferencesModal: React.FC<PreferencesModalProps> = ({
   const [marketing, setMarketing] = useState(initialPreferences.marketing);
 
   const handleSave = () => {
-    onSave({ analytics, marketing });
+    onSave({
+      essential: initialPreferences.essential ?? true,
+      analytics,
+      marketing
+    });
     onClose();
   };
 

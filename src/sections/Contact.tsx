@@ -1,9 +1,8 @@
-import Seo from '../Seo';
 import React, { useState } from 'react';
 import './Contact.css';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-
+import { Helmet } from 'react-helmet';
 
 interface FormData {
   name: string;
@@ -83,15 +82,13 @@ const Contact: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Seo
-        title={t('VINCANTO | Contatti e Richieste')}
-        description={t('Contatta Vincanto per informazioni, richieste personalizzate o prenotazioni. Rispondiamo rapidamente a ogni esigenza di soggiorno a Maiori.')}
-        ogImage="/logo.svg"
-        canonical="https://www.vincantomaori.it/contact"
-      />
-      <section id="contact" className="contact-section">
+      <Helmet>
+        <title>{t('seo.contact.title')}</title>
+        <meta name="description" content={t('seo.contact.description')} />
+      </Helmet>
+     <section id="contact" className="contact-section">
       <div className="container">
-        <h2 className="section-title">{t('Contatti')}</h2>
+        <h2 className="section-title">{t('contacts.title')}</h2>
 
         <div className="contact-content">
           <div className="booking-form-container">
@@ -124,7 +121,7 @@ const Contact: React.FC = () => {
                     required
                     aria-required="true"
                     minLength={2}
-                    placeholder="Es. Mario Rossi"
+                    placeholder={t('contact.form.namePlaceholder')}
                   />
                 </div>
 
@@ -139,7 +136,7 @@ const Contact: React.FC = () => {
                       onChange={handleChange}
                       required
                       aria-required="true"
-                      placeholder="Es. mario.rossi@example.com"
+                      placeholder={t('contact.form.emailPlacehoder')}
                     />
                   </div>
                   <div className="form-group">
@@ -152,7 +149,7 @@ const Contact: React.FC = () => {
                       onChange={handleChange}
                       required
                       aria-required="true"
-                      placeholder="Es. +39 333 123 456 789"
+                      placeholder={t('contact.form.phonePlaceholder')}
                     />
                   </div>
                 </div>
@@ -166,7 +163,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     required
                     aria-required="true"
-                    aria-lebel="Seleziona il numero di ospiti"
+                    aria-label="Seleziona il numero di ospiti"
                   
                   >
                     <option value="">{t('Seleziona')}</option>
@@ -190,6 +187,8 @@ const Contact: React.FC = () => {
                       aria-required="true"
                       aria-label="Seleziona la data di arrivo"
                     />
+                    <small>{t('contact.form.dateHelp')}
+                    </small>
                   </div>
                   <div className="form-group">
                     <label htmlFor="checkout">{t('Data di Partenza')}</label>
@@ -215,7 +214,7 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     required
                     aria-required="true"
-                    placeholder="Richieste particolari, orari preferiti, ecc."
+                    placeholder={t('contact.form.messagePlaceholder')}
                   ></textarea>
                 </div>
 
@@ -243,19 +242,19 @@ const Contact: React.FC = () => {
           <div className="contact-info">
             <div className="contact-details">
                 <h3>
-                  {t('Contattaci')}
+                  {t('contacts.title.contact')}
                 </h3>
               <div className="contact-item">
                 <h4>
-                  {t('Indirizzo')}
+                  {t('contacts.address')}
                 </h4>
-                <p>Via Torre di Milo, 7</p>
-                <p>Maiori, (SA)</p>
-                <p>84010, Italia</p>
+                <p>{t('contacts.address.value')}</p>
+                <p>{t('contacts.city')}</p>
+                <p>{t('contacts.cap')}, {t('contacts.country')}</p>
               </div>
               <div className="contact-item">
                 <h4>
-                  {t('Telefono & Email')}
+                  {t('contacts.telephoneEmail')}
                 </h4>
                 <p>
                   <a href="tel:3331481677" className="footer-link">
@@ -268,10 +267,10 @@ const Contact: React.FC = () => {
               </div>
               <div className="contact-item">
                 <h4>
-                  {t('Trasporti')}
+                  {t('contacts.transports.title')}
                 </h4>
-                <p><strong>{t('Da Salerno')}:</strong> {t('Traghetto per Maiori (45 min) | Autobus (60 min)')}</p>
-                <p><strong>{t('Da Amalfi')}:</strong> {t('Autobus locale (40 min)')}</p>
+                <p><strong>{t('contacts.transports.salerno1')}:</strong> {t('contacts.transports.salerno')}</p>
+                <p><strong>{t('contacts.transports.amalfi1')}:</strong> {t('contacts.transports.amalfi')}</p>
               </div>
             </div>
             <div className="map-container">

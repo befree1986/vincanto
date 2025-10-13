@@ -1,21 +1,19 @@
-import Seo from '../Seo';
 import React from 'react';
 import ParallaxBackground from '../components/ParallaxBackground';
 import LemonDivider from '../components/LemonDivider';
 import Propriety from './Propriety';
 import './About.css';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 
 const About: React.FC = () => {
   const { t } = useTranslation();
   return (
-  <>
-      <Seo
-        title={t('VINCANTO | Chi Siamo')}
-        description={t('Scopri la storia, la filosofia e la posizione di Vincanto. Ospitalità autentica tra i limoni della Costiera Amalfitana, comfort e natura per il tuo soggiorno a Maiori.')}
-        ogImage="/logo.svg"
-        canonical="https://www.vincantomaori.it/about"
-      />
+  <React.Fragment>
+      <Helmet>
+        <title>{t('seo.about.title')}</title>
+        <meta name="description" content={t('seo.about.description')} />
+      </Helmet>
       <section id="about" className="about-section">
       <ParallaxBackground imageUrl="/lemon.webp">
         <div className="about-hero">
@@ -38,45 +36,45 @@ const About: React.FC = () => {
           <div className="location-info">
             <div className="location-text">
               <h4>
-                {t('La Nostra Posizione')}
+                {t('about.positionTitle')}
               </h4>
               <div style={{ marginTop: '1rem' }}> {/* Aggiunto div con marginTop */}
                 <p>
-                  {t('Situati a soli 2 km dal centro paese, godi della tranquillità della campagna con la comodità dei servizi vicini, facilmente raggiungibili anche grazie al servizio navetta comunale e ai bus di linea.')}
+                  {t('about.positionDesc1')}
                 </p>
                 <p>
-                  {t("L'accesso a VINCANTO avviene attraverso una scalinata di circa 200 gradini, un percorso suggestivo che si snoda nel verde. Consideriamo questi gradini parte del fascino autentico del luogo, un piccolo 'sentiero delle formichelle' che storicamente trasportavano i preziosi limoni. Salire ti ricompenserà con una vista impagabile e la sensazione di raggiungere un angolo di paradiso nascosto, lontano dalla frenesia quotidiana. È un invito a rallentare, a connettersi con la natura e a godere della pace che solo luoghi come questo sanno offrire.")}
+                  {t('about.positionDesc2')}
                 </p>
              </div>
               <div className="distances" style={{ marginTop: '1.5rem' }}>
                 {/* Riga 1 */}
                 <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
                   <div className="distance-item" style={{ width: '32%', marginRight: '2%' }}>
-                    <strong>{t('Maiori')}:</strong> {t('8 min dal porto di Maiori (6 min dal lungomare)')}
+                    <strong>{t('about.position.mai')}:</strong> {t('about.position.mai2')}
                   </div>
                   <div className="distance-item" style={{ width: '32%', marginRight: '2%' }}>
-                    <strong>{t('Amalfi')}:</strong> {t('20 min in auto')}
+                    <strong>{t('about.position.ama')}:</strong> {t('about.position.ama2')}
                   </div>
                   <div className="distance-item" style={{ width: '32%' }}>
-                    <strong>{t('Ravello')}:</strong> {t('20 min in auto')}
+                    <strong>{t('about.position.rav')}:</strong> {t('about.position.rav2')}
                   </div>
                 </div>
                 {/* Riga 2 */}
                 <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
                   <div className="distance-item" style={{ width: '32%', marginRight: '2%' }}>
-                    <strong>{t('Positano')}:</strong> {t('55 min in auto')}
+                    <strong>{t('about.position.pos')}:</strong> {t('about.position.pos2')}
                   </div>
                   <div className="distance-item" style={{ width: '32%', marginRight: '2%' }}>
-                    <strong>{t('Salerno')}:</strong> {t('45 min in auto')}
+                    <strong>{t('about.position.sal')}:</strong> {t('about.position.sal2')}
                   </div>
                   <div className="distance-item" style={{ width: '32%' }}>
-                    <strong>{t('Aeroporto di Napoli')}:</strong> {t('70 min in auto')}
+                    <strong>{t('about.position.nap')}:</strong> {t('about.position.nap2')}
                   </div>
                 </div>
                 {/* Riga 3 (con un solo elemento) */}
                 <div style={{ display: 'flex', justifyContent: 'flex-start', flexWrap: 'wrap' }}>
                   <div className="distance-item" style={{ width: '32%' }}>
-                    <strong>{t('Aeroporto di Salerno')}:</strong> {t('60 min in auto')}
+                    <strong>{t('about.position.sar')}:</strong> {t('about.position.sar2')}
                   </div>
                 </div>
               </div>
@@ -94,7 +92,7 @@ const About: React.FC = () => {
       
       <LemonDivider position="right" />
       </section>
-    </>
+    </React.Fragment>
   );
 };
 

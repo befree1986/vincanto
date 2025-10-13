@@ -55,7 +55,6 @@
   /* Applichiamo un'ombra più definita e un contorno bianco */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Ombra: offset-x, offset-y, blur-radius, color */
   -webkit-text-stroke-width: 1px; /* Spessore del contorno */
-  -webkit-text-stroke-color: rgba(58, 104, 255, 0.493);
 -webkit-text-stroke-color:rgba(194, 174, 174, 0.856);
   paint-order: stroke fill; /* Assicura che il riempimento sia sopra il contorno */
 }

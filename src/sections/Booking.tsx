@@ -1,4 +1,3 @@
-import Seo from '../Seo';
 import React from "react";
 import "./Booking.css";
 import LemonDivider from "../components/LemonDivider";
@@ -21,6 +20,8 @@ const BookingForm: React.FC = () => {
     },
   ];
 
+  const { t } = useTranslation();
+
   return (
     <div className="booking-showcase" role="region" aria-label="Piattaforme di prenotazione">
       <div className="logo-only-links">
@@ -31,7 +32,7 @@ const BookingForm: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="logo-link"
-            title={`Prenota su ${name}`}
+            title={`${t('section.booking.platformShowcase')} ${name}`}
           >
             <img
               src={logo}
@@ -50,28 +51,23 @@ const Booking: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-  <>
-      <Seo
-        title={t('VINCANTO | Prenota il tuo soggiorno')}
-        description={t('Prenota la tua vacanza a Maiori direttamente o tramite le principali piattaforme. Scopri disponibilità, offerte e servizi esclusivi di Vincanto.')}
-        ogImage="/logo.svg"
-        canonical="https://www.vincantomaori.it/booking"
-      />
-      <section id="booking" className="booking-section">
+  <React.Fragment>
+
+     <section id="booking" className="booking-section">
       <div className="container">
         <header>
           <h2 className="section-title underline-title titolo-sezione">
-            {t("Prenota il tuo Soggiorno")}
+            {t('section.booking.title')}
           </h2>
           <p className="section-subtitle booking-subtitle">
-            {t("Siamo presenti sulle principali piattaforme online.")}
+            {t('section.booking.subtitle')}
           </p>
         </header>
         <BookingForm />
       </div>
       <LemonDivider position="left" />
       </section>
-    </>
+    </React.Fragment>
   );
 };
 

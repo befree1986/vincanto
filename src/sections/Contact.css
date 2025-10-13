@@ -1,17 +1,17 @@
 .contact-section {
-  padding: 4rem 0;
-  background-color: #fff;
+  padding: var(--spacing-xxl, 4rem) 0;
+  background-color: var(--background-color, #fff);
   scroll-margin-top: 80px; /* Regola in base all'altezza del tuo header fisso */
 }
 
 .contact-section .section-title {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--spacing-xl, 2.5rem);
 }
 
 .contact-content {
   display: flex;
-  gap: 3rem;
+  gap: var(--spacing-xl, 3rem);
   align-items: center; /* Allinea verticalmente gli item (inclusa la linea) quando in riga, e orizzontalmente quando in colonna */
 }
 
@@ -19,17 +19,16 @@
 .contact-info {
   flex: 1;
 }
-
 .booking-form-container h3,
 .contact-info h3 {
-  font-size: 1.6rem;
-  margin-bottom: 1.5rem;
+  font-size: var(--font-size-xl, 1.6rem);
+  margin-bottom: var(--spacing-lg, 1.5rem);
   color: var(--blue-dark); /* O il colore che preferisci */
 }
 
 .booking-form .form-row { /* Stili specifici per il form di contatto se necessario */
   display: flex;
-  gap: 1.5rem;
+  gap: var(--spacing-lg, 1.5rem);
 }
 
 .booking-form .form-group {
@@ -39,7 +38,7 @@
 }
 
 .booking-form .form-group label {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-xs, 0.5rem);
   font-weight: 500;
 }
 
@@ -50,41 +49,41 @@
 .booking-form select,
 .booking-form textarea {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: var(--spacing-sm, 0.75rem);
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: var(--border-radius-md, 6px);
+  font-size: var(--font-size-base, 1rem);
 }
 
 .success-message {
-  padding: 1.5rem;
-  background-color: #e6ffed;
-  color: #2f6f4f;
-  border: 1px solid #b7e4c7;
-  border-radius: 6px;
+  padding: var(--spacing-lg, 1.5rem);
+  background-color: var(--success-bg, #e6ffed);
+  color: var(--success-text, #2f6f4f);
+  border: 1px solid var(--success-border, #b7e4c7);
+  border-radius: var(--border-radius-md, 6px);
   text-align: center;
 }
 
 .contact-details .contact-item {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-lg, 1.5rem);
 }
 
 .contact-details .contact-item h4 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  color: #444;
+  font-size: var(--font-size-md, 1.1rem);
+  margin-bottom: var(--spacing-xs, 0.5rem);
+  color: var(--text-color, #444);
 }
 
 .contact-details .contact-item p {
-  margin: 0.25rem 0;
-  color: #555;
+  margin: var(--spacing-xxs, 0.25rem) 0;
+  color: var(--text-color-secondary, #555);
 }
 
 .map-container {
-  margin-top: 2rem;
-  border-radius: 8px;
+  margin-top: var(--spacing-lg, 2rem);
+  border-radius: var(--border-radius-lg, 8px);
   overflow: hidden; /* Per far rispettare il border-radius all'iframe */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-md, 0 4px 15px rgba(0,0,0,0.1));
 }
 
 .map-iframe {
@@ -98,14 +97,14 @@
   height: 750px;                  /* Altezza della linea verticale - puoi aggiustare questo valore */
   background-color: var(--gray-light); /* Colore della linea */
   margin: 0; /* Il 'gap' del genitore .contact-content gestirà lo spazio attorno alla linea */
-  border-radius: 10px;
+  border-radius: var(--border-radius-full, 10px);
 }
 
 /* Responsive adjustments for Contact section */
 @media (max-width: 992px) { /* Tablet e inferiori */
   .contact-content {
     flex-direction: column;
-    gap: 2.5rem;
+    gap: var(--spacing-xl, 2.5rem);
     /* align-items: center; è ereditato e ora centra orizzontalmente gli item impilati */
   }
   .contact-divider {
@@ -117,27 +116,27 @@
   }
   .booking-form .form-row {
     flex-direction: column; /* Stack form groups in a row */
-    gap: 1.5rem; /* Mantieni il gap anche quando impilati */
+    gap: var(--spacing-lg, 1.5rem); /* Mantieni il gap anche quando impilati */
   }
   .booking-form-container h3,
   .contact-info h3 {
-    font-size: 1.4rem;
+    font-size: var(--font-size-lg, 1.4rem);
   }
   .discount-info {
-  font-size: 0.9em;
-  color: #555;
-  margin-left: 1rem;
+  font-size: var(--font-size-sm, 0.9em);
+  color: var(--text-color-secondary, #555);
+  margin-left: var(--spacing-md, 1rem);
 }
 
 .original-price {
   text-decoration: line-through;
-  color: #999;
-  margin-right: 0.5rem;
+  color: var(--text-color-muted, #999);
+  margin-right: var(--spacing-xs, 0.5rem);
 }
 
 .discounted-price {
   font-weight: bold;
-  color: #27ae60; /* Un colore verde per evidenziare lo sconto */
+  color: var(--success-color, #27ae60); /* Un colore verde per evidenziare lo sconto */
 }
 
 }

@@ -7,7 +7,7 @@ import Contact from './sections/Contact';
 import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
 import PreferencesModal from './components/PreferencesModal';
-import { CookieProvider } from './components/CookieContext';
+import { useCookieContext } from './components/CookieContext';
 import { ArrowUp } from 'lucide-react';
 import CookiePolicy from './pages/CookiePolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -17,99 +17,82 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "./utils/GoogleAnalytics";
+import SafeSeo from './components/SafeSeo';
 
 
-interface CookiePreferences {
-  analytics: boolean;
-  marketing: boolean;
-}
+
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-  const [preferences, setPreferences] = useState<CookiePreferences>({
-    analytics: false,
-    marketing: false,
-  });
-  const [hideBanner, setHideBanner] = useState(false);
-
-  useEffect(() => {
-    const savedPrefs = localStorage.getItem('cookiePreferences');
-    if (savedPrefs) {
-      setPreferences(JSON.parse(savedPrefs));
-      setHideBanner(true);
-    }
-  }, []);
-
-  const handleSavePreferences = (prefs: CookiePreferences) => {
-    setPreferences(prefs);
-    localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
-    console.log('Preferenze aggiornate:', prefs);
-    setHideBanner(true);
-  };
-
-  const handleAcceptAll = () => {
-    handleSavePreferences({ analytics: true, marketing: true });
-  };
+  const {
+    showBanner,
+    setShowBanner,
+    showPreferences,
+    setShowPreferences,
+    userPreferences,
+    setConsent,
+    savePreferences
+  } = useCookieContext() || {};
 
   return (
     <>
-
-  {/* Google Analytics pageview tracking, solo se accettato */}
-  {preferences.analytics && <GoogleAnalytics />}
-  <Navbar />
+      {/* Google Analytics pageview tracking, solo se accettato */}
+      {userPreferences?.analytics && <GoogleAnalytics />}
+      <Navbar />
 
       <Routes>
         <Route
-          path="/"
-          element={
-            <>
-              <Home />
-              <About />
-              <Booking />
-              <Contact />
-            </>
+          path="/" element={ <>
+          <SafeSeo
+            page="home"
+            ogImage="/logo.svg"
+            canonical="https://www.vincantomaori.it"
+          />
+          <Home />
+          <About />
+          <Booking />
+          <Contact />
+          </>
           }
-        />
+          />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-conditions" element={<TermsConditions />} />
         <Route path="/accessibility" element={<Accessibility />} />
       </Routes>
 
-      {hideBanner && !showModal && (
-        <div className="cookie-actions">
-          <button className="cookie-edit-btn" onClick={() => setShowModal(true)}>
-            Modifica preferenze cookie
-          </button>
-          <p className="cookie-status">
-            Preferenze attuali: Analytics {preferences.analytics ? '✔' : '❌'}, Marketing {preferences.marketing ? '✔' : '❌'}
-          </p>
-        </div>
-      )}
-
-      {showModal && (
-        <PreferencesModal
-          isOpen={showModal}
-          onClose={() => setShowModal(false)}
-          onSave={handleSavePreferences}
-          initialPreferences={preferences}
+      {showBanner && (
+        <CookieBanner
+          onClose={() => setShowBanner(false)}
+          onAccept={() => setConsent && setConsent(true)}
+          onCustomize={() => {
+            setShowPreferences && setShowPreferences(true);
+            setShowBanner && setShowBanner(false);
+          }}
         />
       )}
 
-      <CookieProvider>
-        {!hideBanner && (
-          <CookieBanner
-            onClose={() => setHideBanner(true)}
-            onAccept={handleAcceptAll}
-            onCustomize={() => {
-              setShowModal(true);
-              setHideBanner(true);
-            }}
-          />
-        )}
-        <Footer />
-      </CookieProvider>
+      {showPreferences && (
+        <PreferencesModal
+          isOpen={showPreferences}
+          onClose={() => setShowPreferences && setShowPreferences(false)}
+          onSave={(prefs) => {
+            if (savePreferences) {
+              savePreferences({
+                analytics: prefs.analytics,
+                marketing: prefs.marketing,
+                essential: prefs.essential !== undefined ? prefs.essential : true // ensure boolean
+              });
+            }
+          }}
+          initialPreferences={{
+            analytics: userPreferences?.analytics ?? false,
+            marketing: userPreferences?.marketing ?? false,
+            essential: userPreferences?.essential ?? true
+          }}
+        />
+      )}
 
+      <Footer />
       <BackToTopButton />
       <Analytics />
     </>

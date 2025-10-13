@@ -10,7 +10,7 @@ const resources = {
   it: { translation: translationIT },
   en: { translation: translationEN },
   de: { translation: translationDE },
-  fr: { translation: translationFR }, // Add French translations
+  fr: { translation: translationFR },
 };
 
 i18n
@@ -21,5 +21,15 @@ i18n
     fallbackLng: 'it',
     interpolation: { escapeValue: false },
   });
+
+// ✅ Funzione semplificata per proteggere le traduzioni
+export function getSafeTranslation(
+  t: (key: string) => string,
+  key: string,
+  fallback?: string
+): string {
+  const translated = t(key);
+  return translated === key ? fallback || key : translated;
+}
 
 export default i18n;

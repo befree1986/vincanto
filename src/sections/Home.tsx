@@ -3,20 +3,18 @@ import ParallaxBackground from '../components/ParallaxBackground';
 import LemonDivider from '../components/LemonDivider';
 import './Home.css';
 import { useTranslation } from 'react-i18next';
-import Seo from '../Seo';
-
+import { Helmet } from 'react-helmet';
 const Home: React.FC = () => {
   const { t } = useTranslation();
 
+  <Helmet>
+  <title>TEST | Titolo Manuale</title>
+</Helmet>
+
   return (
-    <>
-      <Seo
-        title={t('VINCANTO | Casa Vacanza Maiori')}
-        description={t('Vincanto è una Struttura immersa nei limoneti della Costiera Amalfitana a Maiori. Prenota il tuo soggiorno esclusivo, comfort e servizi premium. Ideale per famiglie e gruppi. Contattaci per offerte personalizzate.')}
-        ogImage="/logo.svg"
-        canonical="https://www.vincantomaori.it"
-      />
-      <section id="home" className="home-section">
+    <React.Fragment>
+      
+        <section id="home" className="home-section">
         <ParallaxBackground imageUrl="/welcome.webp">
           <div className="hero-content">
             <div className="hero-bar"></div>
@@ -34,10 +32,10 @@ const Home: React.FC = () => {
           <div className="welcome-section">
             <div className="welcome-text">
               <h2>
-                {t('Benvenuti a VINCANTO')}
+                {t('home.position.textTitle')}
               </h2>
               <p>
-                {t('una struttura ricettiva nata da una completa ristrutturazione e immerso nella quiete di un profumato limoneto. Qui lusso, comfort e natura si incontrano per offrirti un soggiorno rigenerante.')}
+                {t('home.position.text1')}
               </p>
               <a href="#about" className="btn">
                 {t('Scopri di più')}
@@ -73,7 +71,7 @@ const Home: React.FC = () => {
                 {t('Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.')}
               </p>
               <p>
-                {t('🤝 Il proprietario è sempre presente per garantire un\'accoglienza calorosa e un supporto costante durante la vostra permanenza')}
+                {t('home.position.DescP')}
               </p>
             </div>
             <div className="highlights-grid">
@@ -135,7 +133,7 @@ const Home: React.FC = () => {
         </div>
         <LemonDivider position="right" />
       </section>
-    </>
+    </React.Fragment>
   );
 };
 

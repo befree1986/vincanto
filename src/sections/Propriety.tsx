@@ -6,6 +6,7 @@ import '../styles/Propriety.base.css';
 import '../styles/Propriety.desktop.css';
 import '../styles/Propriety.mobile.css';
 import LemonDivider from '../components/LemonDivider';
+import { Helmet } from 'react-helmet';
 
 const Propriety: React.FC = () => {
   const { t } = useTranslation();
@@ -67,6 +68,10 @@ const Propriety: React.FC = () => {
   }, []);
     return (
     <section id="proprieta" className="proprieta-section">
+      <Helmet>
+        <title>{t('seo.propriety.title')}</title>
+        <meta name="description" content={t('seo.propriety.description')} />
+      </Helmet>
       <div className="container">
         {/* Titolo galleria */}
         <h2

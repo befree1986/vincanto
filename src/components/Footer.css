@@ -1,3 +1,27 @@
+/* Modalità notte per il footer */
+.dark-theme .footer {
+  background-color: #181a1b !important;
+  color: #ffeaa7 !important;
+}
+.dark-theme .footer h3,
+.dark-theme .footer h4 {
+  color: #f9d423 !important;
+}
+.dark-theme .footer a,
+.dark-theme .footer-links ul li a,
+.dark-theme .footer-bottom,
+.dark-theme .footer-contact p,
+.dark-theme .footer-paytourist-logo p,
+.dark-theme .footer-verfied-logo p {
+  color: #ffeaa7 !important;
+}
+.dark-theme .footer a:hover,
+.dark-theme .footer-links ul li a:hover {
+  color: #f9d423 !important;
+}
+.dark-theme .footer-bottom {
+  border-top: 1px solid #444 !important;
+}
 .footer {
   background-color: var(--blue-dark);
   color: var(--white);
