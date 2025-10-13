@@ -49,7 +49,13 @@ const Contact: React.FC = () => {
     if (formData.honeypot) return; // anti-bot trap
 
     if (!validateEmail(formData.email)) {
-      setErrorMsg('Email non valida');
+      setErrorMsg(t('contact.form.error.invalidEmail'));
+      return;
+    }
+
+    // Validazione date: la data di partenza deve essere successiva a quella di arrivo
+    if (formData.checkin && formData.checkout && formData.checkout <= formData.checkin) {
+      setErrorMsg(t('contact.form.error.invalidDate'));
       return;
     }
 
@@ -61,7 +67,7 @@ const Contact: React.FC = () => {
       setSubmitted(true);
     } catch (error) {
       console.error(error);
-      setErrorMsg(t('Si è verificato un errore. Riprova più tardi.'));
+      setErrorMsg(t('contact.form.error.generic'));
     }
 
     setTimeout(() => {
@@ -92,11 +98,11 @@ const Contact: React.FC = () => {
 
         <div className="contact-content">
           <div className="booking-form-container">
-            <h3>{t('Hai richieste particolari o domande?')}</h3>
+            <h3>{t('contact.form.title')}</h3>
 
             {submitted ? (
               <div className="success-message">
-                <p>{t('Grazie per la tua richiesta! Ti ricontatteremo al più presto.')}</p>
+                <p>{t('contact.form.success')}</p>
               </div>
             ) : (
               <form className="booking-form" onSubmit={handleSubmit} aria-label="Modulo di contatto per richieste o prenotazioni">
@@ -111,7 +117,7 @@ const Contact: React.FC = () => {
                 />
 
                 <div className="form-group">
-                  <label htmlFor="name">{t('Nome e Cognome')}</label>
+                  <label htmlFor="name">{t('contact.form.name')}</label>
                   <input
                     type="text"
                     id="name"
@@ -127,7 +133,7 @@ const Contact: React.FC = () => {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="email">{t('Email')}</label>
+                    <label htmlFor="email">{t('contact.form.email')}</label>
                     <input
                       type="email"
                       id="email"
@@ -140,7 +146,7 @@ const Contact: React.FC = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="phone">{t('Telefono')}</label>
+                    <label htmlFor="phone">{t('contact.form.phone')}</label>
                     <input
                       type="tel"
                       id="phone"
@@ -155,7 +161,7 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="guests">{t('Numero di Ospiti')}</label>
+                  <label htmlFor="guests">{t('contact.form.guests')}</label>
                   <select
                     id="guests"
                     name="guests"
@@ -166,7 +172,7 @@ const Contact: React.FC = () => {
                     aria-label="Seleziona il numero di ospiti"
                   
                   >
-                    <option value="">{t('Seleziona')}</option>
+                    <option value="">{t('contact.form.select')}</option>
                     <option value="1-2">1-2</option>
                     <option value="3-4">3-4</option>
                     <option value="5-6">5-6</option>
@@ -176,7 +182,7 @@ const Contact: React.FC = () => {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="checkin">{t('Data di Arrivo')}</label>
+                    <label htmlFor="checkin">{t('contact.form.checkin')}</label>
                     <input
                       type="date"
                       id="checkin"
@@ -191,7 +197,7 @@ const Contact: React.FC = () => {
                     </small>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="checkout">{t('Data di Partenza')}</label>
+                    <label htmlFor="checkout">{t('contact.form.checkout')}</label>
                     <input
                       type="date"
                       id="checkout"
@@ -205,7 +211,7 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="message">{t('Richieste Speciali')}</label>
+                  <label htmlFor="message">{t('contact.form.message')}</label>
                   <textarea
                     id="message"
                     name="message"
@@ -230,7 +236,7 @@ const Contact: React.FC = () => {
                   disabled={loading}
                   aria-busy={loading}
                 >
-                  {loading ? t('Invio in corso...') : t('Invia Richiesta')}
+                  {loading ? t('contact.form.sending') : t('contact.form.submit')}
                 </button>
               </form>
             )}
@@ -258,11 +264,11 @@ const Contact: React.FC = () => {
                 </h4>
                 <p>
                   <a href="tel:3331481677" className="footer-link">
-                <i className="fas fa-phone"></i> +39 333 148 1677 </a>
+                <i className="fas fa-phone" aria-hidden="true"></i> +39 333 148 1677 </a>
                 </p>
                 <p>
                   <a href="mailto:info@vincantomaiori.it" className="footer-link">
-                <i className="fas fa-envelope"></i> info@vincantomaiori.it </a>
+                <i className="fas fa-envelope" aria-hidden="true"></i> info@vincantomaiori.it </a>
                 </p>
               </div>
               <div className="contact-item">

@@ -139,6 +139,34 @@
   transition: all 0.3s ease;
 }
 
+.full-width-feature-card {
+  background: #f8f9fa;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.feature-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.feature-icon {
+  font-size: 2.0rem;
+  margin-right: 1rem;
+}
+
+.feature-title h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--blue-dark);
+}
+
 .highlight-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
@@ -150,6 +178,7 @@
 }
 
 .highlight-card h3 {
+  font-size: 1.2rem;
   margin-bottom: 1rem;
   color: var(--blue-dark);
 }

@@ -23,10 +23,10 @@ const About: React.FC = () => {
       <div className="container">
         <div className="about-content">
           <div className="about-description">
-            <h2>VINCANTO</h2>
-            <p className='proprieta-description' style={{ marginBottom: '2rem' }}>{t('about.longdesc1')}</p>
-            <p>{t('about.longdesc2')}</p>
-            <p className="proprieta-description" style={{ marginBottom: '2rem' }}>{t('about.longdesc3')}</p>
+            <h2 className="about-title">VINCANTO</h2>
+            <p className="proprieta-description">{t('about.longdesc1')}</p>
+            <p className="proprieta-description">{t('about.longdesc2')}</p>
+            <p className="proprieta-description">{t('about.longdesc3')}</p>
             <p>{t('about.longdesc4')}</p>
           </div>
           
@@ -38,7 +38,7 @@ const About: React.FC = () => {
               <h4>
                 {t('about.positionTitle')}
               </h4>
-              <div style={{ marginTop: '1rem' }}> {/* Aggiunto div con marginTop */}
+              <div className="location-description">
                 <p>
                   {t('about.positionDesc1')}
                 </p>
@@ -46,36 +46,22 @@ const About: React.FC = () => {
                   {t('about.positionDesc2')}
                 </p>
              </div>
-              <div className="distances" style={{ marginTop: '1.5rem' }}>
+              <div className="distances">
                 {/* Riga 1 */}
-                <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
-                  <div className="distance-item" style={{ width: '32%', marginRight: '2%' }}>
-                    <strong>{t('about.position.mai')}:</strong> {t('about.position.mai2')}
-                  </div>
-                  <div className="distance-item" style={{ width: '32%', marginRight: '2%' }}>
-                    <strong>{t('about.position.ama')}:</strong> {t('about.position.ama2')}
-                  </div>
-                  <div className="distance-item" style={{ width: '32%' }}>
-                    <strong>{t('about.position.rav')}:</strong> {t('about.position.rav2')}
-                  </div>
+                <div className="distances-row">
+                  <div className="distance-item"><strong>{t('about.position.mai')}:</strong> {t('about.position.mai2')}</div>
+                  <div className="distance-item"><strong>{t('about.position.ama')}:</strong> {t('about.position.ama2')}</div>
+                  <div className="distance-item"><strong>{t('about.position.rav')}:</strong> {t('about.position.rav2')}</div>
                 </div>
                 {/* Riga 2 */}
-                <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
-                  <div className="distance-item" style={{ width: '32%', marginRight: '2%' }}>
-                    <strong>{t('about.position.pos')}:</strong> {t('about.position.pos2')}
-                  </div>
-                  <div className="distance-item" style={{ width: '32%', marginRight: '2%' }}>
-                    <strong>{t('about.position.sal')}:</strong> {t('about.position.sal2')}
-                  </div>
-                  <div className="distance-item" style={{ width: '32%' }}>
-                    <strong>{t('about.position.nap')}:</strong> {t('about.position.nap2')}
-                  </div>
+                <div className="distances-row">
+                  <div className="distance-item"><strong>{t('about.position.pos')}:</strong> {t('about.position.pos2')}</div>
+                  <div className="distance-item"><strong>{t('about.position.sal')}:</strong> {t('about.position.sal2')}</div>
+                  <div className="distance-item"><strong>{t('about.position.nap')}:</strong> {t('about.position.nap2')}</div>
                 </div>
                 {/* Riga 3 (con un solo elemento) */}
-                <div style={{ display: 'flex', justifyContent: 'flex-start', flexWrap: 'wrap' }}>
-                  <div className="distance-item" style={{ width: '32%' }}>
-                    <strong>{t('about.position.sar')}:</strong> {t('about.position.sar2')}
-                  </div>
+                <div className="distances-row">
+                  <div className="distance-item"><strong>{t('about.position.sar')}:</strong> {t('about.position.sar2')}</div>
                 </div>
               </div>
             </div>
@@ -84,6 +70,7 @@ const About: React.FC = () => {
                 src="/contact3.webp" 
                 alt="Vista panoramica su Maiori e la Costiera Amalfitana" 
                 className="img-fluid"
+                loading="lazy"
               />
             </div>
           </div>

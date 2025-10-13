@@ -106,6 +106,7 @@ const Propriety: React.FC = () => {
                       src={section.mainImage.src}
                       alt={t(section.mainImage.altKey)}
                       className="img-fluid-main gallery-img"
+                      loading="lazy"
                     />
                     {(section.mainImage.captionKey ||
                       section.mainImage.captionText) && (

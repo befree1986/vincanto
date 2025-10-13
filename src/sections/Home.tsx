@@ -42,7 +42,7 @@ const Home: React.FC = () => {
               </a>
             </div>
             <div className="welcome-image">
-              <img src="/esterni/ingressoindex.webp" alt="Vincanto" className="img-fluid" />
+              <img src="/esterni/ingressoindex.webp" alt="Ingresso di Vincanto circondato da un limoneto" className="img-fluid" loading="lazy" />
             </div>
           </div>
 
@@ -52,22 +52,12 @@ const Home: React.FC = () => {
             </h2>
 
             {/* Sezione "Perfetta per Ogni Ospite" a tutta larghezza */}
-            <div 
-              className="full-width-feature-card" 
-              style={{ 
-                background: '#f8f9fa',
-                padding: '2rem',
-                marginBottom: '2.5rem',
-                borderRadius: '8px',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.05)',
-                textAlign: 'center',
-              }}
-            >
-              <div className="feature-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
-                <span className="feature-icon" style={{ fontSize: '2.0rem', marginRight: '1rem' }}>👨‍👩‍👧‍👦</span>
-                <h3 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 600 }}>{t('Perfetta per Ogni Ospite')}</h3>
+            <div className="full-width-feature-card" role="region" aria-labelledby="feature-card-title">
+              <div className="feature-title" >
+                <span className="feature-icon" aria-hidden="true">👨‍👩‍👧‍👦</span>
+                <h3 id="feature-card-title">{t('Perfetta per Ogni Ospite')}</h3>
               </div>
-              <p style={{ fontSize: '1.0rem', lineHeight: '1.65', color: '#333', margin: '0' }}>
+              <p>
                 {t('Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.')}
               </p>
               <p>
@@ -75,11 +65,11 @@ const Home: React.FC = () => {
               </p>
             </div>
             <div className="highlights-grid">
-              <div className="highlight-card" style={{ background: '#f8f9fa' }}>
-                <div className="highlight-icon">🛏</div>
-                <h2>
+              <div className="highlight-card">
+                <div className="highlight-icon" aria-hidden="true">🛏</div>
+                <h3>
                   {t('Comfort e accoglienza')}
-                </h2>
+                </h3>
                 <p>
                   {t('• 3 camere da letto climatizzate, luminose e arredate con gusto')}
                 </p>
@@ -90,11 +80,11 @@ const Home: React.FC = () => {
                   {t('• Smart TV in ogni camera per un intrattenimento completo')}
                 </p>
               </div>
-              <div className="highlight-card" style={{ background: '#f8f9fa' }}>
-                <div className="highlight-icon">🏠</div>
-                <h2>
+              <div className="highlight-card">
+                <div className="highlight-icon" aria-hidden="true">🏠</div>
+                <h3>
                   {t('Alloggio di Lusso')}
-                </h2>
+                </h3>
                 <p>
                   {t('• Zona giorno con ampio open space con divano letto e cucina completamente attrezzata')}
                 </p>
@@ -105,11 +95,11 @@ const Home: React.FC = () => {
                   {t('• Aria condizionata in ogni zona della struttura')}
                 </p>
               </div>
-              <div className="highlight-card" style={{ background: '#f8f9fa' }}>
-                <div className="highlight-icon">🌞</div>
-                <h2>
+              <div className="highlight-card">
+                <div className="highlight-icon" aria-hidden="true">🌞</div>
+                <h3>
                   {t('Spazi esterni esclusivi')}
-                </h2>
+                </h3>
                 <p>
                   {t('• Cucina esterna coperta per pranzi e cene all’aperto.')}
                 </p>
@@ -119,11 +109,11 @@ const Home: React.FC = () => {
                   {t('• Doccia esterna, perfetta per rinfrescarsi dopo una giornata di mare o escursioni')}
                 </p>
               </div>
-              <div className="highlight-card" style={{ background: '#f8f9fa' }}>
-                <div className="highlight-icon">📍</div>
-                <h2>
+              <div className="highlight-card">
+                <div className="highlight-icon" aria-hidden="true">📍</div>
+                <h3>
                   {t('Posizione Unica')}
-                </h2>
+                </h3>
                 <p>
                   {t('La struttura si trova in una zona collinare tranquilla, immersa nel verde. Accessibile tramite 200 gradini utilizzata dalle formichelle, trasporitatrice di limoni. Un’esperienza autentica e una vista indimenticabile, ideale per gli amanti della quiete.')}
                 </p>

@@ -13,16 +13,6 @@
   "contact.transports.salerno": "From Salerno: Ferry to Maiori (45 min) | Bus (60 min)",
   "contact.transports.amalfi": "From Amalfi: Local bus (40 min)",
   
-  "Hai richieste particolari o domande?": "Do you have any special requests or questions?",
-  "Nome e Cognome": "Name and Surname",
-  "Email": "Email",
-  "Telefono": "Telephone",
-  "Numero di Ospiti": "Number of Guests",
-  "Data di Arrivo": "Arrival Date",
-  "Data di Partenza": "Departure Date",
-  "Richieste Speciali": "Special Requests",
-  "Invia Richiesta":"Send Request",
-  
   "about":{
   "positionTitle": "Our Location",
   "positionDesc1": "Located just 2 km from the town center, enjoy the tranquility of the countryside with the convenience of nearby services, easily accessible thanks to the municipal shuttle service and local buses.",
@@ -43,11 +33,8 @@
   "position.sar2": "60 min by car"
   },
 
-  "tab.position.title": "VINCANTO | Holiday Home Maiori",
-  "Vincanto è una Struttura immersa nei limoneti della Costiera Amalfitana a Maiori. Prenota il tuo soggiorno esclusivo, comfort e servizi premium. Ideale per famiglie e gruppi. Contattaci per offerte personalizzate.": "Vincanto is a property nestled in the lemon groves of the Amalfi Coast in Maiori. Book your exclusive stay, comfort and premium services. Ideal for families and groups. Contact us for personalized offers.",
-  "Un angolo di paradiso tra i limoni della Costiera Amalfitana": "A corner of paradise among the lemons of the Amalfi Coast",
+  "hero-subtitle": "A corner of paradise among the lemons of the Amalfi Coast",
   "Prenota Ora": "Book Now",
-
   "home.position.textTitle": "Welcome to VINCANTO",
   "home.position.text1": "An exclusive accommodation born from a complete renovation and immersed in the tranquility of a fragrant lemon grove. Here, luxury, comfort, and nature meet to offer you a rejuvenating stay.",
   "Scopri di più": "Discover more",
@@ -58,8 +45,10 @@
   "Comfort e accoglienza": "Comfort and hospitality",
   "• 3 camere da letto climatizzate, luminose e arredate con gusto": "• 3 air-conditioned, bright, and tastefully furnished bedrooms",
   "• 3 bagni moderni di cui 2 con spaziosi piatti doccia": "• 3 modern bathrooms, 2 with spacious shower trays",
+  "• Smart TV in ogni camera per un intrattenimento completo": "• Smart TV in each room for complete entertainment",
+  "Alloggio di Lusso": "Luxury Accommodation",
   "• Zona giorno con ampio open space con divano letto e cucina completamente attrezzata": "• Living area with large open space, sofa bed, and fully equipped kitchen",
-  "• Wi-Fi gratuito in tutta la casa": "• Free Wi-Fi throughout the house",
+  "• Internet gratuito in tutta la casa con collegamento Wi-Fi veloce e ingressi Ethernet LAN": "• Free internet throughout the house with fast Wi-Fi connection and Ethernet LAN inputs",
   "• Aria condizionata in ogni zona della struttura": "• Air conditioning in every area of the property",
   "Spazi esterni esclusivi": "Exclusive outdoor spaces",
   "• Cucina esterna coperta per pranzi e cene all’aperto.": "• Covered outdoor kitchen for lunches and dinners al fresco.",
@@ -68,26 +57,6 @@
   "Posizione Unica": "Unique Location",
   "La struttura si trova in una zona collinare tranquilla, immersa nel verde. Accessibile tramite 200 gradini utilizzata dalle formichelle, trasporitatrice di limoni. Un’esperienza autentica e una vista indimenticabile, ideale per gli amanti della quiete.": "The property is located in a quiet hilly area, surrounded by greenery. Accessible via about 200 steps, historically used by the 'formichelle' (little ants), the women who transported lemons. An authentic experience and an unforgettable view, ideal for lovers of tranquility.",
   "Il Tuo angolo di Paradiso nel Limoneto": "Your corner of Paradise in the Lemon Grove",
-  "Link Veloci": "Quick Links",
-
-  "propriety.title": "The Property",
-  "propriety.intro": "VINCANTO is a holiday home born from a complete renovation, immersed in the tranquility of a fragrant lemon grove. Here, luxury, comfort, and nature meet to offer you a rejuvenating stay.",
-  "propriety.aboutTitle": "About VINCANTO",
-  "propriety.aboutSubtitle": "Your corner of paradise among the lemons of the Amalfi Coast",
-  "propriety.aboutDesc1": "Every detail of VINCANTO is designed to offer you an unforgettable stay. The interiors, completely renovated, combine contemporary design and quality materials: elegant porcelain stoneware floors and coverings, handmade Vietri ceramic wall lights, refined furnishings and high-quality finishes. The new PVC windows ensure silence and comfort, while the mosquito nets on doors and windows let you enjoy the country breeze in total relaxation.",
-  "propriety.aboutDesc2": "The property has two double bedrooms with King Size beds, one room with two single beds, all bright and welcoming, and three modern and functional bathrooms with large shower trays for maximum comfort and privacy. The open space kitchen, fully equipped, is perfect for sharing convivial moments and preparing your favorite dishes.",
-  "propriety.aboutDesc3": "Immersed in the fragrant heart of a typical lemon grove of the Amalfi Coast.",
-  "propriety.aboutDesc4": "Outside, guests can enjoy an outdoor kitchen, perfect for lunches and dinners under the pergola, overlooking the surrounding greenery. Completing the offer are an outdoor shower, a traditional wood-fired oven and a barbecue, ideal for convivial evenings surrounded by the scent of lemons and the sea.",
-  "propriety.positionTitle": "Our Location",
-  "propriety.positionDesc1": "Located just 2 km from the town center, enjoy the tranquility of the countryside with the convenience of nearby services, easily accessible thanks to the municipal shuttle service and local buses.",
-  "propriety.positionDesc2": "Access to VINCANTO is via a staircase of about 200 steps, a charming path winding through the greenery. We consider these steps part of the authentic charm of the place, a small 'formichelle path' historically used to transport precious lemons. Climbing up will reward you with an unbeatable view and the feeling of reaching a hidden paradise, far from the daily hustle. It's an invitation to slow down, connect with nature, and enjoy the peace that only places like this can offer.",
-  "propriety.position.mai": "Maiori: 8 min from Maiori port (6 min from the seafront)",
-  "propriety.position.ama": "Amalfi: 20 min by car",
-  "propriety.position.rav": "Ravello: 20 min by car",
-  "propriety.position.pos": "Positano: 55 min by car",
-  "propriety.position.sal": "Salerno: 45 min by car",
-  "propriety.position.nap": "Naples Airport: 70 min by car",
-  "propriety.position.sar": "Salerno Airport: 60 min by car ",
 
   "propriety.gallery.mainTitle": "Property Photos",
   "propriety.gallery.section1.title": "Entrance and Hallway",
@@ -98,7 +67,7 @@
   "propriety.gallery.section4.title": "Living Area and Kitchen",
   "propriety.gallery.section5.title": "Bathrooms",
   "propriety.gallery.section6.title": "Outdoor Areas",
- 
+
   "propriety.rates.title": "Our Rates",
   "propriety.rates.table.personsHeader": "Number of Guests",
   "propriety.rates.table.pricePerNightHeader": "Price per Night",
@@ -110,14 +79,6 @@
   "propriety.rates.table.price5to6": "€ 30 per person",
   "propriety.rates.table.persons7to8": "7 to 8",
   "propriety.rates.table.price7to8": "€ 30 per person",
-  "propriety.rates.note1": "Minimum stay: 2 nights (all year round)",
-  "propriety.rates.note2": "Weekly stays (7 nights) from Sunday to Sunday only during the summer period (11 to 24 August)",
-  "propriety.rates.note3": "Final cleaning (mandatory): €40",
-  "propriety.rates.note4": "Tourist tax: €2.00 per person per night (over 12 years old, up to 5 nights)",
-  "propriety.rates.note5": "Exempt: children under 12, disabled guests and their companions, drivers and guides of tourist groups.",
-  "propriety.rates.note6": "The tax is payable on site, in cash, at check-in.",
-  "propriety.rates.note7": "For all details, please consult the website of the Municipality of Maiori or the dedicated PayTourist portal.",
-  "propriety.rates.note8": "Reserved and guarded parking space at €15/day (on request)",
   
   "propriety.rates.touristTaxCost": "Tourist tax: €2.00 per person per night (over 12 years old, up to 5 nights)",
   "propriety.rates.touristTaxExemptions": "Exempt: children under 12, disabled guests and their companions, drivers and guides of tourist groups.",
@@ -133,7 +94,7 @@
   "section.booking.rules.minoriTitle": "Children 0–3 years",
   "section.booking.rules.minoriList1": "For children aged 0 to 3 years, the stay is free.",
   "section.booking.rules.summerTitle": "Summer Period",
-  "section.booking.rules.summerList1": "From 11 to 24 August, only weekly bookings from Sunday to Sunday are accepted.",
+  "section.booking.rules.summerList1": "From August 11th to 24th, only weekly bookings from Sunday to Sunday are accepted.",
   "section.booking.rules.allYearTitle": "All Year Round",
   "section.booking.rules.allYearList1": "The minimum stay throughout the year is 2 nights.",
   "section.booking.rules.checkinoutTitle": "Check-in and Check-out",
@@ -162,7 +123,7 @@
   
   "section.extraCosts.title": "💰 Extra Costs (not included)",
   "section.extraCosts.mandatoryTitle": "Mandatory",
-  "section.extraCosts.mandatoryList1": "Final cleaning (mandatory): €30",
+  "section.extraCosts.mandatoryList1": "Mandatory final cleaning: €40",
   "section.extraCosts.mandatoryList2": "Tourist tax according to municipal regulations",
   "section.extraCosts.onRequestTitle": "On request",
   "section.extraCosts.onRequestList1": "Reserved and guarded parking space at €15/day"
@@ -176,21 +137,42 @@
   "cookie.acceptAll": "Accept All",
   "cookie.acceptEssential": "Accept Essentials",
   "cookie.customize": "Customize",
-  
-  "Seleziona": "Select",
-  
+
+  "contact.form.title": "Do you have any special requests or questions?",
+  "contact.form.name": "Name and Surname",
+  "contact.form.email": "Email",
+  "contact.form.phone": "Telephone",
+  "contact.form.guests": "Number of Guests",
+  "contact.form.checkin": "Arrival Date",
+  "contact.form.checkout": "Departure Date",
+  "contact.form.message": "Special Requests",
+  "contact.form.submit": "Send Request",
+  "contact.form.sending": "Sending...",
+  "contact.form.success": "Thank you for your request! We will contact you as soon as possible.",
+  "contact.form.error.invalidEmail": "Invalid email",
+  "contact.form.error.generic": "An error occurred. Please try again later.",
+  "contact.form.error.invalidDate": "The departure date must be after the arrival date.",
+  "contact.form.select": "Select",
   "contact.form.namePlaceholder": "E.g. David Brown",
   "contact.form.phonePlaceholder": "+44 333 123 456 789",
   "contact.form.emailPlacehoder": "E.g. david.brown@example.com",
   "contact.form.messagePlaceholder":"Special requests, preferred times, etc.",
   "contact.form.dateHelp": "dd/mm/yyyy",
 
+  "seo": {
+    "home.title": "VINCANTO | Maiori - Amalfi Coast",
+    "home.description": "Vincanto is a property nestled in the lemon groves of the Amalfi Coast in Maiori. Book your exclusive stay, comfort and premium services. Ideal for families and groups. Contact us for personalized offers.",
+    "about.title": "VINCANTO | About Us",
+    "about.description": "Discover the history of Vincanto, our mission, and the values that guide us. A place where luxury, comfort, and nature meet to offer you a rejuvenating stay.",
+    "propriety.title": "VINCANTO | The Property",
+    "propriety.description": "Explore our property, rooms, services, and rates. Discover why Vincanto is the ideal choice for your stay on the Amalfi Coast.",
+    "contact.title": "VINCANTO | Contacts and Inquiries",
+    "contact.description": "Contact us for reservations, questions, or special requests. We are here to help you plan your perfect stay at Vincanto."
+  },
+
   "contacts":{
     "title": "Contact",
     "title.contact": "Contact Us",
-    "address" : "Via Limoneto, 10",
-    "city": "Maiori (SA)",
-    "cap": "84010",
     "telephoneEmail": "Telefono & Email",
     "transports":{
       "title": "Transports",
@@ -198,7 +180,6 @@
       "amalfi": "From Amalfi: Local bus (40 min)"
     }
   },
-
 
   "footer": {
     "followUs": "Follow Us",
@@ -208,7 +189,7 @@
     "contactUs": "Contact Us",
     "home": "Home",
     "about": "About Us",
-    "proprieta": "The Property",
+    "proprieta": "Property",
     "contact": "Contact",
     "quickLinks": "Quick Links",
     "certifiedBy": "Certified by the Municipality of Maiori",
@@ -219,7 +200,6 @@
     "cookiePolicy": "Cookie Policy",
     "terms": "Terms and Conditions",
     "accessibility": "Site Accessibility",
-    "cookieSettings": "Manage Cookie Preferences",
-    "allRightsReserved": "All rights reserved."
+    "cookieSettings": "Manage Cookie Preferences"
   }
 }

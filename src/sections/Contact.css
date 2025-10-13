@@ -64,6 +64,16 @@
   text-align: center;
 }
 
+.error-message {
+  padding: var(--spacing-md, 1rem);
+  margin-bottom: var(--spacing-lg, 1.5rem);
+  background-color: var(--error-bg, #ffebee);
+  color: var(--error-text, #c62828);
+  border: 1px solid var(--error-border, #ef9a9a);
+  border-radius: var(--border-radius-md, 6px);
+  text-align: center;
+}
+
 .contact-details .contact-item {
   margin-bottom: var(--spacing-lg, 1.5rem);
 }
