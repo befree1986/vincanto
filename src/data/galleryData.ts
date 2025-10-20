@@ -1,5 +1,6 @@
 export interface GalleryImage {
   src: string;
+  srcSet?: string;
   altKey: string;
   captionKey?: string;
   captionText?: string;

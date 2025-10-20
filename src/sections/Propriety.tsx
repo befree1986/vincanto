@@ -6,6 +6,9 @@ import '../styles/Propriety.base.css';
 import '../styles/Propriety.desktop.css';
 import '../styles/Propriety.mobile.css';
 import LemonDivider from '../components/LemonDivider';
+import Image from '../components/Image';
+import Lightbox from '../components/Lightbox';
+import InfoSection from '../components/InfoSection';
 import { Helmet } from 'react-helmet';
 
 const Propriety: React.FC = () => {
@@ -68,10 +71,37 @@ const Propriety: React.FC = () => {
   }, []);
     return (
     <section id="proprieta" className="proprieta-section">
+      {/* SEO e Dati Strutturati (JSON-LD) */}
       <Helmet>
         <title>{t('seo.propriety.title')}</title>
         <meta name="description" content={t('seo.propriety.description')} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "VacationRental",
+            "name": "Vincanto",
+            "description": t('seo.propriety.description'),
+            "url": "https://www.vincantomaiori.it/",
+            "image": [
+              "https://www.vincantomaiori.it/ingressoNotte/ingresso2.webp",
+              "https://www.vincantomaiori.it/openSpace/open_new.webp",
+              "https://www.vincantomaiori.it/esterni/ingressoindex.webp"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Via Torre di Milo, 7",
+              "addressLocality": "Maiori",
+              "addressRegion": "SA",
+              "postalCode": "84010",
+              "addressCountry": "IT"
+            },
+            "telephone": "+393331481677",
+            "email": "info@vincantomaiori.it",
+            "priceRange": "€150 - €330"
+          })}
+        </script>
       </Helmet>
+
       <div className="container">
         {/* Titolo galleria */}
         <h2
@@ -97,22 +127,23 @@ const Propriety: React.FC = () => {
                   {t(section.titleKey)}
                 </h3>
 
-                {section.mainImage && (
+                {allImages.length > 0 && (
                   <div
                     className="gallery-main-image-card"
-                    onClick={() => openLightbox(allImages, 0)}
+                    onClick={() => openLightbox(allImages, allImages.indexOf(section.mainImage || allImages[0]))}
                   >
-                    <img
-                      src={section.mainImage.src}
-                      alt={t(section.mainImage.altKey)}
+                    <Image
+                      src={(section.mainImage || allImages[0]).src}
+                      alt={t((section.mainImage || allImages[0]).altKey)}
+                      srcSet={(section.mainImage || allImages[0]).srcSet}
                       className="img-fluid-main gallery-img"
-                      loading="lazy"
+                      loading="lazy" // Gestito dal componente Image, ma lo lasciamo per chiarezza
                     />
-                    {(section.mainImage.captionKey ||
-                      section.mainImage.captionText) && (
+                    {((section.mainImage || allImages[0]).captionKey ||
+                      (section.mainImage || allImages[0]).captionText) && (
                       <p className="image-caption">
-                        {section.mainImage.captionText ||
-                          t(section.mainImage.captionKey!)}
+                        {(section.mainImage || allImages[0]).captionText ||
+                          t((section.mainImage || allImages[0]).captionKey!)}
                       </p>
                     )}
                   </div>
@@ -123,66 +154,15 @@ const Propriety: React.FC = () => {
         </div>
 
         {/* Lightbox */}
-        {isLightboxOpen && lightboxImages.length > 0 && (
-          <div className="lightbox-overlay" onClick={closeLightbox}>
-            <div
-              className="lightbox-content"
-              onClick={(e) => e.stopPropagation()}
-              onTouchStart={(e) => {
-               touchStartX.current = e.changedTouches[0].clientX;
-  }}
-               onTouchEnd={(e) => {
-                const delta = e.changedTouches[0].clientX - touchStartX.current;
-                if (Math.abs(delta) > 50) {
-                if (delta > 0) showPrevImage();
-                else showNextImage();
-    }
-  }}
->
-              <button
-                className="lightbox-close"
-                onClick={closeLightbox}
-              >
-                &times;
-              </button>
-              {lightboxImages.length > 1 && (
-                <>
-                  <button
-                    className="lightbox-prev"
-                    onClick={showPrevImage}
-                  >
-                    &#10094;
-                  </button>
-                  <button
-                    className="lightbox-next"
-                    onClick={showNextImage}
-                  >
-                    &#10095;
-                  </button>
-                </>
-              )}
-              <img
-                src={lightboxImages[currentImageIndex].src}
-                alt={t(lightboxImages[currentImageIndex].altKey)}
-                className="lightbox-img"
-              />
-              {lightboxImages.length > 1 && (
-              <div className="lightbox-indicator">
-               {currentImageIndex + 1} / {lightboxImages.length}
-              </div>
-)}
-              {(lightboxImages[currentImageIndex].captionKey ||
-                lightboxImages[currentImageIndex].captionText) && (
-                <div className="lightbox-caption">
-                  {lightboxImages[currentImageIndex].captionText ||
-                    t(
-                      lightboxImages[currentImageIndex]
-                        .captionKey!
-                    )}
-                </div>
-              )}
-            </div>
-          </div>
+        {isLightboxOpen && (
+          <Lightbox
+            images={lightboxImages}
+            currentIndex={currentImageIndex}
+            onClose={closeLightbox}
+            onPrev={showPrevImage}
+            onNext={showNextImage}
+            touchStartXRef={touchStartX}
+          />
         )}
                 {/* Tabella Tariffe */}
         <h2
@@ -221,99 +201,55 @@ const Propriety: React.FC = () => {
         </div>
 
         {/* Regole di Prenotazione */}
-        <section className="booking-rules">
-          <h2 className="section-title">{t('section.booking.rules.title')}</h2>
-
-          <div className="rule-group">
-            <h4 className="section-subtitle">{t('section.booking.rules.minoriTitle')}</h4>
-            <ul className="section-list">
-              <li>{t('section.booking.rules.minoriList1')}</li>
-            </ul>
-          </div>
-
-          <div className="rule-group">
-            <h4 className="section-subtitle">{t('section.booking.rules.summerTitle')}</h4>
-            <ul className="section-list">
-              <li>{t('section.booking.rules.summerList1')}</li>
-            </ul>
-          </div>
-
-          <div className="rule-group">
-            <h4 className="section-subtitle">{t('section.booking.rules.allYearTitle')}</h4>
-            <ul className="section-list">
-              <li>{t('section.booking.rules.allYearList1')}</li>
-            </ul>
-          </div>
-
-          <div className="rule-group">
-            <h4 className="section-subtitle">{t('section.booking.rules.checkinoutTitle')}</h4>
-            <ul className="section-list">
-              <li>{t('section.booking.rules.checkinoutList1')}</li>
-              <li>{t('section.booking.rules.checkinoutList2')}</li>
-            </ul>
-          </div>
-
-          <div className="rule-group">
-            <h4 className="section-subtitle">{t('section.booking.rules.paymentTitle')}</h4>
-            <ul className="section-list">
-              <li>{t('section.booking.rules.paymentList1')}</li>
-            </ul>
-          </div>
-        </section>
+        <InfoSection
+          className="booking-rules"
+          titleKey="section.booking.rules.title"
+          items={[
+            'section.booking.rules.minoriList1',
+            'section.booking.rules.summerList1',
+            'section.booking.rules.allYearList1',
+            'section.booking.rules.checkinoutList1',
+            'section.booking.rules.checkinoutList2',
+            'section.booking.rules.paymentList1',
+          ]}
+        />
 
         {/* Servizi Inclusi */}
-        <section className="included-services">
-          <h2 className="section-title">{t('section.includedServices.title')}</h2>
-
-          <div className="service-group">
-            <h4 className="section-subtitle">{t('section.includedServices.comfortTitle')}</h4>
-            <ul className="section-list">
-              <li>{t('section.includedServices.comfortList1')}</li>
-              <li>{t('section.includedServices.comfortList2')}</li>
-              <li>{t('section.includedServices.comfortList3')}</li>
-              <li>{t('section.includedServices.comfortList4')}</li>
-              <li>{t('section.includedServices.comfortList5')}</li>
-              <li>{t('section.includedServices.comfortList6')}</li>
-              <li>{t('section.includedServices.comfortList7')}</li>
-              <li>{t('section.includedServices.comfortList8')}</li>
-              <li>{t('section.includedServices.comfortList9')}</li>
-              <li>{t('section.includedServices.comfortList10')}</li>
-              <li>{t('section.includedServices.comfortList11')}</li>
-              <li>{t('section.includedServices.comfortList12')}</li>
-            </ul>
-          </div>
-
-          <div className="service-group">
-            <h4 className="section-subtitle">{t('section.includedServices.connectivityTitle')}</h4>
-            <ul className="section-list">
-              <li>{t('section.includedServices.connectivityList1')}</li>
-              <li>{t('section.includedServices.connectivityList2')}</li>
-            </ul>
-          </div>
-        </section>
+        <InfoSection
+          className="included-services"
+          titleKey="section.includedServices.title"
+          items={[
+            'section.includedServices.comfortList1',
+            'section.includedServices.comfortList2',
+            'section.includedServices.comfortList3',
+            'section.includedServices.comfortList4',
+            'section.includedServices.comfortList5',
+            'section.includedServices.comfortList6',
+            'section.includedServices.comfortList7',
+            'section.includedServices.comfortList8',
+            'section.includedServices.comfortList9',
+            'section.includedServices.comfortList10',
+            'section.includedServices.comfortList11',
+            'section.includedServices.comfortList12',
+            'section.includedServices.connectivityList1',
+            'section.includedServices.connectivityList2',
+          ]}
+        />
 
         {/* Costi Extra */}
-        <section className="extra-costs">
-          <h2 className="section-title">{t('section.extraCosts.title')}</h2>
-
-          <div className="cost-group">
-            <h4 className="section-subtitle">{t('section.extraCosts.mandatoryTitle')}</h4>
-            <ul className="section-list">
-              <li>{t('section.extraCosts.mandatoryList1')}</li>
-              <li>{t('section.extraCosts.mandatoryList2')}</li>
-            </ul>
-          </div>
-
-          <div className="cost-group">
-            <h4 className="section-subtitle">{t('section.extraCosts.onRequestTitle')}</h4>
-            <ul className="section-list">
-              <li>{t('section.extraCosts.onRequestList1')}</li>
-            </ul>
-          </div>
-        </section>
+        <InfoSection
+          className="extra-costs"
+          titleKey="section.extraCosts.title"
+          items={[
+            'section.extraCosts.mandatoryList1',
+            'section.extraCosts.mandatoryList2',
+            'section.extraCosts.onRequestList1',
+          ]}
+        />
 
         {/* Info Tassa di Soggiorno */}
         <div className="tariffe-note">
+          <h3 className="section-subtitle">{t('propriety.rates.touristTaxTitle')}</h3>
           <p>{t('propriety.rates.touristTaxCost')}</p>
           <p>{t('propriety.rates.touristTaxExemptions')}</p>
           <p>{t('propriety.rates.touristTaxPaymentInfo')}</p>

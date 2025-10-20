@@ -2,26 +2,11 @@ import React from 'react';
 import './Footer.css';
 import { useTranslation } from 'react-i18next';
 import { useCookieContext } from './CookieContext';
-import { useTranslationDebug } from '../hooks/useTranslationDebug';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
-  const { setShowPreferences } = useCookieContext();
-
-  useTranslationDebug([
-  'footer.privacyPolicy',
-  'footer.cookiePolicy',
-  'footer.termsConditions',
-  'footer.accessibility',
-  'footer.manageCookies',
-  'footer.legalInfo',
-  'footer.certified',
-  'footer.license',
-  'footer.cin',
-  'footer.rights',
-  'footer.webmaster'
-], 'Footer');
+  const { setShowPreferences } = useCookieContext() || {};
 
   return (
     <footer className="footer">

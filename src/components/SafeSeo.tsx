@@ -20,15 +20,8 @@ const SafeSeo: React.FC<SafeSeoProps> = ({ page, ogImage, canonical }) => {
     ogImage={ogImage}
    canonical={canonical}
 
-   
-/>
+    />
   );
-  console.log('SEO DEBUG:', {
-  page,
-  title: getSafeTranslation(t, `seo.${page}.title`, content.title),
-  description: getSafeTranslation(t, `seo.${page}.description`, content.description),
-});
-
 };
 
 

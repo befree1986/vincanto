@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Contact.css';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { Helmet } from 'react-helmet';
 
 interface FormData {
@@ -12,6 +13,7 @@ interface FormData {
   checkin: string;
   checkout: string;
   message: string;
+  hcaptchaToken: string;
   honeypot?: string; // campo anti-spam invisibile
 }
 
@@ -26,12 +28,14 @@ const Contact: React.FC = () => {
     checkin: '',
     checkout: '',
     message: '',
+    hcaptchaToken: '',
     honeypot: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const captchaRef = React.useRef<HCaptcha>(null);
 
   const validateEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -41,6 +45,10 @@ const Contact: React.FC = () => {
   ) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const onHCaptchaChange = (token: string) => {
+    setFormData(prev => ({ ...prev, hcaptchaToken: token }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -65,7 +73,10 @@ const Contact: React.FC = () => {
     try {
       await axios.post('/api/contact-request', formData);
       setSubmitted(true);
+      // Resetta il captcha dopo l'invio
+      captchaRef.current?.resetCaptcha();
     } catch (error) {
+      captchaRef.current?.resetCaptcha();
       console.error(error);
       setErrorMsg(t('contact.form.error.generic'));
     }
@@ -79,6 +90,7 @@ const Contact: React.FC = () => {
         checkin: '',
         checkout: '',
         message: '',
+        hcaptchaToken: '',
         honeypot: ''
       });
       setSubmitted(false);
@@ -204,7 +216,8 @@ const Contact: React.FC = () => {
                       name="checkout"
                       value={formData.checkout}
                       onChange={handleChange}
-                      requiredaria-required="true"
+                      required
+                      aria-required="true"
                       aria-label="Seleziona la data di partenza"
                     />
                   </div>
@@ -223,6 +236,12 @@ const Contact: React.FC = () => {
                     placeholder={t('contact.form.messagePlaceholder')}
                   ></textarea>
                 </div>
+
+                <HCaptcha
+                  sitekey={import.meta.env.VITE_HCAPTCHA_SITEKEY as string}
+                  onVerify={onHCaptchaChange}
+                  ref={captchaRef}
+                />
 
                 {errorMsg && (
                   <p className="error-message" role="alert">

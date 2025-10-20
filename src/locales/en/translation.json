@@ -1,8 +1,35 @@
- {
-  
+ 
+ {  
   "booking.title": "Book Your Stay",
   "booking.platforms": "We are present on the main online platforms.",
   "contact.address": "Address",
+  "booking.steps.step1": "1. Select Dates",
+  "booking.steps.step2": "2. Choose Guests",
+  "booking.form.adults": "Adults",
+  "booking.form.children": "Children (4-12 years)",
+  "booking.form.parking": "Parking space (€15/day)",
+  "booking.form.coupon": "Have a discount code?",
+  "booking.form.couponPlaceholder": "Enter code",
+  "booking.form.name": "Full Name",
+  "booking.form.email": "Email",
+  "booking.form.phone": "Phone (optional)",
+  "booking.form.bookNow": "Confirm and Book",
+  "booking.summary.title": "Quote Summary",
+  "booking.summary.nights_one": "{{count}} night",
+  "booking.summary.nights_other": "{{count}} nights",
+  "booking.summary.discount": "Discount applied",
+  "booking.summary.originalPrice": "Original price",
+  "booking.summary.cleaning": "Final cleaning",
+  "booking.summary.parking": "Parking",
+  "booking.summary.touristTax": "Tourist tax",
+  "booking.confirmation.title": "Booking Request Sent!",
+  "booking.confirmation.message": "Thank you! Your booking request has been sent. You will receive a confirmation email shortly with details for the deposit payment.",
+  "booking.errors.title": "Booking Error",
+  "booking.summary.total": "Total",
+  "booking.summary.deposit": "Deposit (30%)",
+  "booking.errors.priceCalculation": "Could not calculate price. Please try again.",
+  "booking.steps.selectDates": "1. Select Dates",
+  "booking.calendar.loading": "Loading availability...",
   "contact.address.value": "Via Torre di Milo, 7",
   "contact.city": "Maiori, (SA)",
   "contact.cap": "84010, Italy",
@@ -12,8 +39,9 @@
   "contact.transports": "Transports",
   "contact.transports.salerno": "From Salerno: Ferry to Maiori (45 min) | Bus (60 min)",
   "contact.transports.amalfi": "From Amalfi: Local bus (40 min)",
-  
-  "about":{
+  "booking.errors.contactButton": "Contact us for assistance",
+
+  "about": {
   "positionTitle": "Our Location",
   "positionDesc1": "Located just 2 km from the town center, enjoy the tranquility of the countryside with the convenience of nearby services, easily accessible thanks to the municipal shuttle service and local buses.",
   "positionDesc2": "Access to VINCANTO is via a staircase of about 200 steps, a charming path winding through the greenery. We consider these steps part of the authentic charm of the place, a small 'formichelle path' historically used to transport precious lemons. Climbing up will reward you with an unbeatable view and the feeling of reaching a hidden paradise, far from the daily hustle. It's an invitation to slow down, connect with nature, and enjoy the peace that only places like this can offer.",
@@ -164,6 +192,8 @@
     "home.description": "Vincanto is a property nestled in the lemon groves of the Amalfi Coast in Maiori. Book your exclusive stay, comfort and premium services. Ideal for families and groups. Contact us for personalized offers.",
     "about.title": "VINCANTO | About Us",
     "about.description": "Discover the history of Vincanto, our mission, and the values that guide us. A place where luxury, comfort, and nature meet to offer you a rejuvenating stay.",
+    "booking.seo.title": "VINCANTO | Book Your Stay",
+    "booking.seo.description": "Check availability and book your stay at Vincanto directly. Simple, fast, and secure.",
     "propriety.title": "VINCANTO | The Property",
     "propriety.description": "Explore our property, rooms, services, and rates. Discover why Vincanto is the ideal choice for your stay on the Amalfi Coast.",
     "contact.title": "VINCANTO | Contacts and Inquiries",
@@ -200,6 +230,9 @@
     "cookiePolicy": "Cookie Policy",
     "terms": "Terms and Conditions",
     "accessibility": "Site Accessibility",
-    "cookieSettings": "Manage Cookie Preferences"
+  "cookieSettings": "Manage Cookie Preferences",
+  "booking.errors.contactButton": "Contact us for assistance"
+    
   }
+
 }

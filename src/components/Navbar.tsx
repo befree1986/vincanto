@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -8,18 +8,45 @@ const Navbar: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+  
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+
+    const handleFocusTrap = (event: KeyboardEvent) => {
+      if (event.key === 'Tab' && isOpen && menuRef.current) {
+        const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (event.shiftKey) { // Shift + Tab
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            event.preventDefault();
+          }
+        } else { // Tab
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            event.preventDefault();
+          }
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleFocusTrap);
+    return () => document.removeEventListener('keydown', handleFocusTrap);
   }, [isOpen]);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen(prev => !prev);
   const closeMenu = () => setIsOpen(false);
 
   const renderFlagSVG = (lang: string) => {
@@ -34,7 +61,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header className={`navbar${scrolled ? ' scrolled' : ' hidden'}`}>
-      <div className="navbar-container">
+      <div className="navbar-container" ref={menuRef}>
         <div className="logo">
           <a href="#home">
             <img src="/logo.svg" alt="Vincanto" className="logo-img" />
@@ -52,11 +79,12 @@ const Navbar: React.FC = () => {
 
           <ul className="nav-links">
             <li><a href="#home" onClick={closeMenu}>{t('Home')}</a></li>
-            <li><a href="#about" onClick={closeMenu}>{t('Chi Siamo')}</a></li>
-            <li><a href="#proprieta" onClick={closeMenu}>{t('La Proprietà')}</a></li>
-            <li><a href="#contact" onClick={closeMenu}>{t('Contatti')}</a></li>
+            <li><a href="#about" onClick={closeMenu}>{t('footer.about')}</a></li>
+            <li><a href="#proprieta" onClick={closeMenu}>{t('footer.proprieta')}</a></li>
+            <li><a href="#contact" onClick={closeMenu}>{t('contacts.title')}</a></li>
+            <li><a href="/prenota" onClick={closeMenu}>{t('Prenota Ora')}</a></li>
           </ul>
-          <a href="#booking" className="btn btn-navbar" onClick={closeMenu}>
+          <a href="/prenota" className="btn btn-navbar" onClick={closeMenu}>
             {t('Prenota Ora')}
           </a>
 
@@ -70,15 +98,11 @@ const Navbar: React.FC = () => {
                 ))}
                 <ThemeSwitcher />
               </div>
-
-              <button onClick={closeMenu} className="close-menu-button" aria-label="Chiudi menu">
-                ❌ {t('Chiudi Menu')}
-              </button>
             </>
           )}
         </nav>
 
-        <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu" aria-expanded={isOpen} aria-controls="navMenu">
+        <button ref={menuToggleRef} className="menu-toggle" onClick={toggleMenu} aria-label={isOpen ? t('Chiudi Menu') : t('Apri Menu')} aria-expanded={isOpen} aria-controls="navMenu">
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>

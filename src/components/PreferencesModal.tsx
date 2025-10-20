@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './PreferencesModal.css';
+import { useTranslation } from 'react-i18next';
 
 interface CookiePreferences {
   essential?: boolean;
@@ -20,6 +21,19 @@ const PreferencesModal: React.FC<PreferencesModalProps> = ({
   onSave,
   initialPreferences,
 }) => {
+  const { t } = useTranslation();
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocus = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      previousFocus.current = document.activeElement as HTMLElement;
+      modalRef.current?.focus();
+    } else {
+      previousFocus.current?.focus();
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const [analytics, setAnalytics] = useState(initialPreferences.analytics);
@@ -35,11 +49,11 @@ const PreferencesModal: React.FC<PreferencesModalProps> = ({
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-        <h2 className="modal-title">Preferenze per un’esperienza su misura</h2>
+    <div className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div className="modal-card" onClick={(e) => e.stopPropagation()} ref={modalRef} tabIndex={-1}>
+        <h2 id="modal-title" className="modal-title">{t('cookie.prefs.title')}</h2>
         <p className="modal-description">
-          Personalizza le preferenze di tracciamento per una navigazione ottimale.
+          {t('cookie.prefs.description')}
         </p>
 
         <div className="modal-checkboxes">
@@ -49,7 +63,7 @@ const PreferencesModal: React.FC<PreferencesModalProps> = ({
               checked={analytics}
               onChange={() => setAnalytics(!analytics)}
             />
-            Cookie di Analisi
+            {t('cookie.prefs.analytics')}
           </label>
 
           <label>
@@ -58,13 +72,13 @@ const PreferencesModal: React.FC<PreferencesModalProps> = ({
               checked={marketing}
               onChange={() => setMarketing(!marketing)}
             />
-            Cookie di Marketing
+            {t('cookie.prefs.marketing')}
           </label>
         </div>
 
         <div className="modal-actions">
-          <button className="btn-outline" onClick={onClose}>ANNULLA</button>
-          <button className="btn-filled" onClick={handleSave}>SALVA</button>
+          <button className="btn-outline" onClick={onClose}>{t('cookie.prefs.cancel')}</button>
+          <button className="btn-filled" onClick={handleSave}>{t('cookie.prefs.save')}</button>
         </div>
       </div>
     </div>

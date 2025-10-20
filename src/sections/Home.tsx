@@ -6,14 +6,13 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 const Home: React.FC = () => {
   const { t } = useTranslation();
-
-  <Helmet>
-  <title>TEST | Titolo Manuale</title>
-</Helmet>
-
+  
   return (
     <React.Fragment>
-      
+      <Helmet>
+        <title>{t('seo.home.title')}</title>
+        <meta name="description" content={t('seo.home.description')} />
+      </Helmet>
         <section id="home" className="home-section">
         <ParallaxBackground imageUrl="/welcome.webp">
           <div className="hero-content">
@@ -22,7 +21,7 @@ const Home: React.FC = () => {
             <h2>
               {t('Un angolo di paradiso tra i limoni della Costiera Amalfitana')}
             </h2>
-            <a href="#booking" className="btn btn-accent">
+            <a href="/prenota" className="btn btn-accent">
               {t('Prenota Ora')}
             </a>
           </div>

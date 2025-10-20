@@ -12,6 +12,7 @@ import { ArrowUp } from 'lucide-react';
 import CookiePolicy from './pages/CookiePolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
+import BookingPage from './pages/BookingPage'; // Importa la nuova pagina
 import Accessibility from './pages/Accessibility';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
@@ -57,6 +58,7 @@ function App() {
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-conditions" element={<TermsConditions />} />
+        <Route path="/prenota" element={<BookingPage />} /> {/* Aggiungi la nuova rotta */}
         <Route path="/accessibility" element={<Accessibility />} />
       </Routes>
 
