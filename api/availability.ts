@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import pool from '../db';
+import db from '../db';
 import { format } from 'date-fns';
 
 /**
@@ -17,7 +17,7 @@ async function getUnavailableDates(startDate: Date, endDate: Date) {
   // Una data è occupata se esiste una prenotazione dove:
   // (booking.check_in <= endDate) AND (booking.check_out > startDate)
   // Questo copre tutti i casi di sovrapposizione escludendo il giorno di check-out.
-  const { rows } = await pool.query<{ check_in_date: string, check_out_date: string }>(
+  const { rows } = await db.query<{ check_in_date: string, check_out_date: string }>(
     `SELECT check_in_date, check_out_date
      FROM bookings
      WHERE status = 'confirmed' AND check_in_date < $2 AND check_out_date > $1`,

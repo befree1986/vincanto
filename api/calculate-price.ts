@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { calculateBookingCosts, type CalculationInput } from '../src/utils/priceCalculator';
-import pool from '../db';
+import db from '../db';
 
 interface Coupon {
   id: number;
@@ -56,7 +56,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     if (couponCode) {
-      const { rows } = await pool.query<Coupon>(
+      const { rows } = await db.query<Coupon>(
         "SELECT discount_percentage FROM coupons WHERE code = $1 AND active = TRUE",
         [couponCode]
       );

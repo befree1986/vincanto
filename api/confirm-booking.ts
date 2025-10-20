@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import pool from '../db';
+import db from '../db';
 import Stripe from 'stripe';
 
 interface BookingForPayment {
@@ -35,7 +35,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     // --- 2. Trova la prenotazione usando il token ---
-    const { rows } = await pool.query<BookingForPayment>(
+    const { rows } = await db.query<BookingForPayment>(
       "SELECT id, deposit_price, customer_email, customer_name, language, check_in_date, check_out_date FROM bookings WHERE confirmation_token = $1 AND status = 'pending'",
       [token]
     );
@@ -48,7 +48,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // --- 3. Controllo finale di sovrapposizione ---
     // Controlla se un'altra prenotazione è stata confermata nel frattempo
-    const conflictCheck = await pool.query(
+    const conflictCheck = await db.query(
       `SELECT id FROM bookings
        WHERE check_in_date < $2 AND check_out_date > $1
        AND status = 'confirmed'`,

@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Stripe from 'stripe';
 import { buffer } from 'micro';
-import pool from '../db';
+import db from '../db';
 import nodemailer from 'nodemailer';
 import { format, parseISO } from 'date-fns';
 
@@ -64,7 +64,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).send('ID prenotazione mancante dalla sessione di Stripe.');
     }
 
-    const client = await pool.connect(); // Otteniamo un client per la transazione
+    const client = await db.connect(); // Otteniamo un client per la transazione
     try {
       await client.query('BEGIN');
       // Aggiorna lo stato della prenotazione a 'confirmed'

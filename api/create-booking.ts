@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import pool from '../db';
+import db from '../db';
 import nodemailer from 'nodemailer';
 import * as crypto from 'crypto';
 import { format, parseISO } from 'date-fns';
@@ -54,7 +54,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // L'invio email fallirà silenziosamente più avanti.
   }
 
-  const client = await pool.connect(); // Usiamo un client per le transazioni
+  const client = await db.connect(); // Usiamo un client per le transazioni
   let newBookingId: number;
 
   try {

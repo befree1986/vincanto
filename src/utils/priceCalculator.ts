@@ -1,4 +1,4 @@
-import pool from '../../db';
+import db from '../../db';
 
 export interface CalculationInput {
   checkin: string;
@@ -29,7 +29,7 @@ export interface CalculationOutput {
 }
 
 async function getPricingConfig(): Promise<Record<string, number>> {
-  const { rows } = await pool.query<Setting>('SELECT key, value FROM settings');
+  const { rows } = await db.query<Setting>('SELECT key, value FROM settings');
   return rows.reduce((acc, setting) => ({ ...acc, [setting.key]: parseFloat(setting.value) }), {});
 }
 
