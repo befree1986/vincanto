@@ -2,12 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/index.html",
-      "use": "@vercel/static"
-    },
-    {
       "src": "server/index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "dist/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -16,11 +16,15 @@
       "dest": "/server/index.js"
     },
     {
-      "src": "/server.js",
+      "src": "/health",
       "dest": "/server/index.js"
     },
     {
-      "src": "/((?!api).*)",
+      "src": "/test",
+      "dest": "/server/index.js"
+    },
+    {
+      "src": "/(.*)",
       "dest": "/dist/index.html"
     }
   ],
