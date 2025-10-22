@@ -110,20 +110,24 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`🚀 Server Vincanto avviato su porta ${PORT}`);
-    console.log(`📍 Ambiente: ${process.env.NODE_ENV}`);
-    
-    // Start calendar synchronization
-    if (process.env.NODE_ENV !== 'test') {
-        startCalendarSync();
+// Per l'ambiente di sviluppo locale
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`🚀 Server Vincanto avviato su porta ${PORT}`);
+        console.log(`📍 Ambiente: ${process.env.NODE_ENV}`);
         
-        // Initialize calendar scheduler
-        setTimeout(() => {
-            calendarScheduler.init();
-        }, 5000); // Wait 5 seconds for server to be fully ready
-    }
-});
+        // Start calendar synchronization
+        if (process.env.NODE_ENV !== 'test') {
+            startCalendarSync();
+            
+            // Initialize calendar scheduler
+            setTimeout(() => {
+                calendarScheduler.init();
+            }, 5000); // Wait 5 seconds for server to be fully ready
+        }
+    });
+}
 
+// Per Vercel serverless
 export default app;
