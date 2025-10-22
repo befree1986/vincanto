@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Booking.css";
 import LemonDivider from "../components/LemonDivider";
+import BookingSystem from "../components/BookingSystem";
 import { useTranslation } from "react-i18next";
 
 const BOOKING_URL = "https://www.booking.com/hotel/it/vincanto-maiori-costiera-amalfitana.it.html";
@@ -11,7 +12,7 @@ const BookingForm: React.FC = () => {
     {
       name: "Booking.com",
       url: BOOKING_URL,
-  logo: "/assets/booking-logo.webp",
+      logo: "/assets/booking-logo.webp",
     },
     {
       name: "Airbnb",
@@ -49,6 +50,7 @@ const BookingForm: React.FC = () => {
 
 const Booking: React.FC = () => {
   const { t } = useTranslation();
+  const [showBookingSystem, setShowBookingSystem] = useState(false);
 
   return (
   <React.Fragment>
@@ -63,7 +65,26 @@ const Booking: React.FC = () => {
             {t('section.booking.subtitle')}
           </p>
         </header>
-        <BookingForm />
+        
+        {/* Toggle tra booking esterno e sistema interno */}
+        <div className="booking-options">
+          <div className="option-toggle">
+            <button 
+              className={`toggle-btn ${!showBookingSystem ? 'active' : ''}`}
+              onClick={() => setShowBookingSystem(false)}
+            >
+              🏨 Prenota su Booking.com/Airbnb
+            </button>
+            <button 
+              className={`toggle-btn ${showBookingSystem ? 'active' : ''}`}
+              onClick={() => setShowBookingSystem(true)}
+            >
+              💳 Prenota Direttamente
+            </button>
+          </div>
+        </div>
+
+        {showBookingSystem ? <BookingSystem /> : <BookingForm />}
       </div>
       <LemonDivider position="left" />
       </section>
