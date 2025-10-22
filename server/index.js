@@ -80,6 +80,24 @@ app.get('/health', (req, res) => {
     });
 });
 
+// Test endpoint for debugging Vercel
+app.get('/api/test', (req, res) => {
+    res.json({ 
+        message: 'API funziona!', 
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || 'unknown'
+    });
+});
+
+// Direct test endpoint
+app.get('/test', (req, res) => {
+    res.json({ 
+        message: 'Server Express funziona!', 
+        path: req.path,
+        method: req.method
+    });
+});
+
 // API Routes
 app.use('/api/booking', bookingRoutes);
 app.use('/api/availability', availabilityRoutes);
