@@ -19,6 +19,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "./utils/GoogleAnalytics";
 import SafeSeo from './components/SafeSeo';
+import AdvancedSEO from './components/AdvancedSEO';
 
 
 
@@ -48,9 +49,14 @@ function App() {
             ogImage="/logo.svg"
             canonical="https://www.vincantomaori.it"
           />
+          <AdvancedSEO
+            page="home"
+            ogImage="/welcome.webp"
+            canonical="https://www.vincantomaori.it"
+          />
           <Home />
           <About />
-          <Booking />
+          {/* <Booking /> */}
           <Contact />
           </>
           }

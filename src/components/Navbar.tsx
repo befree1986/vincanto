@@ -56,9 +56,9 @@ const Navbar: React.FC = () => {
             <li><a href="#proprieta" onClick={closeMenu}>{t('La Proprietà')}</a></li>
             <li><a href="#contact" onClick={closeMenu}>{t('Contatti')}</a></li>
           </ul>
-          <a href="#booking" className="btn btn-navbar" onClick={closeMenu}>
+          {/* <a href="#booking" className="btn btn-navbar" onClick={closeMenu}>
             {t('Prenota Ora')}
-          </a>
+          </a> */}
 
           {isOpen && (
             <>
