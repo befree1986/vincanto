@@ -85,11 +85,11 @@
   "propriety.rates.table.persons1to2": "2",
   "propriety.rates.table.price1to2": "€ 75 a persona",
   "propriety.rates.table.persons3to4": "da 3 a 4",
-  "propriety.rates.table.price3to4": "€ 30 a persona",
+  "propriety.rates.table.price3to4": "€ 20 a persona",
   "propriety.rates.table.persons5to6": "da 5 a 6",
-  "propriety.rates.table.price5to6": "€ 30 a persona",
+  "propriety.rates.table.price5to6": "€ 20 a persona",
   "propriety.rates.table.persons7to8": "da 7 a 8",
-  "propriety.rates.table.price7to8": "€ 30 a persona",
+  "propriety.rates.table.price7to8": "€ 20 a persona",
   
   "section.booking.title": "Prenota il tuo Soggiorno",
   "section.booking.subtitle": "Siamo presenti sulle principali piattaforme online.",
@@ -128,7 +128,7 @@
   
   "section.extraCosts.title": "💰 Costi Extra (non inclusi)",
   "section.extraCosts.mandatoryTitle": "Obbligatori",
-  "section.extraCosts.mandatoryList1": "Pulizia finale obbligatoria: 40€",
+  "section.extraCosts.mandatoryList1": "Pulizia finale obbligatoria: 50€",
   "section.extraCosts.mandatoryList2": "Tassa di soggiorno secondo normativa comunale",
   "section.extraCosts.onRequestTitle": "Su richiesta",
   "section.extraCosts.onRequestList1": "Posto auto riservato e custodito a 20€/giorno",

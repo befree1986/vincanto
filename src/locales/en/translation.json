@@ -74,11 +74,11 @@
   "propriety.rates.table.persons1to2": "2",
   "propriety.rates.table.price1to2": "€ 75 per person",
   "propriety.rates.table.persons3to4": "3 to 4",
-  "propriety.rates.table.price3to4": "€ 30 per person",
+  "propriety.rates.table.price3to4": "€ 20 per person",
   "propriety.rates.table.persons5to6": "5 to 6",
-  "propriety.rates.table.price5to6": "€ 30 per person",
+  "propriety.rates.table.price5to6": "€ 20 per person",
   "propriety.rates.table.persons7to8": "7 to 8",
-  "propriety.rates.table.price7to8": "€ 30 per person",
+  "propriety.rates.table.price7to8": "€ 20 per person",
   
   "propriety.rates.touristTaxCost": "Tourist tax: €2.00 per person per night (over 12 years old, up to 5 nights)",
   "propriety.rates.touristTaxExemptions": "Exempt: children under 12, disabled guests and their companions, drivers and guides of tourist groups.",
@@ -123,7 +123,7 @@
   
   "section.extraCosts.title": "💰 Extra Costs (not included)",
   "section.extraCosts.mandatoryTitle": "Mandatory",
-  "section.extraCosts.mandatoryList1": "Mandatory final cleaning: €40",
+  "section.extraCosts.mandatoryList1": "Mandatory final cleaning: 50€",
   "section.extraCosts.mandatoryList2": "Tourist tax according to municipal regulations",
   "section.extraCosts.onRequestTitle": "On request",
   "section.extraCosts.onRequestList1": "Reserved and guarded parking space at €20/day"
