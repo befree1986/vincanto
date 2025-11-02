@@ -307,6 +307,7 @@ const Propriety: React.FC = () => {
           <div className="cost-group">
             <h4 className="section-subtitle">{t('section.extraCosts.onRequestTitle')}</h4>
             <ul className="section-list">
+              <li>{t('section.extraCosts.onRequestList2')}</li>
               <li>{t('section.extraCosts.onRequestList1')}</li>
             </ul>
           </div>
