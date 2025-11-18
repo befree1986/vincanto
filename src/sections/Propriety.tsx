@@ -14,6 +14,7 @@ const Propriety: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [lightboxImages, setLightboxImages] = useState<GalleryImage[]>([]);
   const touchStartX = useRef(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   const openLightbox = useCallback((images: GalleryImage[], startIndex: number) => {
     if (images.length === 0) return;
@@ -231,7 +232,7 @@ const Propriety: React.FC = () => {
             </ul>
           </div>
 
-         <div className="rule-group" condition={false}>
+         <div className="rule-group" style={{ display: isVisible ? "block" : "none" }}>
            <h4 className="section-subtitle">{t('section.booking.rules.summerTitle')}</h4>
             <ul className="section-list">
               <li>{t('section.booking.rules.summerList1')}</li>
