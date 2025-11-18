@@ -231,8 +231,8 @@ const Propriety: React.FC = () => {
             </ul>
           </div>
 
-          <div className="rule-group">
-            <h4 className="section-subtitle">{t('section.booking.rules.summerTitle')}</h4>
+         <div className="rule-group" condition={false}>
+           <h4 className="section-subtitle">{t('section.booking.rules.summerTitle')}</h4>
             <ul className="section-list">
               <li>{t('section.booking.rules.summerList1')}</li>
             </ul>
