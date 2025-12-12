@@ -20,7 +20,7 @@ const Home: React.FC = () => {
             <div className="hero-bar"></div>
             <img src="/logo.svg" alt="Vincanto Logo" className="hero-logo" />
             <h2>
-              {t('Un angolo di paradiso tra i limoni della Costiera Amalfitana')}
+              {t('hero.subtitle')}
             </h2>
             {/* <a href="#booking" className="btn btn-accent">
               {t('Prenota Ora')}
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
                 <h3 id="feature-card-title">{t('Perfetta per Ogni Ospite')}</h3>
               </div>
               <p>
-                {t('Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.')}
+                {t('home.highlight.description')}
               </p>
               <p>
                 {t('home.position.DescP')}

@@ -25,6 +25,8 @@ export const seoContent = {
 // ✅ Componente SEO che imposta i meta tag
 import React from "react";
 import { Helmet } from "react-helmet";
+import { useTranslation } from 'react-i18next';
+import { getSafeTranslation } from './i18n';
 
 interface SeoProps {
   title: string;
@@ -34,14 +36,16 @@ interface SeoProps {
 }
 
 const Seo: React.FC<SeoProps> = ({ title, description, canonical, ogImage }) => {
+  const { t } = useTranslation();
+  const safeDescription = description || getSafeTranslation(t, 'home.description', 'Vincanto è una struttura immersa nei limoneti della Costiera Amalfitana a Maiori. Prenota il tuo soggiorno esclusivo, comfort e servizi premium. Ideale per famiglie e gruppi.');
   return (
     <Helmet>
       <title>{title}</title>
-      <meta name="description" content={description} />
+      <meta name="description" content={safeDescription} />
       {canonical && <link rel="canonical" href={canonical} />}
       {ogImage && <meta property="og:image" content={ogImage} />}
       <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
+      <meta property="og:description" content={safeDescription} />
       <meta property="og:type" content="website" />
     </Helmet>
   );

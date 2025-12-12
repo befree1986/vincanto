@@ -40,16 +40,15 @@
   
 
   "tab.position.title": "VINCANTO | Maiori - Costiera Amalfitana",
-  "Vincanto è una Struttura immersa nei limoneti della Costiera Amalfitana a Maiori. Prenota il tuo soggiorno esclusivo, comfort e servizi premium. Ideale per famiglie e gruppi. Contattaci per offerte personalizzate.": "Vincanto è una Struttura immersa nei limoneti della Costiera Amalfitana a Maiori. Prenota il tuo soggiorno esclusivo, comfort e servizi premium. Ideale per famiglie e gruppi. Contattaci per offerte personalizzate.",
-  "Un angolo di paradiso tra i limoni della Costiera Amalfitana": "Un angolo di paradiso tra i limoni della Costiera Amalfitana",
-  "Prenota Ora": "Prenota Ora",
+  "cta.bookNow": "Prenota Ora",
+  "hero.subtitle": "Un angolo di paradiso tra i limoni della Costiera Amalfitana",
 
   "home.position.textTitle": "Benvenuti a VINCANTO",
   "home.position.text1": "una struttura ricettiva nata da una completa ristrutturazione e immerso nella quiete di un profumato limoneto. Qui lusso, comfort e natura si incontrano per offrirti un soggiorno rigenerante.",
   "Scopri di più": "Scopri di più",
   "Punti Salienti della Proprietà": "Punti Salienti della Proprietà",
   "Perfetta per Ogni Ospite": "Perfetta per Ogni Ospite",
-  "Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.": "Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.",
+  "home.highlight.description": "Perfetta per famiglie, gruppi di amici, coppie e chiunque desideri una pausa rigenerante nella quiete della Costiera Amalfitana, senza rinunciare al comfort.",
   "home.position.DescP": "Il proprietario è sempre presente per garantire un'accoglienza calorosa e un supporto costante durante la vostra permanenza",
   "Comfort e accoglienza": "Comfort e accoglienza",
   "• 3 camere da letto climatizzate, luminose e arredate con gusto": "• 3 camere da letto climatizzate, luminose e arredate con gusto",
@@ -116,7 +115,7 @@
   "section.includedServices.comfortList4": "Asciugacapelli",
   "section.includedServices.comfortList5": "Asse e ferro da stiro",
   "section.includedServices.comfortList6": "Prodotti da bagno",
-  "section.includedServices.comfortList7": "Kit di pronto soccorso",
+  "section.includedServices.comfortList7": "Kit di primo soccorso",
   "section.includedServices.comfortList8": "Macchina da caffè",
   "section.includedServices.comfortList9": "Frigorifero",
   "section.includedServices.comfortList10": "Forno a microonde",
