@@ -163,10 +163,6 @@ export const galleryData: GallerySection[] = [
   },
     images: [
       {
-  src: '/bagno/b1.avif',
-        altKey: 'propriety.gallery.section5.img1.alt',  
-      },
-      {
   src: '/bagno/b2.avif',
         altKey: 'propriety.gallery.section5.img2.alt',
       },
