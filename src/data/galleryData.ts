@@ -132,24 +132,24 @@ export const galleryData: GallerySection[] = [
      },
     images: [
       {
-  src: '/openSpace/open1.webp',
+  src: '/openSpace/oc1.avif',
         altKey: 'propriety.gallery.section4.img1.alt',
         
       },
       {
-  src: '/openSpace/open2.webp',
+  src: '/openSpace/oc2.avif',
         altKey: 'propriety.gallery.section4.img2.alt',
       },
       {
-  src: '/openSpace/open3.webp',
+  src: '/openSpace/oc3.avif',
         altKey: 'propriety.gallery.section4.img3.alt',
       },
       {
-  src: '/openSpace/open4a.webp',
+  src: '/openSpace/oc4.avif',
         altKey: 'propriety.gallery.section4.img4.alt',
       },
       {
-  src: '/openSpace/open4.webp',
+  src: '/openSpace/oc5.avif',
         altKey: 'propriety.gallery.section4.img5.alt',
       }
     
