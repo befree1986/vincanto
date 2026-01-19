@@ -119,6 +119,20 @@ const Home: React.FC = () => {
                 </p>
               </div>
             </div>
+            <div className="full-width-feature-card spaced-top" role="region" aria-labelledby="feature-card-title">
+              <div className="feature-title" >
+                <span className="feature-icon" aria-hidden="true">🚌</span>
+                <h3 id="feature-card-title">{t('Trasporti e Accessibilità')}</h3>
+                </div>
+              <p>
+                {t('🚍 Bus di Linea Collegamenti SITA Sud verso i principali borghi della Costiera. Fermate facilmente raggiungibili dalla residenza.')}
+              </p>
+              <p>{t('🚌 Navetta Comunale Servizio locale per spostarsi con semplicità tra centro, lungomare e porto.')}
+              </p>
+              <p>
+                {t('⛴️ Traghetti Partenze dal porto di Maiori verso Amalfi, Positano e Salerno. Il modo più rapido e scenografico per vivere la costa.')}
+              </p>
+            </div>
           </div>
         </div>
         <LemonDivider position="right" />
