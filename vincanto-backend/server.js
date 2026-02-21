@@ -2,6 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const { Pool } = require('pg');
+
+// Connessione Neon PostgreSQL
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
 const app = express();
 app.use(cors());
@@ -121,33 +128,60 @@ app.post('/api/booking/quote', async (req, res) => {
 app.post('/api/booking/create', async (req, res) => {
   try {
     console.log('📝 Creazione prenotazione:', req.body);
-    
     const costs = calculateBookingCosts(req.body);
-    
-    // Simula salvataggio nel database
     const bookingId = `VIN${Date.now()}`;
-    
-    const booking = {
-      id: bookingId,
-      ...req.body,
-      costs,
-      status: 'PENDING',
-      created_at: new Date().toISOString()
-    };
-    
-    console.log('✅ Prenotazione creata:', booking);
-    
+    const createdAt = new Date().toISOString();
+
+    // Salva prenotazione su Neon PostgreSQL
+    const {
+      check_in_date,
+      check_out_date,
+      num_adults,
+      num_children = 0,
+      children_ages = [],
+      parking_option = 'none',
+      guest_name,
+      guest_email,
+      guest_phone
+    } = req.body;
+
+    const query = `
+      INSERT INTO bookings (
+        id, check_in_date, check_out_date, num_adults, num_children, children_ages, parking_option,
+        guest_name, guest_email, guest_phone, costs, status, created_at
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+      RETURNING *;
+    `;
+    const values = [
+      bookingId,
+      check_in_date,
+      check_out_date,
+      num_adults,
+      num_children,
+      JSON.stringify(children_ages),
+      parking_option,
+      guest_name,
+      guest_email,
+      guest_phone,
+      JSON.stringify(costs),
+      'PENDING',
+      createdAt
+    ];
+
+    const result = await pool.query(query, values);
+    const booking = result.rows[0];
+
+    console.log('✅ Prenotazione salvata su Neon:', booking);
     res.json({
       success: true,
       booking,
-      message: 'Prenotazione creata con successo'
+      message: 'Prenotazione creata e salvata su Neon PostgreSQL'
     });
-    
   } catch (error) {
     console.error('❌ Errore creazione prenotazione:', error);
-    res.status(400).json({ 
-      success: false, 
-      message: error.message 
+    res.status(400).json({
+      success: false,
+      message: error.message
     });
   }
 });
@@ -166,17 +200,37 @@ app.get('/api/health', (req, res) => {
 });
 
 // Database simulato per i calendari esterni
-let externalCalendars = [];
-let calendarIdCounter = 1;
+// Calendari esterni su Neon PostgreSQL
+// Tabella consigliata: external_calendars (id SERIAL PRIMARY KEY, name VARCHAR, url VARCHAR, created_at TIMESTAMP)
 
 // Endpoint per ottenere tutti i calendari esterni
 app.get('/api/calendars', (req, res) => {
   console.log('📅 Richiesta calendari esterni');
-  res.json({
-    success: true,
-    data: externalCalendars,
-    count: externalCalendars.length
+  pool.query('SELECT * FROM external_calendars ORDER BY created_at DESC', (err, result) => {
+    if (err) {
+      console.error('❌ Errore DB calendari:', err);
+      return res.status(500).json({ success: false, message: 'Errore database calendari' });
+    }
+    res.json({
+      success: true,
+      data: result.rows,
+      count: result.rows.length
+    });
   });
+// Endpoint per aggiungere un calendario esterno
+app.post('/api/calendars', async (req, res) => {
+  try {
+    const { name, url } = req.body;
+    if (!name || !url) return res.status(400).json({ success: false, message: 'Nome e URL richiesti' });
+    const query = 'INSERT INTO external_calendars (name, url, created_at) VALUES ($1, $2, $3) RETURNING *';
+    const values = [name, url, new Date().toISOString()];
+    const result = await pool.query(query, values);
+    res.json({ success: true, calendar: result.rows[0] });
+  } catch (error) {
+    console.error('❌ Errore aggiunta calendario:', error);
+    res.status(500).json({ success: false, message: 'Errore database' });
+  }
+});
 });
 
 // Endpoint per aggiungere un calendario esterno
@@ -440,7 +494,7 @@ app.post('/api/contact-request', async (req, res) => {
 });
 
 // Forza l'ascolto su IPv4 per evitare conflitti IPv6
-app.listen(3001, '127.0.0.1', () => {
-  console.log('✅ Backend avviato su http://127.0.0.1:3001');
-  console.log('🔗 Ascoltando su IPv4 (127.0.0.1)');
+app.listen(3001, '0.0.0.0', () => {
+  console.log('✅ Backend avviato su http://0.0.0.0:3001');
+  console.log('🔗 Ascoltando su tutte le interfacce (0.0.0.0)');
 });
